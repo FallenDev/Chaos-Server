@@ -7,7 +7,7 @@ using Chaos.Utilities.SequenceScripter.Builder;
 
 namespace Chaos.Utilities.SequenceScripter;
 
-public class TimedActionSequence<T> where T: Creature
+public sealed class TimedActionSequence<T> where T: Creature
 {
     private readonly List<Action<T>> Actions;
     private readonly IIntervalTimer? InitialTimer;

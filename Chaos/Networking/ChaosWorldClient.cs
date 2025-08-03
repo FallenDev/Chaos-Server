@@ -229,16 +229,16 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
         if (panelEntityBase is Item)
             return;
 
-        if (!panelEntityBase.Cooldown.HasValue)
+        if (!panelEntityBase.Cooldown.HasValue && !panelEntityBase.Elapsed.HasValue)
             return;
 
         if (!panelEntityBase.Elapsed.HasValue)
             return;
 
-        var remaining = panelEntityBase.Cooldown.Value.TotalSeconds - panelEntityBase.Elapsed.Value.TotalSeconds;
+        var cd = panelEntityBase.Cooldown ?? TimeSpan.Zero;
+        var elapsed = panelEntityBase.Elapsed ?? TimeSpan.Zero;
 
-        if (remaining < 0)
-            return;
+        var remaining = Math.Abs(cd.TotalSeconds - elapsed.TotalSeconds);
 
         var args = new CooldownArgs
         {
@@ -898,6 +898,10 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
                 //assume the client has disconnected
                 if (Heartbeat1.HasValue || Heartbeat2.HasValue)
                 {
+                    Logger.WithTopics(Topics.Entities.Client, Topics.Servers.WorldServer, Topics.Actions.Disconnect)
+                          .WithProperty(this)
+                          .LogWarning("Disconnecting due to heartbeat timeout");
+
                     Disconnect();
 
                     return;

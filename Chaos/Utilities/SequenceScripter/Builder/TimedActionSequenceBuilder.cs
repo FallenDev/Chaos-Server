@@ -4,7 +4,7 @@ using Chaos.Models.World.Abstractions;
 
 namespace Chaos.Utilities.SequenceScripter.Builder;
 
-public class TimedActionSequenceBuilder<T> where T: Creature
+public sealed class TimedActionSequenceBuilder<T> where T: Creature
 {
     private readonly List<TimedActionDescriptor<T>> Sequence = [];
 
@@ -27,6 +27,12 @@ public class TimedActionSequenceBuilder<T> where T: Creature
         {
             Sequence = Sequence,
             StartingAtTime = startingAtTime
+        };
+
+    public TimedActionSequenceDescriptor<T> Build()
+        => new()
+        {
+            Sequence = Sequence
         };
 
     public TimedActionSequenceDescriptor<T> Build(int startingAtHealthPercent, TimeSpan startingAtTime)

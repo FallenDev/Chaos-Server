@@ -77,18 +77,15 @@ public sealed class MapEntityCollection : IDeltaUpdatable
                                                              .Case<GroundEntity>(GroundEntities)
                                                              .Case<ReactorTile>(Reactors)
                                                              .Case<Door>(Doors)
-                                                             .Case<Creature>(
-                                                                 () => Aislings.Concat<Creature>(Monsters)
-                                                                               .Concat(Merchants))
-                                                             .Case<NamedEntity>(
-                                                                 () => Aislings.Concat<NamedEntity>(Monsters)
-                                                                               .Concat(Merchants)
-                                                                               .Concat(GroundEntities))
-                                                             .Case<VisibleEntity>(
-                                                                 () => Aislings.Concat<VisibleEntity>(Monsters)
-                                                                               .Concat(Merchants)
-                                                                               .Concat(GroundEntities)
-                                                                               .Concat(Doors))
+                                                             .Case<Creature>(() => Aislings.Concat<Creature>(Monsters)
+                                                                                           .Concat(Merchants))
+                                                             .Case<NamedEntity>(() => Aislings.Concat<NamedEntity>(Monsters)
+                                                                 .Concat(Merchants)
+                                                                 .Concat(GroundEntities))
+                                                             .Case<VisibleEntity>(() => Aislings.Concat<VisibleEntity>(Monsters)
+                                                                 .Concat(Merchants)
+                                                                 .Concat(GroundEntities)
+                                                                 .Concat(Doors))
                                                              .Default(EntityLookup.Values)
                                                              .Freeze();
     }
@@ -367,6 +364,10 @@ public sealed class MapEntityCollection : IDeltaUpdatable
 
         return result.OfType<T>();
     }
+
+    public IEnumerable<T> Within<T>(IRectangle rectangle) where T: MapEntity
+        => QuadTree.Query(rectangle)
+                   .OfType<T>();
 
     /// <summary>
     ///     Gets all entities within a certain range of a point

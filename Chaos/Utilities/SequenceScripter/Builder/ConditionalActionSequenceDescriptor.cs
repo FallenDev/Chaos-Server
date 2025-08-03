@@ -4,12 +4,12 @@ using Chaos.Models.World.Abstractions;
 
 namespace Chaos.Utilities.SequenceScripter.Builder;
 
-public class ConditionalTimedActionSequenceDescriptor<T> where T: Creature
+public sealed class ConditionalActionSequenceDescriptor<T> where T: Creature
 {
     public Func<T, bool> Condition { get; }
     public TimedActionSequenceDescriptor<T> Sequence { get; }
 
-    public ConditionalTimedActionSequenceDescriptor(Func<T, bool> condition, TimedActionSequenceDescriptor<T> sequence)
+    public ConditionalActionSequenceDescriptor(Func<T, bool> condition, TimedActionSequenceDescriptor<T> sequence)
     {
         Condition = condition;
         Sequence = sequence;

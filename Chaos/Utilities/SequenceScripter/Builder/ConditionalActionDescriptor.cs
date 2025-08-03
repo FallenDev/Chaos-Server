@@ -4,7 +4,7 @@ using Chaos.Models.World.Abstractions;
 
 namespace Chaos.Utilities.SequenceScripter.Builder;
 
-public class ConditionalActionDescriptor<T> where T: Creature
+public sealed class ConditionalActionDescriptor<T> where T: Creature
 {
     public Action<T> Action { get; }
     public Func<T, bool> Condition { get; }

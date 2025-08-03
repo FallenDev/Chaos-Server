@@ -529,6 +529,8 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     [OverloadResolutionPriority(1)]
     public IEnumerable<T> GetEntitiesAtPoints<T>(params IEnumerable<Point> points) where T: MapEntity => Objects.AtPoints<T>(points);
 
+    public IEnumerable<T> GetEntitiesWithin<T>(IRectangle rectangle) where T: MapEntity => Objects.Within<T>(rectangle);
+
     /// <summary>
     ///     Gets all entities within the given range of a given point
     /// </summary>

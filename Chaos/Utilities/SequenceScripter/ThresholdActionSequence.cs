@@ -5,17 +5,17 @@ using Chaos.Utilities.SequenceScripter.Builder;
 
 namespace Chaos.Utilities.SequenceScripter;
 
-public sealed class ThresholdAction<T> where T: Creature
+public sealed class ThresholdActionSequence<T> where T: Creature
 {
-    private readonly Action<T> Action;
+    private readonly TimedActionSequence<T> Sequence;
     private readonly int Threshold;
     private bool Activated;
     private decimal PreviousValue;
 
-    public ThresholdAction(ThresholdActionDescriptor<T> descriptor)
+    public ThresholdActionSequence(ThresholdActionSequenceDescriptor<T> descriptor)
     {
         Threshold = descriptor.Threshold;
-        Action = descriptor.Action;
+        Sequence = new TimedActionSequence<T>(descriptor.Sequence);
         PreviousValue = 100.0m;
     }
 
@@ -31,7 +31,7 @@ public sealed class ThresholdAction<T> where T: Creature
         if (!Activated)
             return false;
 
-        Action(entity);
+        Sequence.Update(entity, delta);
 
         return true;
     }

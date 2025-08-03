@@ -26,6 +26,7 @@ public sealed class MonsterSpawn : IDeltaUpdatable
     public required int MaxPerSpawn { get; init; }
     public required IMonsterFactory MonsterFactory { get; init; }
     public required MonsterTemplate MonsterTemplate { get; init; }
+    public bool OnlyCountMonstersInSpawnArea { get; set; }
     public required Rectangle? SpawnArea { get; set; }
     public required IIntervalTimer SpawnTimer { get; init; }
 
@@ -52,6 +53,13 @@ public sealed class MonsterSpawn : IDeltaUpdatable
         }
     }
 
+    private int GetCurrentCount()
+        => SpawnArea is not null && OnlyCountMonstersInSpawnArea
+            ? MapInstance.GetEntitiesWithin<Monster>(SpawnArea)
+                         .Count(obj => obj.Template.TemplateKey.EqualsI(MonsterTemplate.TemplateKey))
+            : MapInstance.GetEntities<Monster>()
+                         .Count(obj => obj.Template.TemplateKey.EqualsI(MonsterTemplate.TemplateKey));
+
     private bool PointValidator(Point point)
         => (SpawnArea is null || SpawnArea.Contains(point))
            && MapInstance.IsWalkable(point, collisionType: MonsterTemplate.Type)
@@ -59,8 +67,7 @@ public sealed class MonsterSpawn : IDeltaUpdatable
 
     private void SpawnMonsters()
     {
-        var currentCount = MapInstance.GetEntities<Monster>()
-                                      .Count(obj => obj.Template.TemplateKey.EqualsI(MonsterTemplate.TemplateKey));
+        var currentCount = GetCurrentCount();
 
         if (currentCount >= MaxAmount)
             return;
