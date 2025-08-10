@@ -12,8 +12,8 @@ namespace Chaos.Extensions.Geometry;
 public static class PolygonExtensions
 {
     #region Polygon Contains Point (PNPOLY)
-    /// <inheritdoc cref="Contains(IPolygon, IPoint)" />
-    public static bool Contains(this ValuePolygon polygon, ValuePoint point)
+    /// <inheritdoc cref="ContainsPoint(Chaos.Geometry.Abstractions.IPolygon,Chaos.Geometry.Abstractions.IPoint)" />
+    public static bool ContainsPoint(this ValuePolygon polygon, ValuePoint point)
     {
         var inside = false;
         var vertices = polygon.Vertices;
@@ -36,8 +36,8 @@ public static class PolygonExtensions
         return inside;
     }
 
-    /// <inheritdoc cref="Contains(IPolygon, IPoint)" />
-    public static bool Contains(this ValuePolygon polygon, Point point)
+    /// <inheritdoc cref="ContainsPoint(Chaos.Geometry.Abstractions.IPolygon,Chaos.Geometry.Abstractions.IPoint)" />
+    public static bool ContainsPoint(this ValuePolygon polygon, Point point)
     {
         var inside = false;
         var vertices = polygon.Vertices;
@@ -60,8 +60,8 @@ public static class PolygonExtensions
         return inside;
     }
 
-    /// <inheritdoc cref="Contains(IPolygon, IPoint)" />
-    public static bool Contains(this IPolygon polygon, Point point)
+    /// <inheritdoc cref="ContainsPoint(Chaos.Geometry.Abstractions.IPolygon,Chaos.Geometry.Abstractions.IPoint)" />
+    public static bool ContainsPoint(this IPolygon polygon, Point point)
     {
         var inside = false;
         var vertices = polygon.Vertices;
@@ -139,7 +139,7 @@ public static class PolygonExtensions
     ///     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     ///     SOFTWARE.
     /// </remarks>
-    public static bool Contains(this IPolygon polygon, IPoint point)
+    public static bool ContainsPoint(this IPolygon polygon, IPoint point)
     {
         ArgumentNullException.ThrowIfNull(point);
 
