@@ -61,7 +61,7 @@ public sealed class MonsterSpawn : IDeltaUpdatable
                          .Count(obj => obj.Template.TemplateKey.EqualsI(MonsterTemplate.TemplateKey));
 
     private bool PointValidator(Point point)
-        => (SpawnArea is null || SpawnArea.Contains(point))
+        => (SpawnArea is null || SpawnArea.ContainsPoint(point))
            && MapInstance.IsWalkable(point, collisionType: MonsterTemplate.Type)
            && !BlackList.Contains(point, PointEqualityComparer.Instance);
 

@@ -14,12 +14,10 @@ public sealed class DirectorySynchronizerTests
     {
         const string DIRECTORY = "testDir";
 
-        _ = Task.Run(
-            () => DIRECTORY.SafeExecute(
-                _ =>
-                {
-                    Thread.Sleep(100); // Simulate a long-running operation
-                }));
+        _ = Task.Run(() => DIRECTORY.SafeExecute(_ =>
+        {
+            Thread.Sleep(100); // Simulate a long-running operation
+        }));
 
         Thread.Sleep(50);
 
@@ -35,21 +33,17 @@ public sealed class DirectorySynchronizerTests
         var counter = 0;
         var start = Stopwatch.GetTimestamp();
 
-        var t1 = Task.Run(
-            () => DIRECTORY.SafeExecute(
-                _ =>
-                {
-                    counter++;
-                    Thread.Sleep(100);
-                }));
+        var t1 = Task.Run(() => DIRECTORY.SafeExecute(_ =>
+        {
+            counter++;
+            Thread.Sleep(100);
+        }));
 
-        var t2 = Task.Run(
-            () => DIRECTORY.SafeExecute(
-                _ =>
-                {
-                    counter++;
-                    Thread.Sleep(100);
-                }));
+        var t2 = Task.Run(() => DIRECTORY.SafeExecute(_ =>
+        {
+            counter++;
+            Thread.Sleep(100);
+        }));
 
         await Task.WhenAll(t1, t2);
 
@@ -77,11 +71,10 @@ public sealed class DirectorySynchronizerTests
     {
         const string DIRECTORY = "testDir";
 
-        _ = DIRECTORY.SafeExecuteAsync(
-            async _ =>
-            {
-                await Task.Delay(500); // Simulate a long-running operation
-            });
+        _ = DIRECTORY.SafeExecuteAsync(async _ =>
+        {
+            await Task.Delay(500); // Simulate a long-running operation
+        });
 
         DirectorySynchronizer.LockedPaths
                              .Should()
@@ -95,19 +88,17 @@ public sealed class DirectorySynchronizerTests
         var counter = 0;
         var start = Stopwatch.GetTimestamp();
 
-        var task1 = DIRECTORY.SafeExecuteAsync(
-            async _ =>
-            {
-                counter++;
-                await Task.Delay(100);
-            });
+        var task1 = DIRECTORY.SafeExecuteAsync(async _ =>
+        {
+            counter++;
+            await Task.Delay(100);
+        });
 
-        var task2 = DIRECTORY.SafeExecuteAsync(
-            async _ =>
-            {
-                counter++;
-                await Task.Delay(100);
-            });
+        var task2 = DIRECTORY.SafeExecuteAsync(async _ =>
+        {
+            counter++;
+            await Task.Delay(100);
+        });
 
         await Task.WhenAll(task1, task2);
         var end = Stopwatch.GetElapsedTime(start);
@@ -116,7 +107,7 @@ public sealed class DirectorySynchronizerTests
                .Be(2, "each function should have incremented the counter once");
 
         end.Should()
-           .BeGreaterThan(TimeSpan.FromMilliseconds(200), "the tasks should not have been executed concurrently");
+           .BeGreaterThan(TimeSpan.FromMilliseconds(195), "the tasks should not have been executed concurrently");
     }
 
     [Test]

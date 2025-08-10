@@ -123,7 +123,7 @@ public static class AoeShapeExtensions
         }
 
         if (options.Bounds != null)
-            points = points.Where(options.Bounds.Contains);
+            points = points.Where(options.Bounds.ContainsPoint);
 
         if (!options.ExclusionRange.HasValue)
             points = points.Prepend(sourcePoint);
@@ -135,7 +135,7 @@ public static class AoeShapeExtensions
                 {
                     var rectangle = new Rectangle(sourcePoint, options.ExclusionRange.Value * 2 + 1, options.ExclusionRange.Value * 2 + 1);
 
-                    points = points.Where(pt => !rectangle.Contains(pt));
+                    points = points.Where(pt => !rectangle.ContainsPoint(pt));
 
                     break;
                 }
@@ -144,7 +144,7 @@ public static class AoeShapeExtensions
                 {
                     var circle = new Circle(sourcePoint, options.ExclusionRange.Value);
 
-                    points = points.Where(pt => !circle.Contains(pt));
+                    points = points.Where(pt => !circle.ContainsPoint(pt));
 
                     break;
                 }

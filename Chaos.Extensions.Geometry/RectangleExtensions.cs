@@ -14,23 +14,23 @@ namespace Chaos.Extensions.Geometry;
 public static class RectangleExtensions
 {
     #region Rect Contains Rect
-    /// <inheritdoc cref="Contains(IRectangle, IRectangle)" />
+    /// <inheritdoc cref="ContainsRectangle(Chaos.Geometry.Abstractions.IRectangle,Chaos.Geometry.Abstractions.IRectangle)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ValueRectangle rect, ValueRectangle other)
+    public static bool ContainsRectangle(this ValueRectangle rect, ValueRectangle other)
         => (rect.Bottom >= other.Bottom) && (rect.Left <= other.Left) && (rect.Right >= other.Right) && (rect.Top <= other.Top);
 
-    /// <inheritdoc cref="Contains(IRectangle, IRectangle)" />
+    /// <inheritdoc cref="ContainsRectangle(Chaos.Geometry.Abstractions.IRectangle,Chaos.Geometry.Abstractions.IRectangle)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this IRectangle rect, ValueRectangle other)
+    public static bool ContainsRectangle(this IRectangle rect, ValueRectangle other)
     {
         ArgumentNullException.ThrowIfNull(rect);
 
         return (rect.Bottom >= other.Bottom) && (rect.Left <= other.Left) && (rect.Right >= other.Right) && (rect.Top <= other.Top);
     }
 
-    /// <inheritdoc cref="Contains(IRectangle, IRectangle)" />
+    /// <inheritdoc cref="ContainsRectangle(Chaos.Geometry.Abstractions.IRectangle,Chaos.Geometry.Abstractions.IRectangle)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ValueRectangle rect, IRectangle other)
+    public static bool ContainsRectangle(this ValueRectangle rect, IRectangle other)
     {
         ArgumentNullException.ThrowIfNull(other);
 
@@ -57,7 +57,7 @@ public static class RectangleExtensions
     ///     </c>
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this IRectangle rect, IRectangle other)
+    public static bool ContainsRectangle(this IRectangle rect, IRectangle other)
     {
         ArgumentNullException.ThrowIfNull(rect);
 
@@ -68,37 +68,37 @@ public static class RectangleExtensions
     #endregion
 
     #region Rect Contains Point
-    /// <inheritdoc cref="Contains(IRectangle, IPoint)" />
+    /// <inheritdoc cref="ContainsPoint" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ValueRectangle rect, ValuePoint point)
+    public static bool ContainsPoint(this ValueRectangle rect, ValuePoint point)
         => (rect.Bottom >= point.Y) && (rect.Left <= point.X) && (rect.Right >= point.X) && (rect.Top <= point.Y);
 
-    /// <inheritdoc cref="Contains(IRectangle, IPoint)" />
+    /// <inheritdoc cref="ContainsPoint" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ValueRectangle rect, Point point)
+    public static bool ContainsPoint(this ValueRectangle rect, Point point)
         => (rect.Bottom >= point.Y) && (rect.Left <= point.X) && (rect.Right >= point.X) && (rect.Top <= point.Y);
 
-    /// <inheritdoc cref="Contains(IRectangle, IPoint)" />
+    /// <inheritdoc cref="ContainsPoint" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ValueRectangle rect, IPoint point)
+    public static bool ContainsPoint(this ValueRectangle rect, IPoint point)
     {
         ArgumentNullException.ThrowIfNull(point);
 
         return (rect.Left <= point.X) && (rect.Right >= point.X) && (rect.Top <= point.Y) && (rect.Bottom >= point.Y);
     }
 
-    /// <inheritdoc cref="Contains(IRectangle, IPoint)" />
+    /// <inheritdoc cref="ContainsPoint" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this IRectangle rect, ValuePoint point)
+    public static bool ContainsPoint(this IRectangle rect, ValuePoint point)
     {
         ArgumentNullException.ThrowIfNull(rect);
 
         return (rect.Left <= point.X) && (rect.Right >= point.X) && (rect.Top <= point.Y) && (rect.Bottom >= point.Y);
     }
 
-    /// <inheritdoc cref="Contains(IRectangle, IPoint)" />
+    /// <inheritdoc cref="ContainsPoint" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this IRectangle rect, Point point)
+    public static bool ContainsPoint(this IRectangle rect, Point point)
     {
         ArgumentNullException.ThrowIfNull(rect);
 
@@ -124,7 +124,7 @@ public static class RectangleExtensions
     ///         false
     ///     </c>
     /// </returns>
-    public static bool Contains(this IRectangle rect, IPoint point)
+    public static bool ContainsPoint(this IRectangle rect, IPoint point)
     {
         ArgumentNullException.ThrowIfNull(point);
 
@@ -198,7 +198,7 @@ public static class RectangleExtensions
                 var target = new Point(current.X + dx * 2, current.Y + dy * 2);
 
                 //if the target is out of bounds or already carved, skip
-                if (!mazeRect.Contains(target) || !maze[target.X, target.Y])
+                if (!mazeRect.ContainsPoint(target) || !maze[target.X, target.Y])
                     continue;
 
                 //carve out the wall between the current node and the target

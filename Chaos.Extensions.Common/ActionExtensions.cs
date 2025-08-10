@@ -1,3 +1,7 @@
+#region
+using System.Diagnostics.CodeAnalysis;
+#endregion
+
 namespace Chaos.Extensions.Common;
 
 /// <summary>
@@ -9,6 +13,7 @@ public static class ActionExtensions
     ///     Executes the specified <paramref name="action" /> and catches any exceptions that occur. (Does not rethrow, should
     ///     only be used as a shorthand for unimportant things)
     /// </summary>
+    [ExcludeFromCodeCoverage(Justification = "Wrapper method")]
     public static void Catch(this Action action, Action<Exception> exceptionHandler)
     {
         try

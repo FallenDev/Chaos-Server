@@ -148,7 +148,7 @@ public sealed class MapEntityCollection : IDeltaUpdatable
 
     [OverloadResolutionPriority(1)]
     private IEnumerable<T> AtPoint<T>(Point point) where T: MapEntity
-        => Bounds.Contains(point)
+        => Bounds.ContainsPoint(point)
             ? QuadTree.Query(point)
                       .OfType<T>()
             : [];

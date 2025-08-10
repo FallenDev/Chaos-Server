@@ -804,9 +804,10 @@ public static class CircleExtensions
     #endregion
 
     #region Circle Contains Circle
-    /// <inheritdoc cref="Contains(ICircle, ICircle, DistanceType)" />
+    /// <inheritdoc
+    ///     cref="ContainsCircle(Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Abstractions.Definitions.DistanceType)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ValueCircle circle, ValueCircle other, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsCircle(this ValueCircle circle, ValueCircle other, DistanceType distanceType = DistanceType.Euclidean)
         => distanceType switch
         {
             DistanceType.Manhattan => circle.Radius >= (circle.Center.ManhattanDistanceFrom(other.Center) + other.Radius),
@@ -814,9 +815,10 @@ public static class CircleExtensions
             _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
 
-    /// <inheritdoc cref="Contains(ICircle, ICircle, DistanceType)" />
+    /// <inheritdoc
+    ///     cref="ContainsCircle(Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Abstractions.Definitions.DistanceType)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ValueCircle circle, ICircle other, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsCircle(this ValueCircle circle, ICircle other, DistanceType distanceType = DistanceType.Euclidean)
     {
         ArgumentNullException.ThrowIfNull(other);
 
@@ -828,9 +830,10 @@ public static class CircleExtensions
         };
     }
 
-    /// <inheritdoc cref="Contains(ICircle, ICircle, DistanceType)" />
+    /// <inheritdoc
+    ///     cref="ContainsCircle(Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Abstractions.Definitions.DistanceType)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ICircle circle, ValueCircle other, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsCircle(this ICircle circle, ValueCircle other, DistanceType distanceType = DistanceType.Euclidean)
     {
         ArgumentNullException.ThrowIfNull(circle);
 
@@ -871,7 +874,7 @@ public static class CircleExtensions
     ///     other
     /// </exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ICircle circle, ICircle other, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsCircle(this ICircle circle, ICircle other, DistanceType distanceType = DistanceType.Euclidean)
     {
         ArgumentNullException.ThrowIfNull(circle);
 
@@ -887,9 +890,10 @@ public static class CircleExtensions
     #endregion
 
     #region Circle Contains Point
-    /// <inheritdoc cref="Contains(ICircle, Point, DistanceType)" />
+    /// <inheritdoc
+    ///     cref="ContainsPoint(Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Point,Chaos.Geometry.Abstractions.Definitions.DistanceType)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)] //prefer to not box structs
-    public static bool Contains(this ValueCircle circle, ValuePoint point, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsPoint(this ValueCircle circle, ValuePoint point, DistanceType distanceType = DistanceType.Euclidean)
         => distanceType switch
         {
             DistanceType.Manhattan => point.ManhattanDistanceFrom(circle.Center) <= circle.Radius,
@@ -897,9 +901,10 @@ public static class CircleExtensions
             _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
 
-    /// <inheritdoc cref="Contains(ICircle, Point, DistanceType)" />
+    /// <inheritdoc
+    ///     cref="ContainsPoint(Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Point,Chaos.Geometry.Abstractions.Definitions.DistanceType)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)] //prefer to not box structs
-    public static bool Contains(this ValueCircle circle, Point point, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsPoint(this ValueCircle circle, Point point, DistanceType distanceType = DistanceType.Euclidean)
         => distanceType switch
         {
             DistanceType.Manhattan => point.ManhattanDistanceFrom(circle.Center) <= circle.Radius,
@@ -907,9 +912,10 @@ public static class CircleExtensions
             _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
 
-    /// <inheritdoc cref="Contains(ICircle, Point, DistanceType)" />
+    /// <inheritdoc
+    ///     cref="ContainsPoint(Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Point,Chaos.Geometry.Abstractions.Definitions.DistanceType)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)] //prefer to not box structs
-    public static bool Contains(this ValueCircle circle, IPoint point, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsPoint(this ValueCircle circle, IPoint point, DistanceType distanceType = DistanceType.Euclidean)
     {
         ArgumentNullException.ThrowIfNull(point);
 
@@ -921,9 +927,10 @@ public static class CircleExtensions
         };
     }
 
-    /// <inheritdoc cref="Contains(ICircle, Point, DistanceType)" />
+    /// <inheritdoc
+    ///     cref="ContainsPoint(Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Point,Chaos.Geometry.Abstractions.Definitions.DistanceType)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)] //prefer to not box structs
-    public static bool Contains(this ICircle circle, ValuePoint point, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsPoint(this ICircle circle, ValuePoint point, DistanceType distanceType = DistanceType.Euclidean)
     {
         ArgumentNullException.ThrowIfNull(circle);
 
@@ -935,9 +942,10 @@ public static class CircleExtensions
         };
     }
 
-    /// <inheritdoc cref="Contains(ICircle, Point, DistanceType)" />
+    /// <inheritdoc
+    ///     cref="ContainsPoint(Chaos.Geometry.Abstractions.ICircle,Chaos.Geometry.Point,Chaos.Geometry.Abstractions.Definitions.DistanceType)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)] //prefer to not box structs
-    public static bool Contains(this ICircle circle, Point point, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsPoint(this ICircle circle, Point point, DistanceType distanceType = DistanceType.Euclidean)
     {
         ArgumentNullException.ThrowIfNull(circle);
 
@@ -978,7 +986,7 @@ public static class CircleExtensions
     ///     point
     /// </exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Contains(this ICircle circle, IPoint point, DistanceType distanceType = DistanceType.Euclidean)
+    public static bool ContainsPoint(this ICircle circle, IPoint point, DistanceType distanceType = DistanceType.Euclidean)
     {
         ArgumentNullException.ThrowIfNull(circle);
 
@@ -1350,8 +1358,8 @@ public static class CircleExtensions
         var rngR = Random.Shared.NextDouble();
         var rngAngle = rngA * 2 * Math.PI;
         var rngRadius = Math.Sqrt(rngR) * circle.Radius;
-        var x = (int)(rngRadius * Math.Cos(rngAngle) + circle.Center.X);
-        var y = (int)(rngRadius * Math.Sin(rngAngle) + circle.Center.Y);
+        var x = (int)Math.Round(rngRadius * Math.Cos(rngAngle) + circle.Center.X, MidpointRounding.AwayFromZero);
+        var y = (int)Math.Round(rngRadius * Math.Sin(rngAngle) + circle.Center.Y, MidpointRounding.AwayFromZero);
 
         return new Point(x, y);
     }
@@ -1370,8 +1378,8 @@ public static class CircleExtensions
         var rngR = Random.Shared.NextDouble();
         var rngAngle = rngA * 2 * Math.PI;
         var rngRadius = Math.Sqrt(rngR) * circle.Radius;
-        var x = (int)(rngRadius * Math.Cos(rngAngle) + circle.Center.X);
-        var y = (int)(rngRadius * Math.Sin(rngAngle) + circle.Center.Y);
+        var x = (int)Math.Round(rngRadius * Math.Cos(rngAngle) + circle.Center.X, MidpointRounding.AwayFromZero);
+        var y = (int)Math.Round(rngRadius * Math.Sin(rngAngle) + circle.Center.Y, MidpointRounding.AwayFromZero);
 
         return new Point(x, y);
     }
@@ -1384,8 +1392,9 @@ public static class CircleExtensions
         => distanceType switch
         {
             DistanceType.Manhattan => circle.Center.ManhattanDistanceFrom(other.Center) <= (circle.Radius + other.Radius),
-            DistanceType.Euclidean => circle.Center.EuclideanDistanceFrom(other.Center) <= (circle.Radius + other.Radius),
-            _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
+            DistanceType.Euclidean => circle.Center.EuclideanDistanceFrom(other.Center)
+                                      <= (circle.Radius + (other.Radius + double.Epsilon)),
+            _ => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
 
     /// <inheritdoc cref="Intersects(ICircle, ICircle, DistanceType)" />
@@ -1397,8 +1406,9 @@ public static class CircleExtensions
         return distanceType switch
         {
             DistanceType.Manhattan => circle.Center.ManhattanDistanceFrom(other.Center) <= (circle.Radius + other.Radius),
-            DistanceType.Euclidean => circle.Center.EuclideanDistanceFrom(other.Center) <= (circle.Radius + other.Radius),
-            _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
+            DistanceType.Euclidean => circle.Center.EuclideanDistanceFrom(other.Center)
+                                      <= (circle.Radius + (other.Radius + double.Epsilon)),
+            _ => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
     }
 
@@ -1411,8 +1421,9 @@ public static class CircleExtensions
         return distanceType switch
         {
             DistanceType.Manhattan => circle.Center.ManhattanDistanceFrom(other.Center) <= (circle.Radius + other.Radius),
-            DistanceType.Euclidean => circle.Center.EuclideanDistanceFrom(other.Center) <= (circle.Radius + other.Radius),
-            _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
+            DistanceType.Euclidean => circle.Center.EuclideanDistanceFrom(other.Center)
+                                      <= (circle.Radius + (other.Radius + double.Epsilon)),
+            _ => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
     }
 
@@ -1454,8 +1465,9 @@ public static class CircleExtensions
         return distanceType switch
         {
             DistanceType.Manhattan => circle.Center.ManhattanDistanceFrom(other.Center) <= (circle.Radius + other.Radius),
-            DistanceType.Euclidean => circle.Center.EuclideanDistanceFrom(other.Center) <= (circle.Radius + other.Radius),
-            _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
+            DistanceType.Euclidean => circle.Center.EuclideanDistanceFrom(other.Center)
+                                      <= (circle.Radius + (other.Radius + double.Epsilon)),
+            _ => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
     }
     #endregion
@@ -1471,8 +1483,9 @@ public static class CircleExtensions
         return distanceType switch
         {
             DistanceType.Manhattan => new Point(closestX, closestY).ManhattanDistanceFrom(circle.Center) <= circle.Radius,
-            DistanceType.Euclidean => new Point(closestX, closestY).EuclideanDistanceFrom(circle.Center) <= circle.Radius,
-            _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
+            DistanceType.Euclidean => new Point(closestX, closestY).EuclideanDistanceFrom(circle.Center)
+                                      <= (circle.Radius + double.Epsilon),
+            _ => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
     }
 
@@ -1488,8 +1501,9 @@ public static class CircleExtensions
         return distanceType switch
         {
             DistanceType.Manhattan => new Point(closestX, closestY).ManhattanDistanceFrom(circle.Center) <= circle.Radius,
-            DistanceType.Euclidean => new Point(closestX, closestY).EuclideanDistanceFrom(circle.Center) <= circle.Radius,
-            _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
+            DistanceType.Euclidean => new Point(closestX, closestY).EuclideanDistanceFrom(circle.Center)
+                                      <= (circle.Radius + double.Epsilon),
+            _ => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
     }
 
@@ -1505,8 +1519,9 @@ public static class CircleExtensions
         return distanceType switch
         {
             DistanceType.Manhattan => new Point(closestX, closestY).ManhattanDistanceFrom(circle.Center) <= circle.Radius,
-            DistanceType.Euclidean => new Point(closestX, closestY).EuclideanDistanceFrom(circle.Center) <= circle.Radius,
-            _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
+            DistanceType.Euclidean => new Point(closestX, closestY).EuclideanDistanceFrom(circle.Center)
+                                      <= (circle.Radius + double.Epsilon),
+            _ => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
     }
 
@@ -1543,8 +1558,9 @@ public static class CircleExtensions
         return distanceType switch
         {
             DistanceType.Manhattan => new Point(closestX, closestY).ManhattanDistanceFrom(circle.Center) <= circle.Radius,
-            DistanceType.Euclidean => new Point(closestX, closestY).EuclideanDistanceFrom(circle.Center) <= circle.Radius,
-            _                      => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
+            DistanceType.Euclidean => new Point(closestX, closestY).EuclideanDistanceFrom(circle.Center)
+                                      <= (circle.Radius + double.Epsilon),
+            _ => throw new ArgumentOutOfRangeException(nameof(distanceType), distanceType, null)
         };
     }
     #endregion

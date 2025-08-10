@@ -37,7 +37,7 @@ public sealed class RectangleExtensionsTests
         var point = new Point(pointX, pointY);
 
         // Act
-        var result = rect.Contains(point);
+        var result = rect.ContainsPoint(point);
 
         // Assert
         result.Should()
@@ -61,7 +61,7 @@ public sealed class RectangleExtensionsTests
             15);
 
         // Act
-        var result = rect.Contains(otherRect);
+        var result = rect.ContainsRectangle(otherRect);
 
         // Assert
         result.Should()
@@ -85,7 +85,7 @@ public sealed class RectangleExtensionsTests
             15);
 
         // Act
-        var result = rect.Contains(intersectingRect);
+        var result = rect.ContainsRectangle(intersectingRect);
 
         // Assert
         result.Should()
@@ -109,7 +109,7 @@ public sealed class RectangleExtensionsTests
             6);
 
         // Act
-        var result = rect.Contains(otherRect);
+        var result = rect.ContainsRectangle(otherRect);
 
         // Assert
         result.Should()
@@ -133,7 +133,7 @@ public sealed class RectangleExtensionsTests
             10);
 
         // Act
-        var result = rect.Contains(sameRect);
+        var result = rect.ContainsRectangle(sameRect);
 
         // Assert
         result.Should()
