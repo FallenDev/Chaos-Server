@@ -27,6 +27,54 @@ public sealed class PolygonExtensionsTests
            .Throw<ArgumentNullException>();
     }
 
+    [Test]
+    public void Contains_IPolygon_IPoint_Works_With_IPoint_Argument()
+    {
+        IPolygon poly = new Polygon(
+            [
+                new Point(0, 0),
+                new Point(0, 4),
+                new Point(4, 4),
+                new Point(4, 0)
+            ]);
+
+        IPoint inside = new Point(2, 2);
+        IPoint outside = new Point(5, 5);
+        IPoint boundary = new Point(2, 4);
+
+        poly.ContainsPoint(inside)
+            .Should()
+            .BeTrue();
+
+        poly.ContainsPoint(outside)
+            .Should()
+            .BeFalse();
+
+        poly.ContainsPoint(boundary)
+            .Should()
+            .BeTrue();
+    }
+
+    [Test]
+    public void Contains_IPolygon_Point_FastFail_YBelowMin_And_YAboveMax()
+    {
+        IPolygon polygon = new Polygon(
+            [
+                new Point(0, 0),
+                new Point(0, 4),
+                new Point(4, 4),
+                new Point(4, 0)
+            ]);
+
+        polygon.ContainsPoint(new Point(2, -1))
+               .Should()
+               .BeFalse();
+
+        polygon.ContainsPoint(new Point(2, 5))
+               .Should()
+               .BeFalse();
+    }
+
     //formatter:off
     [Test]
     [Arguments(2, 2, true)]
@@ -150,6 +198,40 @@ public sealed class PolygonExtensionsTests
               .Be(expected);
     }
 
+    [Test]
+    public void Contains_ValuePolygon_Point_XConjunct_Fails_When_AllVertexX_Greater_Than_PointX()
+    {
+        var poly = new ValuePolygon(
+            [
+                new Point(1, 0),
+                new Point(1, 4),
+                new Point(3, 4),
+                new Point(3, 0)
+            ]);
+
+        poly.ContainsPoint(new Point(0, 2))
+            .Should()
+            .BeFalse();
+    }
+
+    [Test]
+    public void Contains_ValuePolygon_Point_XorFlip_Comparison_False_Path_Is_Exercised()
+    {
+        var poly = new ValuePolygon(
+            [
+                new Point(0, 0),
+                new Point(4, 0),
+                new Point(4, 4),
+                new Point(0, 4)
+            ]);
+
+        // For edge (0,0)->(4,4) equivalent along outline, choose a point where crossingX == 2 and point.X == 1
+        // Ensures (crossingX < point.X) is false on that iteration, while other edges still flip to yield inside
+        poly.ContainsPoint(new Point(1, 2))
+            .Should()
+            .BeTrue();
+    }
+
     //formatter:off
     [Test]
     [Arguments(5, 5, false)]
@@ -172,6 +254,23 @@ public sealed class PolygonExtensionsTests
 
         result.Should()
               .Be(expected);
+    }
+
+    [Test]
+    public void Contains_ValuePolygon_ValuePoint_XorFlip_Comparison_True_Path_Is_Exercised()
+    {
+        var poly = new ValuePolygon(
+            [
+                new Point(0, 0),
+                new Point(4, 0),
+                new Point(4, 4),
+                new Point(0, 4)
+            ]);
+
+        // For diagonal-like crossing computation, pick a point where crossingX (2) < point.X (3) for some edge
+        poly.ContainsPoint(new ValuePoint(3, 2))
+            .Should()
+            .BeTrue();
     }
 
     [Test]

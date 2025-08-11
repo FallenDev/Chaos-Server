@@ -1,4 +1,5 @@
 #region
+using Chaos.Geometry.Abstractions;
 using Chaos.Geometry.EqualityComparers;
 using FluentAssertions;
 #endregion
@@ -32,6 +33,37 @@ public sealed class RectangleEqualityComparerTests
     }
 
     [Test]
+    public void Equals_ReturnsFalse_WhenXIsNull()
+    {
+        IRectangle? x = null;
+
+        IRectangle? y = new Rectangle(
+            1,
+            2,
+            3,
+            4);
+        var result = RectangleEqualityComparer.Instance.Equals(x, y);
+
+        result.Should()
+              .BeFalse();
+    }
+
+    [Test]
+    public void Equals_ReturnsFalse_WhenYIsNull()
+    {
+        IRectangle? x = new Rectangle(
+            1,
+            2,
+            3,
+            4);
+        IRectangle? y = null;
+        var result = RectangleEqualityComparer.Instance.Equals(x, y);
+
+        result.Should()
+              .BeFalse();
+    }
+
+    [Test]
     public void Equals_ReturnsTrue_WhenRectanglesAreEqual()
     {
         // Arrange
@@ -51,6 +83,20 @@ public sealed class RectangleEqualityComparerTests
         var result = RectangleEqualityComparer.Instance.Equals(rectangle1, rectangle2);
 
         // Assert
+        result.Should()
+              .BeTrue();
+    }
+
+    [Test]
+    public void Equals_ReturnsTrue_WhenSameReference()
+    {
+        var rect = new Rectangle(
+            1,
+            2,
+            3,
+            4);
+        var result = RectangleEqualityComparer.Instance.Equals(rect, rect);
+
         result.Should()
               .BeTrue();
     }

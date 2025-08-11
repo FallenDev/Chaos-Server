@@ -70,6 +70,19 @@ public sealed class LocationExtensionsTests
     }
 
     [Test]
+    public void EnsureSameMap_ILocation_ValueLocation_DoesNotThrow_When_Same_Map()
+    {
+        ILocation a = new Location("map", 0, 0);
+        var b = new ValueLocation("MAP", 1, 1);
+
+        (var mB, var xB, var yB) = (b.Map, b.X, b.Y);
+        var act = () => LocationExtensions.EnsureSameMap(a, new ValueLocation(mB, xB, yB));
+
+        act.Should()
+           .NotThrow();
+    }
+
+    [Test]
     public void EnsureSameMap_ILocation_ValueLocation_Throws_On_Null_First()
     {
         var b = new ValueLocation("map", 0, 0);
@@ -128,6 +141,19 @@ public sealed class LocationExtensionsTests
         act.Should()
            .Throw<InvalidOperationException>()
            .WithMessage("* is not on the same map as *");
+    }
+
+    [Test]
+    public void EnsureSameMap_ValueLocation_ILocation_DoesNotThrow_When_Same_Map()
+    {
+        var a = new ValueLocation("map", 0, 0);
+        ILocation b = new Location("MAP", 1, 1);
+
+        (var mA, var xA, var yA) = (a.Map, a.X, a.Y);
+        var act = () => LocationExtensions.EnsureSameMap(new ValueLocation(mA, xA, yA), b);
+
+        act.Should()
+           .NotThrow();
     }
 
     [Test]

@@ -46,6 +46,36 @@ public sealed class RectangleExtensionsTests
     }
 
     [Test]
+    public void ContainsPoint_IRectangle_IPoint_Outside()
+    {
+        IRectangle rect = new Rectangle(
+            0,
+            0,
+            4,
+            4);
+        IPoint pt = new Point(10, 10);
+
+        rect.ContainsPoint(pt)
+            .Should()
+            .BeFalse();
+    }
+
+    [Test]
+    public void ContainsPoint_IRectangle_ValuePoint_MixedTypes()
+    {
+        IRectangle rect = new Rectangle(
+            0,
+            0,
+            4,
+            4);
+        var pt = new ValuePoint(2, 2);
+
+        rect.ContainsPoint(pt)
+            .Should()
+            .BeTrue();
+    }
+
+    [Test]
     public void ContainsPoint_ValueRect_IPoint_Throws_When_Point_Null()
     {
         Action act = () => new ValueRectangle(
@@ -172,6 +202,21 @@ public sealed class RectangleExtensionsTests
     }
 
     [Test]
+    public void ContainsPoint_ValueRectangle_IPoint_Outside()
+    {
+        var rect = new ValueRectangle(
+            0,
+            0,
+            4,
+            4);
+        IPoint pt = new Point(-1, -1);
+
+        rect.ContainsPoint(pt)
+            .Should()
+            .BeFalse();
+    }
+
+    [Test]
     public void ContainsRectangle_IRect_IRect_Throws_On_Nulls()
     {
         // both nulls are checked
@@ -210,6 +255,86 @@ public sealed class RectangleExtensionsTests
 
         act.Should()
            .Throw<ArgumentNullException>();
+    }
+
+    [Test]
+    public void ContainsRectangle_IRectangle_IRectangle_False()
+    {
+        IRectangle outer = new Rectangle(
+            0,
+            0,
+            2,
+            2);
+
+        IRectangle inner = new Rectangle(
+            3,
+            3,
+            5,
+            5);
+
+        outer.ContainsRectangle(inner)
+             .Should()
+             .BeFalse();
+    }
+
+    [Test]
+    public void ContainsRectangle_IRectangle_IRectangle_True()
+    {
+        IRectangle outer = new Rectangle(
+            0,
+            0,
+            4,
+            4);
+
+        IRectangle inner = new Rectangle(
+            1,
+            1,
+            3,
+            3);
+
+        outer.ContainsRectangle(inner)
+             .Should()
+             .BeTrue();
+    }
+
+    [Test]
+    public void ContainsRectangle_IRectangle_ValueRectangle_False_When_Not_Contained()
+    {
+        IRectangle outer = new Rectangle(
+            0,
+            0,
+            2,
+            2);
+
+        var inner = new ValueRectangle(
+            1,
+            1,
+            4,
+            4);
+
+        outer.ContainsRectangle(inner)
+             .Should()
+             .BeFalse();
+    }
+
+    [Test]
+    public void ContainsRectangle_IRectangle_ValueRectangle_MixedTypes()
+    {
+        IRectangle outer = new Rectangle(
+            0,
+            0,
+            4,
+            4);
+
+        var inner = new ValueRectangle(
+            1,
+            1,
+            3,
+            3);
+
+        outer.ContainsRectangle(inner)
+             .Should()
+             .BeTrue();
     }
 
     [Test]
@@ -285,6 +410,46 @@ public sealed class RectangleExtensionsTests
 
         result.Should()
               .Be(expected);
+    }
+
+    [Test]
+    public void ContainsRectangle_ValueRectangle_IRectangle_False_When_Not_Contained()
+    {
+        var outer = new ValueRectangle(
+            0,
+            0,
+            2,
+            2);
+
+        IRectangle inner = new Rectangle(
+            1,
+            1,
+            4,
+            4);
+
+        outer.ContainsRectangle(inner)
+             .Should()
+             .BeFalse();
+    }
+
+    [Test]
+    public void ContainsRectangle_ValueRectangle_IRectangle_MixedTypes()
+    {
+        var outer = new ValueRectangle(
+            0,
+            0,
+            4,
+            4);
+
+        IRectangle inner = new Rectangle(
+            1,
+            1,
+            3,
+            3);
+
+        outer.ContainsRectangle(inner)
+             .Should()
+             .BeTrue();
     }
 
     [Test]
@@ -496,6 +661,86 @@ public sealed class RectangleExtensionsTests
     }
 
     [Test]
+    public void Intersects_IRectangle_IRectangle_False()
+    {
+        IRectangle a = new Rectangle(
+            0,
+            0,
+            1,
+            1);
+
+        IRectangle b = new Rectangle(
+            3,
+            3,
+            4,
+            4);
+
+        a.Intersects(b)
+         .Should()
+         .BeFalse();
+    }
+
+    [Test]
+    public void Intersects_IRectangle_IRectangle_True()
+    {
+        IRectangle a = new Rectangle(
+            0,
+            0,
+            4,
+            4);
+
+        IRectangle b = new Rectangle(
+            3,
+            3,
+            6,
+            6);
+
+        a.Intersects(b)
+         .Should()
+         .BeTrue();
+    }
+
+    [Test]
+    public void Intersects_IRectangle_ValueRectangle_False_When_Separated()
+    {
+        IRectangle a = new Rectangle(
+            0,
+            0,
+            1,
+            1);
+
+        var b = new ValueRectangle(
+            3,
+            3,
+            4,
+            4);
+
+        a.Intersects(b)
+         .Should()
+         .BeFalse();
+    }
+
+    [Test]
+    public void Intersects_IRectangle_ValueRectangle_MixedTypes()
+    {
+        IRectangle a = new Rectangle(
+            0,
+            0,
+            4,
+            4);
+
+        var b = new ValueRectangle(
+            3,
+            3,
+            6,
+            6);
+
+        a.Intersects(b)
+         .Should()
+         .BeTrue();
+    }
+
+    [Test]
     public void Intersects_ValueRect_IRect_Throws_When_Other_Null()
     {
         Action act = () => new ValueRectangle(
@@ -567,6 +812,46 @@ public sealed class RectangleExtensionsTests
         a.Intersects(b)
          .Should()
          .Be(expected);
+    }
+
+    [Test]
+    public void Intersects_ValueRectangle_IRectangle_False_When_Separated()
+    {
+        var a = new ValueRectangle(
+            0,
+            0,
+            1,
+            1);
+
+        IRectangle b = new Rectangle(
+            3,
+            3,
+            4,
+            4);
+
+        a.Intersects(b)
+         .Should()
+         .BeFalse();
+    }
+
+    [Test]
+    public void Intersects_ValueRectangle_IRectangle_MixedTypes()
+    {
+        var a = new ValueRectangle(
+            0,
+            0,
+            4,
+            4);
+
+        IRectangle b = new Rectangle(
+            3,
+            3,
+            6,
+            6);
+
+        a.Intersects(b)
+         .Should()
+         .BeTrue();
     }
 
     [Test]

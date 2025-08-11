@@ -172,6 +172,26 @@ public sealed class FileExTests
     }
 
     [Test]
+    public void SafeOpenRead_When_Func_Throws_Unexpected_Exception_Breaks_And_Aggregates()
+    {
+        var guid = Guid.NewGuid()
+                       .ToString();
+        var path = $"{guid}.txt";
+        File.WriteAllText(path, "content");
+
+        Action act = () => FileEx.SafeOpenRead<string>(path, _ => throw new Exception("boom"));
+
+        act.Should()
+           .Throw<AggregateException>()
+           .Which
+           .InnerExceptions
+           .Should()
+           .ContainSingle(e => e is Exception && (e.Message == "boom"));
+
+        File.Delete(path);
+    }
+
+    [Test]
     public async Task SafeOpenReadAsync_Should_CaptureExceptions_InAggregateException()
     {
         // Arrange
@@ -443,6 +463,23 @@ public sealed class FileExTests
         FileEx.SafeWriteAllText(path, text);
 
         // Assert
+        File.ReadAllText(path)
+            .Should()
+            .Be(text);
+    }
+
+    [Test]
+    public async Task SafeWriteAllTextAsync_Writes_File_Successfully()
+    {
+        var path = "async_test.txt";
+        var text = "Async write";
+
+        await FileEx.SafeWriteAllTextAsync(path, text);
+
+        File.Exists(path)
+            .Should()
+            .BeTrue();
+
         File.ReadAllText(path)
             .Should()
             .Be(text);

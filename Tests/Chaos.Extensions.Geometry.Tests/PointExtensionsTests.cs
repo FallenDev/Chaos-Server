@@ -11,12 +11,99 @@ namespace Chaos.Extensions.Geometry.Tests;
 
 public sealed class PointExtensionsTests
 {
+    //formatter:off
     [Test]
-    public void ConalSearch_MaxDistanceGreaterThanOne_ReturnsAllPointsWithinCone()
+    [Arguments(
+        Direction.Up,
+        new[]
+        {
+            -1,
+            -1,
+            0,
+            -1,
+            1,
+            -1,
+            -2,
+            -2,
+            -1,
+            -2,
+            0,
+            -2,
+            1,
+            -2,
+            2,
+            -2
+        })]
+    [Arguments(
+        Direction.Right,
+        new[]
+        {
+            1,
+            -1,
+            1,
+            0,
+            1,
+            1,
+            2,
+            -2,
+            2,
+            -1,
+            2,
+            0,
+            2,
+            1,
+            2,
+            2
+        })]
+    [Arguments(
+        Direction.Down,
+        new[]
+        {
+            1,
+            1,
+            0,
+            1,
+            -1,
+            1,
+            2,
+            2,
+            1,
+            2,
+            0,
+            2,
+            -1,
+            2,
+            -2,
+            2
+        })]
+    [Arguments(
+        Direction.Left,
+        new[]
+        {
+            -1,
+            -1,
+            -1,
+            0,
+            -1,
+            1,
+            -2,
+            -2,
+            -2,
+            -1,
+            -2,
+            0,
+            -2,
+            1,
+            -2,
+            2
+        })]
+    public void ConalSearch_MaxDistanceGreaterThanOne_ReturnsAllPointsWithinCone(Direction direction, params IEnumerable<int> expected)
+
+        //formatter:on
     {
         var startingPoint = new Point(0, 0);
 
-        var points = startingPoint.ConalSearch(Direction.Up, 2)
+        var points = startingPoint.ConalSearch(direction, 2)
                                   .ToList();
 
         points.Should()
@@ -24,24 +111,63 @@ public sealed class PointExtensionsTests
 
         points.Should()
               .BeEquivalentTo(
-                  [
-                      new Point(-2, -2),
-                      new Point(-1, -1),
-                      new Point(0, -2),
-                      new Point(1, -1),
-                      new Point(2, -2),
-                      new Point(-1, -2),
-                      new Point(1, -2),
-                      new Point(0, -1)
-                  ]);
+                  expected.Chunk(2)
+                          .Select(p => new Point(p[0], p[1])));
     }
 
+    //formatter:off
     [Test]
-    public void ConalSearch_MaxDistanceOne_ReturnsThreePointsInSpecifiedDirection()
+    [Arguments(
+        Direction.Up,
+        new[]
+        {
+            -1,
+            -1,
+            0,
+            -1,
+            1,
+            -1
+        })]
+    [Arguments(
+        Direction.Right,
+        new[]
+        {
+            1,
+            -1,
+            1,
+            0,
+            1,
+            1
+        })]
+    [Arguments(
+        Direction.Down,
+        new[]
+        {
+            -1,
+            1,
+            0,
+            1,
+            1,
+            1
+        })]
+    [Arguments(
+        Direction.Left,
+        new[]
+        {
+            -1,
+            -1,
+            -1,
+            0,
+            -1,
+            1
+        })]
+    public void ConalSearch_MaxDistanceOne_ReturnsThreePointsInSpecifiedDirection(Direction direction, params IEnumerable<int> expected)
+
+        //formatter:on
     {
         var startingPoint = new Point(0, 0);
 
-        var points = startingPoint.ConalSearch(Direction.Up, 1)
+        var points = startingPoint.ConalSearch(direction, 1)
                                   .ToList();
 
         points.Should()
@@ -49,19 +175,23 @@ public sealed class PointExtensionsTests
 
         points.Should()
               .BeEquivalentTo(
-                  [
-                      new Point(-1, -1),
-                      new Point(0, -1),
-                      new Point(1, -1)
-                  ]);
+                  expected.Chunk(2)
+                          .Select(p => new Point(p[0], p[1])));
     }
 
+    //formatter:off
     [Test]
-    public void ConalSearch_MaxDistanceZero_ReturnsEmpty()
+    [Arguments(Direction.Up)]
+    [Arguments(Direction.Right)]
+    [Arguments(Direction.Down)]
+    [Arguments(Direction.Left)]
+    public void ConalSearch_MaxDistanceZero_ReturnsEmpty(Direction direction)
+
+        //formatter:on
     {
         var startingPoint = new Point(0, 0);
 
-        var points = startingPoint.ConalSearch(Direction.Up, 0)
+        var points = startingPoint.ConalSearch(direction, 0)
                                   .ToList();
 
         points.Should()
@@ -251,6 +381,17 @@ public sealed class PointExtensionsTests
                        .Select(p => new Point(p[0], p[1])));
     }
 
+    [Test]
+    public void DirectionalOffset_IPoint_Invalid_Throws()
+    {
+        IPoint p = new Point(0, 0);
+
+        var act = () => p.DirectionalOffset(Direction.Invalid);
+
+        act.Should()
+           .Throw<ArgumentOutOfRangeException>();
+    }
+
     //@formatter:off
     [Test]
     [Arguments(1, 1, Direction.Up, 1, 1, 0)]
@@ -365,6 +506,112 @@ public sealed class PointExtensionsTests
          .Be(new Point(10 + dx, 10 + dy));
     }
 
+    //formatter:off
+    [Test]
+    [Arguments(
+        5,
+        0,
+        0,
+        1,
+        Direction.Right)] // x dominates, x> -> Right
+    [Arguments(
+        2,
+        0,
+        0,
+        10,
+        Direction.Up)] // y dominates, y> -> Up
+    [Arguments(
+        -5,
+        0,
+        0,
+        1,
+        Direction.Left)] // x dominates, x< -> Left
+    [Arguments(
+        -1,
+        10,
+        1,
+        0,
+        Direction.Down)] // y dominates, y< -> Down
+    public void DirectionalRelationTo_IPoint_IPoint_NonTie(
+            int ax,
+            int ay,
+            int bx,
+            int by,
+            Direction expected)
+
+        //formatter:on
+    {
+        IPoint a = new Point(ax, ay);
+        IPoint b = new Point(bx, by);
+
+        a.DirectionalRelationTo(b)
+         .Should()
+         .Be(expected);
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        -1,
+        Direction.Up,
+        Direction.Right)]
+    [Arguments(
+        1,
+        1,
+        Direction.Down,
+        Direction.Right)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Down,
+        Direction.Left)]
+    [Arguments(
+        -1,
+        -1,
+        Direction.Up,
+        Direction.Left)]
+    public void DirectionalRelationTo_IPoint_IPoint_Tie_AllCorners(
+            int dx,
+            int dy,
+            Direction expected1,
+            Direction expected2)
+
+        //formatter:on
+    {
+        IPoint a = new Point(dx, dy);
+        IPoint b = new Point(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 200) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(expected1);
+
+        seen.Should()
+            .Contain(expected2);
+    }
+
+    [Test]
+    public void DirectionalRelationTo_IPoint_IPoint_Tie_ExercisesBothOutcomes()
+    {
+        IPoint a = new Point(1, 1);
+        IPoint b = new Point(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 500) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(Direction.Down);
+
+        seen.Should()
+            .Contain(Direction.Right);
+    }
+
     [Test]
     [Arguments(
         0,
@@ -401,6 +648,69 @@ public sealed class PointExtensionsTests
                 .Contain(dir);
     }
 
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        -1,
+        Direction.Up,
+        Direction.Right)]
+    [Arguments(
+        1,
+        1,
+        Direction.Down,
+        Direction.Right)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Down,
+        Direction.Left)]
+    [Arguments(
+        -1,
+        -1,
+        Direction.Up,
+        Direction.Left)]
+    public void DirectionalRelationTo_IPoint_Point_Tie_AllCorners(
+            int dx,
+            int dy,
+            Direction expected1,
+            Direction expected2)
+
+        //formatter:on
+    {
+        IPoint a = new Point(dx, dy);
+        var b = new Point(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 100) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(expected1);
+
+        seen.Should()
+            .Contain(expected2);
+    }
+
+    [Test]
+    public void DirectionalRelationTo_IPoint_Point_Tie_ExercisesBothOutcomes()
+    {
+        IPoint a = new Point(1, 1);
+        var b = new Point(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 500) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(Direction.Down);
+
+        seen.Should()
+            .Contain(Direction.Right);
+    }
+
     [Test]
     [Arguments(
         0,
@@ -435,6 +745,112 @@ public sealed class PointExtensionsTests
 
         expected.Should()
                 .Contain(dir);
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        5,
+        0,
+        0,
+        1,
+        Direction.Right)] // x dominates, x> -> Right
+    [Arguments(
+        2,
+        0,
+        0,
+        10,
+        Direction.Up)] // y dominates, y> -> Up
+    [Arguments(
+        -5,
+        0,
+        0,
+        1,
+        Direction.Left)] // x dominates, x< -> Left
+    [Arguments(
+        -1,
+        10,
+        1,
+        0,
+        Direction.Down)] // y dominates, y< -> Down
+    public void DirectionalRelationTo_Point_IPoint_NonTie(
+            int ax,
+            int ay,
+            int bx,
+            int by,
+            Direction expected)
+
+        //formatter:on
+    {
+        var a = new Point(ax, ay);
+        IPoint b = new Point(bx, by);
+
+        a.DirectionalRelationTo(b)
+         .Should()
+         .Be(expected);
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        -1,
+        Direction.Up,
+        Direction.Right)]
+    [Arguments(
+        1,
+        1,
+        Direction.Down,
+        Direction.Right)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Down,
+        Direction.Left)]
+    [Arguments(
+        -1,
+        -1,
+        Direction.Up,
+        Direction.Left)]
+    public void DirectionalRelationTo_Point_IPoint_Tie_AllCorners(
+            int dx,
+            int dy,
+            Direction expected1,
+            Direction expected2)
+
+        //formatter:on
+    {
+        var a = new Point(dx, dy);
+        IPoint b = new Point(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 100) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(expected1);
+
+        seen.Should()
+            .Contain(expected2);
+    }
+
+    [Test]
+    public void DirectionalRelationTo_Point_IPoint_Tie_ExercisesBothOutcomes()
+    {
+        var a = new Point(1, 1);
+        IPoint b = new Point(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 500) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(Direction.Down);
+
+        seen.Should()
+            .Contain(Direction.Right);
     }
 
     [Test]
@@ -542,6 +958,69 @@ public sealed class PointExtensionsTests
                 .Contain(direction);
     }
 
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        -1,
+        Direction.Up,
+        Direction.Right)]
+    [Arguments(
+        1,
+        1,
+        Direction.Down,
+        Direction.Right)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Down,
+        Direction.Left)]
+    [Arguments(
+        -1,
+        -1,
+        Direction.Up,
+        Direction.Left)]
+    public void DirectionalRelationTo_Point_ValuePoint_Tie_AllCorners(
+            int dx,
+            int dy,
+            Direction expected1,
+            Direction expected2)
+
+        //formatter:on
+    {
+        var a = new Point(dx, dy);
+        var b = new ValuePoint(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 100) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(expected1);
+
+        seen.Should()
+            .Contain(expected2);
+    }
+
+    [Test]
+    public void DirectionalRelationTo_Point_ValuePoint_Tie_ExercisesBothOutcomes()
+    {
+        var a = new Point(1, 1);
+        var b = new ValuePoint(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 500) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(Direction.Down);
+
+        seen.Should()
+            .Contain(Direction.Right);
+    }
+
     [Test]
     [Arguments(
         0,
@@ -600,6 +1079,49 @@ public sealed class PointExtensionsTests
 
         act.Should()
            .Throw<ArgumentNullException>();
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        5,
+        0,
+        0,
+        1,
+        Direction.Right)] // x dominates, x> -> Right
+    [Arguments(
+        2,
+        0,
+        0,
+        10,
+        Direction.Up)] // y dominates, y> -> Up
+    [Arguments(
+        -5,
+        0,
+        0,
+        1,
+        Direction.Left)] // x dominates, x< -> Left
+    [Arguments(
+        -1,
+        10,
+        1,
+        0,
+        Direction.Down)] // y dominates, y< -> Down
+    public void DirectionalRelationTo_ValuePoint_IPoint_NonTie(
+            int ax,
+            int ay,
+            int bx,
+            int by,
+            Direction expected)
+
+        //formatter:on
+    {
+        var a = new ValuePoint(ax, ay);
+        IPoint b = new Point(bx, by);
+
+        a.DirectionalRelationTo(b)
+         .Should()
+         .Be(expected);
     }
 
     [Test]
@@ -681,6 +1203,69 @@ public sealed class PointExtensionsTests
          .Be(expected);
     }
 
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        -1,
+        Direction.Up,
+        Direction.Right)]
+    [Arguments(
+        1,
+        1,
+        Direction.Down,
+        Direction.Right)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Down,
+        Direction.Left)]
+    [Arguments(
+        -1,
+        -1,
+        Direction.Up,
+        Direction.Left)]
+    public void DirectionalRelationTo_ValuePoint_Point_Tie_AllCorners(
+            int dx,
+            int dy,
+            Direction expected1,
+            Direction expected2)
+
+        //formatter:on
+    {
+        var a = new ValuePoint(dx, dy);
+        var b = new Point(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 100) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(expected1);
+
+        seen.Should()
+            .Contain(expected2);
+    }
+
+    [Test]
+    public void DirectionalRelationTo_ValuePoint_Point_Tie_ExercisesBothOutcomes()
+    {
+        var a = new ValuePoint(1, 1);
+        var b = new Point(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 500) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(Direction.Down);
+
+        seen.Should()
+            .Contain(Direction.Right);
+    }
+
     [Test]
     [Arguments(
         0,
@@ -715,6 +1300,69 @@ public sealed class PointExtensionsTests
 
         expected.Should()
                 .Contain(dir);
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        -1,
+        Direction.Up,
+        Direction.Right)] // NE
+    [Arguments(
+        1,
+        1,
+        Direction.Down,
+        Direction.Right)] // SE
+    [Arguments(
+        -1,
+        1,
+        Direction.Down,
+        Direction.Left)] // SW
+    [Arguments(
+        -1,
+        -1,
+        Direction.Up,
+        Direction.Left)] // NW
+    public void DirectionalRelationTo_ValuePoint_ValuePoint_Tie_AllCorners(
+            int dx,
+            int dy,
+            Direction expected1,
+            Direction expected2)
+
+        //formatter:on
+    {
+        var a = new ValuePoint(dx, dy);
+        var b = new ValuePoint(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 100) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(expected1);
+
+        seen.Should()
+            .Contain(expected2);
+    }
+
+    [Test]
+    public void DirectionalRelationTo_ValuePoint_ValuePoint_Tie_ExercisesBothOutcomes()
+    {
+        var a = new ValuePoint(1, 1);
+        var b = new ValuePoint(0, 0);
+
+        var seen = new HashSet<Direction>();
+
+        for (var i = 0; (i < 500) && (seen.Count < 2); i++)
+            seen.Add(a.DirectionalRelationTo(b));
+
+        seen.Should()
+            .Contain(Direction.Down);
+
+        seen.Should()
+            .Contain(Direction.Right);
     }
 
     [Test]
@@ -1341,21 +1989,66 @@ public sealed class PointExtensionsTests
               .BeEquivalentTo(expectedPoints);
     }
 
+    //formatter:off
     [Test]
-    public void GenerateCardinalPoints_ShouldGeneratePointsInSingleDirection_WhenDirectionIsNotAll()
+    [Arguments(
+        Direction.Up,
+        new[]
+        {
+            0,
+            -1,
+            0,
+            -2,
+            0,
+            -3
+        })]
+    [Arguments(
+        Direction.Right,
+        new[]
+        {
+            1,
+            0,
+            2,
+            0,
+            3,
+            0
+        })]
+    [Arguments(
+        Direction.Down,
+        new[]
+        {
+            0,
+            1,
+            0,
+            2,
+            0,
+            3
+        })]
+    [Arguments(
+        Direction.Left,
+        new[]
+        {
+            -1,
+            0,
+            -2,
+            0,
+            -3,
+            0
+        })]
+    public void GenerateCardinalPoints_ShouldGeneratePointsInSingleDirection_WhenDirectionIsNotAll(
+            Direction direction,
+            params IEnumerable<int> expected)
+
+        //formatter:on
     {
         // Arrange
         var startPoint = new Point(2, 2);
 
-        var expectedPoints = new[]
-        {
-            new Point(2, 1),
-            new Point(2, 0),
-            new Point(2, -1)
-        };
+        var expectedPoints = expected.Chunk(2)
+                                     .Select(p => new Point(2 + p[0], 2 + p[1]));
 
         // Act
-        var result = startPoint.GenerateCardinalPoints(Direction.Up, 3);
+        var result = startPoint.GenerateCardinalPoints(direction, 3);
 
         // Assert
         result.Should()
@@ -2460,6 +3153,112 @@ public sealed class PointExtensionsTests
          .Be(expected);
     }
 
+    //formatter:off
+    [Test]
+
+    // Up true branches: (-1,-1) and (1,-1)
+    [Arguments(
+        -1,
+        -1,
+        0,
+        0,
+        Direction.Up,
+        true)]
+    [Arguments(
+        1,
+        -1,
+        0,
+        0,
+        Direction.Up,
+        true)]
+
+    // Right true branches: (1,-1) and (1,1)
+    [Arguments(
+        1,
+        -1,
+        0,
+        0,
+        Direction.Right,
+        true)]
+    [Arguments(
+        1,
+        1,
+        0,
+        0,
+        Direction.Right,
+        true)]
+
+    // Down true branches: (1,1) and (-1,1)
+    [Arguments(
+        1,
+        1,
+        0,
+        0,
+        Direction.Down,
+        true)]
+    [Arguments(
+        -1,
+        1,
+        0,
+        0,
+        Direction.Down,
+        true)]
+
+    // Left true branches: (-1,1) and (-1,-1)
+    [Arguments(
+        -1,
+        1,
+        0,
+        0,
+        Direction.Left,
+        true)]
+    [Arguments(
+        -1,
+        -1,
+        0,
+        0,
+        Direction.Left,
+        true)]
+    public void IsInterCardinalTo_IPoint_IPoint_DirectionBranches(
+            int ax,
+            int ay,
+            int bx,
+            int by,
+            Direction dir,
+            bool expected)
+
+        //formatter:on
+    {
+        IPoint a = new Point(ax, ay);
+        IPoint b = new Point(bx, by);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .Be(expected);
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(Direction.Up, 1, 1)]
+    [Arguments(Direction.Up, -1, 1)]
+    [Arguments(Direction.Right, -1, -1)]
+    [Arguments(Direction.Right, -1, 1)]
+    [Arguments(Direction.Down, 1, -1)]
+    [Arguments(Direction.Down, -1, -1)]
+    [Arguments(Direction.Left, 1, -1)]
+    [Arguments(Direction.Left, 1, 1)]
+    public void IsInterCardinalTo_IPoint_IPoint_DirectionBranches_False(Direction dir, int ax, int ay)
+
+        //formatter:on
+    {
+        IPoint a = new Point(ax, ay);
+        IPoint b = new Point(0, 0);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .BeFalse();
+    }
+
     [Test]
     [Arguments(
         0,
@@ -2533,6 +3332,112 @@ public sealed class PointExtensionsTests
          .Be(expected);
     }
 
+    //formatter:off
+    [Test]
+
+    // Up true branches: (-1,-1) and (1,-1)
+    [Arguments(
+        -1,
+        -1,
+        0,
+        0,
+        Direction.Up,
+        true)]
+    [Arguments(
+        1,
+        -1,
+        0,
+        0,
+        Direction.Up,
+        true)]
+
+    // Right true branches: (1,-1) and (1,1)
+    [Arguments(
+        1,
+        -1,
+        0,
+        0,
+        Direction.Right,
+        true)]
+    [Arguments(
+        1,
+        1,
+        0,
+        0,
+        Direction.Right,
+        true)]
+
+    // Down true branches: (1,1) and (-1,1)
+    [Arguments(
+        1,
+        1,
+        0,
+        0,
+        Direction.Down,
+        true)]
+    [Arguments(
+        -1,
+        1,
+        0,
+        0,
+        Direction.Down,
+        true)]
+
+    // Left true branches: (-1,1) and (-1,-1)
+    [Arguments(
+        -1,
+        1,
+        0,
+        0,
+        Direction.Left,
+        true)]
+    [Arguments(
+        -1,
+        -1,
+        0,
+        0,
+        Direction.Left,
+        true)]
+    public void IsInterCardinalTo_IPoint_Point_DirectionBranches(
+            int ax,
+            int ay,
+            int bx,
+            int by,
+            Direction dir,
+            bool expected)
+
+        //formatter:on
+    {
+        IPoint a = new Point(ax, ay);
+        var b = new Point(bx, by);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .Be(expected);
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(Direction.Up, 1, 1)] // yDiff>0 => not Up
+    [Arguments(Direction.Up, -1, 1)]
+    [Arguments(Direction.Right, -1, -1)] // xDiff<0 => not Right
+    [Arguments(Direction.Right, -1, 1)]
+    [Arguments(Direction.Down, 1, -1)] // yDiff<0 => not Down
+    [Arguments(Direction.Down, -1, -1)]
+    [Arguments(Direction.Left, 1, -1)] // xDiff>0 => not Left
+    [Arguments(Direction.Left, 1, 1)]
+    public void IsInterCardinalTo_IPoint_Point_DirectionBranches_False(Direction dir, int ax, int ay)
+
+        //formatter:on
+    {
+        IPoint a = new Point(ax, ay);
+        var b = new Point(0, 0);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .BeFalse();
+    }
+
     [Test]
     [Arguments(
         0,
@@ -2589,6 +3494,160 @@ public sealed class PointExtensionsTests
         Direction.Invalid,
         false)]
     public void IsInterCardinalTo_Point_IPoint_All_And_Invalid(
+            int ax,
+            int ay,
+            int bx,
+            int by,
+            Direction dir,
+            bool expected)
+
+        //formatter:on
+    {
+        var a = new Point(ax, ay);
+        IPoint b = new Point(bx, by);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .Be(expected);
+    }
+
+    //formatter:off
+    [Test]
+
+    // Up true branches: (-1,-1) and (1,-1)
+    [Arguments(
+        -1,
+        -1,
+        0,
+        0,
+        Direction.Up,
+        true)]
+    [Arguments(
+        1,
+        -1,
+        0,
+        0,
+        Direction.Up,
+        true)]
+
+    // Right true branches: (1,-1) and (1,1)
+    [Arguments(
+        1,
+        -1,
+        0,
+        0,
+        Direction.Right,
+        true)]
+    [Arguments(
+        1,
+        1,
+        0,
+        0,
+        Direction.Right,
+        true)]
+
+    // Down true branches: (1,1) and (-1,1)
+    [Arguments(
+        1,
+        1,
+        0,
+        0,
+        Direction.Down,
+        true)]
+    [Arguments(
+        -1,
+        1,
+        0,
+        0,
+        Direction.Down,
+        true)]
+
+    // Left true branches: (-1,1) and (-1,-1)
+    [Arguments(
+        -1,
+        1,
+        0,
+        0,
+        Direction.Left,
+        true)]
+    [Arguments(
+        -1,
+        -1,
+        0,
+        0,
+        Direction.Left,
+        true)]
+    public void IsInterCardinalTo_Point_IPoint_DirectionBranches(
+            int ax,
+            int ay,
+            int bx,
+            int by,
+            Direction dir,
+            bool expected)
+
+        //formatter:on
+    {
+        var a = new Point(ax, ay);
+        IPoint b = new Point(bx, by);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .Be(expected);
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(Direction.Up, 1, 1)]
+    [Arguments(Direction.Up, -1, 1)]
+    [Arguments(Direction.Right, -1, -1)]
+    [Arguments(Direction.Right, -1, 1)]
+    [Arguments(Direction.Down, 1, -1)]
+    [Arguments(Direction.Down, -1, -1)]
+    [Arguments(Direction.Left, 1, -1)]
+    [Arguments(Direction.Left, 1, 1)]
+    public void IsInterCardinalTo_Point_IPoint_DirectionBranches_False(Direction dir, int ax, int ay)
+
+        //formatter:on
+    {
+        var a = new Point(ax, ay);
+        IPoint b = new Point(0, 0);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .BeFalse();
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        0,
+        0,
+        -1,
+        Direction.Right,
+        true)] // xDiff>0,yDiff>0 => Right
+    [Arguments(
+        -1,
+        0,
+        0,
+        1,
+        Direction.Left,
+        true)] // xDiff<0,yDiff<0 => Left
+    [Arguments(
+        0,
+        -1,
+        1,
+        0,
+        Direction.Up,
+        true)] // yDiff<0 => Up
+    [Arguments(
+        0,
+        1,
+        -1,
+        0,
+        Direction.Down,
+        true)] // yDiff>0 => Down
+    public void IsInterCardinalTo_Point_IPoint_MoreDirections(
             int ax,
             int ay,
             int bx,
@@ -2736,6 +3795,84 @@ public sealed class PointExtensionsTests
          .Be(expected);
     }
 
+    //formatter:off
+    [Test]
+
+    // Up true branches: (-1,-1) and (1,-1)
+    [Arguments(-1, -1, Direction.Up)]
+    [Arguments(1, -1, Direction.Up)]
+
+    // Right true branches: (1,-1) and (1,1)
+    [Arguments(1, -1, Direction.Right)]
+    [Arguments(1, 1, Direction.Right)]
+
+    // Down true branches: (1,1) and (-1,1)
+    [Arguments(1, 1, Direction.Down)]
+    [Arguments(-1, 1, Direction.Down)]
+
+    // Left true branches: (-1,1) and (-1,-1)
+    [Arguments(-1, 1, Direction.Left)]
+    [Arguments(-1, -1, Direction.Left)]
+    public void IsInterCardinalTo_ValuePoint_IPoint_DirectionBranches(int ax, int ay, Direction dir)
+
+        //formatter:on
+    {
+        var a = new ValuePoint(ax, ay);
+        IPoint b = new Point(0, 0);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .BeTrue();
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        -1,
+        Direction.Right,
+        true)]
+    [Arguments(
+        1,
+        1,
+        Direction.Right,
+        true)]
+    [Arguments(
+        1,
+        1,
+        Direction.Down,
+        true)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Down,
+        true)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Left,
+        true)]
+    [Arguments(
+        -1,
+        -1,
+        Direction.Left,
+        true)]
+    public void IsInterCardinalTo_ValuePoint_IPoint_MoreDirections(
+            int ax,
+            int ay,
+            Direction dir,
+            bool expected)
+
+        //formatter:on
+    {
+        var a = new ValuePoint(ax, ay);
+        IPoint b = new Point(0, 0);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .Be(expected);
+    }
+
     [Test]
     [Arguments(
         0,
@@ -2813,6 +3950,84 @@ public sealed class PointExtensionsTests
 
     //formatter:off
     [Test]
+
+    // Up true branches: (-1,-1) and (1,-1)
+    [Arguments(-1, -1, Direction.Up)]
+    [Arguments(1, -1, Direction.Up)]
+
+    // Right true branches: (1,-1) and (1,1)
+    [Arguments(1, -1, Direction.Right)]
+    [Arguments(1, 1, Direction.Right)]
+
+    // Down true branches: (1,1) and (-1,1)
+    [Arguments(1, 1, Direction.Down)]
+    [Arguments(-1, 1, Direction.Down)]
+
+    // Left true branches: (-1,1) and (-1,-1)
+    [Arguments(-1, 1, Direction.Left)]
+    [Arguments(-1, -1, Direction.Left)]
+    public void IsInterCardinalTo_ValuePoint_Point_DirectionBranches(int ax, int ay, Direction dir)
+
+        //formatter:on
+    {
+        var a = new ValuePoint(ax, ay);
+        var b = new Point(0, 0);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .BeTrue();
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        -1,
+        Direction.Right,
+        true)]
+    [Arguments(
+        1,
+        1,
+        Direction.Right,
+        true)]
+    [Arguments(
+        1,
+        1,
+        Direction.Down,
+        true)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Down,
+        true)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Left,
+        true)]
+    [Arguments(
+        -1,
+        -1,
+        Direction.Left,
+        true)]
+    public void IsInterCardinalTo_ValuePoint_Point_MoreDirections(
+            int ax,
+            int ay,
+            Direction dir,
+            bool expected)
+
+        //formatter:on
+    {
+        var a = new ValuePoint(ax, ay);
+        var b = new Point(0, 0);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .Be(expected);
+    }
+
+    //formatter:off
+    [Test]
     [Arguments(
         0,
         0,
@@ -2879,6 +4094,84 @@ public sealed class PointExtensionsTests
     {
         var a = new ValuePoint(ax, ay);
         var b = new ValuePoint(bx, by);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .Be(expected);
+    }
+
+    //formatter:off
+    [Test]
+
+    // Up true branches: (-1,-1) and (1,-1)
+    [Arguments(-1, -1, Direction.Up)]
+    [Arguments(1, -1, Direction.Up)]
+
+    // Right true branches: (1,-1) and (1,1)
+    [Arguments(1, -1, Direction.Right)]
+    [Arguments(1, 1, Direction.Right)]
+
+    // Down true branches: (1,1) and (-1,1)
+    [Arguments(1, 1, Direction.Down)]
+    [Arguments(-1, 1, Direction.Down)]
+
+    // Left true branches: (-1,1) and (-1,-1)
+    [Arguments(-1, 1, Direction.Left)]
+    [Arguments(-1, -1, Direction.Left)]
+    public void IsInterCardinalTo_ValuePoint_ValuePoint_DirectionBranches(int ax, int ay, Direction dir)
+
+        //formatter:on
+    {
+        var a = new ValuePoint(ax, ay);
+        var b = new ValuePoint(0, 0);
+
+        a.IsInterCardinalTo(b, dir)
+         .Should()
+         .BeTrue();
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        1,
+        -1,
+        Direction.Right,
+        true)]
+    [Arguments(
+        1,
+        1,
+        Direction.Right,
+        true)]
+    [Arguments(
+        1,
+        1,
+        Direction.Down,
+        true)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Down,
+        true)]
+    [Arguments(
+        -1,
+        1,
+        Direction.Left,
+        true)]
+    [Arguments(
+        -1,
+        -1,
+        Direction.Left,
+        true)]
+    public void IsInterCardinalTo_ValuePoint_ValuePoint_MoreDirections(
+            int ax,
+            int ay,
+            Direction dir,
+            bool expected)
+
+        //formatter:on
+    {
+        var a = new ValuePoint(ax, ay);
+        var b = new ValuePoint(0, 0);
 
         a.IsInterCardinalTo(b, dir)
          .Should()
@@ -2977,6 +4270,54 @@ public sealed class PointExtensionsTests
            .Be(expectedDistance);
     }
 
+    [Test]
+    public void OffsetTowards_IPoint_IPoint_Should_Offset_Correctly()
+    {
+        IPoint start = new Point(0, 0);
+        IPoint other = new Point(3, 0);
+
+        var result = start.OffsetTowards(other);
+
+        result.Should()
+              .BeEquivalentTo(new Point(1, 0));
+    }
+
+    [Test]
+    public void OffsetTowards_IPoint_Point_Should_Offset_Correctly()
+    {
+        IPoint start = new Point(0, 0);
+        var other = new Point(-3, 0);
+
+        var result = start.OffsetTowards(other);
+
+        result.Should()
+              .BeEquivalentTo(new Point(-1, 0));
+    }
+
+    [Test]
+    public void OffsetTowards_IPoint_ValuePoint_Should_Offset_Correctly()
+    {
+        IPoint start = new Point(0, 0);
+        var other = new ValuePoint(0, -3);
+
+        var result = start.OffsetTowards(other);
+
+        result.Should()
+              .BeEquivalentTo(new Point(0, -1));
+    }
+
+    [Test]
+    public void OffsetTowards_Point_ValuePoint_Should_Offset_Correctly()
+    {
+        var start = new Point(0, 0);
+        var other = new ValuePoint(2, 0);
+
+        var result = start.OffsetTowards(other);
+
+        result.Should()
+              .BeEquivalentTo(new Point(1, 0));
+    }
+
     //@formatter:off
     [Test]
     [Arguments(0, 0, 0, 1, 0, 1)]   // Offset towards North (Up)
@@ -3045,6 +4386,156 @@ public sealed class PointExtensionsTests
 
         act2.Should()
             .Throw<ArgumentNullException>();
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        0,
+        0,
+        0,
+        1,
+        0,
+        1)] // Up
+    [Arguments(
+        0,
+        0,
+        1,
+        0,
+        1,
+        0)] // Right
+    [Arguments(
+        0,
+        0,
+        0,
+        -1,
+        0,
+        -1)] // Down
+    [Arguments(
+        0,
+        0,
+        -1,
+        0,
+        -1,
+        0)] // Left
+    public void OffsetTowards_ValuePoint_IPoint_Should_Offset_Correctly(
+            int startX,
+            int startY,
+            int otherX,
+            int otherY,
+            int expectedOffsetX,
+            int expectedOffsetY)
+
+        //formatter:on
+    {
+        var start = new ValuePoint(startX, startY);
+        IPoint other = new Point(otherX, otherY);
+        var expected = new Point(expectedOffsetX, expectedOffsetY);
+
+        var result = start.OffsetTowards(other);
+
+        result.Should()
+              .BeEquivalentTo(expected);
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        0,
+        0,
+        0,
+        1,
+        0,
+        1)] // Up
+    [Arguments(
+        0,
+        0,
+        1,
+        0,
+        1,
+        0)] // Right
+    [Arguments(
+        0,
+        0,
+        0,
+        -1,
+        0,
+        -1)] // Down
+    [Arguments(
+        0,
+        0,
+        -1,
+        0,
+        -1,
+        0)] // Left
+    public void OffsetTowards_ValuePoint_Point_Should_Offset_Correctly(
+            int startX,
+            int startY,
+            int otherX,
+            int otherY,
+            int expectedOffsetX,
+            int expectedOffsetY)
+
+        //formatter:on
+    {
+        var start = new ValuePoint(startX, startY);
+        var other = new Point(otherX, otherY);
+        var expected = new Point(expectedOffsetX, expectedOffsetY);
+
+        var result = start.OffsetTowards(other);
+
+        result.Should()
+              .BeEquivalentTo(expected);
+    }
+
+    //formatter:off
+    [Test]
+    [Arguments(
+        0,
+        0,
+        0,
+        1,
+        0,
+        1)] // Up
+    [Arguments(
+        0,
+        0,
+        1,
+        0,
+        1,
+        0)] // Right
+    [Arguments(
+        0,
+        0,
+        0,
+        -1,
+        0,
+        -1)] // Down
+    [Arguments(
+        0,
+        0,
+        -1,
+        0,
+        -1,
+        0)] // Left
+    public void OffsetTowards_ValuePoint_ValuePoint_Should_Offset_Correctly(
+            int startX,
+            int startY,
+            int otherX,
+            int otherY,
+            int expectedOffsetX,
+            int expectedOffsetY)
+
+        //formatter:on
+    {
+        var start = new ValuePoint(startX, startY);
+        var other = new ValuePoint(otherX, otherY);
+        var expected = new Point(expectedOffsetX, expectedOffsetY);
+
+        var result = start.OffsetTowards(other);
+
+        result.Should()
+              .BeEquivalentTo(expected);
     }
 
     [Test]

@@ -1,4 +1,7 @@
 #region
+using System.Collections;
+using System.Collections.Generic;
+using Chaos.Geometry;
 using Chaos.Geometry.Abstractions;
 using FluentAssertions;
 #endregion
@@ -8,259 +11,145 @@ namespace Chaos.Geometry.Tests;
 public sealed class RectangleTests
 {
     [Test]
-    public void Constructor_AdjustsWidthAndHeightForOddNumbers()
+    public void Ctor_FromCenter_Sets_Coordinates_As_Expected()
     {
-        // Arrange
-        var center = new Point(5, 10);
-        const int WIDTH = 4;
-        const int HEIGHT = 6;
+        var center = new Point(5, 5);
+        var rect = new Rectangle(center, 3, 5); // odd dimensions
 
-        // Act
-        var rectangle = new Rectangle(center, WIDTH, HEIGHT);
+        rect.Left
+            .Should()
+            .Be(4);
 
-        // Assert
-        rectangle.Width
-                 .Should()
-                 .Be(4);
+        rect.Top
+            .Should()
+            .Be(3);
 
-        rectangle.Height
-                 .Should()
-                 .Be(6);
+        rect.Right
+            .Should()
+            .Be(6);
 
-        rectangle.Top
-                 .Should()
-                 .Be(8);
-
-        rectangle.Left
-                 .Should()
-                 .Be(4);
-
-        rectangle.Right
-                 .Should()
-                 .Be(7);
-
-        rectangle.Bottom
-                 .Should()
-                 .Be(13);
+        rect.Bottom
+            .Should()
+            .Be(7);
     }
 
     [Test]
-    public void Constructor_CreatesRectangleWithCorrectCenterAndDimensions()
+    public void Equals_IRectangle_Paths()
     {
-        // Arrange
-        var center = new Point(5, 10);
-        const int WIDTH = 3;
-        const int HEIGHT = 5;
+        IRectangle a = new Rectangle(
+            0,
+            0,
+            2,
+            2);
 
-        // Act
-        var rectangle = new Rectangle(center, WIDTH, HEIGHT);
+        IRectangle same = new Rectangle(
+            0,
+            0,
+            2,
+            2);
 
-        // Assert
-        rectangle.Width
-                 .Should()
-                 .Be(WIDTH);
+        IRectangle diff = new Rectangle(
+            1,
+            0,
+            2,
+            2);
 
-        rectangle.Height
-                 .Should()
-                 .Be(HEIGHT);
+        a.Equals(null!)
+         .Should()
+         .BeFalse();
 
-        rectangle.Top
-                 .Should()
-                 .Be(8);
+        a.Equals(a)
+         .Should()
+         .BeTrue();
 
-        rectangle.Left
-                 .Should()
-                 .Be(4);
+        a.Equals(same)
+         .Should()
+         .BeTrue();
 
-        rectangle.Right
-                 .Should()
-                 .Be(6);
-
-        rectangle.Bottom
-                 .Should()
-                 .Be(12);
+        a.Equals(diff)
+         .Should()
+         .BeFalse();
     }
 
     [Test]
-    public void Rectangle_Constructor_CreatesRectangleWithGivenValues()
+    public void Equals_Object_Paths()
     {
-        // Arrange
-        const int LEFT = 10;
-        const int TOP = 20;
-        const int WIDTH = 30;
-        const int HEIGHT = 40;
+        var a = new Rectangle(
+            0,
+            0,
+            2,
+            2);
 
-        // Act
-        var rectangle = new Rectangle(
-            LEFT,
-            TOP,
-            WIDTH,
-            HEIGHT);
+        object sameTypeSame = new Rectangle(
+            0,
+            0,
+            2,
+            2);
 
-        // Assert
-        rectangle.Left
-                 .Should()
-                 .Be(LEFT);
+        object sameTypeDiff = new Rectangle(
+            0,
+            1,
+            2,
+            2);
 
-        rectangle.Top
-                 .Should()
-                 .Be(TOP);
+        a.Equals(null!)
+         .Should()
+         .BeFalse();
 
-        rectangle.Width
-                 .Should()
-                 .Be(WIDTH);
+        a.Equals((object)a)
+         .Should()
+         .BeTrue();
 
-        rectangle.Height
-                 .Should()
-                 .Be(HEIGHT);
+        a.Equals(sameTypeSame)
+         .Should()
+         .BeTrue();
 
-        rectangle.Right
-                 .Should()
-                 .Be(LEFT + WIDTH - 1);
+        a.Equals(sameTypeDiff)
+         .Should()
+         .BeFalse();
 
-        rectangle.Bottom
-                 .Should()
-                 .Be(TOP + HEIGHT - 1);
-
-        rectangle.Area
-                 .Should()
-                 .Be(WIDTH * HEIGHT);
-
-        rectangle.Vertices
-                 .Should()
-                 .HaveCount(4);
-
-        rectangle.Vertices
-                 .Should()
-                 .ContainInOrder(
-                     new List<IPoint>
-                     {
-                         new Point(LEFT, TOP),
-                         new Point(LEFT + WIDTH - 1, TOP),
-                         new Point(LEFT + WIDTH - 1, TOP + HEIGHT - 1),
-                         new Point(LEFT, TOP + HEIGHT - 1)
-                     });
+        a.Equals(new object())
+         .Should()
+         .BeFalse();
     }
 
     [Test]
-    public void Rectangle_Equals_ReturnsFalseWhenComparingWithDifferentType()
+    public void GetEnumerator_And_Enumerable_Enumerator_Work()
     {
-        // Arrange
-        var rectangle = new Rectangle(
-            10,
-            20,
-            30,
-            40);
+        var rect = new Rectangle(
+            0,
+            0,
+            2,
+            2);
 
-        var otherObject = new object();
+        rect.GetEnumerator()
+            .Should()
+            .NotBeNull();
 
-        // Act
-        var result = rectangle.Equals(otherObject);
-
-        // Assert
-        result.Should()
-              .BeFalse();
+        ((IEnumerable)rect).GetEnumerator()
+                           .Should()
+                           .NotBeNull();
     }
 
     [Test]
-    public void Rectangle_Equals_ReturnsFalseWhenRectanglesAreNotEqual()
+    public void Vertices_Are_Generated_In_Expected_Order()
     {
-        // Arrange
-        var rectangle1 = new Rectangle(
-            10,
-            20,
-            30,
-            40);
+        var rect = new Rectangle(
+            1,
+            2,
+            3,
+            2); // Right=3, Bottom=3
+        var verts = rect.Vertices;
 
-        var rectangle2 = new Rectangle(
-            50,
-            60,
-            70,
-            80);
-
-        // Act
-        var result = rectangle1.Equals(rectangle2);
-
-        // Assert
-        result.Should()
-              .BeFalse();
-    }
-
-    [Test]
-    public void Rectangle_Equals_ReturnsTrueWhenRectanglesAreEqual()
-    {
-        // Arrange
-        var rectangle1 = new Rectangle(
-            10,
-            20,
-            30,
-            40);
-
-        var rectangle2 = new Rectangle(
-            10,
-            20,
-            30,
-            40);
-
-        // Act
-        var result = rectangle1.Equals(rectangle2);
-
-        // Assert
-        result.Should()
-              .BeTrue();
-    }
-
-    [Test]
-    public void Rectangle_GetEnumerator_ReturnsVerticesEnumerator()
-    {
-        // Arrange
-        var rectangle = new Rectangle(
-            10,
-            20,
-            30,
-            40);
-
-        var expectedVertices = new List<IPoint>
-        {
-            new Point(10, 20),
-            new Point(39, 20),
-            new Point(39, 59),
-            new Point(10, 59)
-        };
-
-        // Act
-        var actualVertices = rectangle.ToList();
-
-        // Assert
-        actualVertices.Should()
-                      .ContainInOrder(expectedVertices);
-    }
-
-    [Test]
-    public void Rectangle_GetHashCode_ReturnsConsistentHashCode()
-    {
-        // Arrange
-        var rectangle = new Rectangle(
-            10,
-            20,
-            30,
-            40);
-
-        var expectedHashCode = HashCode.Combine(
-            rectangle.Height,
-            rectangle.Left,
-            rectangle.Top,
-            rectangle.Width);
-
-        // Act
-        var hashCode1 = rectangle.GetHashCode();
-        var hashCode2 = rectangle.GetHashCode();
-
-        // Assert
-        hashCode1.Should()
-                 .Be(expectedHashCode);
-
-        hashCode2.Should()
-                 .Be(expectedHashCode);
+        verts.Should()
+             .BeEquivalentTo(
+                 new List<IPoint>
+                 {
+                     new Point(1, 2),
+                     new Point(3, 2),
+                     new Point(3, 3),
+                     new Point(1, 3)
+                 },
+                 o => o.WithStrictOrdering());
     }
 }

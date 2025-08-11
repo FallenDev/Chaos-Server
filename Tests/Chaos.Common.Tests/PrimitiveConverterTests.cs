@@ -295,6 +295,16 @@ public sealed class PrimitiveConverterTests
     }
 
     [Test]
+    public void TryConvert_Generic_WithObject_Null_ReturnsDefault()
+    {
+        object? value = null;
+        var res = PrimitiveConverter.TryConvert<int>(value);
+
+        res.Should()
+           .Be(0);
+    }
+
+    [Test]
     public void TryConvert_Generic_WithObject_ShouldConvertObjectToSameType()
     {
         // Arrange
@@ -361,6 +371,15 @@ public sealed class PrimitiveConverterTests
 
         act.Should()
            .Throw<FormatException>();
+    }
+
+    [Test]
+    public void TryConvert_Generic_WithString_Empty_ReturnsDefault()
+    {
+        var res = PrimitiveConverter.TryConvert<int>("");
+
+        res.Should()
+           .Be(0);
     }
 
     [Test]

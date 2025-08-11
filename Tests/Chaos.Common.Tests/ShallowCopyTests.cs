@@ -39,6 +39,27 @@ public sealed class ShallowCopyTests
     }
 
     [Test]
+    public void Create_Should_Handle_Immutable_Strings_As_Values()
+    {
+        var original = new ImmutableHolder
+        {
+            Name = "alpha"
+        };
+        var copy = ShallowCopy<ImmutableHolder>.Create(original);
+
+        copy.Name
+            .Should()
+            .Be("alpha");
+
+        // Changing original reference to a new string should not change the copy
+        original.Name = "beta";
+
+        copy.Name
+            .Should()
+            .Be("alpha");
+    }
+
+    [Test]
     public void Create_ShouldReturnShallowCopy()
     {
         // Arrange
@@ -67,6 +88,44 @@ public sealed class ShallowCopyTests
         copy.MockCopyableSub
             .Should()
             .BeSameAs(original.MockCopyableSub);
+    }
+
+    [Test]
+    public void Merge_InterfaceType_Copies_Properties()
+    {
+        var from = new InterfaceLike
+        {
+            Value = 10
+        };
+
+        var to = new InterfaceLike
+        {
+            Value = 0
+        };
+
+        ShallowCopy<InterfaceLike>.Merge(from, to);
+
+        to.Value
+          .Should()
+          .Be(10);
+    }
+
+    [Test]
+    public void Merge_Should_Throw_On_Null_Args()
+    {
+        var obj = new MockCopyable
+        {
+            Value = 1,
+            MockCopyableSub = new MockCopyableSub()
+        };
+        var a = () => ShallowCopy<MockCopyable>.Merge(null!, obj);
+        var b = () => ShallowCopy<MockCopyable>.Merge(obj, null!);
+
+        a.Should()
+         .Throw<ArgumentNullException>();
+
+        b.Should()
+         .Throw<ArgumentNullException>();
     }
 
     [Test]
@@ -111,6 +170,16 @@ public sealed class ShallowCopyTests
               .SubValue
               .Should()
               .Be(original.MockCopyableSub.SubValue);
+    }
+
+    internal sealed class ImmutableHolder
+    {
+        public string Name { get; set; } = string.Empty;
+    }
+
+    internal sealed class InterfaceLike
+    {
+        public int Value { get; set; }
     }
 
     internal sealed class MockCopyable

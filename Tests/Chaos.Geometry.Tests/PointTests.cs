@@ -8,6 +8,26 @@ namespace Chaos.Geometry.Tests;
 public sealed class PointTests
 {
     [Test]
+    public void Operator_Equality_And_Inequality_With_IPoint()
+    {
+        var p = new Point(1, 2);
+        IPoint same = new Point(1, 2);
+        IPoint diff = new Point(2, 3);
+
+        (p == same).Should()
+                   .BeTrue();
+
+        (p != same).Should()
+                   .BeFalse();
+
+        (p == diff).Should()
+                   .BeFalse();
+
+        (p != diff).Should()
+                   .BeTrue();
+    }
+
+    [Test]
     public void Point_Constructor_CreatesPointWithGivenCoordinates()
     {
         // Arrange
@@ -43,6 +63,23 @@ public sealed class PointTests
 
         y.Should()
          .Be(Y);
+    }
+
+    [Test]
+    public void Point_Equals_Object_IPoint_Path()
+    {
+        var p = new Point(7, 8);
+        object obj = new Point(7, 8);
+
+        p.Equals(obj)
+         .Should()
+         .BeTrue();
+
+        obj = new Point(1, 1);
+
+        p.Equals(obj)
+         .Should()
+         .BeFalse();
     }
 
     [Test]

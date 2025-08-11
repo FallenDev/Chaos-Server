@@ -415,9 +415,10 @@ public sealed class StringExtensionsTests
         const string INPUT = "Hello, {One} and {Two}!";
 
         // Act and Assert
-        INPUT.Invoking<string>(x => x.Inject("World"))
-             .Should()
-             .Throw<ArgumentException>();
+        Action action = () => INPUT.Inject("World");
+
+        action.Should()
+              .Throw<ArgumentException>();
     }
 
     [Test]
@@ -477,6 +478,16 @@ public sealed class StringExtensionsTests
         // Assert
         result.Should()
               .Be(EXPECTED);
+    }
+
+    [Test]
+    public void Inject_Too_Many_Parameters_Ignores_Extras()
+    {
+        const string INPUT = "A {B}";
+        var result = INPUT.Inject("B", "C", "D");
+
+        result.Should()
+              .Be("A B");
     }
 
     [Test]

@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FB65EF42
 		Tests\Directory.Build.props = Tests\Directory.Build.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.NLog.Logging.Tests", "Tests\Chaos.NLog.Logging.Tests\Chaos.NLog.Logging.Tests.csproj", "{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chaos.Geometry", "Chaos.Geometry\Chaos.Geometry.csproj", "{C676580E-11F0-4CB4-AEC3-6E6A7115B179}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chaos.IO", "Chaos.IO\Chaos.IO.csproj", "{9C0CE93D-BD0C-4301-B799-9EF42EF23307}"
@@ -172,6 +174,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Packets.Tests", "Tests\Chaos.Packets.Tests\Chaos.Packets.Tests.csproj", "{501CB769-8425-4ABF-8061-67A3300E8A81}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Pathfinding.Tests", "Tests\Chaos.Pathfinding.Tests\Chaos.Pathfinding.Tests.csproj", "{71446C55-AA01-47B7-A5D0-A97A95EBFCA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.DarkAges.Tests", "Tests\Chaos.DarkAges.Tests\Chaos.DarkAges.Tests.csproj", "{3793A8EB-6C00-4BAE-871D-32C8E39C8404}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -387,6 +391,14 @@ Global
 		{71446C55-AA01-47B7-A5D0-A97A95EBFCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71446C55-AA01-47B7-A5D0-A97A95EBFCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71446C55-AA01-47B7-A5D0-A97A95EBFCA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3793A8EB-6C00-4BAE-871D-32C8E39C8404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3793A8EB-6C00-4BAE-871D-32C8E39C8404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3793A8EB-6C00-4BAE-871D-32C8E39C8404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3793A8EB-6C00-4BAE-871D-32C8E39C8404}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -424,6 +436,8 @@ Global
 		{E53F8CDF-7DA8-4B1D-A542-2B917EA91E4D} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
 		{501CB769-8425-4ABF-8061-67A3300E8A81} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
 		{71446C55-AA01-47B7-A5D0-A97A95EBFCA5} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
+		{3793A8EB-6C00-4BAE-871D-32C8E39C8404} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
+		{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9D1AB2B-1092-4016-9968-D0B2416CB186}

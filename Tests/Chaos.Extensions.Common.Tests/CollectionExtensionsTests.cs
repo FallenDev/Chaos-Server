@@ -133,6 +133,22 @@ public sealed class CollectionExtensionsTests
     }
 
     [Test]
+    public void BinarySearch_Returns_Zero_When_First_Element_Matches()
+    {
+        IList<int> collection = new List<int>
+        {
+            2,
+            3,
+            5,
+            7
+        };
+
+        collection.BinarySearch(2, Comparer<int>.Default)
+                  .Should()
+                  .Be(0);
+    }
+
+    [Test]
     public void BinarySearch_SingleItemCollection_ItemNotPresent_ReturnsComplementOfCollectionCount()
     {
         IList<int> collection = new List<int>
@@ -158,6 +174,25 @@ public sealed class CollectionExtensionsTests
 
         index.Should()
              .Be(0, "because there's a single item and it matches the search");
+    }
+
+    [Test]
+    public void IndexOfI_Finds_Index_Ignoring_Case_And_Returns_Negative_When_Not_Found()
+    {
+        var list = new List<string>
+        {
+            "Alpha",
+            "Bravo",
+            "Charlie"
+        };
+
+        list.IndexOfI("bravo")
+            .Should()
+            .Be(1);
+
+        list.IndexOfI("delta")
+            .Should()
+            .Be(-1);
     }
 
     [Test]
@@ -319,5 +354,29 @@ public sealed class CollectionExtensionsTests
 
         collection.Should()
                   .Equal(originalList, "because the collection should not be modified");
+    }
+
+    [Test]
+    public void ReplaceI_Replaces_First_Match_Ignoring_Case_And_Returns_False_When_Absent()
+    {
+        var list = new List<string>
+        {
+            "Alpha",
+            "Bravo",
+            "Charlie",
+            "bravo"
+        };
+
+        list.ReplaceI("BRAVO", "Foxtrot")
+            .Should()
+            .BeTrue();
+
+        list[1]
+            .Should()
+            .Be("Foxtrot");
+
+        list.ReplaceI("does-not-exist", "X")
+            .Should()
+            .BeFalse();
     }
 }

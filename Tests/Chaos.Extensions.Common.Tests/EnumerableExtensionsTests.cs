@@ -7,6 +7,24 @@ namespace Chaos.Extensions.Common.Tests;
 public sealed class EnumerableExtensionsTests
 {
     [Test]
+    public void ContainsI_Performs_Case_Insensitive_Search()
+    {
+        var src = new[]
+        {
+            "Alpha",
+            "Bravo"
+        };
+
+        src.ContainsI("bravo")
+           .Should()
+           .BeTrue();
+
+        src.ContainsI("charlie")
+           .Should()
+           .BeFalse();
+    }
+
+    [Test]
     public void ContainsI_Should_Return_False_When_Sequence_Does_Not_Contain_String()
     {
         // Arrange
@@ -61,6 +79,21 @@ public sealed class EnumerableExtensionsTests
               .BeTrue();
     }
 
+    [Test]
+    public void NextHighest_Returns_Seed_When_No_Greater_Number()
+    {
+        var nums = new[]
+        {
+            1,
+            2,
+            3
+        };
+
+        nums.NextHighest(3)
+            .Should()
+            .Be(3);
+    }
+
     // ReSharper disable once ArrangeAttributes
     [Test]
     [Arguments(
@@ -98,6 +131,21 @@ public sealed class EnumerableExtensionsTests
               .Be(expected);
     }
 
+    [Test]
+    public void NextLowest_Returns_Seed_When_No_Lower_Number()
+    {
+        var nums = new[]
+        {
+            1,
+            2,
+            3
+        };
+
+        nums.NextLowest(1)
+            .Should()
+            .Be(1);
+    }
+
     // ReSharper disable once ArrangeAttributes
     [Test]
     [Arguments(
@@ -133,5 +181,51 @@ public sealed class EnumerableExtensionsTests
         // Assert
         result.Should()
               .Be(expected);
+    }
+
+    [Test]
+    public void TakeRandom_Returns_All_When_Count_GreaterOrEqual()
+    {
+        var src = new[]
+        {
+            1,
+            2,
+            3
+        };
+
+        var res = src.TakeRandom(5)
+                     .ToArray();
+
+        res.Should()
+           .Equal(src);
+    }
+
+    [Test]
+    public void TakeRandom_Throws_On_Negative_Count()
+    {
+        var src = new[]
+        {
+            1,
+            2,
+            3
+        };
+
+        Action act = () => src.TakeRandom(-1)
+                              .ToArray();
+
+        act.Should()
+           .Throw<ArgumentOutOfRangeException>();
+    }
+
+    [Test]
+    public void TakeRandom_Throws_On_Null_Source()
+    {
+        IEnumerable<int> src = null!;
+
+        Action act = () => src.TakeRandom(1)
+                              .ToArray();
+
+        act.Should()
+           .Throw<ArgumentNullException>();
     }
 }

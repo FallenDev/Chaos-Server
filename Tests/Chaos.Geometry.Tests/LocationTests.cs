@@ -72,6 +72,38 @@ public sealed class LocationTests
     }
 
     [Test]
+    public void Equals_ReturnsFalse_When_Other_Is_Null()
+    {
+        var location1 = new Location("TestMap", 5, 10);
+
+        location1.Equals((ILocation?)null)
+                 .Should()
+                 .BeFalse();
+    }
+
+    [Test]
+    public void Equals_ReturnsFalse_When_X_Differs()
+    {
+        var a = new Location("Map", 1, 2);
+        ILocation b = new Location("Map", 9, 2);
+
+        a.Equals(b)
+         .Should()
+         .BeFalse();
+    }
+
+    [Test]
+    public void Equals_ReturnsFalse_When_Y_Differs()
+    {
+        var a = new Location("Map", 1, 2);
+        ILocation b = new Location("Map", 1, 9);
+
+        a.Equals(b)
+         .Should()
+         .BeFalse();
+    }
+
+    [Test]
     public void Equals_ReturnsFalseForDifferentLocations()
     {
         var location1 = new Location("TestMap1", 5, 10);
@@ -286,6 +318,34 @@ public sealed class LocationTests
         location.Y
                 .Should()
                 .Be(EXPECTED_Y);
+    }
+
+    [Test]
+    public void Location_TryParse_ValidMatch_But_XParseFails_ReturnsFalse()
+    {
+        const string INPUT = "Example: (abc, 123)";
+
+        var result = Location.TryParse(INPUT, out var location);
+
+        result.Should()
+              .BeFalse();
+
+        location.Should()
+                .BeNull();
+    }
+
+    [Test]
+    public void Location_TryParse_ValidMatch_But_YParseFails_ReturnsFalse()
+    {
+        const string INPUT = "Example: (123, abc)";
+
+        var result = Location.TryParse(INPUT, out var location);
+
+        result.Should()
+              .BeFalse();
+
+        location.Should()
+                .BeNull();
     }
 
     [Test]
