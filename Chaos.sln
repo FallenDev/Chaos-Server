@@ -134,8 +134,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chaos.Scripting.Abstractions.Tests", "Tests\Chaos.Scripting.Abstractions.Tests\Chaos.Scripting.Abstractions.Tests.csproj", "{02CBFCE5-FA7E-4695-982F-012AD3E102FE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chaos.Storage.Abstractions.Tests", "Tests\Chaos.Storage.Abstractions.Tests\Chaos.Storage.Abstractions.Tests.csproj", "{57DAC917-129E-44C9-B2B1-714789CB9D92}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chaos.Extensions.Common.Tests", "Tests\Chaos.Extensions.Common.Tests\Chaos.Extensions.Common.Tests.csproj", "{6781C369-AD5E-48D6-8381-F018645AFB3E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chaos.Extensions.Geometry.Tests", "Tests\Chaos.Extensions.Geometry.Tests\Chaos.Extensions.Geometry.Tests.csproj", "{F0EA582A-6FDE-4225-A322-D63D2051173D}"
@@ -176,6 +174,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Pathfinding.Tests", "Tests\Chaos.Pathfinding.Tests\Chaos.Pathfinding.Tests.csproj", "{71446C55-AA01-47B7-A5D0-A97A95EBFCA5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.DarkAges.Tests", "Tests\Chaos.DarkAges.Tests\Chaos.DarkAges.Tests.csproj", "{3793A8EB-6C00-4BAE-871D-32C8E39C8404}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Networking.Tests", "Tests\Chaos.Networking.Tests\Chaos.Networking.Tests.csproj", "{20BB6C0C-8B53-4C63-AE6E-954E89CE66DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Security.Tests", "Tests\Chaos.Security.Tests\Chaos.Security.Tests.csproj", "{7378A339-C8F2-4864-85DE-05B13C984450}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Storage.Tests", "Tests\Chaos.Storage.Tests\Chaos.Storage.Tests.csproj", "{20F29BAA-3E5A-447C-8E0B-DD6D92CDC7BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Time.Tests", "Tests\Chaos.Time.Tests\Chaos.Time.Tests.csproj", "{3667D0DD-1912-45D5-A065-2EC6EDE8C381}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Storage.Abstractions.Tests", "Tests\Chaos.Storage.Abstractions.Tests\Chaos.Storage.Abstractions.Tests.csproj", "{C73C353B-9F25-4E87-A5ED-044B5EAA5E61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -399,6 +407,30 @@ Global
 		{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20BB6C0C-8B53-4C63-AE6E-954E89CE66DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BB6C0C-8B53-4C63-AE6E-954E89CE66DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BB6C0C-8B53-4C63-AE6E-954E89CE66DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BB6C0C-8B53-4C63-AE6E-954E89CE66DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7378A339-C8F2-4864-85DE-05B13C984450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7378A339-C8F2-4864-85DE-05B13C984450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7378A339-C8F2-4864-85DE-05B13C984450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7378A339-C8F2-4864-85DE-05B13C984450}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B39CA1A2-AC31-45D7-B495-B6F224FAABA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B39CA1A2-AC31-45D7-B495-B6F224FAABA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B39CA1A2-AC31-45D7-B495-B6F224FAABA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B39CA1A2-AC31-45D7-B495-B6F224FAABA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20F29BAA-3E5A-447C-8E0B-DD6D92CDC7BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20F29BAA-3E5A-447C-8E0B-DD6D92CDC7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20F29BAA-3E5A-447C-8E0B-DD6D92CDC7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20F29BAA-3E5A-447C-8E0B-DD6D92CDC7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3667D0DD-1912-45D5-A065-2EC6EDE8C381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3667D0DD-1912-45D5-A065-2EC6EDE8C381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3667D0DD-1912-45D5-A065-2EC6EDE8C381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3667D0DD-1912-45D5-A065-2EC6EDE8C381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C73C353B-9F25-4E87-A5ED-044B5EAA5E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73C353B-9F25-4E87-A5ED-044B5EAA5E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73C353B-9F25-4E87-A5ED-044B5EAA5E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73C353B-9F25-4E87-A5ED-044B5EAA5E61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -438,6 +470,12 @@ Global
 		{71446C55-AA01-47B7-A5D0-A97A95EBFCA5} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
 		{3793A8EB-6C00-4BAE-871D-32C8E39C8404} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
 		{B0D7E7B9-5B27-4AF0-9C9E-2E0D53E4BBE3} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
+		{20BB6C0C-8B53-4C63-AE6E-954E89CE66DE} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
+		{7378A339-C8F2-4864-85DE-05B13C984450} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
+		{B39CA1A2-AC31-45D7-B495-B6F224FAABA6} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
+		{20F29BAA-3E5A-447C-8E0B-DD6D92CDC7BB} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
+		{3667D0DD-1912-45D5-A065-2EC6EDE8C381} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
+		{C73C353B-9F25-4E87-A5ED-044B5EAA5E61} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9D1AB2B-1092-4016-9968-D0B2416CB186}

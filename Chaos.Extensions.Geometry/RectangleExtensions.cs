@@ -68,17 +68,17 @@ public static class RectangleExtensions
     #endregion
 
     #region Rect Contains Point
-    /// <inheritdoc cref="ContainsPoint" />
+    /// <inheritdoc cref="ContainsPoint(IRectangle, IPoint)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool ContainsPoint(this ValueRectangle rect, ValuePoint point)
         => (rect.Bottom >= point.Y) && (rect.Left <= point.X) && (rect.Right >= point.X) && (rect.Top <= point.Y);
 
-    /// <inheritdoc cref="ContainsPoint" />
+    /// <inheritdoc cref="ContainsPoint(IRectangle, IPoint)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool ContainsPoint(this ValueRectangle rect, Point point)
         => (rect.Bottom >= point.Y) && (rect.Left <= point.X) && (rect.Right >= point.X) && (rect.Top <= point.Y);
 
-    /// <inheritdoc cref="ContainsPoint" />
+    /// <inheritdoc cref="ContainsPoint(IRectangle, IPoint)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool ContainsPoint(this ValueRectangle rect, IPoint point)
     {
@@ -87,7 +87,7 @@ public static class RectangleExtensions
         return (rect.Left <= point.X) && (rect.Right >= point.X) && (rect.Top <= point.Y) && (rect.Bottom >= point.Y);
     }
 
-    /// <inheritdoc cref="ContainsPoint" />
+    /// <inheritdoc cref="ContainsPoint(IRectangle, IPoint)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool ContainsPoint(this IRectangle rect, ValuePoint point)
     {
@@ -96,7 +96,7 @@ public static class RectangleExtensions
         return (rect.Left <= point.X) && (rect.Right >= point.X) && (rect.Top <= point.Y) && (rect.Bottom >= point.Y);
     }
 
-    /// <inheritdoc cref="ContainsPoint" />
+    /// <inheritdoc cref="ContainsPoint(IRectangle, IPoint)" />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool ContainsPoint(this IRectangle rect, Point point)
     {

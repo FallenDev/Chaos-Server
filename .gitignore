@@ -274,6 +274,7 @@ dev-debug.log
 .DS_Store
 
 CLAUDE.md
+CoverageReport/*
 
 # Task files
 tasks.json
