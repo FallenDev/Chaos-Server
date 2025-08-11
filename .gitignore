@@ -261,6 +261,9 @@ dev-debug.log
 .env
 # Editor directories and files
 .idea
+.taskmaster
+.cursor
+.env.example
 .vscode
 *.ntvs*
 *.njsproj
@@ -270,5 +273,5 @@ dev-debug.log
 .DS_Store
 
 # Task files
-# tasks.json
-# tasks/ 
+tasks.json
+tasks/ 
