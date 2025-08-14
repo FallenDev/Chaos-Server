@@ -277,6 +277,7 @@ dev-debug.log
 
 CLAUDE.md
 CoverageReport/*
+docs/schemas/
 
 # Task files
 tasks.json
