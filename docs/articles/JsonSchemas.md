@@ -25,13 +25,23 @@ All schemas are automatically published to the Chaos Server documentation site a
 https://docs.chaos-server.net/schemas/
 ```
 
-You can reference any schema directly using this URL pattern:
+Each schema follows this URL pattern:
 
-```json
-{
-   "$schema": "https://docs.chaos-server.net/schemas/item-template.schema.json"
-}
 ```
+https://docs.chaos-server.net/schemas/{template-name}.schema.json
+```
+
+Where `{template-name}` is one of:
+
+- `item-template`
+- `monster-template`
+- `skill-template`
+- `spell-template`
+- `dialog-template`
+- `merchant-template`
+- `map-template`
+- `reactor-tile-template`
+- `bulletin-board-template`
 
 ## JetBrains Rider Setup
 
@@ -74,44 +84,248 @@ If the automatic schema detection isn't working:
 
 ### Visual Studio Code
 
-1. Install the "JSON" extension (usually pre-installed)
-2. Add schema references directly in your JSON files:
-   ```json
-   {
-     "$schema": "https://docs.chaos-server.net/schemas/item-template.schema.json",
-     "templateKey": "MyItem"
-     // ... rest of template
-   }
-   ```
+#### File Templates (Snippets)
 
-3. Alternatively, configure workspace settings in `.vscode/settings.json`:
-   ```json
-   {
-     "json.schemas": [
-       {
-         "fileMatch": ["**Configuration/Templates/Items/**/*.json"],
-         "url": "https://docs.chaos-server.net/schemas/item-template.schema.json"
-       },
-       {
-         "fileMatch": ["**Configuration/Templates/Monsters/**/*.json"],
-         "url": "https://docs.chaos-server.net/schemas/monster-template.schema.json"
-       }
-       // ... add more mappings as needed
-     ]
-   }
-   ```
+VS Code uses snippets for file templates. Create custom snippets for each template type:
+
+1. Go to File → Preferences → Configure User Snippets
+2. Select "New Global Snippets file" or create a project-specific `.vscode/chaos-templates.code-snippets`
+3. Add the following snippets:
+
+```json
+{
+  "Item Template": {
+    "scope": "json",
+    "prefix": "chaos-item",
+    "body": [
+      "{",
+      "  \"\\$schema\": \"https://docs.chaos-server.net/schemas/item-template.schema.json\"",
+      "}"
+    ],
+    "description": "Create a new Item Template"
+  },
+  "Monster Template": {
+    "scope": "json",
+    "prefix": "chaos-monster",
+    "body": [
+      "{",
+      "  \"\\$schema\": \"https://docs.chaos-server.net/schemas/monster-template.schema.json\"",
+      "}"
+    ],
+    "description": "Create a new Monster Template"
+  },
+  "Skill Template": {
+    "scope": "json",
+    "prefix": "chaos-skill",
+    "body": [
+      "{",
+      "  \"\\$schema\": \"https://docs.chaos-server.net/schemas/skill-template.schema.json\"",
+      "}"
+    ],
+    "description": "Create a new Skill Template"
+  },
+  "Spell Template": {
+    "scope": "json",
+    "prefix": "chaos-spell",
+    "body": [
+      "{",
+      "  \"\\$schema\": \"https://docs.chaos-server.net/schemas/spell-template.schema.json\"",
+      "}"
+    ],
+    "description": "Create a new Spell Template"
+  },
+  "Dialog Template": {
+    "scope": "json",
+    "prefix": "chaos-dialog",
+    "body": [
+      "{",
+      "  \"\\$schema\": \"https://docs.chaos-server.net/schemas/dialog-template.schema.json\"",
+      "}"
+    ],
+    "description": "Create a new Dialog Template"
+  },
+  "Merchant Template": {
+    "scope": "json",
+    "prefix": "chaos-merchant",
+    "body": [
+      "{",
+      "  \"\\$schema\": \"https://docs.chaos-server.net/schemas/merchant-template.schema.json\"",
+      "}"
+    ],
+    "description": "Create a new Merchant Template"
+  },
+  "Map Template": {
+    "scope": "json",
+    "prefix": "chaos-map",
+    "body": [
+      "{",
+      "  \"\\$schema\": \"https://docs.chaos-server.net/schemas/map-template.schema.json\"",
+      "}"
+    ],
+    "description": "Create a new Map Template"
+  },
+  "Reactor Tile Template": {
+    "scope": "json",
+    "prefix": "chaos-reactor",
+    "body": [
+      "{",
+      "  \"\\$schema\": \"https://docs.chaos-server.net/schemas/reactor-tile-template.schema.json\"",
+      "}"
+    ],
+    "description": "Create a new Reactor Tile Template"
+  },
+  "Bulletin Board Template": {
+    "scope": "json",
+    "prefix": "chaos-bulletin",
+    "body": [
+      "{",
+      "  \"\\$schema\": \"https://docs.chaos-server.net/schemas/bulletin-board-template.schema.json\"",
+      "}"
+    ],
+    "description": "Create a new Bulletin Board Template"
+  }
+}
+```
+
+To use these snippets, type the prefix (e.g., `chaos-item`) in a JSON file and press Tab.
+
+**Note:** If you prefer right-click file creation similar to Rider/Visual Studio, you'll need to install a file
+templates extension from the VS Code marketplace and follow that extension's setup instructions.
+
+#### Workspace Schema Configuration (Alternative)
+
+If you prefer automatic schema detection without adding `$schema` to each file, configure workspace settings in
+`.vscode/settings.json`:
+
+```json
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["**Configuration/Templates/Items/**/*.json"],
+      "url": "https://docs.chaos-server.net/schemas/item-template.schema.json"
+    },
+    {
+      "fileMatch": ["**Configuration/Templates/Monsters/**/*.json"],
+      "url": "https://docs.chaos-server.net/schemas/monster-template.schema.json"
+    },
+    {
+      "fileMatch": ["**Configuration/Templates/Skills/**/*.json"],
+      "url": "https://docs.chaos-server.net/schemas/skill-template.schema.json"
+    },
+    {
+      "fileMatch": ["**Configuration/Templates/Spells/**/*.json"],
+      "url": "https://docs.chaos-server.net/schemas/spell-template.schema.json"
+    },
+    {
+      "fileMatch": ["**Configuration/Templates/Dialogs/**/*.json"],
+      "url": "https://docs.chaos-server.net/schemas/dialog-template.schema.json"
+    },
+    {
+      "fileMatch": ["**Configuration/Templates/Merchants/**/*.json"],
+      "url": "https://docs.chaos-server.net/schemas/merchant-template.schema.json"
+    },
+    {
+      "fileMatch": ["**Configuration/Templates/Maps/**/*.json"],
+      "url": "https://docs.chaos-server.net/schemas/map-template.schema.json"
+    },
+    {
+      "fileMatch": ["**Configuration/Templates/ReactorTiles/**/*.json"],
+      "url": "https://docs.chaos-server.net/schemas/reactor-tile-template.schema.json"
+    },
+    {
+      "fileMatch": ["**Configuration/Templates/BulletinBoards/**/*.json"],
+      "url": "https://docs.chaos-server.net/schemas/bulletin-board-template.schema.json"
+    }
+  ]
+}
+```
 
 ### Visual Studio
 
-1. Install the "JSON Schema" extension from Visual Studio Marketplace
-2. Add schema references in your JSON files using the `$schema` property
-3. Or configure project settings to map file patterns to schema URLs
+#### File Templates
+
+Create item templates for each schema type:
+
+1. Go to Project → Export Template
+2. Choose "Item Template" and click Next
+3. Select a sample JSON file with the appropriate schema reference
+4. Configure the template:
+   - Template name: e.g., "Chaos Item Template"
+   - Template description: e.g., "Creates a new Chaos Server item template"
+   - Icon: (optional)
+5. Click Finish
+
+Alternatively, manually create templates:
+
+1. Create a folder: `%USERPROFILE%\Documents\Visual Studio 2022\Templates\ItemTemplates\Chaos Templates\`
+2. For each template type, create a `.json` file and a `.vstemplate` file
+
+Example `ItemTemplate.json`:
+
+```json
+{
+  "$schema": "https://docs.chaos-server.net/schemas/item-template.schema.json"
+}
+```
+
+Example `ItemTemplate.vstemplate`:
+
+```xml
+<VSTemplate Version="3.0.0" Type="Item" 
+  xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>Chaos Item Template</Name>
+    <Description>Creates a new Chaos Server item template</Description>
+    <Icon>Icon.ico</Icon>
+    <ProjectType>General</ProjectType>
+    <DefaultName>NewItem.json</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectItem>ItemTemplate.json</ProjectItem>
+  </TemplateContent>
+</VSTemplate>
+```
+
+After creating templates, they'll appear in Add → New Item dialog.
+
+#### Schema Configuration (Alternative)
+
+Visual Studio 2019+ includes built-in JSON IntelliSense support. For automatic schema detection without templates, the
+schemas will be applied based on file paths when properly configured in the project.
 
 ### IntelliJ IDEA
 
+#### File Templates
+
+Create file templates for each schema type:
+
+1. Go to File → Settings → Editor → File and Code Templates
+2. Click the + button to add a new template
+3. Configure the template:
+   - Name: e.g., "Chaos Item Template"
+   - Extension: `json`
+   - Template text:
+
+```json
+{
+  "$schema": "https://docs.chaos-server.net/schemas/item-template.schema.json"
+}
+```
+
+4. Repeat for other template types (Monster, Skill, Spell, Dialog, Merchant, Map, Reactor Tile, Bulletin Board)
+
+To use: Right-click in Project view → New → Select your custom template
+
+#### Schema Configuration (Alternative)
+
+For automatic schema detection without templates:
+
 1. Go to File → Settings → Languages & Frameworks → Schemas and DTDs → JSON Schema Mappings
-2. Add mappings similar to the Rider setup above
-3. The schema URLs remain the same: `https://docs.chaos-server.net/schemas/{template-name}.schema.json`
+2. Click the + button to add a new mapping for each template type
+3. Configure each mapping:
+   - Name: e.g., "Chaos Item Templates"
+   - Schema file or URL: `https://docs.chaos-server.net/schemas/item-template.schema.json`
+   - File path pattern: Add patterns like `**/Configuration/Templates/Items/**/*.json`
 
 ## Relocated Data Folder Configuration
 
