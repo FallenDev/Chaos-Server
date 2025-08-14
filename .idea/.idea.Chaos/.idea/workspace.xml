@@ -57,21 +57,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tools/create-rider-templates.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/articles/JsonSchemas.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/schemas/bulletin-board-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/schemas/dialog-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/schemas/item-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/schemas/map-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/schemas/merchant-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/schemas/monster-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/schemas/reactor-tile-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/schemas/skill-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/schemas/spell-template.schema.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/articles/toc.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/articles/toc.yml" afterDir="false" />
-    </list>
+    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -2145,7 +2131,7 @@
       <workItem from="1755160233580" duration="477000" />
       <workItem from="1755160737922" duration="57000" />
       <workItem from="1755160830282" duration="171000" />
-      <workItem from="1755161075422" duration="1075000" />
+      <workItem from="1755161075422" duration="1470000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2490,7 +2476,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="365" />
+    <option name="localTasksCounter" value="367" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2586,7 +2572,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="aggrolist" />
     <MESSAGE value="sanitize createchar" />
     <MESSAGE value="diff hairstyle cap per gender" />
     <MESSAGE value="PreventBanking&#10;- added PreventBanking to items&#10;- allowed NoTrade and AccountBound to be modified on the item&#10;- LoginIds are logged as part of the client/aisling transform" />
@@ -2606,12 +2591,13 @@
     <MESSAGE value="package updates" />
     <MESSAGE value="SequenceScripter, Cooldowns, misc&#10;- small rework to sequence scripter&#10;- cooldowns now support negative elapsed values, which fixes a bug when trying to set custom cooldown for abilities with no cooldown, or a cooldown shorter than the custom value you were trying to provide&#10;- added a new option to monsterSpawn that allows you to control whether monsters should be counted only in the spawn area or not" />
     <MESSAGE value="tests&#10;- quadtree is now threadsafe&#10;- added a bunch of test cases" />
-    <MESSAGE value="gitignore" />
     <MESSAGE value="more tests" />
     <MESSAGE value="tests and misc" />
     <MESSAGE value="json schema generation" />
     <MESSAGE value="fix sln" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix sln" />
+    <MESSAGE value="schema documentation" />
+    <MESSAGE value="gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
