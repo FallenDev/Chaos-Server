@@ -32,6 +32,9 @@
         "resource": [
             {
                 "files": ["images/**"]
+            },
+            {
+                "files": ["schemas/**"]
             }
         ],
         "overwrite": [

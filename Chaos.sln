@@ -185,6 +185,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Time.Tests", "Tests\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Storage.Abstractions.Tests", "Tests\Chaos.Storage.Abstractions.Tests\Chaos.Storage.Abstractions.Tests.csproj", "{C73C353B-9F25-4E87-A5ED-044B5EAA5E61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemaGenerator", "Tools\SchemaGenerator\SchemaGenerator.csproj", "{A8C0CC59-4DB3-4B1A-9C5F-74482B0CAB13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -431,6 +433,10 @@ Global
 		{C73C353B-9F25-4E87-A5ED-044B5EAA5E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C73C353B-9F25-4E87-A5ED-044B5EAA5E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C73C353B-9F25-4E87-A5ED-044B5EAA5E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8C0CC59-4DB3-4B1A-9C5F-74482B0CAB13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8C0CC59-4DB3-4B1A-9C5F-74482B0CAB13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8C0CC59-4DB3-4B1A-9C5F-74482B0CAB13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8C0CC59-4DB3-4B1A-9C5F-74482B0CAB13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -476,6 +482,7 @@ Global
 		{20F29BAA-3E5A-447C-8E0B-DD6D92CDC7BB} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
 		{3667D0DD-1912-45D5-A065-2EC6EDE8C381} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
 		{C73C353B-9F25-4E87-A5ED-044B5EAA5E61} = {FB65EF42-92F0-49AF-B22C-72B1725098DA}
+		{A8C0CC59-4DB3-4B1A-9C5F-74482B0CAB13} = {698D32AB-9BC9-4B0A-B5DD-19D98C0358DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9D1AB2B-1092-4016-9968-D0B2416CB186}

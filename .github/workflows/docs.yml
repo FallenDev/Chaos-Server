@@ -17,6 +17,10 @@ jobs:
           dotnet-version: 9.x
 
       - run: dotnet tool install -g docfx --version 2.74.1
+
+      - name: Generate JSON Schemas
+        run: dotnet run --project "Tools/SchemaGenerator/SchemaGenerator.csproj" -- "docs"
+      
       - run: docfx docs/docfx.json
 
       - name: Deploy

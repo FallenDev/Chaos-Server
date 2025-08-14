@@ -28,6 +28,10 @@
         <PackageVersion Include="Moq" Version="4.20.72"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2025.2.0"/>
         <PackageVersion Include="Namotion.Reflection" Version="3.4.2"/>
+        <PackageVersion Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageVersion Include="NJsonSchema" Version="11.1.0"/>
+        <PackageVersion Include="NJsonSchema.NewtonsoftJson" Version="11.1.0"/>
+        <PackageVersion Include="NJsonSchema.Generation.SystemTextJson" Version="11.1.0"/>
         <PackageVersion Include="NLog" Version="6.0.2"/>
         <PackageVersion Include="PropertyChanged.Fody" Version="4.1.0"/>
         <PackageVersion Include="ReportGenerator" Version="5.4.10"/>
