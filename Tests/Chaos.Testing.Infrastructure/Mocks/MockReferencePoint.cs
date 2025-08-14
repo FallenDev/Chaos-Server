@@ -1,20 +1,21 @@
-#region
 using Chaos.Geometry.Abstractions;
-#endregion
+using Moq;
 
 namespace Chaos.Testing.Infrastructure.Mocks;
 
-public class MockReferencePoint : IPoint
+public static class MockReferencePoint
 {
-    /// <inheritdoc />
-    public int X { get; init; }
-
-    /// <inheritdoc />
-    public int Y { get; init; }
-
-    public MockReferencePoint(int x, int y)
+    public static Mock<IPoint> Create(int x, int y, Action<Mock<IPoint>>? setup = null)
     {
-        X = x;
-        Y = y;
+        var mock = new Mock<IPoint>();
+
+        mock.SetupGet(p => p.X)
+            .Returns(x);
+
+        mock.SetupGet(p => p.Y)
+            .Returns(y);
+        setup?.Invoke(mock);
+
+        return mock;
     }
 }

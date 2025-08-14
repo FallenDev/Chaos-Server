@@ -33,10 +33,10 @@ public sealed class ChannelServiceTests
 
         LoggerMock = MockLogger.Create<ChannelService>();
 
-        SubscriberMock = MockChannelSubscriber.Create(
-            "TestSubscriber",
-            mock => mock.Setup(s => s.IsIgnoring(It.IsAny<string>()))
-                        .Returns(false));
+        SubscriberMock = MockChannelSubscriber.Create("TestSubscriber");
+
+        SubscriberMock.Setup(s => s.IsIgnoring(It.IsAny<string>()))
+                      .Returns(false);
 
         ChannelService = new ChannelService(ChannelServiceOptions, LoggerMock.Object);
     }
@@ -377,8 +377,8 @@ public sealed class ChannelServiceTests
 
         SubscriberMock.Verify(
             s => s.SendMessage(
-                It.Is<string>(
-                    str => str.ContainsI(MessageColor.Blue.ToPrefix()) && str.ContainsI("Test") && str.ContainsI("Hello, world!"))),
+                It.Is<string>(str
+                    => str.ContainsI(MessageColor.Blue.ToPrefix()) && str.ContainsI("Test") && str.ContainsI("Hello, world!"))),
             Times.AtLeastOnce);
     }
 
@@ -395,8 +395,8 @@ public sealed class ChannelServiceTests
 
         SubscriberMock.Verify(
             s => s.SendMessage(
-                It.Is<string>(
-                    str => str.ContainsI(MessageColor.Red.ToPrefix()) && str.ContainsI("Test") && str.ContainsI("Hello, world!"))),
+                It.Is<string>(str
+                    => str.ContainsI(MessageColor.Red.ToPrefix()) && str.ContainsI("Test") && str.ContainsI("Hello, world!"))),
             Times.AtLeastOnce);
     }
 

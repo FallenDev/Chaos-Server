@@ -1,6 +1,7 @@
 #region
 using Chaos.Collections.Specialized;
 using Chaos.Geometry;
+using Chaos.Geometry.Abstractions;
 using Chaos.Testing.Infrastructure.Mocks;
 using FluentAssertions;
 #endregion
@@ -13,7 +14,7 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Clear_EmptyTree_DoesNotThrow()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
 
         // Act & Assert
         quadTree.Invoking(qt => qt.Clear())
@@ -29,13 +30,16 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Clear_WithItems_RemovesAllItems()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
 
         var points = new[]
         {
-            new MockReferencePoint(10, 10),
-            new MockReferencePoint(20, 30),
-            new MockReferencePoint(80, 90)
+            MockReferencePoint.Create(10, 10)
+                              .Object,
+            MockReferencePoint.Create(20, 30)
+                              .Object,
+            MockReferencePoint.Create(80, 90)
+                              .Object
         };
 
         foreach (var point in points)
@@ -69,7 +73,7 @@ public sealed class QuadTreeWithSpatialHashTests
         var bounds = CreateTestBounds();
 
         // Act
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(bounds);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(bounds);
 
         // Assert
         quadTree.Should()
@@ -85,10 +89,10 @@ public sealed class QuadTreeWithSpatialHashTests
     {
         // Arrange
         var bounds = CreateTestBounds();
-        var comparer = EqualityComparer<MockReferencePoint>.Default;
+        var comparer = EqualityComparer<IPoint>.Default;
 
         // Act
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(bounds, comparer);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(bounds, comparer);
 
         // Assert
         quadTree.Should()
@@ -106,7 +110,7 @@ public sealed class QuadTreeWithSpatialHashTests
         var bounds = CreateTestBounds();
 
         // Act
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(bounds);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(bounds);
 
         // Assert
         quadTree.Should()
@@ -128,11 +132,13 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Inheritance_BehavesLikeQuadTree()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point = MockReferencePoint.Create(50, 50)
+                                      .Object;
 
         // Act & Assert - Test that it can be used as a QuadTree
-        QuadTree<MockReferencePoint> baseQuadTree = quadTree;
+        QuadTree<IPoint> baseQuadTree = quadTree;
 
         baseQuadTree.Insert(point)
                     .Should()
@@ -161,9 +167,13 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Insert_AfterClear_WorksCorrectly()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point1 = new MockReferencePoint(50, 50);
-        var point2 = new MockReferencePoint(60, 60);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point1 = MockReferencePoint.Create(50, 50)
+                                       .Object;
+
+        var point2 = MockReferencePoint.Create(60, 60)
+                                       .Object;
 
         quadTree.Insert(point1);
         quadTree.Clear();
@@ -195,21 +205,33 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Insert_AndQuery_ConsistentResults()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
 
-        var testData = new Dictionary<MockReferencePoint, List<MockReferencePoint>>
+        var testData = new Dictionary<IPoint, List<IPoint>>
         {
-            [new MockReferencePoint(10, 10)] =
+            [MockReferencePoint.Create(10, 10)
+                               .Object] =
             [
-                new MockReferencePoint(10, 10),
-                new MockReferencePoint(10, 10)
+                MockReferencePoint.Create(10, 10)
+                                  .Object,
+                MockReferencePoint.Create(10, 10)
+                                  .Object
             ],
-            [new MockReferencePoint(20, 20)] = [new MockReferencePoint(20, 20)],
-            [new MockReferencePoint(30, 30)] =
+            [MockReferencePoint.Create(20, 20)
+                               .Object] =
             [
-                new MockReferencePoint(30, 30),
-                new MockReferencePoint(30, 30),
-                new MockReferencePoint(30, 30)
+                MockReferencePoint.Create(20, 20)
+                                  .Object
+            ],
+            [MockReferencePoint.Create(30, 30)
+                               .Object] =
+            [
+                MockReferencePoint.Create(30, 30)
+                                  .Object,
+                MockReferencePoint.Create(30, 30)
+                                  .Object,
+                MockReferencePoint.Create(30, 30)
+                                  .Object
             ]
         };
 
@@ -234,16 +256,18 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Insert_LargeNumberOfPoints_HandlesCorrectly()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(
             new Rectangle(
                 0,
                 0,
                 1000,
                 1000));
-        var points = new List<MockReferencePoint>();
+        var points = new List<IPoint>();
 
         for (var i = 0; i < 1000; i++)
-            points.Add(new MockReferencePoint(i % 100 * 10, i / 100 * 10));
+            points.Add(
+                MockReferencePoint.Create(i % 100 * 10, i / 100 * 10)
+                                  .Object);
 
         // Act
         foreach (var point in points)
@@ -267,13 +291,16 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Insert_MultiplePointsDifferentLocations_AllPointsAreAdded()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
 
         var points = new[]
         {
-            new MockReferencePoint(10, 10),
-            new MockReferencePoint(20, 30),
-            new MockReferencePoint(80, 90)
+            MockReferencePoint.Create(10, 10)
+                              .Object,
+            MockReferencePoint.Create(20, 30)
+                              .Object,
+            MockReferencePoint.Create(80, 90)
+                              .Object
         };
 
         // Act
@@ -297,9 +324,13 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Insert_MultiplePointsSameLocation_AllPointsAreAdded()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point1 = new MockReferencePoint(50, 50);
-        var point2 = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point1 = MockReferencePoint.Create(50, 50)
+                                       .Object;
+
+        var point2 = MockReferencePoint.Create(50, 50)
+                                       .Object;
 
         // Act
         var result1 = quadTree.Insert(point1);
@@ -327,9 +358,11 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Insert_SamePointTwice_WithComparer_OnlyAddedOnce()
     {
         // Arrange
-        var comparer = EqualityComparer<MockReferencePoint>.Default;
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds(), comparer);
-        var point = new MockReferencePoint(50, 50);
+        var comparer = EqualityComparer<IPoint>.Default;
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds(), comparer);
+
+        var point = MockReferencePoint.Create(50, 50)
+                                      .Object;
 
         // Act
         var result1 = quadTree.Insert(point);
@@ -351,8 +384,10 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Insert_SamePointTwice_WithoutComparer_BothAreAdded()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point = MockReferencePoint.Create(50, 50)
+                                      .Object;
 
         // Act
         var result1 = quadTree.Insert(point);
@@ -374,8 +409,10 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Insert_SinglePoint_OutsideBounds_ReturnsFalse()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point = new MockReferencePoint(150, 150);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point = MockReferencePoint.Create(150, 150)
+                                      .Object;
 
         // Act
         var result = quadTree.Insert(point);
@@ -396,8 +433,10 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Insert_SinglePoint_WithinBounds_ReturnsTrue()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point = MockReferencePoint.Create(50, 50)
+                                      .Object;
 
         // Act
         var result = quadTree.Insert(point);
@@ -418,8 +457,10 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Query_AfterRemove_DoesNotReturnRemovedItem()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point = MockReferencePoint.Create(50, 50)
+                                      .Object;
         var queryPoint = Point.From(point);
 
         quadTree.Insert(point);
@@ -437,14 +478,18 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Query_WithNegativeCoordinates_WorksCorrectly()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(
             new Rectangle(
                 -100,
                 -100,
                 100,
                 100));
-        var point = new MockReferencePoint(-50, -50);
-        var queryPoint = new MockReferencePoint(-50, -50);
+
+        var point = MockReferencePoint.Create(-50, -50)
+                                      .Object;
+
+        var queryPoint = MockReferencePoint.Create(-50, -50)
+                                           .Object;
 
         quadTree.Insert(point);
 
@@ -460,8 +505,10 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Query_WithPoint_EmptyTree_ReturnsEmpty()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var queryPoint = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var queryPoint = MockReferencePoint.Create(50, 50)
+                                           .Object;
 
         // Act
         var results = quadTree.Query(Point.From(queryPoint));
@@ -475,9 +522,13 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Query_WithPoint_MultipleQueriesReturnSameResults()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var queryPoint = new MockReferencePoint(50, 50);
-        var point = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var queryPoint = MockReferencePoint.Create(50, 50)
+                                           .Object;
+
+        var point = MockReferencePoint.Create(50, 50)
+                                      .Object;
         quadTree.Insert(point);
 
         // Act
@@ -502,9 +553,13 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Query_WithPoint_NoPointsAtLocation_ReturnsEmpty()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var queryPoint = new MockReferencePoint(50, 50);
-        var point = new MockReferencePoint(60, 60);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var queryPoint = MockReferencePoint.Create(50, 50)
+                                           .Object;
+
+        var point = MockReferencePoint.Create(60, 60)
+                                      .Object;
         quadTree.Insert(point);
 
         // Act
@@ -519,11 +574,19 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Query_WithPoint_ReturnsPointsAtExactLocation()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var queryPoint = new MockReferencePoint(50, 50);
-        var point1 = new MockReferencePoint(50, 50);
-        var point2 = new MockReferencePoint(50, 50);
-        var point3 = new MockReferencePoint(60, 60);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var queryPoint = MockReferencePoint.Create(50, 50)
+                                           .Object;
+
+        var point1 = MockReferencePoint.Create(50, 50)
+                                       .Object;
+
+        var point2 = MockReferencePoint.Create(50, 50)
+                                       .Object;
+
+        var point3 = MockReferencePoint.Create(60, 60)
+                                       .Object;
 
         quadTree.Insert(point1);
         quadTree.Insert(point2);
@@ -551,9 +614,13 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Query_WithZeroCoordinates_WorksCorrectly()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point = new MockReferencePoint(0, 0);
-        var queryPoint = new MockReferencePoint(0, 0);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point = MockReferencePoint.Create(0, 0)
+                                      .Object;
+
+        var queryPoint = MockReferencePoint.Create(0, 0)
+                                           .Object;
 
         quadTree.Insert(point);
 
@@ -569,8 +636,10 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Remove_ExistingPoint_ReturnsTrue()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point = MockReferencePoint.Create(50, 50)
+                                      .Object;
         quadTree.Insert(point);
 
         // Act
@@ -592,8 +661,10 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Remove_FromEmptyTree_ReturnsFalse()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point = MockReferencePoint.Create(50, 50)
+                                      .Object;
 
         // Act
         var result = quadTree.Remove(point);
@@ -611,8 +682,10 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Remove_NonExistentPoint_ReturnsFalse()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point = MockReferencePoint.Create(50, 50)
+                                      .Object;
 
         // Act
         var result = quadTree.Remove(point);
@@ -630,9 +703,13 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Remove_OneOfMultiplePointsAtSameLocation_RemovesOnlySpecifiedPoint()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(CreateTestBounds());
-        var point1 = new MockReferencePoint(50, 50);
-        var point2 = new MockReferencePoint(50, 50);
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(CreateTestBounds());
+
+        var point1 = MockReferencePoint.Create(50, 50)
+                                       .Object;
+
+        var point2 = MockReferencePoint.Create(50, 50)
+                                       .Object;
         quadTree.Insert(point1);
         quadTree.Insert(point2);
 
@@ -658,13 +735,15 @@ public sealed class QuadTreeWithSpatialHashTests
     public void Remove_WithNegativeCoordinates_WorksCorrectly()
     {
         // Arrange
-        var quadTree = new QuadTreeWithSpatialHash<MockReferencePoint>(
+        var quadTree = new QuadTreeWithSpatialHash<IPoint>(
             new Rectangle(
                 -100,
                 -100,
                 100,
                 100));
-        var point = new MockReferencePoint(-50, -50);
+
+        var point = MockReferencePoint.Create(-50, -50)
+                                      .Object;
 
         quadTree.Insert(point);
 

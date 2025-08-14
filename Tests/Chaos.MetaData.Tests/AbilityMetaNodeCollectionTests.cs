@@ -1,5 +1,4 @@
 #region
-using System.Linq;
 using Chaos.DarkAges.Definitions;
 using Chaos.MetaData.ClassMetaData;
 using FluentAssertions;

@@ -2,7 +2,6 @@
 using Chaos.Geometry;
 using Chaos.Geometry.Abstractions;
 using Chaos.Geometry.Abstractions.Definitions;
-using Chaos.Pathfinding;
 using FluentAssertions;
 using Microsoft.Extensions.Caching.Memory;
 #endregion
@@ -21,10 +20,7 @@ public sealed class PathfindingServiceTests
         {
             Width = 1,
             Height = 1,
-            Walls = new IPoint[]
-            {
-                new Point(0, 0)
-            }
+            Walls = [new Point(0, 0)]
         };
         svc.RegisterGrid("g2", grid);
 
@@ -55,10 +51,7 @@ public sealed class PathfindingServiceTests
             new Point(2, 0),
             new PathOptions
             {
-                BlockedPoints = new IPoint[]
-                {
-                    new Point(1, 0)
-                }
+                BlockedPoints = [new Point(1, 0)]
             });
 
         dir.Should()

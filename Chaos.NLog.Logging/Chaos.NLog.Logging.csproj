@@ -15,6 +15,7 @@
 
     <ItemGroup>
         <InternalsVisibleTo Include="Chaos.Testing.Infrastructure"/>
+        <InternalsVisibleTo Include="Chaos.NLog.Logging.Tests"/>
     </ItemGroup>
 
 </Project>

@@ -15,4 +15,12 @@
         <PackageReference Include="Namotion.Reflection"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <None Include="JsonSchemas\**\*.json">
+            <Pack>true</Pack>
+            <PackagePath>JsonSchemas\</PackagePath>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
 </Project>

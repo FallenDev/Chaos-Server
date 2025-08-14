@@ -1,5 +1,4 @@
 #region
-using Chaos.Pathfinding;
 using FluentAssertions;
 #endregion
 

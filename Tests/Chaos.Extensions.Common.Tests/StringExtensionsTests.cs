@@ -314,7 +314,123 @@ public sealed class StringExtensionsTests
     }
 
     [Test]
-    [MethodDataSource(nameof(FuzzySearchTestData))]
+
+    //formatter:off
+    [Arguments(
+        new[]
+        {
+            "kitten",
+            "sitting",
+            "mittens"
+        },
+        "sitten",
+        0.6,
+        0.33,
+        null,
+        true,
+        "kitten")]
+    [Arguments(
+        new[]
+        {
+            "kitten",
+            "sitting",
+            "mittens"
+        },
+        "sitten",
+        0.6,
+        0.33,
+        null,
+        false,
+        "kitten")]
+    [Arguments(
+        new[]
+        {
+            "kitten",
+            "Sitting",
+            "mittens"
+        },
+        "sitteng",
+        0.6,
+        0.33,
+        null,
+        true,
+        "kitten")]
+    [Arguments(
+        new[]
+        {
+            "kitten",
+            "Sitting",
+            "mittens"
+        },
+        "sitteng",
+        0.6,
+        0.33,
+        null,
+        false,
+        "Sitting")]
+    [Arguments(
+        new[]
+        {
+            "Written",
+            "writing",
+            "kitten"
+        },
+        "ritten",
+        0.6,
+        0.33,
+        null,
+        true,
+        "Written")]
+    [Arguments(
+        new[]
+        {
+            "Written",
+            "writing",
+            "kitten"
+        },
+        "ritten",
+        0.6,
+        0.33,
+        null,
+        false,
+        "Written")]
+    [Arguments(
+        new[]
+        {
+            "apple",
+            "banana",
+            "cherry"
+        },
+        "peach",
+        0,
+        1,
+        null,
+        true,
+        "cherry")]
+    [Arguments(
+        new[]
+        {
+            "apple",
+            "banana",
+            "cherry"
+        },
+        "peach",
+        0,
+        1,
+        null,
+        true,
+        "cherry")]
+    [Arguments(
+        new string[]
+            { },
+        "peach",
+        0,
+        1,
+        null,
+        true,
+        null)]
+
+    //formatter:on
     public void FuzzySearchByTests(
         IEnumerable<string> strings,
         string str,
@@ -338,54 +454,124 @@ public sealed class StringExtensionsTests
               .Be(expected);
     }
 
-    public static IEnumerable<(IEnumerable<string>, string, decimal, decimal, int?, bool, string? expected)> FuzzySearchTestData()
-        =>
-        [
-            ([
-                 "kitten",
-                 "sitting",
-                 "mittens"
-             ], "sitten", 0.6m, 0.33m, null, true, "kitten"),
-            ([
-                 "kitten",
-                 "sitting",
-                 "mittens"
-             ], "sitten", 0.6m, 0.33m, null, false, "kitten"),
-            ([
-                 "kitten",
-                 "Sitting",
-                 "mittens"
-             ], "sitteng", 0.6m, 0.33m, null, true, "kitten"),
-            ([
-                 "kitten",
-                 "Sitting",
-                 "mittens"
-             ], "sitteng", 0.6m, 0.33m, null, false, "Sitting"),
-            ([
-                 "Written",
-                 "writing",
-                 "kitten"
-             ], "ritten", 0.6m, 0.33m, null, true, "Written"),
-            ([
-                 "Written",
-                 "writing",
-                 "kitten"
-             ], "ritten", 0.6m, 0.33m, null, false, "Written"),
-            ([
-                 "apple",
-                 "banana",
-                 "cherry"
-             ], "peach", 0, 1, null, true, "cherry"),
-            ([
-                 "apple",
-                 "banana",
-                 "cherry"
-             ], "peach", 0, 1, null, true, "cherry"),
-            ([], "peach", 0, 1, null, true, null)
-        ];
-
     [Test]
-    [MethodDataSource(nameof(FuzzySearchTestData))]
+
+    //formatter:off
+    [Arguments(
+        new[]
+        {
+            "kitten",
+            "sitting",
+            "mittens"
+        },
+        "sitten",
+        0.6,
+        0.33,
+        null,
+        true,
+        "kitten")]
+    [Arguments(
+        new[]
+        {
+            "kitten",
+            "sitting",
+            "mittens"
+        },
+        "sitten",
+        0.6,
+        0.33,
+        null,
+        false,
+        "kitten")]
+    [Arguments(
+        new[]
+        {
+            "kitten",
+            "Sitting",
+            "mittens"
+        },
+        "sitteng",
+        0.6,
+        0.33,
+        null,
+        true,
+        "kitten")]
+    [Arguments(
+        new[]
+        {
+            "kitten",
+            "Sitting",
+            "mittens"
+        },
+        "sitteng",
+        0.6,
+        0.33,
+        null,
+        false,
+        "Sitting")]
+    [Arguments(
+        new[]
+        {
+            "Written",
+            "writing",
+            "kitten"
+        },
+        "ritten",
+        0.6,
+        0.33,
+        null,
+        true,
+        "Written")]
+    [Arguments(
+        new[]
+        {
+            "Written",
+            "writing",
+            "kitten"
+        },
+        "ritten",
+        0.6,
+        0.33,
+        null,
+        false,
+        "Written")]
+    [Arguments(
+        new[]
+        {
+            "apple",
+            "banana",
+            "cherry"
+        },
+        "peach",
+        0,
+        1,
+        null,
+        true,
+        "cherry")]
+    [Arguments(
+        new[]
+        {
+            "apple",
+            "banana",
+            "cherry"
+        },
+        "peach",
+        0,
+        1,
+        null,
+        true,
+        "cherry")]
+    [Arguments(
+        new string[]
+            { },
+        "peach",
+        0,
+        1,
+        null,
+        true,
+        null)]
+
+    //formatter:on
     public void FuzzySearchTests(
         IEnumerable<string> strings,
         string str,

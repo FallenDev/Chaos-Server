@@ -1,5 +1,4 @@
 #region
-using System.Linq;
 using System.Text;
 using Chaos.DarkAges.Definitions;
 using Chaos.IO.Memory;

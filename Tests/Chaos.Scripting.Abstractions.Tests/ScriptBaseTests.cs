@@ -1,5 +1,5 @@
 #region
-using Chaos.Scripting.Abstractions.Tests.Mocks;
+using Chaos.Testing.Infrastructure.Mocks;
 using FluentAssertions;
 #endregion
 
@@ -11,8 +11,11 @@ public sealed class ScriptBaseTests
     public void Equals_ReturnsFalse_ForDifferentObjects()
     {
         // Arrange
-        var scriptA = new MockScriptBase();
-        var scriptB = new MockCompositeScript();
+        var scriptA = MockScript.Create()
+                                .Object;
+
+        var scriptB = MockCompositeScript.Create()
+                                         .Object;
 
         // Assert
         scriptA.Equals(scriptB)

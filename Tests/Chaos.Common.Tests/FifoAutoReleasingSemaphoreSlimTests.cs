@@ -1,11 +1,79 @@
-#region
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Chaos.Common.Synchronization;
 using FluentAssertions;
-#endregion
 
 namespace Chaos.Common.Tests;
 
-public sealed class FifoAutoReleasingSemaphoreSlimTests
+public class FifoAutoReleasingSemaphoreSlimTests
+{
+    [Test]
+    public void Release_Should_Not_Throw_When_Already_Released()
+    {
+        var sem = new FifoAutoReleasingSemaphoreSlim(1, 1);
+        sem.Release();
+
+        sem.Invoking(s => s.Release())
+           .Should()
+           .NotThrow();
+    }
+
+    [Test]
+    public async Task WaitAsync_Should_Return_Disposable_That_Releases_On_Dispose()
+    {
+        var sem = new FifoAutoReleasingSemaphoreSlim(initialCount: 1, maxCount: 1);
+
+        var sub = await sem.WaitAsync();
+
+        sem.CurrentCount
+           .Should()
+           .Be(0);
+
+        sub.Dispose();
+
+        sem.CurrentCount
+           .Should()
+           .Be(1);
+    }
+
+    [Test]
+    public async Task WaitAsync_With_Timeout_OutParam_Should_Set_Task_On_Success()
+    {
+        var sem = new FifoAutoReleasingSemaphoreSlim(1, 1);
+
+        var ok = await sem.WaitAsync(TimeSpan.FromMilliseconds(1), out var subTask);
+
+        ok.Should()
+          .BeTrue();
+
+        var sub = await subTask;
+
+        sem.CurrentCount
+           .Should()
+           .Be(0);
+        sub.Dispose();
+
+        sem.CurrentCount
+           .Should()
+           .Be(1);
+    }
+
+    [Test]
+    public async Task WaitAsync_With_Timeout_Should_Return_Null_On_Timeout()
+    {
+        var sem = new FifoAutoReleasingSemaphoreSlim(0, 1);
+        var sub = await sem.WaitAsync(TimeSpan.FromMilliseconds(1));
+
+        sub.Should()
+           .BeNull();
+    }
+}
+
+// Remove duplicate file-scoped namespace to avoid CS8954; file is already in Chaos.Common.Tests
+//formatter:off
+public sealed class FifoAutoReleasingSemaphoreSlimExtendedTests
 {
     [Test]
     public async Task WaitAsync_ShouldAcquireSemaphoreInOrder()

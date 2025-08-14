@@ -1,5 +1,7 @@
+#region
 using System.Collections;
 using System.Runtime.InteropServices;
+#endregion
 
 namespace Chaos.Scripting.Abstractions;
 
@@ -17,7 +19,7 @@ public abstract class CompositeScriptBase<TScript> : ScriptBase, ICompositeScrip
     /// <summary>
     ///     Initializes a new instance of the <see cref="CompositeScriptBase{TScript}" /> class.
     /// </summary>
-    protected CompositeScriptBase() => Scripts = new List<TScript>();
+    protected CompositeScriptBase() => Scripts = [];
 
     /// <inheritdoc />
     public void Add(TScript script) => Scripts.Add(script);

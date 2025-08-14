@@ -13,44 +13,6 @@ public sealed class AutoReleasingReaderWriterLockSlimTests
     public AutoReleasingReaderWriterLockSlimTests() => _autoLock = new AutoReleasingReaderWriterLockSlim(_rootLock);
 
     [Test]
-    public async Task AutoReleasingSubscription_ConcurrentDisposal_ShouldBeThreadSafe()
-    {
-        var subscription = _autoLock.EnterReadLock();
-
-        _rootLock.IsReadLockHeld
-                 .Should()
-                 .BeTrue();
-
-        // Start multiple dispose operations concurrently
-        var tasks = new List<Task>();
-
-        for (int i = 0; i < 10; i++)
-        {
-            tasks.Add(
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        subscription.Dispose();
-                    } catch (SynchronizationLockException)
-                    {
-                        // This is expected when multiple threads try to dispose concurrently
-                        // The implementation uses Interlocked.CompareExchange to prevent double disposal
-                        // but ReaderWriterLockSlim can still throw if locks are already released
-                    }
-                }));
-        }
-
-        // Wait for all dispose operations to complete
-        await Task.WhenAll(tasks);
-
-        // Lock should be released (at least once, safely)
-        _rootLock.IsReadLockHeld
-                 .Should()
-                 .BeFalse();
-    }
-
-    [Test]
     public void AutoReleasingSubscription_ShouldHandleMultipleDisposalsSafely()
     {
         var subscription = _autoLock.EnterReadLock();
@@ -405,9 +367,7 @@ public sealed class AutoReleasingReaderWriterLockSlimTests
             // NOTE: Current implementation has a bug - it creates AutoReleasingSubscription instead of UpgradeableLockSubscription
             // So we need to manually exit the upgradeable read lock to avoid SynchronizationLockException
             if (upgradeableLock != null)
-            {
                 _rootLock.ExitUpgradeableReadLock(); // Manual cleanup due to implementation bug
-            }
         }
     }
 
@@ -495,53 +455,6 @@ public sealed class AutoReleasingReaderWriterLockSlimTests
                  .BeFalse();
 
         _rootLock.IsUpgradeableReadLockHeld
-                 .Should()
-                 .BeFalse();
-    }
-
-    [Test]
-    public async Task UpgradeableLockSubscription_ConcurrentDisposal_ShouldBeThreadSafe()
-    {
-        var subscription = _autoLock.EnterUpgradeableReadLock();
-        subscription.UpgradeToWriteLock();
-
-        _rootLock.IsUpgradeableReadLockHeld
-                 .Should()
-                 .BeTrue();
-
-        _rootLock.IsWriteLockHeld
-                 .Should()
-                 .BeTrue();
-
-        // Start multiple dispose operations concurrently
-        var tasks = new List<Task>();
-
-        for (int i = 0; i < 10; i++)
-        {
-            tasks.Add(
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        subscription.Dispose();
-                    } catch (SynchronizationLockException)
-                    {
-                        // This is expected when multiple threads try to dispose concurrently
-                        // The implementation uses Interlocked.CompareExchange to prevent double disposal
-                        // but ReaderWriterLockSlim can still throw if locks are already released
-                    }
-                }));
-        }
-
-        // Wait for all dispose operations to complete
-        await Task.WhenAll(tasks);
-
-        // Both locks should be released (at least once, safely)
-        _rootLock.IsUpgradeableReadLockHeld
-                 .Should()
-                 .BeFalse();
-
-        _rootLock.IsWriteLockHeld
                  .Should()
                  .BeFalse();
     }

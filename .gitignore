@@ -263,7 +263,9 @@ dev-debug.log
 .idea
 .taskmaster
 .cursor
+.cursorrules
 .claude
+.serena
 .env.example
 .vscode
 *.ntvs*

@@ -1,25 +1,22 @@
+#region
+using Chaos.Storage.Abstractions;
 using Microsoft.Extensions.Options;
 using Moq;
+#endregion
 
 namespace Chaos.Testing.Infrastructure.Mocks;
 
 public class MockOptions
 {
-    public static Mock<IOptions<T>> Create<T>(T value) where T: class, new()
+    public static Mock<IOptions<T>> Create<T>() where T: class => new();
+
+    public static Mock<IOptions<T>> Create<T>(T value) where T: class
     {
-        var options = new Mock<IOptions<T>>();
+        var options = Create<T>();
 
         options.Setup(o => o.Value)
                .Returns(value);
 
         return options;
-    }
-
-    public static Mock<IOptions<T>> Create<T>(Action<T>? setup = null) where T: class, new()
-    {
-        var value = new T();
-        setup?.Invoke(value);
-
-        return Create(value);
     }
 }

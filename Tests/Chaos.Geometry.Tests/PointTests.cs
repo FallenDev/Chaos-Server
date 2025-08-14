@@ -133,7 +133,8 @@ public sealed class PointTests
     public void Point_From_ReturnsNewPointWithSameValuesWhenPassedPointOfDifferentType()
     {
         // Arrange
-        IPoint originalPoint = new MockPoint(10, 20);
+        IPoint originalPoint = Chaos.Testing.Infrastructure.Mocks.MockPoint.Create(10, 20)
+                                    .Object;
 
         // Act
         var newPoint = Point.From(originalPoint);
@@ -222,10 +223,5 @@ public sealed class PointTests
              .Be(EXPECTED_Y);
     }
 
-    // CustomPoint class for testing Point.From method
-    private sealed class MockPoint(int x, int y) : IPoint
-    {
-        public int X { get; } = x;
-        public int Y { get; } = y;
-    }
+    // moved to Chaos.Testing.Infrastructure.Mocks.MockPoint
 }

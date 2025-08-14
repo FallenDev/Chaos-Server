@@ -23,8 +23,8 @@ public sealed class TopicsActionsTests
             value.Should()
                  .NotBeNull();
 
-            value!.Should()
-                  .Be(property.Name);
+            value.Should()
+                 .Be(property.Name);
         }
     }
 

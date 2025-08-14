@@ -2,7 +2,6 @@
 using Chaos.Geometry;
 using Chaos.Geometry.Abstractions;
 using Chaos.Geometry.Abstractions.Definitions;
-using Chaos.Pathfinding;
 using FluentAssertions;
 #endregion
 
@@ -171,7 +170,7 @@ public sealed class PathfinderTests
         {
             Width = w,
             Height = h,
-            Walls = (walls ?? Array.Empty<IPoint>()).ToList(),
-            BlockingReactors = (reactors ?? Array.Empty<IPoint>()).ToList()
+            Walls = (walls ?? []).ToList(),
+            BlockingReactors = (reactors ?? []).ToList()
         };
 }

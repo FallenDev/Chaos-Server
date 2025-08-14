@@ -222,7 +222,8 @@ public sealed class LocationTests
     public void Location_From_ReturnsNewLocationWithSameValuesWhenPassedLocationOfDifferentType()
     {
         // Arrange
-        ILocation originalLocation = new MockLocation("Map1", 10, 20);
+        ILocation originalLocation = Chaos.Testing.Infrastructure.Mocks.MockLocation.Create("Map1", 10, 20)
+                                          .Object;
 
         // Act
         var newLocation = Location.From(originalLocation);
@@ -359,11 +360,5 @@ public sealed class LocationTests
               .Be("TestMap:(5, 10)"); // Adjust this based on your actual expected format
     }
 
-    // CustomLocation class for testing Location.From method
-    private sealed class MockLocation(string map, int x, int y) : ILocation
-    {
-        public string Map { get; } = map;
-        public int X { get; } = x;
-        public int Y { get; } = y;
-    }
+    // moved to Chaos.Testing.Infrastructure.Mocks.MockLocation
 }

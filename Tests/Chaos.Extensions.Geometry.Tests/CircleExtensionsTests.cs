@@ -127,8 +127,12 @@ public sealed class CircleExtensionsTests
         var valueEnd = new ValuePoint(lineEndX, lineEndY);
         var pointStart = new Point(lineStartX, lineStartY);
         var pointEnd = new Point(lineEndX, lineEndY);
-        var iPointStart = new MockReferencePoint(lineStartX, lineStartY);
-        var iPointEnd = new MockReferencePoint(lineEndX, lineEndY);
+
+        var iPointStart = MockReferencePoint.Create(lineStartX, lineStartY)
+                                            .Object;
+
+        var iPointEnd = MockReferencePoint.Create(lineEndX, lineEndY)
+                                          .Object;
 
         // Act & Assert - Test all combinations
         circle.CalculateIntersectionEntryPoint(valueStart, valueEnd)
@@ -437,8 +441,12 @@ public sealed class CircleExtensionsTests
         // Arrange
         var center = new Point(centerX, centerY);
         var circle = new ValueCircle(center, radius);
-        var lineStart = new MockReferencePoint(lineStartX, lineStartY);
-        var lineEnd = new MockReferencePoint(lineEndX, lineEndY);
+
+        var lineStart = MockReferencePoint.Create(lineStartX, lineStartY)
+                                          .Object;
+
+        var lineEnd = MockReferencePoint.Create(lineEndX, lineEndY)
+                                        .Object;
         var expected = new Point(expectedX, expectedY);
 
         // Act
@@ -471,7 +479,9 @@ public sealed class CircleExtensionsTests
         // Arrange
         var center = new Point(centerX, centerY);
         var circle = new ValueCircle(center, radius);
-        var lineStart = new MockReferencePoint(lineStartX, lineStartY);
+
+        var lineStart = MockReferencePoint.Create(lineStartX, lineStartY)
+                                          .Object;
         var lineEnd = new Point(lineEndX, lineEndY);
         var expected = new Point(expectedX, expectedY);
 
@@ -505,7 +515,9 @@ public sealed class CircleExtensionsTests
         // Arrange
         var center = new Point(centerX, centerY);
         var circle = new ValueCircle(center, radius);
-        var lineStart = new MockReferencePoint(lineStartX, lineStartY);
+
+        var lineStart = MockReferencePoint.Create(lineStartX, lineStartY)
+                                          .Object;
         var lineEnd = new ValuePoint(lineEndX, lineEndY);
         var expected = new Point(expectedX, expectedY);
 
@@ -540,7 +552,9 @@ public sealed class CircleExtensionsTests
         var center = new Point(centerX, centerY);
         var circle = new ValueCircle(center, radius);
         var lineStart = new Point(lineStartX, lineStartY);
-        var lineEnd = new MockReferencePoint(lineEndX, lineEndY);
+
+        var lineEnd = MockReferencePoint.Create(lineEndX, lineEndY)
+                                        .Object;
         var expected = new Point(expectedX, expectedY);
 
         // Act
@@ -642,7 +656,9 @@ public sealed class CircleExtensionsTests
         var center = new Point(centerX, centerY);
         var circle = new ValueCircle(center, radius);
         var lineStart = new ValuePoint(lineStartX, lineStartY);
-        var lineEnd = new MockReferencePoint(lineEndX, lineEndY);
+
+        var lineEnd = MockReferencePoint.Create(lineEndX, lineEndY)
+                                        .Object;
         var expected = new Point(expectedX, expectedY);
 
         // Act
@@ -1856,7 +1872,9 @@ public sealed class CircleExtensionsTests
         // Arrange
         var center = new Point(0, 0);
         var circle = new ValueCircle(center, 10);
-        var point = new MockReferencePoint(6, 8); // Distance = 10
+
+        var point = MockReferencePoint.Create(6, 8)
+                                      .Object; // Distance = 10
 
         // Act
         var result = circle.ContainsPoint(point);
@@ -1872,7 +1890,9 @@ public sealed class CircleExtensionsTests
         // Arrange
         var center = new Point(0, 0);
         var circle = new ValueCircle(center, 14);
-        var point = new MockReferencePoint(6, 8); // Manhattan distance = 14
+
+        var point = MockReferencePoint.Create(6, 8)
+                                      .Object; // Manhattan distance = 14
 
         // Act
         var result = circle.ContainsPoint(point, DistanceType.Manhattan);
@@ -1972,7 +1992,9 @@ public sealed class CircleExtensionsTests
     {
         // Arrange
         ICircle circle = null!;
-        var point = new MockReferencePoint(3, 4);
+
+        var point = MockReferencePoint.Create(3, 4)
+                                      .Object;
 
         // Act
         var act = () => circle.ContainsPoint(point);
@@ -2006,7 +2028,9 @@ public sealed class CircleExtensionsTests
         // Arrange
         var center = new Point(0, 0);
         ICircle circle = new Circle(center, 5);
-        var point = new MockReferencePoint(3, 4);
+
+        var point = MockReferencePoint.Create(3, 4)
+                                      .Object;
         var invalidDistanceType = (DistanceType)255;
 
         // Act
@@ -2024,7 +2048,9 @@ public sealed class CircleExtensionsTests
         // Arrange
         var center = new Point(-5, -5);
         ICircle circle = new Circle(center, 10);
-        var point = new MockReferencePoint(-2, -1); // Distance = 5
+
+        var point = MockReferencePoint.Create(-2, -1)
+                                      .Object; // Distance = 5
 
         // Act
         var result = circle.ContainsPoint(point);
@@ -2040,7 +2066,9 @@ public sealed class CircleExtensionsTests
         // Arrange
         var center = new Point(0, 0);
         ICircle circle = new Circle(center, 10);
-        var point = new MockReferencePoint(4, 6); // Manhattan distance = 10
+
+        var point = MockReferencePoint.Create(4, 6)
+                                      .Object; // Manhattan distance = 10
 
         // Act
         var result = circle.ContainsPoint(point, DistanceType.Manhattan);
@@ -2184,7 +2212,9 @@ public sealed class CircleExtensionsTests
 
         var valuePoint = new ValuePoint(18, 32);
         var refPoint = new Point(18, 32);
-        var iPoint = new MockReferencePoint(18, 32);
+
+        var iPoint = MockReferencePoint.Create(18, 32)
+                                       .Object;
 
         // Act - Test all combinations with Euclidean distance
         var result1 = valueCircle.ContainsPoint(valuePoint);

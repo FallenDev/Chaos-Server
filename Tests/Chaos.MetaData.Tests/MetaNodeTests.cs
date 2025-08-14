@@ -1,7 +1,6 @@
 #region
 using System.Text;
 using Chaos.IO.Memory;
-using Chaos.MetaData;
 using FluentAssertions;
 #endregion
 
