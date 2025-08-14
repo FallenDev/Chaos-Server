@@ -16,6 +16,8 @@
   href: WorldOptions.md
 - name: Caching and Serialization
   href: CachingAndSerialization.md
+- name: JSON Schemas
+  href: JsonSchemas.md
 - name: Commands
   href: Commands.md
 - name: Items
