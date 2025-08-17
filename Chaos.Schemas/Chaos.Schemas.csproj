@@ -17,4 +17,8 @@
         <PackageReference Include="Namotion.Reflection"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="schemas\"/>
+    </ItemGroup>
+
 </Project>

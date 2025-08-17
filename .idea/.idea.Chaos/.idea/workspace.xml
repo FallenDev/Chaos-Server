@@ -59,7 +59,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/articles/JsonSchemas.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/articles/JsonSchemas.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools/SchemaGenerator/SchemaGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/SchemaGenerator/SchemaGenerator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +112,6 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/17.9.0/build/netcoreapp3.1/Microsoft.NET.Test.Sdk.Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/DecompilerCache/ILViewer/12ccd7978d5e4a12b44bb38276cb9032a800/a2/5f054127/02000017pdb21.il" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/DecompilerCache/ILViewer/12ccd7978d5e4a12b44bb38276cb9032a800/a2/5f054127/02000017pdb21Low.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/DecompilerCache/ILViewer/2f90e474742049cb97f42a2f70d2f38444e00/63/f1483b56/020000DCpdb4Low.cs" root0="SKIP_HIGHLIGHTING" />
@@ -268,6 +267,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/7ec131f6a923f957e37efbe7cb234f516d5b4b3b19a5080c6b6cb80ed78d6/MD5.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/7ee725ee96f111d37690c58fee67515d5d1706bf9892196531efff8346adf/Buffer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/7f61ffeed0b3f0e5c63ec9765f31e1c9d9a2155cafbaab0a32cc1aa98ea8f1/MemoryExtensions.Globalization.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/7f6b42b8301a8222bac968de069a88b21577dd8ea617b62fc3e7a9e2e1373b4/EnumUtils.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/7fd231fff64ea1cef625e4d9d50c83d95143bf59efa36c24f8a1f9a384a5b3/Decimal.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/81cc2099363ff84f1614136d278beb5bed411454404ec1ec16856d72b0d434e9/LoggerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/827a95c805b2e995cf6cb74af9f26bd34cc49ea7e8f425116b4c5d6f7f541d/IMemberConfigurationExpression.cs" root0="SKIP_HIGHLIGHTING" />
@@ -290,6 +290,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/9beec8c04891d57f2cdd08e2ed6933a9ead233f7868f9866ace093f6c68a8/SetupSerializationBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/9c15a8f36c15288d59c3e877bda5694ea0c54cff4e56e7bc1ae83646ff91cf4/MemoryMarshal.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/9e426ec41699a1b1889b37c8ef3a1e32e3d219181bf85f4e3e88788112db93/SafeSocketHandle.Windows.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/9ec14bf1a6ca9b18c9e62147b1cadf0959b3acbfc5c8c2b9d5c6fa12030/StringEnumConverter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/9f3e637c30e4ff62e3793652afb7beebace3f58f2c89a451ccdf7c221c4e6/Span.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/a030f35efe93d922e78fbc1ad6654c3b2c930552aefcb44c264bcbbf715049/ImmutableArray_1.Enumerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/a13a23687b565d3b3ca279dd8e2bfd1d74d49132851d9dcc489eaad1431ff/ServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -470,9 +471,10 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/AttackingScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/CompositeMonsterScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/MapperProfiles/MapInstanceMapperProfile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Chaos/obj/Debug/net8.0/Chaos.Version.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/Templates/Items/apple.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Common.Tests/ArgumentCollectionTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/DirectionExtensionsTests.cs" root0="FORCE_HIGHLIGHTING" />
@@ -499,7 +501,7 @@
     <option name="ENABLED" value="false" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -532,6 +534,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;c2afcbe5-0e59-4837-899f-c28ccc52a2d6.executor&quot;: &quot;Debug&quot;,
@@ -554,15 +557,15 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;rider.code.cleanup.on.save&quot;: &quot;true&quot;,
     &quot;rider.code.cleanup.on.save.profile&quot;: &quot;Custom Cleanup&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;settings.editor.splitter.proportion&quot;: &quot;0.21536253&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\JetBrains\\apps\\Rider\\ch-0\\233.13135.100\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.SchemaGenerator">
+  <component name="RunManager" selected=".NET Project.Chaos">
     <configuration name="SeqConfiguratorPublish" type="DotNetFolderPublish" factoryName="Publish to folder">
-      <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" runtime="Portable" target_folder="$PROJECT_DIR$/Tools/SeqConfigurator/bin/Release/net7.0/publish" target_framework="net7.0" uuid_high="-3565605415540145261" uuid_low="-5168491521234425180" />
+      <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" target_folder="$PROJECT_DIR$/Tools/SeqConfigurator/bin/Release/net7.0/publish" target_framework="net7.0" uuid_high="-3565605415540145261" uuid_low="-5168491521234425180" />
       <method v="2" />
     </configuration>
     <configuration name="Benchmarks" type="DotNetProject" factoryName=".NET Project">
@@ -2135,7 +2138,20 @@
       <workItem from="1755160737922" duration="57000" />
       <workItem from="1755160830282" duration="171000" />
       <workItem from="1755161075422" duration="3386000" />
-      <workItem from="1755187972013" duration="1093000" />
+      <workItem from="1755187972013" duration="1513000" />
+      <workItem from="1755189552027" duration="4501000" />
+      <workItem from="1755234211638" duration="304000" />
+      <workItem from="1755234576095" duration="1483000" />
+      <workItem from="1755265259513" duration="814000" />
+      <workItem from="1755340571361" duration="115000" />
+      <workItem from="1755340915295" duration="62000" />
+      <workItem from="1755341001271" duration="75000" />
+      <workItem from="1755341145967" duration="531000" />
+      <workItem from="1755341694156" duration="48000" />
+      <workItem from="1755341918366" duration="10000" />
+      <workItem from="1755341940566" duration="76000" />
+      <workItem from="1755342894243" duration="34000" />
+      <workItem from="1755426079438" duration="1749000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2480,7 +2496,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="368" />
+    <option name="localTasksCounter" value="369" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2576,7 +2592,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="sanitize createchar" />
     <MESSAGE value="diff hairstyle cap per gender" />
     <MESSAGE value="PreventBanking&#10;- added PreventBanking to items&#10;- allowed NoTrade and AccountBound to be modified on the item&#10;- LoginIds are logged as part of the client/aisling transform" />
     <MESSAGE value="fix verbalshopscript" />
@@ -2601,7 +2616,8 @@
     <MESSAGE value="schema documentation" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="fix sln" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix sln" />
+    <MESSAGE value="jsonschemas update" />
+    <option name="LAST_COMMIT_MESSAGE" value="jsonschemas update" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
