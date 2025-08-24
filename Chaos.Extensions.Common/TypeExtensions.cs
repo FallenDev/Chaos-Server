@@ -1,5 +1,7 @@
+#region
 using System.Reflection;
 using System.Runtime.CompilerServices;
+#endregion
 
 namespace Chaos.Extensions.Common;
 
@@ -94,6 +96,26 @@ public static class TypeExtensions
     }
 
     /// <summary>
+    ///     Determines whether the specified type has a custom attribute of the specified attribute type.
+    /// </summary>
+    /// <param name="type">
+    ///     The type to check for the attribute.
+    /// </param>
+    /// <param name="attributeType">
+    ///     The type of the attribute to search for.
+    /// </param>
+    /// <returns>
+    ///     <c>
+    ///         true
+    ///     </c>
+    ///     when the type has the specified attribute, otherwise
+    ///     <c>
+    ///         false
+    ///     </c>
+    /// </returns>
+    public static bool HasAttribute(this Type type, Type attributeType) => type.GetCustomAttribute(attributeType) is not null;
+
+    /// <summary>
     ///     Determines whether a type inherits from the specified base type
     /// </summary>
     public static bool HasBaseType(this Type type, Type baseType)
@@ -155,6 +177,32 @@ public static class TypeExtensions
     public static bool IsCompilerGenerated(this Type type) => type.GetCustomAttribute<CompilerGeneratedAttribute>() != null;
 
     /// <summary>
+    ///     Loads all types from the current application domain's assemblies that are annotated with the specified attribute
+    ///     type.
+    /// </summary>
+    /// <param name="type">
+    ///     The attribute type used to filter the types in the assemblies.
+    /// </param>
+    /// <returns>
+    ///     An enumerable collection of types annotated with the specified attribute type
+    /// </returns>
+    public static IEnumerable<Type> LoadAttributedTypes(this Type type)
+        => AppDomain.CurrentDomain
+                    .GetAssemblies()
+                    .Where(a => !a.IsDynamic)
+                    .SelectMany(a =>
+                    {
+                        try
+                        {
+                            return a.GetTypes();
+                        } catch
+                        {
+                            return [];
+                        }
+                    })
+                    .Where(asmType => asmType.HasAttribute(type));
+
+    /// <summary>
     ///     Returns all constructable types that inherit from the specified type.
     /// </summary>
     public static IEnumerable<Type> LoadImplementations(this Type type)
@@ -162,17 +210,16 @@ public static class TypeExtensions
         var assemblyTypes = AppDomain.CurrentDomain
                                      .GetAssemblies()
                                      .Where(a => !a.IsDynamic)
-                                     .SelectMany(
-                                         a =>
+                                     .SelectMany(a =>
+                                     {
+                                         try
                                          {
-                                             try
-                                             {
-                                                 return a.GetTypes();
-                                             } catch
-                                             {
-                                                 return [];
-                                             }
-                                         })
+                                             return a.GetTypes();
+                                         } catch
+                                         {
+                                             return [];
+                                         }
+                                     })
                                      .Where(asmType => asmType is { IsInterface: false, IsAbstract: false });
 
         if (type.IsGenericTypeDefinition)
