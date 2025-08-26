@@ -59,7 +59,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/SchemaGenerator/SchemaGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/SchemaGenerator/SchemaGenerator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -489,6 +488,7 @@
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/Controls/ItemTemplateControls/ItemTemplatePropertyEditor.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/Controls/MapTemplateControls/MapTemplatePropertyEditor.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/SchemaGenerator/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Tools/SchemaGenerator/SchemaGenerator.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -563,7 +563,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.Chaos">
+  <component name="RunManager" selected=".NET Project.SchemaGenerator">
     <configuration name="SeqConfiguratorPublish" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" target_folder="$PROJECT_DIR$/Tools/SeqConfigurator/bin/Release/net7.0/publish" target_framework="net7.0" uuid_high="-3565605415540145261" uuid_low="-5168491521234425180" />
       <method v="2" />
@@ -2151,7 +2151,10 @@
       <workItem from="1755341918366" duration="10000" />
       <workItem from="1755341940566" duration="76000" />
       <workItem from="1755342894243" duration="34000" />
-      <workItem from="1755426079438" duration="1749000" />
+      <workItem from="1755426079438" duration="2552000" />
+      <workItem from="1755557049446" duration="960000" />
+      <workItem from="1755641049680" duration="11382000" />
+      <workItem from="1755989333869" duration="5815000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2496,7 +2499,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="369" />
+    <option name="localTasksCounter" value="371" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2592,8 +2595,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="diff hairstyle cap per gender" />
-    <MESSAGE value="PreventBanking&#10;- added PreventBanking to items&#10;- allowed NoTrade and AccountBound to be modified on the item&#10;- LoginIds are logged as part of the client/aisling transform" />
     <MESSAGE value="fix verbalshopscript" />
     <MESSAGE value="armor/overcoat feature&#10;- armors can now utilize overcoat sprites&#10;- overcoats can utilize armor sprites" />
     <MESSAGE value="Ability stuff&#10;- also collection expressions stuff" />
@@ -2617,7 +2618,9 @@
     <MESSAGE value="gitignore" />
     <MESSAGE value="fix sln" />
     <MESSAGE value="jsonschemas update" />
-    <option name="LAST_COMMIT_MESSAGE" value="jsonschemas update" />
+    <MESSAGE value="fix schema generator" />
+    <MESSAGE value="misc" />
+    <option name="LAST_COMMIT_MESSAGE" value="misc" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

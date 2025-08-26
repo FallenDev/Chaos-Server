@@ -99,6 +99,15 @@ public sealed class ItemMapperProfile(ISimpleCache simpleCache, IScriptProvider 
 
         var ret = new ItemSchema
         {
+            AccountBound = obj.AccountBound == obj.Template.AccountBound ? null : obj.AccountBound,
+            OvercoatUsesArmorSprites = obj.OvercoatUsesArmorSprites == obj.Template.OvercoatUsesArmorSprites
+                ? null
+                : obj.OvercoatUsesArmorSprites,
+            ArmorUsesOvercoatSprites = obj.ArmorUsesOvercoatSprites == obj.Template.ArmorUsesOvercoatSprites
+                ? null
+                : obj.ArmorUsesOvercoatSprites,
+            NoTrade = obj.NoTrade == obj.Template.NoTrade ? null : obj.NoTrade,
+            PreventBanking = obj.PreventBanking == obj.Template.PreventBanking ? null : obj.PreventBanking,
             UniqueId = obj.UniqueId,
             ElapsedMs = obj.Elapsed.HasValue ? Convert.ToInt32(obj.Elapsed.Value.TotalMilliseconds) : null,
             ScriptKeys = extraScriptKeys.Count != 0 ? extraScriptKeys : null,
