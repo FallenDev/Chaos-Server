@@ -62,6 +62,9 @@ public sealed class ItemMapperProfile(ISimpleCache simpleCache, IScriptProvider 
         if (obj.Color.HasValue)
             item.Color = obj.Color.Value;
 
+        if (obj.PantsColor.HasValue)
+            item.PantsColor = obj.PantsColor.Value;
+
         if (obj.PanelSprite.HasValue)
             item.ItemSprite.PanelSprite = obj.PanelSprite.Value;
 
@@ -113,6 +116,7 @@ public sealed class ItemMapperProfile(ISimpleCache simpleCache, IScriptProvider 
             ScriptKeys = extraScriptKeys.Count != 0 ? extraScriptKeys : null,
             TemplateKey = obj.Template.TemplateKey,
             Color = obj.Template.Color == obj.Color ? null : obj.Color,
+            PantsColor = obj.Template.PantsColor == obj.PantsColor ? null : obj.PantsColor,
             Count = obj.Count,
             CurrentDurability = obj.CurrentDurability,
             Slot = obj.Slot,

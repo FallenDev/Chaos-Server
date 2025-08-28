@@ -47,6 +47,7 @@ public sealed class Item : PanelEntityBase, IScripted<IItemScript>, IDialogSourc
     public string? NotepadText { get; set; }
     public bool NoTrade { get; set; }
     public bool? OvercoatUsesArmorSprites { get; set; }
+    public DisplayColor PantsColor { get; set; }
 
     public string? Prefix
     {
@@ -87,6 +88,7 @@ public sealed class Item : PanelEntityBase, IScripted<IItemScript>, IDialogSourc
         Template = template;
         NameComposer = new NameComposer(template.Name, template.IsDyeable);
         Color = template.Color;
+        PantsColor = template.PantsColor;
         Count = 1;
         CurrentDurability = template.MaxDurability;
         Modifiers = template.Modifiers is null ? new Attributes() : ShallowCopy<Attributes>.Create(template.Modifiers);

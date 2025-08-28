@@ -59,6 +59,13 @@
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Schemas/Aisling/ItemSchema.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Schemas/Aisling/ItemSchema.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Schemas/Templates/ItemTemplateSchema.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Schemas/Templates/ItemTemplateSchema.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Models/Panel/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/Panel/Item.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Models/Templates/ItemTemplate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/Templates/ItemTemplate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Services/Factories/ItemFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Factories/ItemFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/AislingMapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/AislingMapperProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/ItemMapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/ItemMapperProfile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -447,6 +454,7 @@
     <setting file="file://$PROJECT_DIR$/Chaos.Networking/Entities/Server/WorldListArgs.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Schemas/Data/ItemRequirementSchema.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Schemas/Data/LootDropSchema.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos.Schemas/Templates/ItemTemplateSchema.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Scripting/ScriptProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Storage.Abstractions/IEntityRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Storage/EntityRepository.cs" root0="FORCE_HIGHLIGHTING" />
@@ -471,6 +479,7 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/AttackingScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/CompositeMonsterScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos/Services/MapperProfiles/ItemMapperProfile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/MapperProfiles/MapInstanceMapperProfile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" root0="FORCE_HIGHLIGHTING" />
@@ -488,7 +497,6 @@
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/Controls/ItemTemplateControls/ItemTemplatePropertyEditor.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/Controls/MapTemplateControls/MapTemplatePropertyEditor.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/SchemaGenerator/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/repos/Sichii/Chaos-Server/Tools/SchemaGenerator/SchemaGenerator.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -2155,6 +2163,7 @@
       <workItem from="1755557049446" duration="960000" />
       <workItem from="1755641049680" duration="11382000" />
       <workItem from="1755989333869" duration="5815000" />
+      <workItem from="1756236550353" duration="1800000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2499,7 +2508,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="371" />
+    <option name="localTasksCounter" value="372" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2595,7 +2604,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fix verbalshopscript" />
     <MESSAGE value="armor/overcoat feature&#10;- armors can now utilize overcoat sprites&#10;- overcoats can utilize armor sprites" />
     <MESSAGE value="Ability stuff&#10;- also collection expressions stuff" />
     <MESSAGE value="more ability stuff" />
@@ -2620,7 +2628,8 @@
     <MESSAGE value="jsonschemas update" />
     <MESSAGE value="fix schema generator" />
     <MESSAGE value="misc" />
-    <option name="LAST_COMMIT_MESSAGE" value="misc" />
+    <MESSAGE value="minor item fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor item fixes" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
