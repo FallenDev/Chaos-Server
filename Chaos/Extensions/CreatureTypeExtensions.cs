@@ -1,7 +1,9 @@
+#region
 using Chaos.DarkAges.Definitions;
 using Chaos.Definitions;
 using Chaos.Models.World;
 using Chaos.Models.World.Abstractions;
+#endregion
 
 namespace Chaos.Extensions;
 
@@ -25,4 +27,10 @@ public static class CreatureTypeExtensions
 
         return type.WillCollideWith(creature.Type);
     }
+
+    public static bool WillCollideWith(this Creature creature, Creature other)
+        =>
+
+            //for the most specific creature v creature interactions
+            creature.Type.WillCollideWith(other);
 }

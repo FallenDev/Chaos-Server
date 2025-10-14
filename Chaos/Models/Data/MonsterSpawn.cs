@@ -60,9 +60,9 @@ public sealed class MonsterSpawn : IDeltaUpdatable
             : MapInstance.GetEntities<Monster>()
                          .Count(obj => obj.Template.TemplateKey.EqualsI(MonsterTemplate.TemplateKey));
 
-    private bool PointValidator(Point point)
+    private bool PointValidator(Monster monster, Point point)
         => (SpawnArea is null || SpawnArea.ContainsPoint(point))
-           && MapInstance.IsWalkable(point, collisionType: MonsterTemplate.Type)
+           && MapInstance.IsWalkable(point, monster)
            && !BlackList.Contains(point, PointEqualityComparer.Instance);
 
     private void SpawnMonsters()
@@ -74,22 +74,24 @@ public sealed class MonsterSpawn : IDeltaUpdatable
 
         var spawnAmount = Math.Min(MaxAmount - currentCount, MaxPerSpawn);
         var monsters = new List<Monster>();
+        var defaultPoint = new Point();
 
         for (var i = 0; i < spawnAmount; i++)
         {
-            if (!TryGenerateSpawnPoint(out var spawnPoint))
-                continue;
-
             var monster = MonsterFactory.Create(
                 MonsterTemplate.TemplateKey,
                 MapInstance,
-                spawnPoint,
+                defaultPoint,
                 ExtraScriptKeys);
+
+            if (!TryGenerateSpawnPoint(monster, out var spawnPoint))
+                continue;
 
             FinalLootTable ??= ExtraLootTables.Count != 0
                 ? new CompositeLootTable(ExtraLootTables.Append(monster.LootTable))
                 : monster.LootTable;
 
+            monster.SetLocation(MapInstance, spawnPoint);
             monster.LootTable = FinalLootTable;
             monster.Direction = Direction ?? (Direction)Random.Shared.Next(4);
             monsters.Add(monster);
@@ -101,11 +103,11 @@ public sealed class MonsterSpawn : IDeltaUpdatable
             monster.Script.OnSpawn();
     }
 
-    private bool TryGenerateSpawnPoint([NotNullWhen(true)] out Point? spawnPoint)
+    private bool TryGenerateSpawnPoint(Monster monster, [NotNullWhen(true)] out Point? spawnPoint)
     {
         spawnPoint = null;
 
-        if (MapInstance.Template.Bounds.TryGetRandomPoint(PointValidator, out spawnPoint))
+        if (MapInstance.Template.Bounds.TryGetRandomPoint(pt => PointValidator(monster, pt), out spawnPoint))
             return true;
 
         return false;

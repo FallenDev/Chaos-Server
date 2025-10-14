@@ -436,54 +436,53 @@ public abstract class Creature : NamedEntity, IAffected, IScripted<ICreatureScri
         bool ignoreSharding = false,
         bool fromWolrdMap = false,
         Func<Task>? onTraverse = null)
-        => Task.Run<Task>(
-            async () =>
+        => Task.Run<Task>(async () =>
+        {
+            var currentMap = MapInstance;
+
+            var aisling = this as Aisling;
+
+            if (aisling is not null)
+                await aisling.Client.ReceiveSync.WaitAsync();
+
+            try
             {
-                var currentMap = MapInstance;
+                await using var sync = await ComplexSynchronizationHelper.WaitAsync(
+                    TimeSpan.FromMilliseconds(500),
+                    TimeSpan.FromMilliseconds(3),
+                    currentMap.Sync,
+                    destinationMap.Sync);
 
-                var aisling = this as Aisling;
+                if (!fromWolrdMap && !currentMap.RemoveEntity(this))
+                    return;
 
-                if (aisling is not null)
-                    await aisling.Client.ReceiveSync.WaitAsync();
+                if (currentMap.InstanceId != destinationMap.InstanceId)
+                    Trackers.LastMapInstanceId = currentMap.InstanceId;
 
-                try
-                {
-                    await using var sync = await ComplexSynchronizationHelper.WaitAsync(
-                        TimeSpan.FromMilliseconds(500),
-                        TimeSpan.FromMilliseconds(3),
-                        currentMap.Sync,
-                        destinationMap.Sync);
+                if (aisling is not null && ignoreSharding)
+                    destinationMap.AddAislingDirect(aisling, destinationPoint);
+                else
+                    destinationMap.AddEntity(this, destinationPoint);
 
-                    if (!fromWolrdMap && !currentMap.RemoveEntity(this))
-                        return;
-
-                    if (currentMap.InstanceId != destinationMap.InstanceId)
-                        Trackers.LastMapInstanceId = currentMap.InstanceId;
-
-                    if (aisling is not null && ignoreSharding)
-                        destinationMap.AddAislingDirect(aisling, destinationPoint);
-                    else
-                        destinationMap.AddEntity(this, destinationPoint);
-
-                    if (onTraverse is not null)
-                        await onTraverse();
-                } catch (Exception e)
-                {
-                    Logger.WithTopics(Topics.Entities.MapInstance, Topics.Entities.Creature, Topics.Actions.Traverse)
-                          .WithProperty(this)
-                          .WithProperty(currentMap)
-                          .WithProperty(destinationMap)
-                          .LogError(
-                              e,
-                              "Exception thrown while creature {@CreatureName} attempted to traverse from map {@FromMapInstanceId} to map {@ToMapInstanceId}",
-                              Name,
-                              currentMap.InstanceId,
-                              destinationMap.InstanceId);
-                } finally
-                {
-                    aisling?.Client.ReceiveSync.Release();
-                }
-            });
+                if (onTraverse is not null)
+                    await onTraverse();
+            } catch (Exception e)
+            {
+                Logger.WithTopics(Topics.Entities.MapInstance, Topics.Entities.Creature, Topics.Actions.Traverse)
+                      .WithProperty(this)
+                      .WithProperty(currentMap)
+                      .WithProperty(destinationMap)
+                      .LogError(
+                          e,
+                          "Exception thrown while creature {@CreatureName} attempted to traverse from map {@FromMapInstanceId} to map {@ToMapInstanceId}",
+                          Name,
+                          currentMap.InstanceId,
+                          destinationMap.InstanceId);
+            } finally
+            {
+                aisling?.Client.ReceiveSync.Release();
+            }
+        });
 
     /// <summary>
     ///     Attempts to move this entity from its current map to the destination map
@@ -717,10 +716,10 @@ public abstract class Creature : NamedEntity, IAffected, IScripted<ICreatureScri
 
         if (!MapInstance.IsWalkable(
                 endPoint,
+                this,
                 ignoreBlockingReactors,
                 ignoreWalls,
-                ignoreCollision,
-                Type))
+                ignoreCollision))
             return;
 
         SetLocation(endPoint);
@@ -797,8 +796,6 @@ public abstract class Creature : NamedEntity, IAffected, IScripted<ICreatureScri
                                            .ToList())
             reactor.OnWalkedOn(this);
     }
-
-    public virtual bool WillCollideWith(Creature other) => Type.WillCollideWith(other);
 
     public virtual bool WithinLevelRange(Creature other)
         => LevelRangeFormulae.Default.WithinLevelRange(StatSheet.Level, other.StatSheet.Level);

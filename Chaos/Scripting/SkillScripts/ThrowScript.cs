@@ -1,5 +1,4 @@
 #region
-using Chaos.DarkAges.Definitions;
 using Chaos.Extensions.Geometry;
 using Chaos.Models.Data;
 using Chaos.Models.Panel;
@@ -39,11 +38,7 @@ public class ThrowScript : SkillScriptBase
         foreach (var aisling in thrownAislings)
         {
             foreach (var point in potentialTargetPoints)
-                if (context.SourceMap.IsWalkable(
-                        point,
-                        false,
-                        false,
-                        collisionType: CreatureType.Aisling))
+                if (context.SourceMap.IsWalkable(point, aisling, false))
                 {
                     var aislingPoint = Point.From(aisling);
                     aisling.WarpTo(point);

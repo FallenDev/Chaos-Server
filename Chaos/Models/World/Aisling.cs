@@ -1257,10 +1257,10 @@ public sealed class Aisling : Creature, IScripted<IAislingScript>, IDialogSource
         //otherwise, check if the point is walkable
         else if (!MapInstance.IsWalkable(
                      endPoint,
+                     this,
                      ignoreBlockingReactors,
                      ignoreWalls,
-                     ignoreCollision,
-                     Type))
+                     ignoreCollision))
         {
             Refresh(true);
 

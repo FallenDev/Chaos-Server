@@ -935,7 +935,7 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
                       Topics.Entities.Packet,
                       Topics.Actions.Receive)
                   .WithProperty(this)
-                  .LogTrace("[Rcv] {@Packet}", packet.ToString());
+                  .LogTrace("[Rcv] {Packet}", packet.ToString());
         else if (LogReceivePacketCode)
             Logger.WithTopics(
                       Topics.Qualifiers.Raw,

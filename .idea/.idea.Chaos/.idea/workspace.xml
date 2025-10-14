@@ -58,14 +58,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/bulletin-board-template.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/dialog-template.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/item-template.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/map-template.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/merchant-template.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/monster-template.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/reactor-tile-template.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/skill-template.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/spell-template.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/TestPacket.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Schemas/Aisling/ItemSchema.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Schemas/Aisling/ItemSchema.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Schemas/Templates/ItemTemplateSchema.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Schemas/Templates/ItemTemplateSchema.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Models/Panel/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/Panel/Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Models/Templates/ItemTemplate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/Templates/ItemTemplate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/Factories/ItemFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Factories/ItemFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/AislingMapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/AislingMapperProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/ItemMapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/ItemMapperProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosLobbyClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosLobbyClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosLoginClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosLoginClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -479,10 +486,10 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/AttackingScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/CompositeMonsterScript.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos/Services/MapperProfiles/ItemMapperProfile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/MapperProfiles/MapInstanceMapperProfile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Data/Configuration/MapData/lod8030.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/Templates/Items/apple.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Common.Tests/ArgumentCollectionTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/DirectionExtensionsTests.cs" root0="FORCE_HIGHLIGHTING" />
@@ -496,6 +503,7 @@
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/Controls/ItemTemplateControls/ItemTemplatePropertyEditor.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/Controls/ItemTemplateControls/ItemTemplatePropertyEditor.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/Controls/MapTemplateControls/MapTemplatePropertyEditor.xaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/obj/Debug/net9.0-windows/Controls/DialogTemplateControls/DialogTemplatePropertyEditor.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/SchemaGenerator/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -529,7 +537,7 @@
     &quot;.NET Project.Chaos.executor&quot;: &quot;Debug&quot;,
     &quot;.NET Project.ChaosTool.executor&quot;: &quot;Debug&quot;,
     &quot;.NET Project.ItemLevelPatch.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Project.SchemaGenerator.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Project.SchemaGenerator.executor&quot;: &quot;Debug&quot;,
     &quot;.NET Project.SeqConfigurator.executor&quot;: &quot;Run&quot;,
     &quot;54c0c070-a7bc-4bed-b39d-bc8f581e068c.executor&quot;: &quot;Debug&quot;,
     &quot;5cacdb9d-324b-4d7e-9eea-0604ac093b11.executor&quot;: &quot;Debug&quot;,
@@ -571,7 +579,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.SchemaGenerator">
+  <component name="RunManager" selected=".NET Project.Chaos">
     <configuration name="SeqConfiguratorPublish" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" target_folder="$PROJECT_DIR$/Tools/SeqConfigurator/bin/Release/net7.0/publish" target_framework="net7.0" uuid_high="-3565605415540145261" uuid_low="-5168491521234425180" />
       <method v="2" />
@@ -2163,7 +2171,11 @@
       <workItem from="1755557049446" duration="960000" />
       <workItem from="1755641049680" duration="11382000" />
       <workItem from="1755989333869" duration="5815000" />
-      <workItem from="1756236550353" duration="1800000" />
+      <workItem from="1756236550353" duration="1965000" />
+      <workItem from="1756357250987" duration="84000" />
+      <workItem from="1756422564058" duration="69000" />
+      <workItem from="1756673181613" duration="5089000" />
+      <workItem from="1756861007431" duration="4500000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2508,7 +2520,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="372" />
+    <option name="localTasksCounter" value="373" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2604,7 +2616,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="armor/overcoat feature&#10;- armors can now utilize overcoat sprites&#10;- overcoats can utilize armor sprites" />
     <MESSAGE value="Ability stuff&#10;- also collection expressions stuff" />
     <MESSAGE value="more ability stuff" />
     <MESSAGE value="network monitoring" />
@@ -2629,7 +2640,8 @@
     <MESSAGE value="fix schema generator" />
     <MESSAGE value="misc" />
     <MESSAGE value="minor item fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor item fixes" />
+    <MESSAGE value="pantsColor serializes&#10;- minor pantsColor bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="pantsColor serializes&#10;- minor pantsColor bug fix" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
