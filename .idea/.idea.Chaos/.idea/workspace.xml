@@ -57,23 +57,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/bulletin-board-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/dialog-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/item-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/map-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/merchant-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/monster-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/reactor-tile-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/skill-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Schemas/schemas/spell-template.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/TestPacket.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosLobbyClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosLobbyClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosLoginClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosLoginClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/appsettings.json" afterDir="false" />
-    </list>
+    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -482,7 +466,10 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/WhoChannelCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Models/World/Abstractions/Creature.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Models/World/ReactorTile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos/Networking/ChaosLobbyClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos/Networking/ChaosLoginClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos/Networking/ChaosWorldClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/AttackingScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/CompositeMonsterScript.cs" root0="FORCE_HIGHLIGHTING" />
@@ -2176,6 +2163,7 @@
       <workItem from="1756422564058" duration="69000" />
       <workItem from="1756673181613" duration="5089000" />
       <workItem from="1756861007431" duration="4500000" />
+      <workItem from="1760423626029" duration="3279000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2520,7 +2508,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="373" />
+    <option name="localTasksCounter" value="374" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2616,7 +2604,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Ability stuff&#10;- also collection expressions stuff" />
     <MESSAGE value="more ability stuff" />
     <MESSAGE value="network monitoring" />
     <MESSAGE value="aisling tags (trackers)" />
@@ -2641,7 +2628,8 @@
     <MESSAGE value="misc" />
     <MESSAGE value="minor item fixes" />
     <MESSAGE value="pantsColor serializes&#10;- minor pantsColor bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="pantsColor serializes&#10;- minor pantsColor bug fix" />
+    <MESSAGE value="more verbose collision checks" />
+    <option name="LAST_COMMIT_MESSAGE" value="more verbose collision checks" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
