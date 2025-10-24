@@ -12,40 +12,6 @@ namespace Chaos.Extensions.Geometry.Tests;
 public sealed class RectangleExtensionsTests
 {
     [Test]
-    public void ContainsPoint_IRect_IPoint_Throws_When_Point_Null()
-    {
-        var rect = new Rectangle(
-            0,
-            0,
-            2,
-            2);
-        IPoint pt = null!;
-
-        var act = () => rect.ContainsPoint(pt);
-
-        act.Should()
-           .Throw<ArgumentNullException>();
-    }
-
-    [Test]
-    public void ContainsPoint_IRect_Point_Throws_When_Rect_Null()
-    {
-        Action act = () => ((IRectangle)null!).ContainsPoint(new Point(0, 0));
-
-        act.Should()
-           .Throw<ArgumentNullException>();
-    }
-
-    [Test]
-    public void ContainsPoint_IRect_ValuePoint_Throws_When_Rect_Null()
-    {
-        Action act = () => ((IRectangle)null!).ContainsPoint(new ValuePoint(0, 0));
-
-        act.Should()
-           .Throw<ArgumentNullException>();
-    }
-
-    [Test]
     public void ContainsPoint_IRectangle_IPoint_Outside()
     {
         IRectangle rect = new Rectangle(
@@ -73,19 +39,6 @@ public sealed class RectangleExtensionsTests
         rect.ContainsPoint(pt)
             .Should()
             .BeTrue();
-    }
-
-    [Test]
-    public void ContainsPoint_ValueRect_IPoint_Throws_When_Point_Null()
-    {
-        Action act = () => new ValueRectangle(
-            0,
-            0,
-            2,
-            2).ContainsPoint(null!);
-
-        act.Should()
-           .Throw<ArgumentNullException>();
     }
 
     //formatter:off
@@ -217,47 +170,6 @@ public sealed class RectangleExtensionsTests
     }
 
     [Test]
-    public void ContainsRectangle_IRect_IRect_Throws_On_Nulls()
-    {
-        // both nulls are checked
-        IRectangle rect = null!;
-        IRectangle other = null!;
-
-        Action act1 = () => rect.ContainsRectangle(
-            new Rectangle(
-                0,
-                0,
-                1,
-                1));
-
-        Action act2 = () => new Rectangle(
-            0,
-            0,
-            1,
-            1).ContainsRectangle(other);
-
-        act1.Should()
-            .Throw<ArgumentNullException>();
-
-        act2.Should()
-            .Throw<ArgumentNullException>();
-    }
-
-    [Test]
-    public void ContainsRectangle_IRect_ValueRect_Throws_When_Rect_Null()
-    {
-        Action act = () => ((IRectangle)null!).ContainsRectangle(
-            new ValueRectangle(
-                0,
-                0,
-                1,
-                1));
-
-        act.Should()
-           .Throw<ArgumentNullException>();
-    }
-
-    [Test]
     public void ContainsRectangle_IRectangle_IRectangle_False()
     {
         IRectangle outer = new Rectangle(
@@ -335,19 +247,6 @@ public sealed class RectangleExtensionsTests
         outer.ContainsRectangle(inner)
              .Should()
              .BeTrue();
-    }
-
-    [Test]
-    public void ContainsRectangle_ValueRect_IRect_Throws_When_Other_Null()
-    {
-        Action act = () => new ValueRectangle(
-            0,
-            0,
-            2,
-            2).ContainsRectangle(null!);
-
-        act.Should()
-           .Throw<ArgumentNullException>();
     }
 
     //formatter:off
@@ -477,32 +376,6 @@ public sealed class RectangleExtensionsTests
     }
 
     [Test]
-    public void GenerateMaze_IPoint_Overload_Throws_On_Null_Start_Or_End()
-    {
-        IRectangle rect = new Rectangle(
-            0,
-            0,
-            3,
-            3);
-
-        // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-        #pragma warning disable CA1806
-        Action act1 = () => rect.GenerateMaze(null!, new Point(0, 0))
-                                .ToList();
-
-        // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-        Action act2 = () => rect.GenerateMaze(new Point(0, 0), null!)
-                                .ToList();
-        #pragma warning restore CA1806
-
-        act1.Should()
-            .Throw<ArgumentNullException>();
-
-        act2.Should()
-            .Throw<ArgumentNullException>();
-    }
-
-    [Test]
     public void GetOutline_IRect_Returns_Expected_Perimeter_In_Order()
     {
         IRectangle rect = new Rectangle(
@@ -550,18 +423,6 @@ public sealed class RectangleExtensionsTests
                       new(1, 1), // bottom excluding (0,1)
                       new(0, 1) // left excluding (0,0)
                   });
-    }
-
-    [Test]
-    public void GetPoints_IRect_Throws_When_Rect_Null()
-    {
-        IRectangle rect = null!;
-
-        var act = () => rect.GetPoints()
-                            .ToList();
-
-        act.Should()
-           .Throw<ArgumentNullException>();
     }
 
     [Test]
@@ -618,46 +479,6 @@ public sealed class RectangleExtensionsTests
         rect.ContainsPoint(pt)
             .Should()
             .BeTrue();
-    }
-
-    [Test]
-    public void Intersects_IRect_IRect_Throws_On_Nulls()
-    {
-        IRectangle rect = null!;
-        IRectangle other = null!;
-
-        Action act1 = () => rect.Intersects(
-            new Rectangle(
-                0,
-                0,
-                1,
-                1));
-
-        Action act2 = () => new Rectangle(
-            0,
-            0,
-            1,
-            1).Intersects(other);
-
-        act1.Should()
-            .Throw<ArgumentNullException>();
-
-        act2.Should()
-            .Throw<ArgumentNullException>();
-    }
-
-    [Test]
-    public void Intersects_IRect_ValueRect_Throws_When_Rect_Null()
-    {
-        Action act = () => ((IRectangle)null!).Intersects(
-            new ValueRectangle(
-                0,
-                0,
-                1,
-                1));
-
-        act.Should()
-           .Throw<ArgumentNullException>();
     }
 
     [Test]
@@ -738,19 +559,6 @@ public sealed class RectangleExtensionsTests
         a.Intersects(b)
          .Should()
          .BeTrue();
-    }
-
-    [Test]
-    public void Intersects_ValueRect_IRect_Throws_When_Other_Null()
-    {
-        Action act = () => new ValueRectangle(
-            0,
-            0,
-            1,
-            1).Intersects(null!);
-
-        act.Should()
-           .Throw<ArgumentNullException>();
     }
 
     //formatter:off
@@ -979,11 +787,11 @@ public sealed class RectangleExtensionsTests
 
         rect.Intersects(tangent)
             .Should()
-            .BeFalse();
+            .BeTrue(); // Tangent (touching) counts as intersection
 
         rect.Intersects(tangent, DistanceType.Manhattan)
             .Should()
-            .BeFalse();
+            .BeTrue(); // Tangent (touching) counts as intersection
 
         rect.Intersects(diffCase)
             .Should()
@@ -1038,7 +846,7 @@ public sealed class RectangleExtensionsTests
         point.Should()
              .NotBeNull();
 
-        rect.ContainsPoint(point)
+        rect.ContainsPoint(point!.Value)
             .Should()
             .BeTrue();
     }
@@ -1078,7 +886,7 @@ public sealed class RectangleExtensionsTests
         point.Should()
              .NotBeNull();
 
-        rect.ContainsPoint(point)
+        rect.ContainsPoint(point!.Value)
             .Should()
             .BeTrue();
     }

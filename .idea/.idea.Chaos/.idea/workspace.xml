@@ -57,7 +57,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="" />
+    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Geometry.Tests/ILocationTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Geometry.Tests/IPointTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tools/Benchmarks/PointExtensionsBenchmarks.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Collections/Specialized/QuadTree.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Collections/Specialized/QuadTree.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/LocationExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/LocationExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PointExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PointExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PolygonExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PolygonExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Geometry.Abstractions/ILocation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Geometry.Abstractions/ILocation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Geometry.Abstractions/IPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Geometry.Abstractions/IPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Collections/MapEntityCollection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Collections/MapEntityCollection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Extensions/AoeShapeExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Extensions/AoeShapeExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Models/Data/MonsterSpawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/Data/MonsterSpawn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Models/Templates/MapTemplate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/Templates/MapTemplate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Services/Storage/ExpiringMapInstanceCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Storage/ExpiringMapInstanceCache.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Collections.Tests/QuadTreeTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Collections.Tests/QuadTreeTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/CircleExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/CircleExtensionsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/LocationExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/LocationExtensionsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PolygonExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PolygonExtensionsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/RectangleExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/RectangleExtensionsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools/Benchmarks/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/Benchmarks/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools/Benchmarks/QuadTreeBenchmarks.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/Benchmarks/QuadTreeBenchmarks.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools/ChaosTool/Controls/IntegrityCheckControls/IntegrityCheckControl.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/ChaosTool/Controls/IntegrityCheckControls/IntegrityCheckControl.xaml.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -212,6 +239,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/44dea858dc963797a8c1dba8ccc73d3551b4a4d094e13fecd21ac654751944a7/DefaultObjectPool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/4533b85327df6224d2d35855bdf78de4b88cfb41b82dae38e8e78aca249b55e/SafeHandle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/46969286be38e70626b627f8cebad4740971ad/LibraryImports.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/47e3dfd9692654de14398ffdea8c695a4b42e898912f422f577c51a215779f8/InliningDiagnoserAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/49ead4a771535a76d2fe960312dbfc284973bf3758839f97e212c2396b3fa/Array.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/4a3d2ea4bbefa4adf1718d54d4486f29bfc65414dfa2784068bf8fbb95633e1/SmallFrozenDictionary.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/4c2266d9aba4c4ba36aec62278534ed6bbd881431c65810dd69b8d57bbf/Path.Windows.cs" root0="SKIP_HIGHLIGHTING" />
@@ -425,6 +453,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Runtime.Numerics/src/System/Numerics/BigInteger.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Security.Cryptography/src/System/Security/Cryptography/HashAlgorithm.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/winforms/0b4028eb507aeb222f5bd1fc421876cc5e5e3fb8/src/System.Windows.Forms.Primitives/src/System/EnumExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos.Collections/Specialized/QuadTree.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common.Abstractions/IInterlockedObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common/Collections/FlagCollection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common/Collections/Synchronized/SynchronizedHashSet.cs" root0="FORCE_HIGHLIGHTING" />
@@ -436,7 +465,9 @@
     <setting file="file://$PROJECT_DIR$/Chaos.Extensions.Common/EnumerableExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Extensions.Common/StringExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos.Extensions.Geometry/CircleExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Extensions.Geometry/LocationExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos.Extensions.Geometry/PointExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Extensions.Geometry/PointExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Geometry.Abstractions/Definitions/Enums.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.MetaData/Abstractions/IMetaNode.cs" root0="FORCE_HIGHLIGHTING" />
@@ -466,17 +497,16 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/WhoChannelCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Models/World/Abstractions/Creature.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Models/World/ReactorTile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos/Networking/ChaosLobbyClient.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos/Networking/ChaosLoginClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos/Networking/ChaosWorldClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/AttackingScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/CompositeMonsterScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/MapperProfiles/MapInstanceMapperProfile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ThresholdAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/MapData/lod8030.map" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Data/Configuration/MapData/lod8329.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/Templates/Items/apple.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Common.Tests/ArgumentCollectionTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/DirectionExtensionsTests.cs" root0="FORCE_HIGHLIGHTING" />
@@ -566,7 +596,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.Chaos">
+  <component name="RunManager" selected=".NET Project.Benchmarks">
     <configuration name="SeqConfiguratorPublish" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" target_folder="$PROJECT_DIR$/Tools/SeqConfigurator/bin/Release/net7.0/publish" target_framework="net7.0" uuid_high="-3565605415540145261" uuid_low="-5168491521234425180" />
       <method v="2" />
@@ -2164,6 +2194,9 @@
       <workItem from="1756673181613" duration="5089000" />
       <workItem from="1756861007431" duration="4500000" />
       <workItem from="1760423626029" duration="3279000" />
+      <workItem from="1761161239433" duration="8839000" />
+      <workItem from="1761270434489" duration="999000" />
+      <workItem from="1761308570558" duration="18045000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2827,19 +2860,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="915" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/CircleExtensionsTests.cs</url>
-          <line>5522</line>
-          <properties documentPath="D:\repos\Sichii\Chaos-Server\Tests\Chaos.Extensions.Geometry.Tests\CircleExtensionsTests.cs" containingFunctionPresentation="Method 'Intersects_ValueCircle_ValueRectangle_Should_Return_Correct_Result'">
-            <startOffsets>
-              <option value="161796" />
-            </startOffsets>
-            <endOffsets>
-              <option value="161852" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="916" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Chaos.Storage.Abstractions/DirectoryBackupService.cs</url>

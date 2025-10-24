@@ -48,28 +48,6 @@ public sealed class LocationExtensionsTests
     }
 
     [Test]
-    public void EnsureSameMap_ILocation_ILocation_Throws_On_Null_First()
-    {
-        ILocation b = new Location("map", 0, 0);
-
-        var act = () => LocationExtensions.EnsureSameMap(null!, b);
-
-        act.Should()
-           .Throw<ArgumentNullException>();
-    }
-
-    [Test]
-    public void EnsureSameMap_ILocation_ILocation_Throws_On_Null_Second()
-    {
-        ILocation a = new Location("map", 0, 0);
-
-        var act = () => LocationExtensions.EnsureSameMap(a, null!);
-
-        act.Should()
-           .Throw<ArgumentNullException>();
-    }
-
-    [Test]
     public void EnsureSameMap_ILocation_ValueLocation_DoesNotThrow_When_Same_Map()
     {
         ILocation a = new Location("map", 0, 0);
@@ -80,18 +58,6 @@ public sealed class LocationExtensionsTests
 
         act.Should()
            .NotThrow();
-    }
-
-    [Test]
-    public void EnsureSameMap_ILocation_ValueLocation_Throws_On_Null_First()
-    {
-        var b = new ValueLocation("map", 0, 0);
-        (var mB, var xB, var yB) = (b.Map, b.X, b.Y);
-
-        var act = () => LocationExtensions.EnsureSameMap(null!, new ValueLocation(mB, xB, yB));
-
-        act.Should()
-           .Throw<ArgumentNullException>();
     }
 
     [Test]
@@ -154,18 +120,6 @@ public sealed class LocationExtensionsTests
 
         act.Should()
            .NotThrow();
-    }
-
-    [Test]
-    public void EnsureSameMap_ValueLocation_ILocation_Throws_On_Null_Second()
-    {
-        var a = new ValueLocation("map", 0, 0);
-        (var mA, var xA, var yA) = (a.Map, a.X, a.Y);
-
-        var act = () => LocationExtensions.EnsureSameMap(new ValueLocation(mA, xA, yA), null!);
-
-        act.Should()
-           .Throw<ArgumentNullException>();
     }
 
     [Test]
@@ -243,18 +197,6 @@ public sealed class LocationExtensionsTests
     }
 
     [Test]
-    public void OnSameMapAs_ILocation_ValueLocation_Throws_On_Null_Self()
-    {
-        var v2 = new ValueLocation("map", 0, 0);
-        (var m, var x, var y) = (v2.Map, v2.X, v2.Y);
-
-        var act = () => LocationExtensions.OnSameMapAs(null!, new ValueLocation(m, x, y));
-
-        act.Should()
-           .Throw<ArgumentNullException>();
-    }
-
-    [Test]
     public void OnSameMapAs_ShouldReturnFalse_WhenLocationsAreOnDifferentMaps()
     {
         // Arrange
@@ -302,18 +244,6 @@ public sealed class LocationExtensionsTests
         v1.OnSameMapAs(i2)
           .Should()
           .Be(expected);
-    }
-
-    [Test]
-    public void OnSameMapAs_ValueLocation_ILocation_Throws_On_Null_Other()
-    {
-        var v1 = new ValueLocation("map", 0, 0);
-        (var m, var x, var y) = (v1.Map, v1.X, v1.Y);
-
-        var act = () => new ValueLocation(m, x, y).OnSameMapAs(null!);
-
-        act.Should()
-           .Throw<ArgumentNullException>();
     }
 
     //formatter:off

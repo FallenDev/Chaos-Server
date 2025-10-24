@@ -265,7 +265,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>();
+           .Throw<NullReferenceException>();
     }
 
     //@formatter:off
@@ -312,7 +312,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>();
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -917,8 +917,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -953,8 +952,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("other");
+           .Throw<NullReferenceException>();
     }
 
     //@formatter:off
@@ -1000,8 +998,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -1188,8 +1185,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("other");
+           .Throw<NullReferenceException>();
     }
     
     //@formatter:off
@@ -1385,8 +1381,7 @@ public sealed class CircleExtensionsTests
         var act = () => circle!.CalculateIntersectionEntryPoint(new ValuePoint(0, 0), lineEnd);
 
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -1400,8 +1395,7 @@ public sealed class CircleExtensionsTests
         var act = () => circle!.CalculateIntersectionEntryPoint(lineStart, new ValuePoint(5, 5));
 
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -1416,8 +1410,7 @@ public sealed class CircleExtensionsTests
         var act = () => circle!.CalculateIntersectionEntryPoint(lineStart, lineEnd);
 
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -1432,8 +1425,7 @@ public sealed class CircleExtensionsTests
         var act = () => circle!.CalculateIntersectionEntryPoint(lineStart, lineEnd);
 
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -1447,8 +1439,7 @@ public sealed class CircleExtensionsTests
         var act = () => circle!.CalculateIntersectionEntryPoint(lineStart, new ValuePoint(5, 5));
 
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -1463,8 +1454,7 @@ public sealed class CircleExtensionsTests
         var act = () => circle!.CalculateIntersectionEntryPoint(lineStart, lineEnd);
 
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
     #endregion
 
@@ -1862,8 +1852,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("point");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -1915,8 +1904,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -1965,8 +1953,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2001,8 +1988,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2018,8 +2004,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("point");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2383,8 +2368,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("other");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2431,8 +2415,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2484,8 +2467,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2519,8 +2501,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2535,8 +2516,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("other");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2746,8 +2726,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("other");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2824,8 +2803,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2905,8 +2883,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -2921,8 +2898,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("other");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -3362,7 +3338,7 @@ public sealed class CircleExtensionsTests
 
     #region ICircle Tests
     [Test]
-    public void GetOutline_ICircle_WithNullCircle_ShouldThrowArgumentNullException()
+    public void GetOutline_ICircle_WithNullCircle_ShouldThrowNullReferenceException()
     {
         // Arrange
         ICircle? circle = null;
@@ -3372,8 +3348,7 @@ public sealed class CircleExtensionsTests
                                   .ToList();
 
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -3978,7 +3953,7 @@ public sealed class CircleExtensionsTests
 
     #region ICircle GetPoints Tests
     [Test]
-    public void GetPoints_ICircle_WithNullCircle_ShouldThrowArgumentNullException()
+    public void GetPoints_ICircle_WithNullCircle_ShouldThrowNullReferenceException()
     {
         // Arrange
         ICircle circle = null!;
@@ -3988,8 +3963,7 @@ public sealed class CircleExtensionsTests
                               .ToList();
 
         act.Should()
-           .Throw<ArgumentNullException>()
-           .WithParameterName("circle");
+           .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -5022,8 +4996,7 @@ public sealed class CircleExtensionsTests
         var action = () => new ValueCircle(new Point(0, 0), 5).Intersects(other!);
 
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("other");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -5116,8 +5089,7 @@ public sealed class CircleExtensionsTests
         var action = () => circle!.Intersects(new ValueCircle(new Point(0, 0), 5));
 
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -5224,8 +5196,7 @@ public sealed class CircleExtensionsTests
         var action = () => circle!.Intersects(otherMock.Object);
 
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -5245,8 +5216,7 @@ public sealed class CircleExtensionsTests
         var action = () => circleMock.Object.Intersects(other!);
 
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("other");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -5496,7 +5466,7 @@ public sealed class CircleExtensionsTests
     [Arguments(0, 0, 2, 1, 1, 5, 5, DistanceType.Euclidean, true)] // Circle overlaps rectangle corner
     [Arguments(0, 0, 1, 2, 0, 4, 2, DistanceType.Euclidean, false)] // Circle doesn't reach rectangle
     [Arguments(0, 0, 5, -10, -10, 10, 10, DistanceType.Manhattan, true)] // Manhattan distance
-    [Arguments(0, 0, 8, 4, 4, 6, 6, DistanceType.Manhattan, true)] // Manhattan intersects at corner
+    [Arguments(0, 0, 8, 4, 4, 6, 6, DistanceType.Manhattan, true)] // Manhattan tangent at corner (distance == radius counts as intersection)
     [Arguments(0, 0, 2, 4, 4, 6, 6, DistanceType.Manhattan, false)] // Manhattan doesn't reach
     //@formatter:on
     public void Intersects_ValueCircle_ValueRectangle_Should_Return_Correct_Result(
@@ -5520,7 +5490,7 @@ public sealed class CircleExtensionsTests
             bottom - top);
 
         // Act
-        var result = circle.Intersects(rectangle, distanceType);
+        var result = rectangle.Intersects(circle, distanceType);
 
         // Assert
         result.Should()
@@ -5540,8 +5510,8 @@ public sealed class CircleExtensionsTests
             20);
 
         // Act
-        var resultDefault = circle.Intersects(rectangle);
-        var resultExplicit = circle.Intersects(rectangle);
+        var resultDefault = rectangle.Intersects(circle);
+        var resultExplicit = rectangle.Intersects(circle);
 
         // Assert
         resultDefault.Should()
@@ -5555,13 +5525,11 @@ public sealed class CircleExtensionsTests
         var invalidDistanceType = (DistanceType)99;
 
         // Act & Assert
-        var action = () => new ValueCircle(new Point(0, 0), 5).Intersects(
-            new ValueRectangle(
-                0,
-                0,
-                10,
-                10),
-            invalidDistanceType);
+        var action = () => new ValueRectangle(
+            0,
+            0,
+            10,
+            10).Intersects(new ValueCircle(new Point(0, 0), 5), invalidDistanceType);
 
         action.Should()
               .Throw<ArgumentOutOfRangeException>()
@@ -5581,7 +5549,7 @@ public sealed class CircleExtensionsTests
             10);
 
         // Act
-        var result = circle.Intersects(rectangle);
+        var result = rectangle.Intersects(circle);
 
         // Assert
         result.Should()
@@ -5601,7 +5569,7 @@ public sealed class CircleExtensionsTests
             10);
 
         // Act
-        var result = circle.Intersects(rectangle);
+        var result = rectangle.Intersects(circle);
 
         // Assert
         result.Should()
@@ -5621,7 +5589,7 @@ public sealed class CircleExtensionsTests
             10);
 
         // Act
-        var result = circle.Intersects(rectangle);
+        var result = rectangle.Intersects(circle);
 
         // Assert
         result.Should()
@@ -5664,7 +5632,7 @@ public sealed class CircleExtensionsTests
                      .Returns(bottom);
 
         // Act
-        var result = circle.Intersects(mockRectangle.Object, distanceType);
+        var result = mockRectangle.Object.Intersects(circle, distanceType);
 
         // Assert
         result.Should()
@@ -5678,10 +5646,10 @@ public sealed class CircleExtensionsTests
         IRectangle? nullRectangle = null;
 
         // Act & Assert
-        var action = () => new ValueCircle(new Point(0, 0), 5).Intersects(nullRectangle!);
+        var action = () => nullRectangle!.Intersects(new ValueCircle(new Point(0, 0), 5));
 
         action.Should()
-              .Throw<ArgumentNullException>();
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -5704,8 +5672,8 @@ public sealed class CircleExtensionsTests
                      .Returns(10);
 
         // Act
-        var resultDefault = circle.Intersects(mockRectangle.Object);
-        var resultExplicit = circle.Intersects(mockRectangle.Object);
+        var resultDefault = mockRectangle.Object.Intersects(circle);
+        var resultExplicit = mockRectangle.Object.Intersects(circle);
 
         // Assert
         resultDefault.Should()
@@ -5732,7 +5700,7 @@ public sealed class CircleExtensionsTests
         var invalidDistanceType = (DistanceType)99;
 
         // Act & Assert
-        var action = () => new ValueCircle(new Point(0, 0), 5).Intersects(mockRectangle.Object, invalidDistanceType);
+        var action = () => mockRectangle.Object.Intersects(new ValueCircle(new Point(0, 0), 5), invalidDistanceType);
 
         action.Should()
               .Throw<ArgumentOutOfRangeException>()
@@ -5774,7 +5742,7 @@ public sealed class CircleExtensionsTests
             bottom - top);
 
         // Act
-        var result = mockCircle.Object.Intersects(rectangle, distanceType);
+        var result = rectangle.Intersects(mockCircle.Object, distanceType);
 
         // Assert
         result.Should()
@@ -5788,15 +5756,14 @@ public sealed class CircleExtensionsTests
         ICircle? nullCircle = null;
 
         // Act & Assert
-        var action = () => nullCircle!.Intersects(
-            new ValueRectangle(
-                0,
-                0,
-                10,
-                10));
+        var action = () => new ValueRectangle(
+            0,
+            0,
+            10,
+            10).Intersects(nullCircle!);
 
         action.Should()
-              .Throw<ArgumentNullException>();
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -5818,8 +5785,8 @@ public sealed class CircleExtensionsTests
             20);
 
         // Act
-        var resultDefault = mockCircle.Object.Intersects(rectangle);
-        var resultExplicit = mockCircle.Object.Intersects(rectangle);
+        var resultDefault = rectangle.Intersects(mockCircle.Object);
+        var resultExplicit = rectangle.Intersects(mockCircle.Object);
 
         // Assert
         resultDefault.Should()
@@ -5840,13 +5807,11 @@ public sealed class CircleExtensionsTests
         var invalidDistanceType = (DistanceType)99;
 
         // Act & Assert
-        var action = () => mockCircle.Object.Intersects(
-            new ValueRectangle(
-                0,
-                0,
-                10,
-                10),
-            invalidDistanceType);
+        var action = () => new ValueRectangle(
+            0,
+            0,
+            10,
+            10).Intersects(mockCircle.Object, invalidDistanceType);
 
         action.Should()
               .Throw<ArgumentOutOfRangeException>()
@@ -5897,7 +5862,7 @@ public sealed class CircleExtensionsTests
                      .Returns(bottom);
 
         // Act
-        var result = mockCircle.Object.Intersects(mockRectangle.Object, distanceType);
+        var result = mockRectangle.Object.Intersects(mockCircle.Object, distanceType);
 
         // Assert
         result.Should()
@@ -5924,10 +5889,10 @@ public sealed class CircleExtensionsTests
                      .Returns(10);
 
         // Act & Assert
-        var action = () => nullCircle!.Intersects(mockRectangle.Object);
+        var action = () => mockRectangle.Object.Intersects(nullCircle!);
 
         action.Should()
-              .Throw<ArgumentNullException>();
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -5944,10 +5909,10 @@ public sealed class CircleExtensionsTests
         IRectangle? nullRectangle = null;
 
         // Act & Assert
-        var action = () => mockCircle.Object.Intersects(nullRectangle!);
+        var action = () => nullRectangle!.Intersects(mockCircle.Object);
 
         action.Should()
-              .Throw<ArgumentNullException>();
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -5977,8 +5942,8 @@ public sealed class CircleExtensionsTests
                      .Returns(10);
 
         // Act
-        var resultDefault = mockCircle.Object.Intersects(mockRectangle.Object);
-        var resultExplicit = mockCircle.Object.Intersects(mockRectangle.Object);
+        var resultDefault = mockRectangle.Object.Intersects(mockCircle.Object);
+        var resultExplicit = mockRectangle.Object.Intersects(mockCircle.Object);
 
         // Assert
         resultDefault.Should()
@@ -6013,7 +5978,7 @@ public sealed class CircleExtensionsTests
         var invalidDistanceType = (DistanceType)99;
 
         // Act & Assert
-        var action = () => mockCircle.Object.Intersects(mockRectangle.Object, invalidDistanceType);
+        var action = () => mockRectangle.Object.Intersects(mockCircle.Object, invalidDistanceType);
 
         action.Should()
               .Throw<ArgumentOutOfRangeException>()
@@ -6035,7 +6000,7 @@ public sealed class CircleExtensionsTests
             10);
 
         // Act
-        var result = circle.Intersects(rectangle);
+        var result = rectangle.Intersects(circle);
 
         // Assert
         result.Should()
@@ -6055,7 +6020,7 @@ public sealed class CircleExtensionsTests
             4);
 
         // Act
-        var result = circle.Intersects(rectangle);
+        var result = rectangle.Intersects(circle);
 
         // Assert
         result.Should()
@@ -6075,13 +6040,13 @@ public sealed class CircleExtensionsTests
             4); // Corner at (2,2)
 
         // Act & Assert
-        circle.Intersects(rectangle)
-              .Should()
-              .BeTrue(); // Distance is 2.83, radius is 3
+        rectangle.Intersects(circle)
+                 .Should()
+                 .BeTrue(); // Distance is 2.83, radius is 3
 
-        circle.Intersects(rectangle, DistanceType.Manhattan)
-              .Should()
-              .BeFalse(); // Distance is 4, but radius is 3, so false would be expected
+        rectangle.Intersects(circle, DistanceType.Manhattan)
+                 .Should()
+                 .BeFalse(); // Distance is 4, but radius is 3, so false would be expected
     }
 
     [Test]
@@ -6097,8 +6062,8 @@ public sealed class CircleExtensionsTests
             2); // Corner at (3,3)
 
         // Act
-        var euclideanResult = circle.Intersects(rectangle);
-        var manhattanResult = circle.Intersects(rectangle, DistanceType.Manhattan);
+        var euclideanResult = rectangle.Intersects(circle);
+        var manhattanResult = rectangle.Intersects(circle, DistanceType.Manhattan);
 
         // Assert
         // Euclidean distance from (0,0) to (3,3) is ~4.24, radius is 3, so false
@@ -6123,7 +6088,7 @@ public sealed class CircleExtensionsTests
             5);
 
         // Act
-        var result = circle.Intersects(rectangle);
+        var result = rectangle.Intersects(circle);
 
         // Assert
         result.Should()
@@ -6143,7 +6108,7 @@ public sealed class CircleExtensionsTests
             200);
 
         // Act
-        var result = circle.Intersects(rectangle);
+        var result = rectangle.Intersects(circle);
 
         // Assert
         result.Should()
@@ -6190,10 +6155,10 @@ public sealed class CircleExtensionsTests
                      .Returns(bottom);
 
         // Act
-        var result1 = valueCircle.Intersects(valueRectangle);
-        var result2 = valueCircle.Intersects(mockRectangle.Object);
-        var result3 = mockCircle.Object.Intersects(valueRectangle);
-        var result4 = mockCircle.Object.Intersects(mockRectangle.Object);
+        var result1 = valueRectangle.Intersects(valueCircle);
+        var result2 = mockRectangle.Object.Intersects(valueCircle);
+        var result3 = valueRectangle.Intersects(mockCircle.Object);
+        var result4 = mockRectangle.Object.Intersects(mockCircle.Object);
 
         // Assert
         result1.Should()
@@ -6358,8 +6323,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("other");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -6417,8 +6381,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -6493,8 +6456,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -6561,8 +6523,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -6591,8 +6552,7 @@ public sealed class CircleExtensionsTests
 
         // Assert
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("other");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -6940,8 +6900,7 @@ public sealed class CircleExtensionsTests
         var action = () => new ValueCircle(new Point(0, 0), 5).ManhattanEdgeToEdgeDistanceFrom(other!);
 
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("other");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -7012,8 +6971,7 @@ public sealed class CircleExtensionsTests
         var action = () => circle!.ManhattanEdgeToEdgeDistanceFrom(new ValueCircle(new Point(5, 5), 3));
 
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -7087,8 +7045,7 @@ public sealed class CircleExtensionsTests
         var action = () => circle!.ManhattanEdgeToEdgeDistanceFrom(mockOther.Object);
 
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("circle");
+              .Throw<NullReferenceException>();
     }
 
     [Test]
@@ -7102,8 +7059,7 @@ public sealed class CircleExtensionsTests
         var action = () => mockCircle.Object.ManhattanEdgeToEdgeDistanceFrom(other!);
 
         action.Should()
-              .Throw<ArgumentNullException>()
-              .WithParameterName("other");
+              .Throw<NullReferenceException>();
     }
 
     [Test]

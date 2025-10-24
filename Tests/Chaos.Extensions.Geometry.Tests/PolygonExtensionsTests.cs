@@ -11,23 +11,6 @@ namespace Chaos.Extensions.Geometry.Tests;
 public sealed class PolygonExtensionsTests
 {
     [Test]
-    public void Contains_IPolygon_IPoint_Should_Throw_On_Null_Point()
-    {
-        IPolygon poly = new Polygon(
-            [
-                new Point(0, 0),
-                new Point(0, 1),
-                new Point(1, 1),
-                new Point(1, 0)
-            ]);
-
-        Action act = () => poly.ContainsPoint(null!);
-
-        act.Should()
-           .Throw<ArgumentNullException>();
-    }
-
-    [Test]
     public void Contains_IPolygon_IPoint_Works_With_IPoint_Argument()
     {
         IPolygon poly = new Polygon(

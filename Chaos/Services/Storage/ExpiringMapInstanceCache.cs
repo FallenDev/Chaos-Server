@@ -205,7 +205,7 @@ public sealed class ExpiringMapInstanceCache : ExpiringFileCache<MapInstance, Ma
                 merchantSpawn.SpawnPoint,
                 merchantSpawn.ExtraScriptKeys);
 
-            var pathingBoundsBlacklist = merchantSpawn.PathingBounds?.GetOutline() ?? [];
+            var pathingBoundsBlacklist = merchantSpawn.PathingBounds is { } bounds ? bounds.GetOutline() : [];
 
             merchant.BlackList = merchantSpawn.BlackList
                                               .Concat(pathingBoundsBlacklist.OfType<IPoint>())

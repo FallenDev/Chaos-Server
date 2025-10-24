@@ -123,7 +123,7 @@ public static class AoeShapeExtensions
         }
 
         if (options.Bounds != null)
-            points = points.Where(options.Bounds.ContainsPoint);
+            points = points.Where(pt => options.Bounds.ContainsPoint(pt));
 
         if (!options.ExclusionRange.HasValue)
             points = points.Prepend(sourcePoint);
