@@ -4,10 +4,9 @@ using Chaos.Models.World.Abstractions;
 
 namespace Chaos.Utilities.SequenceScripter.Builder;
 
-public sealed class TimedActionDescriptor<T> where T: Creature
+public sealed class TimedActionDescriptor<T>
 {
     public bool StartAsElapsed { get; init; }
-    public int? StartingAtHealthPercent { get; init; }
     public Action<T> Action { get; }
     public TimeSpan Time { get; }
 

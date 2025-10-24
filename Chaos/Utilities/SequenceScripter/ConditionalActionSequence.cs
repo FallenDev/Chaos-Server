@@ -5,7 +5,7 @@ using Chaos.Utilities.SequenceScripter.Builder;
 
 namespace Chaos.Utilities.SequenceScripter;
 
-public sealed class ConditionalActionSequence<T> where T: Creature
+public sealed class ConditionalActionSequence<T>
 {
     public Func<T, bool> Condition { get; }
     public TimedActionSequence<T> Sequence { get; }

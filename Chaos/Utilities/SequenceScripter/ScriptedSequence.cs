@@ -7,11 +7,11 @@ using Chaos.Utilities.SequenceScripter.Builder;
 
 namespace Chaos.Utilities.SequenceScripter;
 
-public sealed class ScriptedSequence<T> : IDeltaUpdatable where T: Creature
+public class ScriptedSequence<T> : IDeltaUpdatable
 {
-    private readonly T Entity;
-    private readonly IIntervalTimer ScriptTimer;
-    private readonly TimeSpan ScriptUpdateInterval;
+    protected readonly T Entity;
+    protected readonly IIntervalTimer ScriptTimer;
+    protected readonly TimeSpan ScriptUpdateInterval;
 
     public ScriptedSequence(
         T entity,
@@ -23,11 +23,7 @@ public sealed class ScriptedSequence<T> : IDeltaUpdatable where T: Creature
         List<TimedActionDescriptor<T>> repeatedTimedActions,
         List<TimedActionSequenceDescriptor<T>> repeatedTimedActionSequences,
         List<TimedActionDescriptor<T>> timedActions,
-        List<TimedActionSequenceDescriptor<T>> timedActionSequences,
-        List<ThresholdActionDescriptor<T>> repeatedThresholdActions,
-        List<ThresholdActionSequenceDescriptor<T>> repeatedThresholdActionSequences,
-        List<ThresholdActionDescriptor<T>> thresholdActions,
-        List<ThresholdActionSequenceDescriptor<T>> thresholdActionSequences)
+        List<TimedActionSequenceDescriptor<T>> timedActionSequences)
     {
         Entity = entity;
         ScriptUpdateInterval = scriptUpdateInterval;
@@ -56,22 +52,10 @@ public sealed class ScriptedSequence<T> : IDeltaUpdatable where T: Creature
 
         foreach (var action in timedActionSequences)
             TimedActionSequences.Add(new TimedActionSequence<T>(action));
-
-        foreach (var action in repeatedThresholdActions)
-            RepeatedThresholdActions.Add(new ThresholdAction<T>(action));
-
-        foreach (var action in repeatedThresholdActionSequences)
-            RepeatedThresholdActionSequences.Add(new ThresholdActionSequence<T>(action));
-
-        foreach (var action in thresholdActions)
-            ThresholdActions.Add(new ThresholdAction<T>(action));
-
-        foreach (var action in thresholdActionSequences)
-            ThresholdActionSequences.Add(new ThresholdActionSequence<T>(action));
     }
 
     /// <inheritdoc />
-    public void Update(TimeSpan delta)
+    public virtual void Update(TimeSpan delta)
     {
         ScriptTimer.Update(delta);
 
@@ -105,6 +89,76 @@ public sealed class ScriptedSequence<T> : IDeltaUpdatable where T: Creature
         foreach (var action in TimedActionSequences.ToList())
             if (action.Update(Entity, ScriptUpdateInterval))
                 TimedActionSequences.Remove(action);
+    }
+
+    #region Conditional
+    protected readonly List<ConditionalAction<T>> RepeatedConditionalActions = [];
+    protected readonly List<ConditionalActionSequence<T>> RepeatedConditionalActionSequences = [];
+    protected readonly List<ConditionalAction<T>> ConditionalActions = [];
+    protected readonly List<ConditionalActionSequence<T>> ConditionalActionSequences = [];
+    #endregion
+
+    #region Timed
+    protected readonly List<TimedAction<T>> RepeatedTimedActions = [];
+    protected readonly List<TimedActionSequence<T>> RepeatedTimedActionSequences = [];
+    protected readonly List<TimedAction<T>> TimedActions = [];
+    protected readonly List<TimedActionSequence<T>> TimedActionSequences = [];
+    #endregion
+}
+
+public sealed class CreatureScriptedSequence<T> : ScriptedSequence<T> where T: Creature
+{
+    private readonly List<ThresholdAction<T>> RepeatedThresholdActions = [];
+    private readonly List<ThresholdActionSequence<T>> RepeatedThresholdActionSequences = [];
+    private readonly List<ThresholdAction<T>> ThresholdActions = [];
+    private readonly List<ThresholdActionSequence<T>> ThresholdActionSequences = [];
+
+    public CreatureScriptedSequence(
+        T entity,
+        TimeSpan scriptUpdateInterval,
+        List<ConditionalActionDescriptor<T>> repeatedConditionalActions,
+        List<ConditionalActionSequenceDescriptor<T>> repeatedConditionalActionSequences,
+        List<ConditionalActionDescriptor<T>> conditionalActions,
+        List<ConditionalActionSequenceDescriptor<T>> conditionalActionSequences,
+        List<TimedActionDescriptor<T>> repeatedTimedActions,
+        List<TimedActionSequenceDescriptor<T>> repeatedTimedActionSequences,
+        List<TimedActionDescriptor<T>> timedActions,
+        List<TimedActionSequenceDescriptor<T>> timedActionSequences,
+        List<ThresholdActionDescriptor<T>> repeatedThresholdActions,
+        List<ThresholdActionSequenceDescriptor<T>> repeatedThresholdActionSequences,
+        List<ThresholdActionDescriptor<T>> thresholdActions,
+        List<ThresholdActionSequenceDescriptor<T>> thresholdActionSequences)
+        : base(
+            entity,
+            scriptUpdateInterval,
+            repeatedConditionalActions,
+            repeatedConditionalActionSequences,
+            conditionalActions,
+            conditionalActionSequences,
+            repeatedTimedActions,
+            repeatedTimedActionSequences,
+            timedActions,
+            timedActionSequences)
+    {
+        foreach (var action in repeatedThresholdActions)
+            RepeatedThresholdActions.Add(new ThresholdAction<T>(action));
+
+        foreach (var action in repeatedThresholdActionSequences)
+            RepeatedThresholdActionSequences.Add(new ThresholdActionSequence<T>(action));
+
+        foreach (var action in thresholdActions)
+            ThresholdActions.Add(new ThresholdAction<T>(action));
+
+        foreach (var action in thresholdActionSequences)
+            ThresholdActionSequences.Add(new ThresholdActionSequence<T>(action));
+    }
+
+    public override void Update(TimeSpan delta)
+    {
+        base.Update(delta);
+
+        if (!ScriptTimer.IntervalElapsed)
+            return;
 
         foreach (var action in RepeatedThresholdActions.ToList())
             action.Update(Entity, ScriptUpdateInterval);
@@ -120,25 +174,4 @@ public sealed class ScriptedSequence<T> : IDeltaUpdatable where T: Creature
             if (action.Update(Entity, ScriptUpdateInterval))
                 ThresholdActionSequences.Remove(action);
     }
-
-    #region Conditional
-    private readonly List<ConditionalAction<T>> RepeatedConditionalActions = [];
-    private readonly List<ConditionalActionSequence<T>> RepeatedConditionalActionSequences = [];
-    private readonly List<ConditionalAction<T>> ConditionalActions = [];
-    private readonly List<ConditionalActionSequence<T>> ConditionalActionSequences = [];
-    #endregion
-
-    #region Timed
-    private readonly List<TimedAction<T>> RepeatedTimedActions = [];
-    private readonly List<TimedActionSequence<T>> RepeatedTimedActionSequences = [];
-    private readonly List<TimedAction<T>> TimedActions = [];
-    private readonly List<TimedActionSequence<T>> TimedActionSequences = [];
-    #endregion
-
-    #region Threshold
-    private readonly List<ThresholdAction<T>> RepeatedThresholdActions = [];
-    private readonly List<ThresholdActionSequence<T>> RepeatedThresholdActionSequences = [];
-    private readonly List<ThresholdAction<T>> ThresholdActions = [];
-    private readonly List<ThresholdActionSequence<T>> ThresholdActionSequences = [];
-    #endregion
 }

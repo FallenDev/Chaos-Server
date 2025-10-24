@@ -58,32 +58,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Geometry.Tests/ILocationTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Geometry.Tests/IPointTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tools/Benchmarks/PointExtensionsBenchmarks.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Collections/Specialized/QuadTree.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Collections/Specialized/QuadTree.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/LocationExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/LocationExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PointExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PointExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PolygonExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PolygonExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Geometry.Abstractions/ILocation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Geometry.Abstractions/ILocation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Geometry.Abstractions/IPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Geometry.Abstractions/IPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Collections/MapEntityCollection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Collections/MapEntityCollection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Extensions/AoeShapeExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Extensions/AoeShapeExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Models/Data/MonsterSpawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/Data/MonsterSpawn.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Models/Templates/MapTemplate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/Templates/MapTemplate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/Storage/ExpiringMapInstanceCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Storage/ExpiringMapInstanceCache.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Collections.Tests/QuadTreeTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Collections.Tests/QuadTreeTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/CircleExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/CircleExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/LocationExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/LocationExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PolygonExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PolygonExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/RectangleExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/RectangleExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/Benchmarks/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/Benchmarks/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/Benchmarks/QuadTreeBenchmarks.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/Benchmarks/QuadTreeBenchmarks.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/ChaosTool/Controls/IntegrityCheckControls/IntegrityCheckControl.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/ChaosTool/Controls/IntegrityCheckControls/IntegrityCheckControl.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/Builder/ScriptBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/Builder/ScriptBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -2196,7 +2173,7 @@
       <workItem from="1760423626029" duration="3279000" />
       <workItem from="1761161239433" duration="8839000" />
       <workItem from="1761270434489" duration="999000" />
-      <workItem from="1761308570558" duration="18045000" />
+      <workItem from="1761308570558" duration="20684000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2541,7 +2518,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="374" />
+    <option name="localTasksCounter" value="375" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2637,7 +2614,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="more ability stuff" />
     <MESSAGE value="network monitoring" />
     <MESSAGE value="aisling tags (trackers)" />
     <MESSAGE value="better network stats" />
@@ -2662,7 +2638,8 @@
     <MESSAGE value="minor item fixes" />
     <MESSAGE value="pantsColor serializes&#10;- minor pantsColor bug fix" />
     <MESSAGE value="more verbose collision checks" />
-    <option name="LAST_COMMIT_MESSAGE" value="more verbose collision checks" />
+    <MESSAGE value="geometry extension stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="geometry extension stuff" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

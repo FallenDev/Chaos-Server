@@ -4,36 +4,13 @@ using Chaos.Models.World.Abstractions;
 
 namespace Chaos.Utilities.SequenceScripter.Builder;
 
-public sealed class ScriptBuilder<T> where T: Creature
+public class ScriptBuilder<T>
 {
-    private readonly TimeSpan ScriptUpdateInterval;
+    protected readonly TimeSpan ScriptUpdateInterval;
 
     public ScriptBuilder(TimeSpan scriptUpdateInterval) => ScriptUpdateInterval = scriptUpdateInterval;
 
-    public ScriptBuilder<T> AtThresholdThenAfterTimeRepeatAction(
-        TimeSpan time,
-        int threshold,
-        Action<T> action,
-        bool startAsElapsed = false)
-    {
-        RepeatedTimedActions.Add(
-            new TimedActionDescriptor<T>(time, action, startAsElapsed)
-            {
-                StartingAtHealthPercent = threshold
-            });
-
-        return this;
-    }
-
-    public ScriptBuilder<T> AtThresholdThenAfterTimeRepeatSequence(TimeSpan time, int threshold, TimedActionSequenceBuilder<T> builder)
-    {
-        var sequence = builder.Build(threshold, time);
-        RepeatedTimedActionSequences.Add(sequence);
-
-        return this;
-    }
-
-    public ScriptedSequence<T> Build(T entity)
+    public virtual ScriptedSequence<T> Build(T entity)
         => new(
             entity,
             ScriptUpdateInterval,
@@ -44,31 +21,20 @@ public sealed class ScriptBuilder<T> where T: Creature
             RepeatedTimedActions,
             RepeatedTimedActionSequences,
             TimedActions,
-            TimedActionSequences,
-            RepeatedThresholdActions,
-            RepeatedThresholdActionSequences,
-            ThresholdActions,
-            ThresholdActionSequences);
+            TimedActionSequences);
 
     #region Conditional
-    private readonly List<ConditionalActionDescriptor<T>> RepeatedConditionalActions = [];
-    private readonly List<ConditionalActionSequenceDescriptor<T>> RepeatedConditionalActionSequences = [];
-    private readonly List<ConditionalActionDescriptor<T>> ConditionalActions = [];
-    private readonly List<ConditionalActionSequenceDescriptor<T>> ConditionalActionSequences = [];
+    protected readonly List<ConditionalActionDescriptor<T>> RepeatedConditionalActions = [];
+    protected readonly List<ConditionalActionSequenceDescriptor<T>> RepeatedConditionalActionSequences = [];
+    protected readonly List<ConditionalActionDescriptor<T>> ConditionalActions = [];
+    protected readonly List<ConditionalActionSequenceDescriptor<T>> ConditionalActionSequences = [];
     #endregion
 
     #region Timed
-    private readonly List<TimedActionDescriptor<T>> RepeatedTimedActions = [];
-    private readonly List<TimedActionSequenceDescriptor<T>> RepeatedTimedActionSequences = [];
-    private readonly List<TimedActionDescriptor<T>> TimedActions = [];
-    private readonly List<TimedActionSequenceDescriptor<T>> TimedActionSequences = [];
-    #endregion
-
-    #region Threshold
-    private readonly List<ThresholdActionDescriptor<T>> ThresholdActions = [];
-    private readonly List<ThresholdActionSequenceDescriptor<T>> ThresholdActionSequences = [];
-    private readonly List<ThresholdActionDescriptor<T>> RepeatedThresholdActions = [];
-    private readonly List<ThresholdActionSequenceDescriptor<T>> RepeatedThresholdActionSequences = [];
+    protected readonly List<TimedActionDescriptor<T>> RepeatedTimedActions = [];
+    protected readonly List<TimedActionSequenceDescriptor<T>> RepeatedTimedActionSequences = [];
+    protected readonly List<TimedActionDescriptor<T>> TimedActions = [];
+    protected readonly List<TimedActionSequenceDescriptor<T>> TimedActionSequences = [];
     #endregion
 
     #region Conditional
@@ -81,7 +47,7 @@ public sealed class ScriptBuilder<T> where T: Creature
 
     public ScriptBuilder<T> WhileThenRepeatSequence(Func<T, bool> condition, TimedActionSequenceBuilder<T> builder)
     {
-        var sequence = builder.Build(TimeSpan.Zero);
+        var sequence = builder.Build();
         var descriptor = new ConditionalActionSequenceDescriptor<T>(condition, sequence);
         RepeatedConditionalActionSequences.Add(descriptor);
 
@@ -134,61 +100,112 @@ public sealed class ScriptBuilder<T> where T: Creature
         return this;
     }
     #endregion
+}
+
+public class CreatureScriptBuilder<T> : ScriptBuilder<T> where T: Creature
+{
+    protected readonly List<ThresholdActionDescriptor<T>> RepeatedThresholdActions = [];
+    protected readonly List<ThresholdActionSequenceDescriptor<T>> RepeatedThresholdActionSequences = [];
+    protected readonly List<ThresholdActionDescriptor<T>> ThresholdActions = [];
+    protected readonly List<ThresholdActionSequenceDescriptor<T>> ThresholdActionSequences = [];
+
+    public CreatureScriptBuilder(TimeSpan scriptUpdateInterval)
+        : base(scriptUpdateInterval) { }
+
+    public override ScriptedSequence<T> Build(T entity)
+        => new CreatureScriptedSequence<T>(
+            entity,
+            ScriptUpdateInterval,
+            RepeatedConditionalActions,
+            RepeatedConditionalActionSequences,
+            ConditionalActions,
+            ConditionalActionSequences,
+            RepeatedTimedActions,
+            RepeatedTimedActionSequences,
+            TimedActions,
+            TimedActionSequences,
+            RepeatedThresholdActions,
+            RepeatedThresholdActionSequences,
+            ThresholdActions,
+            ThresholdActionSequences);
 
     #region Threshold
-    public ScriptBuilder<T> AtThresholdDoActionOnce(int threshold, Action<T> action)
+    public CreatureScriptBuilder<T> AtThresholdDoActionOnce(int threshold, Action<T> action)
     {
         ThresholdActions.Add(new ThresholdActionDescriptor<T>(threshold, action));
 
         return this;
     }
 
-    public ScriptBuilder<T> AtThresholdDoSequenceOnce(int threshold, TimedActionSequenceBuilder<T> builder)
+    public CreatureScriptBuilder<T> AtThresholdDoSequenceOnce(int threshold, TimedActionSequenceBuilder<T> builder)
     {
         ThresholdActionSequences.Add(new ThresholdActionSequenceDescriptor<T>(threshold, builder.Build()));
 
         return this;
     }
 
-    public ScriptBuilder<T> AtThresholdRepeatAction(int threshold, Action<T> action)
+    public CreatureScriptBuilder<T> AtThresholdRepeatAction(int threshold, Action<T> action)
     {
         RepeatedThresholdActions.Add(new ThresholdActionDescriptor<T>(threshold, action));
 
         return this;
     }
 
-    public ScriptBuilder<T> AtThresholdRepeatSequence(int threshold, TimedActionSequenceBuilder<T> builder)
+    public CreatureScriptBuilder<T> AtThresholdRepeatSequence(int threshold, TimedActionSequenceBuilder<T> builder)
     {
         RepeatedThresholdActionSequences.Add(new ThresholdActionSequenceDescriptor<T>(threshold, builder.Build()));
 
         return this;
     }
-    #endregion
 
-    #region Complex
-    public ScriptBuilder<T> AtThresholdThenAfterTimeDoActionOnce(
-        TimeSpan time,
-        int threshold,
-        Action<T> action,
-        bool startAsElapsed = false)
+    public CreatureScriptBuilder<T> AtThresholdThenAfterTimeDoActionOnce(TimeSpan time, int threshold, Action<T> action)
     {
-        TimedActions.Add(
-            new TimedActionDescriptor<T>(time, action, startAsElapsed)
+        ThresholdActions.Add(
+            new ThresholdActionDescriptor<T>(threshold, action)
             {
-                StartingAtHealthPercent = threshold
+                DelayAfterThreshold = time
             });
 
         return this;
     }
 
-    public ScriptBuilder<T> AtThresholdThenAfterTimeDoSequenceOnce(TimeSpan time, int threshold, TimedActionSequenceBuilder<T> builder)
+    public CreatureScriptBuilder<T> AtThresholdThenAfterTimeDoSequenceOnce(
+        TimeSpan time,
+        int threshold,
+        TimedActionSequenceBuilder<T> builder)
     {
-        var sequence = builder.Build(threshold, time);
-        TimedActionSequences.Add(sequence);
+        var sequence = new ThresholdActionSequenceDescriptor<T>(threshold, builder.Build())
+        {
+            DelayAfterThreshold = time
+        };
+        ThresholdActionSequences.Add(sequence);
 
         return this;
     }
 
-    //blah blah fill them in as needed, you can combine any of the 3 things
+    public CreatureScriptBuilder<T> AtThresholdThenAfterTimeRepeatAction(TimeSpan time, int threshold, Action<T> action)
+    {
+        RepeatedThresholdActions.Add(
+            new ThresholdActionDescriptor<T>(threshold, action)
+            {
+                DelayAfterThreshold = time
+            });
+
+        return this;
+    }
+
+    public CreatureScriptBuilder<T> AtThresholdThenAfterTimeRepeatSequence(
+        TimeSpan time,
+        int threshold,
+        TimedActionSequenceBuilder<T> builder)
+    {
+        var sequence = new ThresholdActionSequenceDescriptor<T>(threshold, builder.Build())
+        {
+            DelayAfterThreshold = time
+        };
+        RepeatedThresholdActionSequences.Add(sequence);
+
+        return this;
+    }
     #endregion
 }
