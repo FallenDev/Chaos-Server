@@ -437,8 +437,8 @@ public static class PointExtensions
     public static IEnumerable<Point> GetDirectPath<T1, T2>(this T1 start, T2 end) where T1: IPoint, allows ref struct
                                                                                   where T2: IPoint, allows ref struct
     {
-        var startPoint = new Point(start.X, start.Y);
-        var endPoint = new Point(end.X, end.Y);
+        var startPoint = Point.From(start);
+        var endPoint = Point.From(end);
 
         return InnerGetDirectPath(startPoint, endPoint);
 

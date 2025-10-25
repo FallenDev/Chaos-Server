@@ -57,11 +57,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/Builder/ScriptBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/Builder/ScriptBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" afterDir="false" />
-    </list>
+    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -480,6 +476,7 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/CompositeMonsterScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/MapperProfiles/MapInstanceMapperProfile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos/Utilities/SequenceScripter/Builder/ThresholdActionDescriptor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ThresholdAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/MapData/lod8030.map" root0="FORCE_HIGHLIGHTING" />
@@ -2173,7 +2170,7 @@
       <workItem from="1760423626029" duration="3279000" />
       <workItem from="1761161239433" duration="8839000" />
       <workItem from="1761270434489" duration="999000" />
-      <workItem from="1761308570558" duration="20684000" />
+      <workItem from="1761308570558" duration="21049000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2518,7 +2515,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="375" />
+    <option name="localTasksCounter" value="377" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2614,8 +2611,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="network monitoring" />
-    <MESSAGE value="aisling tags (trackers)" />
     <MESSAGE value="better network stats" />
     <MESSAGE value="ability checks" />
     <MESSAGE value="fix board issues" />
@@ -2639,7 +2634,9 @@
     <MESSAGE value="pantsColor serializes&#10;- minor pantsColor bug fix" />
     <MESSAGE value="more verbose collision checks" />
     <MESSAGE value="geometry extension stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="geometry extension stuff" />
+    <MESSAGE value="ScriptBuilder / ScriptedSequence improvements&#10;- separate implementations for creatures and non-creatures, to allow scripting for all kinds of objects" />
+    <MESSAGE value="missed a file" />
+    <option name="LAST_COMMIT_MESSAGE" value="missed a file" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

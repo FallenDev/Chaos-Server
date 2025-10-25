@@ -38,14 +38,14 @@ public class ScriptBuilder<T>
     #endregion
 
     #region Conditional
-    public ScriptBuilder<T> WhileThenRepeatAction(Func<T, bool> condition, Action<T> action)
+    public virtual ScriptBuilder<T> WhileThenRepeatAction(Func<T, bool> condition, Action<T> action)
     {
         RepeatedConditionalActions.Add(new ConditionalActionDescriptor<T>(condition, action));
 
         return this;
     }
 
-    public ScriptBuilder<T> WhileThenRepeatSequence(Func<T, bool> condition, TimedActionSequenceBuilder<T> builder)
+    public virtual ScriptBuilder<T> WhileThenRepeatSequence(Func<T, bool> condition, TimedActionSequenceBuilder<T> builder)
     {
         var sequence = builder.Build();
         var descriptor = new ConditionalActionSequenceDescriptor<T>(condition, sequence);
@@ -54,14 +54,14 @@ public class ScriptBuilder<T>
         return this;
     }
 
-    public ScriptBuilder<T> WhenThenDoActionOnce(Func<T, bool> condition, Action<T> action)
+    public virtual ScriptBuilder<T> WhenThenDoActionOnce(Func<T, bool> condition, Action<T> action)
     {
         ConditionalActions.Add(new ConditionalActionDescriptor<T>(condition, action));
 
         return this;
     }
 
-    public ScriptBuilder<T> WhenThenDoSequenceOnce(Func<T, bool> condition, TimedActionSequenceBuilder<T> builder)
+    public virtual ScriptBuilder<T> WhenThenDoSequenceOnce(Func<T, bool> condition, TimedActionSequenceBuilder<T> builder)
     {
         ConditionalActionSequences.Add(new ConditionalActionSequenceDescriptor<T>(condition, builder.Build()));
 
@@ -70,14 +70,14 @@ public class ScriptBuilder<T>
     #endregion
 
     #region Timed
-    public ScriptBuilder<T> AfterTimeDoActionOnce(TimeSpan time, Action<T> action, bool startAsElapsed = false)
+    public virtual ScriptBuilder<T> AfterTimeDoActionOnce(TimeSpan time, Action<T> action, bool startAsElapsed = false)
     {
         TimedActions.Add(new TimedActionDescriptor<T>(time, action, startAsElapsed));
 
         return this;
     }
 
-    public ScriptBuilder<T> AfterTimeDoSequenceOnce(TimeSpan time, TimedActionSequenceBuilder<T> builder)
+    public virtual ScriptBuilder<T> AfterTimeDoSequenceOnce(TimeSpan time, TimedActionSequenceBuilder<T> builder)
     {
         var sequence = builder.Build(time);
         TimedActionSequences.Add(sequence);
@@ -85,14 +85,14 @@ public class ScriptBuilder<T>
         return this;
     }
 
-    public ScriptBuilder<T> AfterTimeRepeatAction(TimeSpan time, Action<T> action, bool startAsElapsed = false)
+    public virtual ScriptBuilder<T> AfterTimeRepeatAction(TimeSpan time, Action<T> action, bool startAsElapsed = false)
     {
         RepeatedTimedActions.Add(new TimedActionDescriptor<T>(time, action, startAsElapsed));
 
         return this;
     }
 
-    public ScriptBuilder<T> AfterTimeRepeatSequence(TimeSpan time, TimedActionSequenceBuilder<T> builder)
+    public virtual ScriptBuilder<T> AfterTimeRepeatSequence(TimeSpan time, TimedActionSequenceBuilder<T> builder)
     {
         var sequence = builder.Build(time);
         RepeatedTimedActionSequences.Add(sequence);
@@ -129,7 +129,71 @@ public class CreatureScriptBuilder<T> : ScriptBuilder<T> where T: Creature
             ThresholdActions,
             ThresholdActionSequences);
 
-    #region Threshold
+    #region Conditional
+    public override CreatureScriptBuilder<T> WhileThenRepeatAction(Func<T, bool> condition, Action<T> action)
+    {
+        RepeatedConditionalActions.Add(new ConditionalActionDescriptor<T>(condition, action));
+
+        return this;
+    }
+
+    public override CreatureScriptBuilder<T> WhileThenRepeatSequence(Func<T, bool> condition, TimedActionSequenceBuilder<T> builder)
+    {
+        var sequence = builder.Build();
+        var descriptor = new ConditionalActionSequenceDescriptor<T>(condition, sequence);
+        RepeatedConditionalActionSequences.Add(descriptor);
+
+        return this;
+    }
+
+    public override CreatureScriptBuilder<T> WhenThenDoActionOnce(Func<T, bool> condition, Action<T> action)
+    {
+        ConditionalActions.Add(new ConditionalActionDescriptor<T>(condition, action));
+
+        return this;
+    }
+
+    public override CreatureScriptBuilder<T> WhenThenDoSequenceOnce(Func<T, bool> condition, TimedActionSequenceBuilder<T> builder)
+    {
+        ConditionalActionSequences.Add(new ConditionalActionSequenceDescriptor<T>(condition, builder.Build()));
+
+        return this;
+    }
+    #endregion
+
+    #region Timed
+    public override CreatureScriptBuilder<T> AfterTimeDoActionOnce(TimeSpan time, Action<T> action, bool startAsElapsed = false)
+    {
+        TimedActions.Add(new TimedActionDescriptor<T>(time, action, startAsElapsed));
+
+        return this;
+    }
+
+    public override CreatureScriptBuilder<T> AfterTimeDoSequenceOnce(TimeSpan time, TimedActionSequenceBuilder<T> builder)
+    {
+        var sequence = builder.Build(time);
+        TimedActionSequences.Add(sequence);
+
+        return this;
+    }
+
+    public override CreatureScriptBuilder<T> AfterTimeRepeatAction(TimeSpan time, Action<T> action, bool startAsElapsed = false)
+    {
+        RepeatedTimedActions.Add(new TimedActionDescriptor<T>(time, action, startAsElapsed));
+
+        return this;
+    }
+
+    public override CreatureScriptBuilder<T> AfterTimeRepeatSequence(TimeSpan time, TimedActionSequenceBuilder<T> builder)
+    {
+        var sequence = builder.Build(time);
+        RepeatedTimedActionSequences.Add(sequence);
+
+        return this;
+    }
+    #endregion
+
+    #region Threshold Methods
     public CreatureScriptBuilder<T> AtThresholdDoActionOnce(int threshold, Action<T> action)
     {
         ThresholdActions.Add(new ThresholdActionDescriptor<T>(threshold, action));
