@@ -22,14 +22,9 @@ public interface IChaosWorldClient : IConnectedClient
     Aisling Aisling { get; set; }
 
     /// <summary>
-    ///     The first byte of the heartbeat
+    ///     Possible heart beat values
     /// </summary>
-    byte? Heartbeat1 { get; set; }
-
-    /// <summary>
-    ///     The second byte of the heartbeat
-    /// </summary>
-    byte? Heartbeat2 { get; set; }
+    List<ushort> HeartBeatValues { get; set; }
 
     /// <summary>
     ///     Client side id of the client

@@ -1266,22 +1266,10 @@ public sealed class WorldServer : ServerBase<IChaosWorldClient>, IWorldServer<IC
     public override ValueTask OnHeartBeatAsync(IChaosWorldClient client, in Packet packet)
     {
         var args = PacketSerializer.Deserialize<HeartBeatResponseArgs>(in packet);
+        var hbVal = (ushort)((args.Second << 8) | args.First);
 
-        if ((args.First != client.Heartbeat2) || (args.Second != client.Heartbeat1))
-        {
-            Logger.WithTopics(Topics.Servers.WorldServer, Topics.Entities.Client, Topics.Actions.Processing)
-                  .WithProperty(client)
-                  .LogWarning(
-                      "Client {@ClientIp} sent an invalid heartbeat. Expected: {@Expected}, Received: {@Received}",
-                      client.RemoteIp,
-                      (client.Heartbeat2, client.Heartbeat1),
-                      (args.First, args.Second));
-
-            client.Disconnect();
-        }
-
-        client.Heartbeat1 = null;
-        client.Heartbeat2 = null;
+        if (client.HeartBeatValues.Contains(hbVal))
+            client.HeartBeatValues.Clear();
 
         return default;
     }
