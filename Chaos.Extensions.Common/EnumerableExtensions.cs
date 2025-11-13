@@ -101,18 +101,6 @@ public static class EnumerableExtensions
         => enumerable.OrderByDescending(e => e, comparer);
 
     /// <summary>
-    ///     Randomizes the order of the elements in a sequence
-    /// </summary>
-    [ExcludeFromCodeCoverage(Justification = "Impossible to test randomness without creating an occasionally failing test")]
-    public static List<T> Shuffle<T>(this IEnumerable<T> objects)
-    {
-        var list = objects.ToList();
-        list.ShuffleInPlace();
-
-        return list;
-    }
-
-    /// <summary>
     ///     Randomly selects a number of elements from the given enumerable
     /// </summary>
     /// <param name="source">
@@ -131,7 +119,7 @@ public static class EnumerableExtensions
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        ArgumentOutOfRangeException.ThrowIfLessThan(count, 0, nameof(count));
+        ArgumentOutOfRangeException.ThrowIfLessThan(count, 0);
 
         var collection = source.ToList();
 
