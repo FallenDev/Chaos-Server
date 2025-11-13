@@ -59,9 +59,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Directory.Packages.props" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Packages.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/DecimalRandomizerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/DecimalRandomizerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/ChaosTool/ChaosTool.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/ChaosTool/ChaosTool.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +78,7 @@
     <option name="firstShow" value="false" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="126" />
+    <option name="cachedIndexableFilesCount" value="133" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -551,6 +549,7 @@
     &quot;54c0c070-a7bc-4bed-b39d-bc8f581e068c.executor&quot;: &quot;Debug&quot;,
     &quot;5cacdb9d-324b-4d7e-9eea-0604ac093b11.executor&quot;: &quot;Debug&quot;,
     &quot;67a2ddff-cb31-4aef-aec5-224d07a1c1d8.executor&quot;: &quot;Debug&quot;,
+    &quot;7b29db37-3d35-4db2-ab31-0781c9ebcf90.executor&quot;: &quot;Debug&quot;,
     &quot;86858d17-9592-45c9-b16f-227e8425ab45.executor&quot;: &quot;Debug&quot;,
     &quot;88ebbb62-3b48-4f36-88fd-bd8138606451.executor&quot;: &quot;Debug&quot;,
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
@@ -565,6 +564,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;c2afcbe5-0e59-4837-899f-c28ccc52a2d6.executor&quot;: &quot;Debug&quot;,
     &quot;c4624a35-7dc3-41a5-9b53-3f8f1f8317f0.executor&quot;: &quot;Debug&quot;,
+    &quot;dd64a8b7-701d-4f62-bf9a-f2201898d16d.executor&quot;: &quot;Debug&quot;,
     &quot;dde2c854-b787-4b8f-97bd-cd545d332b2e.executor&quot;: &quot;Debug&quot;,
     &quot;ded3c7a5-9a9d-445e-8825-e30b079c3145.executor&quot;: &quot;Debug&quot;,
     &quot;e1a18812-12c1-4799-bd54-eba5d50eb555.executor&quot;: &quot;Debug&quot;,
@@ -2145,6 +2145,8 @@
       <workItem from="1763043935858" duration="69000" />
       <workItem from="1763044018916" duration="4850000" />
       <workItem from="1763049508956" duration="2744000" />
+      <workItem from="1763073019006" duration="1792000" />
+      <workItem from="1763074838271" duration="438000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2489,7 +2491,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="379" />
+    <option name="localTasksCounter" value="380" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2585,7 +2587,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fix board issues" />
     <MESSAGE value="configureAwait" />
     <MESSAGE value="nlog collection transformations" />
     <MESSAGE value="interesting stuff" />
@@ -2610,7 +2611,8 @@
     <MESSAGE value="missed a file" />
     <MESSAGE value="better heartbeat" />
     <MESSAGE value=".net 10 things" />
-    <option name="LAST_COMMIT_MESSAGE" value=".net 10 things" />
+    <MESSAGE value="fix warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix warnings" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2821,6 +2823,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="919" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs</url>
+          <line>910</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Tests\Chaos.Extensions.Geometry.Tests\PointExtensionsTests.cs" containingFunctionPresentation="Method 'DirectionalRelationTo_Point_Point_ExtendedCases'">
+            <startOffsets>
+              <option value="20142" />
+            </startOffsets>
+            <endOffsets>
+              <option value="20172" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="925" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
