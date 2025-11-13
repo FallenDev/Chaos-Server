@@ -101,7 +101,7 @@ static void AddConfiguration(WebApplicationBuilder builder)
            .AddJsonFile("appsettings.logging.json", false, true)
            #if DEBUG
            .AddJsonFile("appsettings.local.json", false, true);
-    #else
+           #else
            .AddJsonFile("appsettings.prod.json", false, true);
     #endif
 
@@ -422,7 +422,7 @@ static void RegisterStructuredLoggingTransformations()
                                           OpCode = x.OpCode,
                                           Average = x.Average,
                                           Max = x.Max,
-                                          Upper95thPercentile = x.Upper95thPercentile,
+                                          Upper95thPercentile = x.Upper95ThPercentile,
                                           Median = x.Median,
                                           Count = x.Count
                                       })

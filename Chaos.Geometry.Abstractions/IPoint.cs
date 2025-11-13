@@ -19,5 +19,5 @@ public interface IPoint
     static string ToString(IPoint point) => $"({point.X}, {point.Y})";
 
     /// <inheritdoc cref="Object.ToString" />
-    string ToString() => $"({X}, {Y})";
+    string? ToString() => $"({X}, {Y})";
 }

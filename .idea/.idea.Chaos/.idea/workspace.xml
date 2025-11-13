@@ -59,18 +59,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/EnumerableExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Common/EnumerableExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.MetaData/Chaos.MetaData.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.MetaData/Chaos.MetaData.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Security/Chaos.Security.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Security/Chaos.Security.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Wpf/Chaos.Wpf.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Wpf/Chaos.Wpf.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Directory.Build.props" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Build.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Directory.Packages.props" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Packages.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.DarkAges.Tests/Chaos.DarkAges.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.DarkAges.Tests/Chaos.DarkAges.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/DecimalRandomizerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/DecimalRandomizerTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tools/ChaosTool/ChaosTool.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/ChaosTool/ChaosTool.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/ChaosTool/Model/Tables/AislingRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/ChaosTool/Model/Tables/AislingRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/ChaosTool/Model/Tables/MapInstanceRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/ChaosTool/Model/Tables/MapInstanceRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/SchemaGenerator/SchemaGenerator.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/SchemaGenerator/SchemaGenerator.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/global.json" beforeDir="false" afterPath="$PROJECT_DIR$/global.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -2153,7 +2144,7 @@
       <workItem from="1763043799457" duration="123000" />
       <workItem from="1763043935858" duration="69000" />
       <workItem from="1763044018916" duration="4850000" />
-      <workItem from="1763049508956" duration="521000" />
+      <workItem from="1763049508956" duration="2744000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2498,7 +2489,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="378" />
+    <option name="localTasksCounter" value="379" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2594,7 +2585,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="ability checks" />
     <MESSAGE value="fix board issues" />
     <MESSAGE value="configureAwait" />
     <MESSAGE value="nlog collection transformations" />
@@ -2619,7 +2609,8 @@
     <MESSAGE value="ScriptBuilder / ScriptedSequence improvements&#10;- separate implementations for creatures and non-creatures, to allow scripting for all kinds of objects" />
     <MESSAGE value="missed a file" />
     <MESSAGE value="better heartbeat" />
-    <option name="LAST_COMMIT_MESSAGE" value="better heartbeat" />
+    <MESSAGE value=".net 10 things" />
+    <option name="LAST_COMMIT_MESSAGE" value=".net 10 things" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

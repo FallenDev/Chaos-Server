@@ -1,5 +1,6 @@
 #region
 using System.Collections.Concurrent;
+using System.Reflection;
 using System.Text.Json;
 using Chaos.Common.Utilities;
 using Chaos.Storage;
@@ -13,44 +14,44 @@ namespace Chaos.Storage.Tests;
 
 public sealed class LocalStorageManagerTests : IDisposable
 {
-    private readonly IOptions<JsonSerializerOptions> jsonOptions;
-    private readonly IOptions<LocalStorageOptions> localOptions;
-    private readonly LocalStorageManager manager;
-    private readonly IMemoryCache memoryCache;
-    private readonly string tempDir;
+    private readonly IOptions<JsonSerializerOptions> JsonOptions;
+    private readonly IOptions<LocalStorageOptions> LocalOptions;
+    private readonly LocalStorageManager Manager;
+    private readonly IMemoryCache MemoryCache;
+    private readonly string TempDir;
 
     public LocalStorageManagerTests()
     {
-        tempDir = Path.Combine(
+        TempDir = Path.Combine(
             Path.GetTempPath(),
             "LocalStorageManagerTests_"
             + Guid.NewGuid()
                   .ToString("N"));
-        Directory.CreateDirectory(tempDir);
+        Directory.CreateDirectory(TempDir);
 
-        memoryCache = new MemoryCache(new MemoryCacheOptions());
+        MemoryCache = new MemoryCache(new MemoryCacheOptions());
 
-        jsonOptions = Options.Create(
+        JsonOptions = Options.Create(
             new JsonSerializerOptions
             {
                 WriteIndented = false
             });
 
-        localOptions = Options.Create(
+        LocalOptions = Options.Create(
             new LocalStorageOptions
             {
-                Directory = tempDir
+                Directory = TempDir
             });
 
-        manager = new LocalStorageManager(memoryCache, jsonOptions, localOptions);
+        Manager = new LocalStorageManager(MemoryCache, JsonOptions, LocalOptions);
     }
 
     public void Dispose()
     {
-        (memoryCache as IDisposable)?.Dispose();
+        MemoryCache.Dispose();
 
-        if (Directory.Exists(tempDir))
-            Directory.Delete(tempDir, true);
+        if (Directory.Exists(TempDir))
+            Directory.Delete(TempDir, true);
     }
 
     [Test]
@@ -89,8 +90,8 @@ public sealed class LocalStorageManagerTests : IDisposable
         // Act
         var method = typeof(LocalStorageManager).GetMethod(
             "GetOrAddEntry",
-            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.MakeGenericMethod(typeof(Sample));
-        var dict = (ConcurrentDictionary<string, Sample>)method.Invoke(manager, [])!;
+            BindingFlags.Instance | BindingFlags.NonPublic)!.MakeGenericMethod(typeof(Sample));
+        var dict = (ConcurrentDictionary<string, Sample>)method.Invoke(Manager, [])!;
 
         // Assert
         dict.Should()
@@ -106,8 +107,8 @@ public sealed class LocalStorageManagerTests : IDisposable
         // Act
         var method = typeof(LocalStorageManager).GetMethod(
             "GetOrAddEntryAsync",
-            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.MakeGenericMethod(typeof(Sample));
-        var dict = (ConcurrentDictionary<string, Sample>)await (Task<ConcurrentDictionary<string, Sample>>)method.Invoke(manager, [])!;
+            BindingFlags.Instance | BindingFlags.NonPublic)!.MakeGenericMethod(typeof(Sample));
+        var dict = await (Task<ConcurrentDictionary<string, Sample>>)method.Invoke(Manager, [])!;
 
         // Assert
         dict.Should()
@@ -121,7 +122,7 @@ public sealed class LocalStorageManagerTests : IDisposable
     public void Load_Should_Create_StorageObject_And_Read_Existing_File()
     {
         // Arrange
-        var filePath = Path.Combine(tempDir, "Sample.json");
+        var filePath = Path.Combine(TempDir, "Sample.json");
 
         var initial = new Dictionary<string, Sample>
         {
@@ -131,10 +132,10 @@ public sealed class LocalStorageManagerTests : IDisposable
                 Name = "one"
             }
         };
-        JsonSerializerEx.Serialize(filePath, initial, jsonOptions.Value);
+        JsonSerializerEx.Serialize(filePath, initial, JsonOptions.Value);
 
         // Act
-        var storage = manager.Load<Sample>();
+        var storage = Manager.Load<Sample>();
 
         // Assert
         storage.Should()
@@ -155,7 +156,7 @@ public sealed class LocalStorageManagerTests : IDisposable
     public async Task LoadAsync_Should_Create_StorageObject_And_Read_Existing_File()
     {
         // Arrange
-        var filePath = Path.Combine(tempDir, "Sample.json");
+        var filePath = Path.Combine(TempDir, "Sample.json");
 
         var initial = new Dictionary<string, Sample>
         {
@@ -165,10 +166,10 @@ public sealed class LocalStorageManagerTests : IDisposable
                 Name = "two"
             }
         };
-        await JsonSerializerEx.SerializeAsync(filePath, initial, jsonOptions.Value);
+        await JsonSerializerEx.SerializeAsync(filePath, initial, JsonOptions.Value);
 
         // Act
-        var storage = await manager.LoadAsync<Sample>();
+        var storage = await Manager.LoadAsync<Sample>();
 
         // Assert
         storage.Should()
@@ -189,7 +190,7 @@ public sealed class LocalStorageManagerTests : IDisposable
     public void LoadOrCreateEntry_Should_Load_From_File_When_Exists_Otherwise_Empty()
     {
         // Arrange
-        var filePath = Path.Combine(tempDir, "Sample.json");
+        var filePath = Path.Combine(TempDir, "Sample.json");
 
         var initial = new Dictionary<string, Sample>
         {
@@ -198,13 +199,13 @@ public sealed class LocalStorageManagerTests : IDisposable
                 Id = 5
             }
         };
-        JsonSerializerEx.Serialize(filePath, initial, jsonOptions.Value);
+        JsonSerializerEx.Serialize(filePath, initial, JsonOptions.Value);
 
         // Act
         var method = typeof(LocalStorageManager).GetMethod(
             "LoadOrCreateEntry",
-            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.MakeGenericMethod(typeof(Sample));
-        var dict = (ConcurrentDictionary<string, Sample>)method.Invoke(manager, [])!;
+            BindingFlags.Instance | BindingFlags.NonPublic)!.MakeGenericMethod(typeof(Sample));
+        var dict = (ConcurrentDictionary<string, Sample>)method.Invoke(Manager, [])!;
 
         // Assert
         dict.Should()
@@ -215,7 +216,7 @@ public sealed class LocalStorageManagerTests : IDisposable
     public async Task LoadOrCreateEntryAsync_Should_Load_From_File_When_Exists_Otherwise_Empty()
     {
         // Arrange
-        var filePath = Path.Combine(tempDir, "Sample.json");
+        var filePath = Path.Combine(TempDir, "Sample.json");
 
         var initial = new Dictionary<string, Sample>
         {
@@ -224,13 +225,13 @@ public sealed class LocalStorageManagerTests : IDisposable
                 Id = 6
             }
         };
-        await JsonSerializerEx.SerializeAsync(filePath, initial, jsonOptions.Value);
+        await JsonSerializerEx.SerializeAsync(filePath, initial, JsonOptions.Value);
 
         // Act
         var method = typeof(LocalStorageManager).GetMethod(
             "LoadOrCreateEntryAsync",
-            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.MakeGenericMethod(typeof(Sample));
-        var dict = (ConcurrentDictionary<string, Sample>)await (Task<ConcurrentDictionary<string, Sample>>)method.Invoke(manager, [])!;
+            BindingFlags.Instance | BindingFlags.NonPublic)!.MakeGenericMethod(typeof(Sample));
+        var dict = await (Task<ConcurrentDictionary<string, Sample>>)method.Invoke(Manager, [])!;
 
         // Assert
         dict.Should()
@@ -241,7 +242,7 @@ public sealed class LocalStorageManagerTests : IDisposable
     public void Save_Should_Persist_To_File()
     {
         // Arrange
-        var storage = manager.Load<Sample>();
+        var storage = Manager.Load<Sample>();
         storage.GetInstance("default");
 
         storage.Value
@@ -253,15 +254,15 @@ public sealed class LocalStorageManagerTests : IDisposable
         storage.Value.Name = "three";
 
         // Act
-        manager.Save(storage);
+        Manager.Save(storage);
 
         // Assert
-        var path = Path.Combine(tempDir, "Sample.json");
+        var path = Path.Combine(TempDir, "Sample.json");
 
         File.Exists(path)
             .Should()
             .BeTrue();
-        var data = JsonSerializerEx.Deserialize<Dictionary<string, Sample>>(path, jsonOptions.Value)!;
+        var data = JsonSerializerEx.Deserialize<Dictionary<string, Sample>>(path, JsonOptions.Value)!;
 
         data["default"]
             .Id
@@ -278,20 +279,20 @@ public sealed class LocalStorageManagerTests : IDisposable
     public async Task SaveAsync_Should_Persist_To_File()
     {
         // Arrange
-        var storage = await manager.LoadAsync<Sample>();
+        var storage = await Manager.LoadAsync<Sample>();
         storage.Value.Id = 4;
         storage.Value.Name = "four";
 
         // Act
-        await manager.SaveAsync(storage);
+        await Manager.SaveAsync(storage);
 
         // Assert
-        var path = Path.Combine(tempDir, "Sample.json");
+        var path = Path.Combine(TempDir, "Sample.json");
 
         File.Exists(path)
             .Should()
             .BeTrue();
-        var data = await JsonSerializerEx.DeserializeAsync<Dictionary<string, Sample>>(path, jsonOptions.Value);
+        var data = await JsonSerializerEx.DeserializeAsync<Dictionary<string, Sample>>(path, JsonOptions.Value);
 
         data!["default"]
             .Id

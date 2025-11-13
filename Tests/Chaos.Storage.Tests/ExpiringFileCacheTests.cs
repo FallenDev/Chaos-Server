@@ -1,4 +1,5 @@
 #region
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Text.Json;
 using Chaos.Storage;
@@ -16,27 +17,27 @@ namespace Chaos.Storage.Tests;
 
 public sealed class ExpiringFileCacheTests : IDisposable
 {
-    private readonly ILogger<ExpiringFileCache<Dummy, DummySchema, ExpiringFileCacheOptions>> logger;
-    private readonly IMemoryCache memoryCache;
-    private readonly IOptions<ExpiringFileCacheOptions> options;
-    private readonly Mock<IEntityRepository> repo;
-    private readonly string tempDir;
+    private readonly ILogger<ExpiringFileCache<Dummy, DummySchema, ExpiringFileCacheOptions>> Logger;
+    private readonly IMemoryCache MemoryCache;
+    private readonly IOptions<ExpiringFileCacheOptions> Options;
+    private readonly Mock<IEntityRepository> Repo;
+    private readonly string TempDir;
 
     public ExpiringFileCacheTests()
     {
-        tempDir = Path.Combine(
+        TempDir = Path.Combine(
             Path.GetTempPath(),
             "ExpiringFileCacheTests_"
             + Guid.NewGuid()
                   .ToString("N"));
-        Directory.CreateDirectory(tempDir);
-        memoryCache = new MemoryCache(new MemoryCacheOptions());
-        repo = new Mock<IEntityRepository>();
+        Directory.CreateDirectory(TempDir);
+        MemoryCache = new MemoryCache(new MemoryCacheOptions());
+        Repo = new Mock<IEntityRepository>();
 
-        options = Options.Create(
+        Options = Microsoft.Extensions.Options.Options.Create(
             new ExpiringFileCacheOptions
             {
-                Directory = tempDir,
+                Directory = TempDir,
                 Expires = true,
                 ExpirationMins = 10,
                 FilePattern = "*.json",
@@ -44,7 +45,7 @@ public sealed class ExpiringFileCacheTests : IDisposable
                 SearchType = SearchType.Files
             });
 
-        logger = LoggerFactory.Create(b => { })
+        Logger = LoggerFactory.Create(b => { })
                               .CreateLogger<ExpiringFileCache<Dummy, DummySchema, ExpiringFileCacheOptions>>();
     }
 
@@ -52,10 +53,10 @@ public sealed class ExpiringFileCacheTests : IDisposable
 
     public void Dispose()
     {
-        (memoryCache as IDisposable)?.Dispose();
+        MemoryCache.Dispose();
 
-        if (Directory.Exists(tempDir))
-            Directory.Delete(tempDir, true);
+        if (Directory.Exists(TempDir))
+            Directory.Delete(TempDir, true);
     }
 
     // moved to Chaos.Testing.Infrastructure/Mocks/MockCache.cs
@@ -64,12 +65,12 @@ public sealed class ExpiringFileCacheTests : IDisposable
     public void ConstructKey_DeconstructKey_Should_RoundTrip()
     {
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
         var key = cache.ConstructKeyPublic("Test");
 
         key.Should()
@@ -93,7 +94,7 @@ public sealed class ExpiringFileCacheTests : IDisposable
                  .Should()
                  .BeFalse();
 
-        var opts = Options.Create(
+        var opts = Microsoft.Extensions.Options.Options.Create(
             new ExpiringFileCacheOptions
             {
                 Directory = dir,
@@ -103,12 +104,12 @@ public sealed class ExpiringFileCacheTests : IDisposable
                 SearchType = SearchType.Files
             });
 
-        _ = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-            Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-            memoryCache,
-            repo.Object,
+        _ = new MockCache<Dummy,
+            DummySchema, ExpiringFileCacheOptions>(
+            MemoryCache,
+            Repo.Object,
             opts,
-            logger);
+            Logger);
 
         Directory.Exists(dir)
                  .Should()
@@ -119,10 +120,10 @@ public sealed class ExpiringFileCacheTests : IDisposable
     [Test]
     public void Enumerator_Should_Enumerate_Current_Items()
     {
-        var filename = Path.Combine(tempDir, "enum.json");
+        var filename = Path.Combine(TempDir, "enum.json");
         File.WriteAllText(filename, "{}");
 
-        repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
+        Repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
             .Returns(
                 new Dummy
                 {
@@ -130,12 +131,12 @@ public sealed class ExpiringFileCacheTests : IDisposable
                 });
 
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
 
         _ = cache.Get("enum");
 
@@ -149,7 +150,7 @@ public sealed class ExpiringFileCacheTests : IDisposable
             .NotBeEmpty();
 
         // Non-generic enumerator
-        var enumerator = ((System.Collections.IEnumerable)cache).GetEnumerator();
+        var enumerator = ((IEnumerable)cache).GetEnumerator();
 
         enumerator.MoveNext()
                   .Should()
@@ -159,14 +160,14 @@ public sealed class ExpiringFileCacheTests : IDisposable
     [Test]
     public void ForceLoad_Should_Preload_All_Keys()
     {
-        var filenameA = Path.Combine(tempDir, "a.json");
-        var filenameB = Path.Combine(tempDir, "b.json");
+        var filenameA = Path.Combine(TempDir, "a.json");
+        var filenameB = Path.Combine(TempDir, "b.json");
         File.WriteAllText(filenameA, "{}");
         File.WriteAllText(filenameB, "{}");
 
         var loadCount = 0;
 
-        repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
+        Repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
             .Returns(() =>
             {
                 loadCount++;
@@ -178,12 +179,12 @@ public sealed class ExpiringFileCacheTests : IDisposable
             });
 
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
 
         cache.ForceLoadPublic();
 
@@ -193,29 +194,29 @@ public sealed class ExpiringFileCacheTests : IDisposable
 
         loadCount.Should()
                  .BeGreaterThanOrEqualTo(2);
-        repo.Verify(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()), Times.AtLeast(2));
+        Repo.Verify(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()), Times.AtLeast(2));
     }
 
     [Test]
     public void Get_Should_Load_From_Repository_And_Cache()
     {
         // Arrange: prepare file name used for lookup and mock repository
-        var filename = Path.Combine(tempDir, "abc.json");
+        var filename = Path.Combine(TempDir, "abc.json");
         File.WriteAllText(filename, "{}");
 
-        repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
+        Repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
             .Returns((string p, Action<DummySchema>? cb) => new Dummy
             {
                 Id = 42
             });
 
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
 
         // ensure Paths loaded include our file (constructor already loads). No-op here.
 
@@ -231,19 +232,19 @@ public sealed class ExpiringFileCacheTests : IDisposable
         value2.Id
               .Should()
               .Be(42);
-        repo.Verify(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()), Times.Once);
+        Repo.Verify(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()), Times.Once);
     }
 
     [Test]
     public void Get_Should_Throw_When_Key_Not_Found_By_SearchType_Files()
     {
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
         Action act = () => cache.Get("missing");
 
         act.Should()
@@ -253,11 +254,11 @@ public sealed class ExpiringFileCacheTests : IDisposable
     [Test]
     public void ReloadAsync_Should_Handle_Errors_And_Continue()
     {
-        var filename = Path.Combine(tempDir, "err.json");
+        var filename = Path.Combine(TempDir, "err.json");
         File.WriteAllText(filename, "{}");
 
         // Seed with a successful load first
-        repo.SetupSequence(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
+        Repo.SetupSequence(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
             .Returns(
                 new Dummy
                 {
@@ -266,12 +267,12 @@ public sealed class ExpiringFileCacheTests : IDisposable
             .Throws(new InvalidOperationException("boom"));
 
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
         _ = cache.Get("err");
 
         // Now repository throws during reload; method should swallow and continue
@@ -286,11 +287,11 @@ public sealed class ExpiringFileCacheTests : IDisposable
     [Test]
     public void ReloadAsync_SpecificKey_Should_Handle_Errors()
     {
-        var filename = Path.Combine(tempDir, "err2.json");
+        var filename = Path.Combine(TempDir, "err2.json");
         File.WriteAllText(filename, "{}");
 
         // Seed with a successful load first
-        repo.SetupSequence(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
+        Repo.SetupSequence(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
             .Returns(
                 new Dummy
                 {
@@ -299,12 +300,12 @@ public sealed class ExpiringFileCacheTests : IDisposable
             .Throws(new InvalidOperationException("boom"));
 
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
         _ = cache.Get("err2");
 
         Action act = () => cache.ReloadAsync("err2")
@@ -319,12 +320,12 @@ public sealed class ExpiringFileCacheTests : IDisposable
     public void ReloadAsync_SpecificKey_Should_Warn_When_Missing()
     {
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
 
         // No entry yet, should not throw
         cache.ReloadAsync("notcached")
@@ -336,27 +337,27 @@ public sealed class ExpiringFileCacheTests : IDisposable
     public void RemoveValueCallback_Should_Remove_From_LocalLookup()
     {
         // Seed cache by creating file before constructing cache so Paths includes it
-        var filename = Path.Combine(tempDir, "z.json");
+        var filename = Path.Combine(TempDir, "z.json");
         File.WriteAllText(filename, "{}");
 
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
 
         // Seed cache by calling Get
 
         File.WriteAllText(filename, "{}");
 
-        repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
+        Repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
             .Returns(new Dummy());
         _ = cache.Get("z");
 
         // Evict entry
-        memoryCache.Remove("dummy___z");
+        MemoryCache.Remove("dummy___z");
 
         // If LocalLookup cleanup failed, a subsequent enumerate would include stale; no direct accessor, but
         // calling ReloadAsync to ensure no exceptions as a smoke check
@@ -368,7 +369,7 @@ public sealed class ExpiringFileCacheTests : IDisposable
     [Test]
     public void RemoveValueCallback_Should_Respect_Replaced_Reason()
     {
-        var filename = Path.Combine(tempDir, "cb.json");
+        var filename = Path.Combine(TempDir, "cb.json");
         File.WriteAllText(filename, "{}");
 
         var value = new Dummy
@@ -376,16 +377,16 @@ public sealed class ExpiringFileCacheTests : IDisposable
             Id = 99
         };
 
-        repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
+        Repo.Setup(r => r.LoadAndMap<Dummy, DummySchema>(It.IsAny<string>(), It.IsAny<Action<DummySchema>>()))
             .Returns(value);
 
         var cache
-            = new Chaos.Testing.Infrastructure.Mocks.MockCache<Chaos.Storage.Tests.ExpiringFileCacheTests.Dummy,
-                Chaos.Storage.Tests.ExpiringFileCacheTests.DummySchema, ExpiringFileCacheOptions>(
-                memoryCache,
-                repo.Object,
-                options,
-                logger);
+            = new MockCache<Dummy,
+                DummySchema, ExpiringFileCacheOptions>(
+                MemoryCache,
+                Repo.Object,
+                Options,
+                Logger);
 
         _ = cache.Get("cb");
 

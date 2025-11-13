@@ -58,9 +58,9 @@ public sealed class RectangleTests
          .Should()
          .BeFalse();
 
-        a.Equals(a)
-         .Should()
-         .BeTrue();
+        a!.Equals(a)
+          .Should()
+          .BeTrue();
 
         a.Equals(same)
          .Should()
@@ -96,9 +96,9 @@ public sealed class RectangleTests
          .Should()
          .BeFalse();
 
-        a.Equals((object)a)
-         .Should()
-         .BeTrue();
+        a!.Equals((object)a)
+          .Should()
+          .BeTrue();
 
         a.Equals(sameTypeSame)
          .Should()

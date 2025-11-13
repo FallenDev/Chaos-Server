@@ -1,6 +1,10 @@
 #region
 using Chaos.Common.Utilities;
 using FluentAssertions;
+
+// ReSharper disable ClassCanBeSealed.Global
+// ReSharper disable UnusedMember.Local
+#pragma warning disable CS0414 // Field is assigned but its value is never used
 #endregion
 
 namespace Chaos.Common.Tests;
@@ -519,9 +523,9 @@ public sealed class ShallowCopyTests
     }
 
     // Test classes for comprehensive coverage
-    internal sealed class ClassWithFields
+    internal class ClassWithFields
     {
-        public const int ConstField = 100;
+        public const int CONST_FIELD = 100;
         public static int StaticField = 50;
         public readonly int ReadOnlyField = 42;
         internal int InternalField;
@@ -539,7 +543,7 @@ public sealed class ShallowCopyTests
         public int RegularProperty { get; set; } = 20;
     }
 
-    internal sealed class ClassWithMixedProperties
+    internal class ClassWithMixedProperties
     {
         private int _privateProperty = 30;
         private int _writeOnlyValue;
@@ -553,7 +557,7 @@ public sealed class ShallowCopyTests
             set => _writeOnlyValue = value;
         }
 
-        public int ReadOnlyProperty { get; } = 20;
+        public int ReadOnlyProperty => 20;
         public int GetWriteOnlyValue() => _writeOnlyValue;
     }
 

@@ -16,7 +16,6 @@
         <PackageReference Include="Namotion.Reflection"/>
         <PackageReference Include="RoslynPad.Editor.Windows"/>
         <PackageReference Include="ShowMeTheXAML.MSBuild"/>
-        <PackageReference Include="System.Text.Json"/>
     </ItemGroup>
 
     <ItemGroup>

@@ -161,9 +161,11 @@ public class GameTimeTests
         (earlierTime <= laterTime).Should()
                                   .BeTrue();
 
+        // ReSharper disable once EqualExpressionComparison
         (earlierTime >= earlierTime).Should()
                                     .BeTrue();
 
+        // ReSharper disable once EqualExpressionComparison
         (laterTime <= laterTime).Should()
                                 .BeTrue();
     }

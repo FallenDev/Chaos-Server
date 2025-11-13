@@ -41,7 +41,7 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
     public Aisling Aisling { get; set; } = null!;
 
     /// <inheritdoc />
-    public List<ushort> HeartBeatValues { get; set; }
+    public List<ushort> HeartBeatValues { get; set; } = [];
 
     /// <inheritdoc />
     public uint LoginId1 { get; set; }

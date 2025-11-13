@@ -8,14 +8,40 @@ using TDigestNet;
 
 namespace Chaos.Networking;
 
+/// <summary>
+///     Represents statistical metrics for network packet execution times grouped by operation code.
+/// </summary>
 public sealed class NetworkStatistic
 {
+    /// <summary>
+    ///     The average execution time in milliseconds for packets with this operation code.
+    /// </summary>
     public double Average { get; init; }
+
+    /// <summary>
+    ///     The total number of packets recorded for this operation code.
+    /// </summary>
     public long Count { get; init; }
+
+    /// <summary>
+    ///     The maximum execution time in milliseconds recorded for packets with this operation code.
+    /// </summary>
     public double Max { get; init; }
+
+    /// <summary>
+    ///     The median execution time in milliseconds for packets with this operation code.
+    /// </summary>
     public double Median { get; init; }
+
+    /// <summary>
+    ///     The network operation code identifying the type of packet being measured.
+    /// </summary>
     public byte OpCode { get; init; }
-    public double Upper95thPercentile { get; init; }
+
+    /// <summary>
+    ///     The 95th percentile execution time in milliseconds for packets with this operation code.
+    /// </summary>
+    public double Upper95ThPercentile { get; init; }
 }
 
 /// <summary>
@@ -92,7 +118,7 @@ public sealed class NetworkMonitor
                 OpCode = opcode,
                 Average = average,
                 Max = max,
-                Upper95thPercentile = upperPct,
+                Upper95ThPercentile = upperPct,
                 Median = median,
                 Count = count
             };
