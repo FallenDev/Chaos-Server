@@ -59,7 +59,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.IO/Memory/SpanWriter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.IO/Memory/SpanWriter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Messaging/ChannelService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Messaging/ChannelService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.MetaData/Abstractions/MetaDataBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.MetaData/Abstractions/MetaDataBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.MetaData/ClassMetaData/AbilityMetaData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.MetaData/ClassMetaData/AbilityMetaData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Entities/ServerTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Entities/ServerTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Packets/PacketSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Packets/PacketSerializer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +83,7 @@
     <option name="firstShow" value="false" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="133" />
+    <option name="cachedIndexableFilesCount" value="2" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -456,6 +461,7 @@
     <setting file="file://$PROJECT_DIR$/Chaos.MetaData/MetaNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.NLog.Logging/Definitions/Topics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Networking/Entities/Server/WorldListArgs.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos.Networking/Extensions/SocketExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Schemas/Data/ItemRequirementSchema.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Schemas/Data/LootDropSchema.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Schemas/Templates/ItemTemplateSchema.cs" root0="FORCE_HIGHLIGHTING" />
@@ -498,6 +504,7 @@
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Common.Tests/ArgumentCollectionTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/DirectionExtensionsTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/LocationExtensionsTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.IO.Tests/DirectorySynchronizerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Messaging.Tests/CommandInterceptorTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/App.xaml" root0="FORCE_HIGHLIGHTING" />
@@ -510,6 +517,7 @@
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/Model/Tables/AislingRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/Model/Tables/MapInstanceRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/ViewModel/DocumentViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/obj/Debug/net10.0-windows/MainWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/SchemaGenerator/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/SchemaGenerator/SchemaGenerator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -2146,7 +2154,9 @@
       <workItem from="1763044018916" duration="4850000" />
       <workItem from="1763049508956" duration="2744000" />
       <workItem from="1763073019006" duration="1792000" />
-      <workItem from="1763074838271" duration="438000" />
+      <workItem from="1763074838271" duration="1238000" />
+      <workItem from="1763076108626" duration="542000" />
+      <workItem from="1763076670169" duration="2055000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2491,7 +2501,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="380" />
+    <option name="localTasksCounter" value="381" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2587,7 +2597,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="configureAwait" />
     <MESSAGE value="nlog collection transformations" />
     <MESSAGE value="interesting stuff" />
     <MESSAGE value="SequenceScriptBuilder, Heartbeat&#10;- added some functionality to the sequenceScriptBuilder&#10;- implemented a routing to use the heartbeat packets&#10;- added a heartbeat interval to worldoptions" />
@@ -2612,7 +2621,8 @@
     <MESSAGE value="better heartbeat" />
     <MESSAGE value=".net 10 things" />
     <MESSAGE value="fix warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix warnings" />
+    <MESSAGE value="fix tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix tests" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

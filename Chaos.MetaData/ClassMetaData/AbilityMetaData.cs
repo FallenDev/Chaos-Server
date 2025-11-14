@@ -1,9 +1,11 @@
+#region
 using System.Runtime.InteropServices;
 using System.Text;
 using Chaos.Cryptography;
 using Chaos.IO.Compression;
 using Chaos.IO.Memory;
 using Chaos.MetaData.Abstractions;
+#endregion
 
 namespace Chaos.MetaData.ClassMetaData;
 
@@ -24,7 +26,8 @@ public sealed class AbilityMetaData : MetaDataBase<AbilityMetaNode>
     /// <inheritdoc />
     public override void Compress()
     {
-        var writer = new SpanWriter(Encoding.GetEncoding(949));
+        var writer = new SpanWriter(Encoding.GetEncoding(949), usePooling: true);
+        using var disposable = writer;
 
         var nodeCount = Nodes.Count + 4;
 

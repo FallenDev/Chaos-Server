@@ -225,7 +225,7 @@ public sealed class ChannelService : IChannelService
         //the string values here that are not stored in other objects should be intern()'d
         //all other strings are just having their bytes copied into the span
         //the only allocation is the final string
-        var spanWriter = new SpanWriter(Encoding.Default);
+        using var spanWriter = new SpanWriter(Encoding.Default, usePooling: true);
 
         //$"[{finalChannelName}] {senderName}: {message}";
 
