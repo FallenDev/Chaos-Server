@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <PropertyGroup>
+        <LangVersion>13</LangVersion>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="FluentAssertions"/>
         <PackageReference Include="Moq"/>

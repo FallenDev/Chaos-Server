@@ -57,15 +57,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.IO/Memory/SpanWriter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.IO/Memory/SpanWriter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Messaging/ChannelService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Messaging/ChannelService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.MetaData/Abstractions/MetaDataBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.MetaData/Abstractions/MetaDataBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.MetaData/ClassMetaData/AbilityMetaData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.MetaData/ClassMetaData/AbilityMetaData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Entities/ServerTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Entities/ServerTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Packets/PacketSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Packets/PacketSerializer.cs" afterDir="false" />
-    </list>
+    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -2156,7 +2148,7 @@
       <workItem from="1763073019006" duration="1792000" />
       <workItem from="1763074838271" duration="1238000" />
       <workItem from="1763076108626" duration="542000" />
-      <workItem from="1763076670169" duration="2055000" />
+      <workItem from="1763076670169" duration="4972000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2501,7 +2493,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="381" />
+    <option name="localTasksCounter" value="382" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2597,7 +2589,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="nlog collection transformations" />
     <MESSAGE value="interesting stuff" />
     <MESSAGE value="SequenceScriptBuilder, Heartbeat&#10;- added some functionality to the sequenceScriptBuilder&#10;- implemented a routing to use the heartbeat packets&#10;- added a heartbeat interval to worldoptions" />
     <MESSAGE value="package updates" />
@@ -2622,7 +2613,8 @@
     <MESSAGE value=".net 10 things" />
     <MESSAGE value="fix warnings" />
     <MESSAGE value="fix tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix tests" />
+    <MESSAGE value="memory pooling part 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="memory pooling part 1" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
