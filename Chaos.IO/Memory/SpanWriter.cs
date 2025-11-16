@@ -191,12 +191,12 @@ public ref struct SpanWriter
     ///         null
     ///     </c>
     /// </returns>
-    public IMemoryOwner<byte>? TransferOwnership()
+    public (IMemoryOwner<byte> Owner, int Length) TransferOwnership()
     {
-        var ret = RentedBlock;
+        var ret = RentedBlock ?? throw new InvalidOperationException("No rented block to transfer ownership of.");
         RentedBlock = null;
 
-        return ret;
+        return (ret, Position);
     }
 
     /// <summary>

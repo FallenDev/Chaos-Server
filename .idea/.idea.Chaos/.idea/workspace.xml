@@ -57,7 +57,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="" />
+    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Cryptography.Abstractions/ICrypto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Cryptography.Abstractions/ICrypto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Cryptography/Crypto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Cryptography/Crypto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.IO/Memory/SpanWriter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.IO/Memory/SpanWriter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Abstractions/ConnectedClientBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Abstractions/ConnectedClientBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Extensions/CryptoExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Extensions/CryptoExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Packets/Packet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Packets/Packet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Packets/PacketSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Packets/PacketSerializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Cryptography.Tests/CryptoTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Cryptography.Tests/CryptoTests.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -257,6 +268,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/6b227eb303238834af2c3fb122a7e882e9349736231bacc21e165f6c9a98d45/ObservableBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/6bc56cbd8f3683e925c3ac41392b43fb9730b83db7ec9b9b6ea3dfad087b991/IMemoryCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/6ef8e7d549f6bfb5b9eafaaa0ff48d8cbfc564f32be26323b5f60e63aef4dd1/SafeFileHandle.Windows.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/6fbc8062c52b4e20ad38bfb5dc216337fbabc12b4fa8d2a9fb4e8247f9c2a520/SpanHelpers.ByteMemOps.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/70631b79231fac29f3a4684e41e8b926325661b5fc4e4e5ca489684a2d1/Skip.SpeedOpt.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/72e5ebb3c7b6c846b64cc4b2184c929e188e105c91c65ddd999eeaf6ac64d38/DefaultFrozenDictionary.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/74563a21a815e1c53e892bef7ee2a2f9817ba694578d681ba3354275a723fb0/Reverse.cs" root0="FORCE_HIGHLIGHTING" />
@@ -301,6 +313,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/a6cbf0728982c3dd764e1b68d78a39e1047cb403853fc87b526175afd49cf5/OleServicesContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/aa74b2b4e9988ce29825f798c3ef4254a9bde18b81c60754798e520d5445a27/Span.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/aa9fca834d3161fbf0e6b680ba7d4a8bc6cd65b2749b64084ae719dc885/ArrayMemoryPool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/aae2f2181c64c43415adf3be184e7d3e1d5455ade23df2823e11ac3899277a3b/Memory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/acc3e6e5f85e7174c16f6fd86bfc988df4815a736791e6f3d736ed79b8436e/CancellationTokenSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/ad49093fbcdcf5c1455da627b83f3c367b31b18719d89c897f2d26d2a8b/WpfXamlLoader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/af9592decebfa21cfa1c195061952a228de0a945de3e12cdad8e952bf86d/ReadLinesIterator.cs" root0="SKIP_HIGHLIGHTING" />
@@ -317,9 +330,11 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bdac74b5db145724bb644be6eff638cdc43259aed939119c661cda256cc9/ImmutableArray_1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bf716f2e258f4819cd669d49cd1ec3361b17e4cb7f1ec31aaca5bbcb3a118/Except.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c173ee0aedaf314566cbf55476351dfe4f35d5a8a2fddefadbd3fab712392/StringRuneEnumerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c24d475d83442e0a97ce97fdd4d43d6b5a3977b2a474c7996b895330c6b0/Span.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c388d6a36e5748e1a3c59b48a4fbbdad84910/_08fcf/IPartition.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c7102cd0ffb8973777e61b1942c3fffac7e14016a511d055c3adf73ff91748/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c7599cf911b1e5da637e64b4f4b7be581accdaf739e9d2b8c8456edbea7a/Buffer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c7934094a99f6d1c68421d9239a12d2dfe4e9e155dbb4760da30a7d059a41da3/IValueFormatter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c98c4c26354b89d76ffbddb774441bcc9c7ed3559b98dbd6fe39a56fc7eb18/ObservableCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/cac241b71611f4f0a185b3988ec18b7d242070a43b6c62dda117f496bf5a33a2/String.Searching.cs" root0="SKIP_HIGHLIGHTING" />

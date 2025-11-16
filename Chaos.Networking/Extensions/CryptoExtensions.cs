@@ -1,5 +1,7 @@
+#region
 using Chaos.Cryptography.Abstractions;
 using Chaos.Packets;
+#endregion
 
 // ReSharper disable once CheckNamespace
 namespace Chaos.Extensions.Networking;
@@ -31,5 +33,9 @@ public static class CryptoExtensions
     ///     The packet to encrypt
     /// </param>
     public static void Encrypt(this ICrypto crypto, ref Packet packet)
-        => crypto.ServerEncrypt(ref packet.Buffer, packet.OpCode, packet.Sequence);
+        => crypto.ServerEncrypt(
+            ref packet.MemoryOwner!,
+            ref packet.Length,
+            packet.OpCode,
+            packet.Sequence);
 }

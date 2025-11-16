@@ -60,16 +60,11 @@ public sealed class PacketSerializer : IPacketSerializer
             throw new InvalidOperationException($"No converter exists for type \"{type.FullName}\"");
 
         var writer = new SpanWriter(Encoding, usePooling: true);
-        using var disposable = writer;
 
         converter.Serialize(ref writer, obj);
+        var ownership = writer.TransferOwnership();
 
-        var packet = new Packet(converter.OpCode)
-        {
-            //temporary, will be replaced when Packet.cs is converted to memory ownership
-            Buffer = writer.ToSpan()
-                           .ToArray()
-        };
+        var packet = new Packet(converter.OpCode, ownership.Owner, ownership.Length);
 
         return packet;
     }

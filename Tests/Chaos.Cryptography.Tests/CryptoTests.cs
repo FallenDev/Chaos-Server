@@ -1,4 +1,5 @@
 #region
+using System.Buffers;
 using System.Text;
 using Chaos.Cryptography.Abstractions.Definitions;
 using FluentAssertions;
@@ -279,10 +280,9 @@ public sealed class CryptoTests
     [Test]
     public void GenerateKey_Should_Use_KeySalts_Deterministically_For_Given_A_B()
     {
-        var c = new Crypto(0, "UrkcnItnI", string.Empty);
-        var k1 = c.GenerateKey(1234, 200);
-        var k2 = c.GenerateKey(1234, 200);
-        var k3 = c.GenerateKey(2222, 201);
+        var k1 = Crypto.GenerateKey(1234, 200);
+        var k2 = Crypto.GenerateKey(1234, 200);
+        var k3 = Crypto.GenerateKey(2222, 201);
 
         k1.Should()
           .BeEquivalentTo(k2);
@@ -298,10 +298,9 @@ public sealed class CryptoTests
     [Test]
     public void GenerateKeySalts_Should_Return_Same_For_Same_Seed_And_Different_For_Different_Seed()
     {
-        var c = new Crypto();
-        var a1 = c.GenerateKeySalts("seed-A");
-        var a2 = c.GenerateKeySalts("seed-A");
-        var b1 = c.GenerateKeySalts("seed-B");
+        var a1 = Crypto.GenerateKeySalts("seed-A");
+        var a2 = Crypto.GenerateKeySalts("seed-A");
+        var b1 = Crypto.GenerateKeySalts("seed-B");
 
         a1.Should()
           .BeEquivalentTo(a2);
@@ -394,14 +393,24 @@ public sealed class CryptoTests
     {
         var c = new Crypto(0, "UrkcnItnI", string.Empty);
         var original = Encoding.ASCII.GetBytes("nochange");
-        var buffer = new Span<byte>(original.ToArray());
+        var memoryOwner = MemoryPool<byte>.Shared.Rent(original.Length);
+        original.CopyTo(memoryOwner.Memory.Span);
+        var length = original.Length;
 
-        c.ServerEncrypt(ref buffer, opCode, 0);
+        c.ServerEncrypt(
+            ref memoryOwner,
+            ref length,
+            opCode,
+            0);
+
+        var buffer = memoryOwner.Memory.Span[..length];
 
         Encoding.ASCII
                 .GetString(buffer.ToArray())
                 .Should()
                 .Be("nochange");
+
+        memoryOwner.Dispose();
     }
 
     [Test]
@@ -410,16 +419,25 @@ public sealed class CryptoTests
     {
         var c = new Crypto(0, "UrkcnItnI", string.Empty);
         var original = Encoding.ASCII.GetBytes("srv-md5");
-        var buffer = new Span<byte>(original.ToArray());
+        var memoryOwner = MemoryPool<byte>.Shared.Rent(original.Length);
+        original.CopyTo(memoryOwner.Memory.Span);
+        var length = original.Length;
 
-        c.ServerEncrypt(ref buffer, opCode, sequence);
+        c.ServerEncrypt(
+            ref memoryOwner,
+            ref length,
+            opCode,
+            sequence);
 
+        var buffer = memoryOwner.Memory.Span[..length];
         c.ClientDecrypt(ref buffer, opCode, sequence);
 
         Encoding.ASCII
                 .GetString(buffer.ToArray())
                 .Should()
                 .Be("srv-md5");
+
+        memoryOwner.Dispose();
     }
 
     [Test]
@@ -428,16 +446,25 @@ public sealed class CryptoTests
     {
         var c = new Crypto(0, "UrkcnItnI", string.Empty);
         var original = Encoding.ASCII.GetBytes("srv-norm");
-        var buffer = new Span<byte>(original.ToArray());
+        var memoryOwner = MemoryPool<byte>.Shared.Rent(original.Length);
+        original.CopyTo(memoryOwner.Memory.Span);
+        var length = original.Length;
 
-        c.ServerEncrypt(ref buffer, opCode, sequence);
+        c.ServerEncrypt(
+            ref memoryOwner,
+            ref length,
+            opCode,
+            sequence);
 
+        var buffer = memoryOwner.Memory.Span[..length];
         c.ClientDecrypt(ref buffer, opCode, sequence);
 
         Encoding.ASCII
                 .GetString(buffer.ToArray())
                 .Should()
                 .Be("srv-norm");
+
+        memoryOwner.Dispose();
     }
 
     [Test]
@@ -445,15 +472,23 @@ public sealed class CryptoTests
     public void ServerEncrypt_Then_ClientDecrypt_Should_Work_With_EmptyPayload(byte opCode, byte sequence)
     {
         var c = new Crypto(0, "UrkcnItnI", string.Empty);
-        var buffer = new Span<byte>(Array.Empty<byte>());
+        var memoryOwner = MemoryPool<byte>.Shared.Rent(0);
+        var length = 0;
 
-        c.ServerEncrypt(ref buffer, opCode, sequence);
+        c.ServerEncrypt(
+            ref memoryOwner,
+            ref length,
+            opCode,
+            sequence);
 
+        var buffer = memoryOwner.Memory.Span[..length];
         c.ClientDecrypt(ref buffer, opCode, sequence);
 
         buffer.ToArray()
               .Should()
               .BeEmpty();
+
+        memoryOwner.Dispose();
     }
 
     [Test]

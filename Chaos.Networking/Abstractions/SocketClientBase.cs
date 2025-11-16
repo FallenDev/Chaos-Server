@@ -312,7 +312,8 @@ public abstract class SocketClientBase : ISocketClient, IDisposable
             Encrypt(ref packet);
         }
 
-        var args = DequeueArgs(packet.ToMemory());
+        (var owner, var length) = packet.TransferOwnership();
+        var args = DequeueArgs(owner, length);
         Socket.SendAndForget(args, ReuseSocketAsyncEventArgs);
     }
 
@@ -358,7 +359,17 @@ public abstract class SocketClientBase : ISocketClient, IDisposable
     #endregion
 
     #region Utility
-    private void ReuseSocketAsyncEventArgs(object? sender, SocketAsyncEventArgs e) => SocketArgsQueue.Enqueue(e);
+    private void ReuseSocketAsyncEventArgs(object? sender, SocketAsyncEventArgs e)
+    {
+        // Dispose the memory owner and return it to the pool
+        if (e.UserToken is IMemoryOwner<byte> owner)
+        {
+            owner.Dispose();
+            e.UserToken = null;
+        }
+
+        SocketArgsQueue.Enqueue(e);
+    }
 
     private SocketAsyncEventArgs CreateArgs()
     {
@@ -368,12 +379,14 @@ public abstract class SocketClientBase : ISocketClient, IDisposable
         return args;
     }
 
-    private SocketAsyncEventArgs DequeueArgs(Memory<byte> buffer)
+    private SocketAsyncEventArgs DequeueArgs(IMemoryOwner<byte> owner, int length)
     {
         if (!SocketArgsQueue.TryDequeue(out var args))
             args = CreateArgs();
 
-        args.SetBuffer(buffer);
+        // Store the owner in UserToken so we can dispose it later
+        args.UserToken = owner;
+        args.SetBuffer(owner.Memory[..length]);
 
         return args;
     }
