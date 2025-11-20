@@ -49,6 +49,15 @@ public class Trackers : IDeltaUpdatable
     public FlagCollection Flags { get; init; } = new();
 
     /// <summary>
+    ///     A collection of big enum flags organized by type. These flags are different in that they can hold unlimited numbers
+    ///     of bit indexes, but are declared differently.
+    /// </summary>
+    /// <remarks>
+    ///     IS PERSISTENT / SERIALIZED TO FILE
+    /// </remarks>
+    public BigFlagsCollection BigFlags { get; init; } = new();
+
+    /// <summary>
     ///     A collection of timed events organized by key
     /// </summary>
     /// <remarks>

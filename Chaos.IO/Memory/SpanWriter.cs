@@ -120,7 +120,12 @@ public ref struct SpanWriter
             RentedBlock = newRentedBlock;
             Buffer = newBuffer;
         } else
-            Buffer = new byte[size];
+        {
+            Span<byte> newBuffer = new byte[size];
+            Buffer.CopyTo(newBuffer);
+
+            Buffer = newBuffer;
+        }
     }
 
     /// <summary>

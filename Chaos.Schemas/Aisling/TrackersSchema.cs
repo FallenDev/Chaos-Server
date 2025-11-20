@@ -14,22 +14,27 @@ namespace Chaos.Schemas.Aisling;
 public class TrackersSchema
 {
     /// <summary>
+    ///     A collection of large, marker-type-indexed flag values
+    /// </summary>
+    public BigFlagsCollection BigFlags { get; set; } = new();
+
+    /// <summary>
     ///     A collection of counters, or string-int pairs
     /// </summary>
     [JsonRequired]
-    public CounterCollection Counters { get; set; } = null!;
+    public CounterCollection Counters { get; set; } = new();
 
     /// <summary>
     ///     A collection of enums. Enums can only have one value at a time
     /// </summary>
     [JsonRequired]
-    public EnumCollection Enums { get; set; } = null!;
+    public EnumCollection Enums { get; set; } = new();
 
     /// <summary>
     ///     A collection of flags. Flags can have multiple values at once
     /// </summary>
     [JsonRequired]
-    public FlagCollection Flags { get; set; } = null!;
+    public FlagCollection Flags { get; set; } = new();
 
     /// <summary>
     ///     A collection of tag strings organized by key
@@ -41,7 +46,7 @@ public class TrackersSchema
     ///     A collection of timed events.
     /// </summary>
     [JsonRequired]
-    public TimedEventCollection TimedEvents { get; set; } = null!;
+    public TimedEventCollection TimedEvents { get; set; } = new();
 }
 
 /// <summary>

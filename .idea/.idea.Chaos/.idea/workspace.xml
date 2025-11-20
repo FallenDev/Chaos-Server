@@ -58,16 +58,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/Abstractions/IBigFlagsValue.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/Attributes/BitIndexAttribute.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/Collections/BigFlagsCollection.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsCollectionJsonConverter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsValueJsonConverter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsValueJsonConverterFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlags.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlagsValue.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlags`1.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos/Definitions/BigFlags.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/TestBigFlags.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsCollectionJsonConverterTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsCollectionTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsGenericTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsInitTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsUtilityTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsValueJsonConverterTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsValueTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/TestBigFlagsInitializer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/articles/BigFlags.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Cryptography.Abstractions/ICrypto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Cryptography.Abstractions/ICrypto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Cryptography/Crypto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Cryptography/Crypto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chaos.IO/Memory/SpanWriter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.IO/Memory/SpanWriter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Abstractions/ConnectedClientBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Abstractions/ConnectedClientBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Extensions/CryptoExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Extensions/CryptoExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Packets/Packet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Packets/Packet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Packets/PacketSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Packets/PacketSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Cryptography.Tests/CryptoTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Cryptography.Tests/CryptoTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Schemas/Aisling/TrackersSchema.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Schemas/Aisling/TrackersSchema.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Collections/Trackers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Collections/Trackers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/TrackersMapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/MapperProfiles/TrackersMapperProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/Definitions/Enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/Definitions/Enums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/DummyTestClass.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/articles/toc.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/articles/toc.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +105,7 @@
     <option name="firstShow" value="false" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="2" />
+    <option name="cachedIndexableFilesCount" value="7" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -322,6 +341,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b6b80c2c5cbc74bdda121548840fca5a53e8c61c16fbcc0f9921be589964/LogFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b7208b3f72528d22781d25fde9a55271bdf2b5aade4f03b1324579a25493cd8/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b89f587f22d2d16755c37a8dd74fd350ef6fd97fc9bcacbad5af80c41a844cc2/PointerMemoryManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b8d753e12338b313a0baa29e5b7010f685edfd61c8eab6f759541034cc83387/RuntimeHelpers.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bb20bcb6cf86be25708bd683fe862b76c8c4497abe68566865702178cf5e1c/Memory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bca1ebe78b16c322f436622bc3f2642c3eadb904227576a249e27db652f41cd/AssertionScope.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
@@ -344,6 +364,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/d2807bcc9c46d3cce158d3dcddc94d4180f123d593332b7172ac547c036b8d/STAThreadExecutor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/d2c48082bf1fe2e24d401a6d514cec332b89c39ea61ec8c1f34b52ef27def5b8/MemoryPool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/d49485e469b7c56ea29d165b121cd86aa5aeb67e665b5f8c68166f6ede623c9/ArgumentOutOfRangeException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/d6ccafa4f336a9a6c46d93560b7cd30b088c26e/Chaos_Common_Tests_BigFlagsGenericTests_StaticFields_ShouldAutoAssignAfterExplicitIndices.g.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/d8376ed3909540d894e73d70cfa7e34b13908/_2bbc8/PropertyChangedEventHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/d8376ed3909540d894e73d70cfa7e34b13908/_d965b/INotifyPropertyChanged.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/d894934a095de6eebed844639db3a3712da6a9142ac84dbab4de2182faf581/IPAddress.cs" root0="FORCE_HIGHLIGHTING" />
@@ -447,8 +468,10 @@
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Security.Cryptography/src/System/Security/Cryptography/HashAlgorithm.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/winforms/0b4028eb507aeb222f5bd1fc421876cc5e5e3fb8/src/System.Windows.Forms.Primitives/src/System/EnumExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/01504B0C7839F28B2D78A5B4/System.Text.RegularExpressions.Generator/System.Text.RegularExpressions.Generator.RegexGenerator/RegexGenerator.g.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/8BFE73F4073B79A7364EB99D/System.Text.Json.SourceGeneration/System.Text.Json.SourceGeneration.JsonSourceGenerator/SerializationContext.AislingTrackersSchema.g.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="jar://$APPLICATION_HOME_DIR$/lib/modules/intellij.rider.jar!/schemas/msbuild/Microsoft.Build.Commontypes.xsd" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common.Abstractions/IInterlockedObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos.Common/Collections/BigFlagsCollection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common/Collections/FlagCollection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common/Collections/Synchronized/SynchronizedHashSet.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common/Definitions/RegexCache.cs" root0="FORCE_HIGHLIGHTING" />
@@ -467,6 +490,8 @@
     <setting file="file://$PROJECT_DIR$/Chaos.MetaData/ItemMetaData/ItemMetaNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.MetaData/MetaNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.NLog.Logging/Definitions/Topics.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos.Networking/Abstractions/ConnectedClientBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Networking/Entities/Server/WorldListArgs.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Networking/Extensions/SocketExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Schemas/Data/ItemRequirementSchema.cs" root0="FORCE_HIGHLIGHTING" />
@@ -487,6 +512,8 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Collections/Exchange.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Collections/MapEntityCollection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos/Definitions/BigFlags.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos/Messaging/Admin/TestBigFlags.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/ChannelListCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/JoinChannelCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/LeaveChannelCommand.cs" root0="FORCE_HIGHLIGHTING" />
@@ -500,6 +527,7 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Scripting/MonsterScripts/CompositeMonsterScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/MapperProfiles/MapInstanceMapperProfile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos/Services/Storage/ExpiringMapTemplateCache.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Utilities/ComplexActionHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ScriptedSequence.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Utilities/SequenceScripter/ThresholdAction.cs" root0="FORCE_HIGHLIGHTING" />
@@ -583,6 +611,7 @@
     &quot;dde2c854-b787-4b8f-97bd-cd545d332b2e.executor&quot;: &quot;Debug&quot;,
     &quot;ded3c7a5-9a9d-445e-8825-e30b079c3145.executor&quot;: &quot;Debug&quot;,
     &quot;e1a18812-12c1-4799-bd54-eba5d50eb555.executor&quot;: &quot;Debug&quot;,
+    &quot;e490b3b5-8569-45e9-b78c-cf9e0537656a.executor&quot;: &quot;Debug&quot;,
     &quot;edb1b382-81ae-4b94-a501-fae99ab1c6bf.executor&quot;: &quot;Debug&quot;,
     &quot;fc439a04-995e-4a7b-9c5d-88fa3c6ed18d.executor&quot;: &quot;Debug&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
@@ -2853,6 +2882,84 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="925" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/Chaos.MetaData.Tests/EventMetaTests.cs</url>
+          <line>51</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Tests\Chaos.MetaData.Tests\EventMetaTests.cs" containingFunctionPresentation="Method 'EventMetaNode_Serialize_Writes_Sequence_Of_Subnodes'">
+            <startOffsets>
+              <option value="1253" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1316" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="926" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlagsValue.cs</url>
+          <line>88</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Chaos.Common\CustomTypes\BigFlagsValue.cs" containingFunctionPresentation="Method 'HasAllFlags'">
+            <startOffsets>
+              <option value="2919" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2932" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="935" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsValueTests.cs</url>
+          <line>548</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Tests\Chaos.Common.Tests\BigFlagsValueTests.cs" containingFunctionPresentation="Method 'ToggleFlag_WithBitIndex_ShouldToggleBit'">
+            <startOffsets>
+              <option value="12324" />
+            </startOffsets>
+            <endOffsets>
+              <option value="12356" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="941" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsValueJsonConverterTests.cs</url>
+          <line>333</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Tests\Chaos.Common.Tests\BigFlagsValueJsonConverterTests.cs" containingFunctionPresentation="Method 'Serialize_ShouldWriteNumericValue_ForUndefinedFlag'">
+            <startOffsets>
+              <option value="8288" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8330" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="942" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsValueJsonConverterTests.cs</url>
+          <line>305</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Tests\Chaos.Common.Tests\BigFlagsValueJsonConverterTests.cs" containingFunctionPresentation="Method 'Serialize_ShouldWriteEmptyString_ForNone'">
+            <startOffsets>
+              <option value="7637" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7679" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="943" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsUtilityTests.cs</url>
+          <line>495</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Tests\Chaos.Common.Tests\BigFlagsUtilityTests.cs" containingFunctionPresentation="Method 'TryParse_Generic_ShouldReturnFalse_WhenNameNotFound'">
+            <startOffsets>
+              <option value="11802" />
+            </startOffsets>
+            <endOffsets>
+              <option value="11868" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="944" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
