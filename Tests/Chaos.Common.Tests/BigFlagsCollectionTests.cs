@@ -24,7 +24,7 @@ public sealed class BigFlagsCollectionTests
     }
 
     [Test]
-    public void AddFlag_Generic_ShouldCombineFlags_WhenTypeExists()
+    public void AddFlag_Generic_ShouldCombineFlags_WhenTypeists()
     {
         // Arrange
         var collection = new BigFlagsCollection();
@@ -59,7 +59,7 @@ public sealed class BigFlagsCollectionTests
     }
 
     [Test]
-    public void AddFlag_NonGeneric_ShouldCombineFlags_WhenTypeExists()
+    public void AddFlag_NonGeneric_ShouldCombineFlags_WhenTypeists()
     {
         // Arrange
         var collection = new BigFlagsCollection();
@@ -182,7 +182,7 @@ public sealed class BigFlagsCollectionTests
     }
 
     [Test]
-    public void GetFlag_Generic_ShouldReturnCorrectValue_WhenTypeExists()
+    public void GetFlag_Generic_ShouldReturnCorrectValue_WhenTypeists()
     {
         // Arrange
         var collection = new BigFlagsCollection();
@@ -436,7 +436,7 @@ public sealed class BigFlagsCollectionTests
     }
 
     [Test]
-    public void TryGetFlag_Generic_ShouldReturnTrue_WhenTypeExists()
+    public void TryGetFlag_Generic_ShouldReturnTrue_WhenTypeists()
     {
         // Arrange
         var collection = new BigFlagsCollection();
@@ -472,7 +472,7 @@ public sealed class BigFlagsCollectionTests
     }
 
     [Test]
-    public void TryGetFlag_NonGeneric_ShouldReturnTrue_WhenTypeExists()
+    public void TryGetFlag_NonGeneric_ShouldReturnTrue_WhenTypeists()
     {
         // Arrange
         var collection = new BigFlagsCollection();

@@ -1,5 +1,4 @@
 #region
-using System.Text;
 using Chaos.IO.Exceptions;
 using Chaos.IO.FileSystem;
 using FluentAssertions;

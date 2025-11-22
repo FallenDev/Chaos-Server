@@ -1,4 +1,3 @@
-using System;
 using Chaos.Time;
 using Chaos.Time.Abstractions;
 using FluentAssertions;

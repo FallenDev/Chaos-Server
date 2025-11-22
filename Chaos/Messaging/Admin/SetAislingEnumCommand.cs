@@ -45,7 +45,7 @@ public class SetAislingEnumCommand(IClientRegistry<IChaosWorldClient> clients) :
         var typeName = split[0];
         var enumValue = split[1];
 
-        var type = TypeEx.LoadType(
+        var type = Type.LoadType(
             typeName,
             (asm, t) =>
             {

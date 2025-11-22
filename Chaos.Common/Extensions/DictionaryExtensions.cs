@@ -1,5 +1,8 @@
+#region
 using System.Diagnostics.CodeAnalysis;
+#endregion
 
+// ReSharper disable once CheckNamespace
 namespace Chaos.Extensions.Common;
 
 /// <summary>

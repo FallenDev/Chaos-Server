@@ -1,4 +1,3 @@
-using System;
 using Chaos.Common.Utilities;
 using FluentAssertions;
 

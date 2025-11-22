@@ -264,7 +264,7 @@ internal static class BigFlagsInitializer
                                         .Where(asmType => asmType.BaseType!.GetGenericTypeDefinition() == typeof(BigFlags<>));
 
             foreach (var asmType in bigFlagsTypes)
-                RuntimeHelpers.RunClassConstructor(asmType.BaseType!.TypeHandle);
+                RuntimeHelpers.RunClassConstructor(asmType.TypeHandle);
         } catch
         {
             // Skip assemblies that can't be scanned (e.g., resource assemblies, reflection-only assemblies)

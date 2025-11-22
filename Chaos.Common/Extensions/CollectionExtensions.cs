@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 #endregion
 
+// ReSharper disable once CheckNamespace
 namespace Chaos.Extensions.Common;
 
 /// <summary>
@@ -114,80 +115,6 @@ public static class CollectionExtensions
         => (collection == null) || (collection.Count == 0);
 
     /// <summary>
-    ///     Replaces an item in a collection with a new item
-    /// </summary>
-    /// <param name="collection">
-    ///     This collection
-    /// </param>
-    /// <param name="item">
-    ///     The item to replace
-    /// </param>
-    /// <param name="newItem">
-    ///     The new item that replaces the old item
-    /// </param>
-    /// <returns>
-    ///     <c>
-    ///         true
-    ///     </c>
-    ///     if a matching item was found and replaced, otherwise
-    ///     <c>
-    ///         false
-    ///     </c>
-    /// </returns>
-    public static bool Replace<T>(this IList<T> collection, T item, T newItem)
-    {
-        var index = collection.IndexOf(item);
-
-        if (index == -1)
-            return false;
-
-        collection[index] = newItem;
-
-        return true;
-    }
-
-    /// <summary>
-    ///     Replaces an item in a collection with a new item
-    /// </summary>
-    /// <param name="collection">
-    ///     This collection
-    /// </param>
-    /// <param name="predicate">
-    ///     A predicate used to match to the item to be replaced
-    /// </param>
-    /// <param name="newItem">
-    ///     The new item that replaces the old item
-    /// </param>
-    /// <returns>
-    ///     <c>
-    ///         true
-    ///     </c>
-    ///     if a matching item was found and replaced, otherwise
-    ///     <c>
-    ///         false
-    ///     </c>
-    /// </returns>
-    public static bool ReplaceBy<T>(this IList<T> collection, Func<T, bool> predicate, T newItem)
-    {
-        var index = -1;
-
-        for (var i = 0; i < collection.Count; i++)
-            if (predicate(collection[i]))
-            {
-                index = i;
-
-                break;
-            }
-
-        if (index == -1)
-            return false;
-
-        collection[index] = newItem;
-
-        return true;
-    }
-
-    /// <summary>
     ///     Replaces a string in a collection with a new string
     /// </summary>
     /// <param name="collection">
@@ -218,5 +145,79 @@ public static class CollectionExtensions
         collection[index] = newItem;
 
         return true;
+    }
+
+    /// <param name="collection">
+    ///     This collection
+    /// </param>
+    extension<T>(IList<T> collection)
+    {
+        /// <summary>
+        ///     Replaces an item in a collection with a new item
+        /// </summary>
+        /// <param name="item">
+        ///     The item to replace
+        /// </param>
+        /// <param name="newItem">
+        ///     The new item that replaces the old item
+        /// </param>
+        /// <returns>
+        ///     <c>
+        ///         true
+        ///     </c>
+        ///     if a matching item was found and replaced, otherwise
+        ///     <c>
+        ///         false
+        ///     </c>
+        /// </returns>
+        public bool Replace(T item, T newItem)
+        {
+            var index = collection.IndexOf(item);
+
+            if (index == -1)
+                return false;
+
+            collection[index] = newItem;
+
+            return true;
+        }
+
+        /// <summary>
+        ///     Replaces an item in a collection with a new item
+        /// </summary>
+        /// <param name="predicate">
+        ///     A predicate used to match to the item to be replaced
+        /// </param>
+        /// <param name="newItem">
+        ///     The new item that replaces the old item
+        /// </param>
+        /// <returns>
+        ///     <c>
+        ///         true
+        ///     </c>
+        ///     if a matching item was found and replaced, otherwise
+        ///     <c>
+        ///         false
+        ///     </c>
+        /// </returns>
+        public bool ReplaceBy(Func<T, bool> predicate, T newItem)
+        {
+            var index = -1;
+
+            for (var i = 0; i < collection.Count; i++)
+                if (predicate(collection[i]))
+                {
+                    index = i;
+
+                    break;
+                }
+
+            if (index == -1)
+                return false;
+
+            collection[index] = newItem;
+
+            return true;
+        }
     }
 }

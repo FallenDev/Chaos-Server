@@ -1,7 +1,9 @@
+#region
 using System.Text;
+#endregion
 
 // ReSharper disable ConvertIfStatementToSwitchStatement
-
+// ReSharper disable once CheckNamespace
 namespace Chaos.Extensions.Common;
 
 /// <summary>

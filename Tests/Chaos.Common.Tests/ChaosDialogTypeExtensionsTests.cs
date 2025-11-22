@@ -8,7 +8,7 @@ using FluentAssertions;
 
 namespace Chaos.Extensions.Common.Tests;
 
-public sealed class ChaosDialogTypeExtensionsTests
+public sealed class ChaosDialogTypetensionsTests
 {
     [Test]
     [Arguments(ChaosDialogType.Normal, DialogType.Normal)]

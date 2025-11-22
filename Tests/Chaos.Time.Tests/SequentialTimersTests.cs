@@ -1,4 +1,3 @@
-using System;
 using Chaos.Time;
 using FluentAssertions;
 using Moq;

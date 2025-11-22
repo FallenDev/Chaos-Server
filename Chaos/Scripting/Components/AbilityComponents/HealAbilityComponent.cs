@@ -1,6 +1,7 @@
 #region
 using Chaos.Common.Utilities;
 using Chaos.DarkAges.Definitions;
+using Chaos.Extensions.Common;
 using Chaos.Models.Data;
 using Chaos.Models.World.Abstractions;
 using Chaos.Scripting.Components.Abstractions;
@@ -50,7 +51,7 @@ public struct HealAbilityComponent : IComponent
     {
         var finalHeal = baseHeal ?? 0;
 
-        finalHeal += MathEx.GetPercentOf<int>((int)target.StatSheet.EffectiveMaximumHp, pctHpHeal ?? 0);
+        finalHeal += Math.GetPercentOf<int>((int)target.StatSheet.EffectiveMaximumHp, pctHpHeal ?? 0);
 
         if (!healStat.HasValue)
             return finalHeal;

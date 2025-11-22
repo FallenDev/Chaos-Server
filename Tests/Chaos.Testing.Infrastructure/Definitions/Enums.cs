@@ -64,6 +64,8 @@ public sealed class TestFeatures : BigFlags<TestFeatures>
     public static BigFlagsValue<TestFeatures> Feature2;
     public static BigFlagsValue<TestFeatures> Feature3;
     public static BigFlagsValue<TestFeatures> Feature4;
+
+    static TestFeatures() => Initialize();
 }
 
 public sealed class TestPermissions : BigFlags<TestPermissions>
@@ -72,6 +74,8 @@ public sealed class TestPermissions : BigFlags<TestPermissions>
     public static BigFlagsValue<TestPermissions> Write;
     public static BigFlagsValue<TestPermissions> Execute;
     public static BigFlagsValue<TestPermissions> Delete;
+
+    static TestPermissions() => Initialize();
 }
 
 public sealed class TestExplicitIndices : BigFlags<TestExplicitIndices>
@@ -86,4 +90,6 @@ public sealed class TestExplicitIndices : BigFlags<TestExplicitIndices>
     public static BigFlagsValue<TestExplicitIndices> Flag100;
 
     public static BigFlagsValue<TestExplicitIndices> AutoFlag;
+
+    static TestExplicitIndices() => Initialize();
 }

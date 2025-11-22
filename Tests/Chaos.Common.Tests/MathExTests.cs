@@ -1,16 +1,17 @@
 #region
 using Chaos.Common.Utilities;
+using Chaos.Extensions.Common;
 using FluentAssertions;
 #endregion
 
 namespace Chaos.Common.Tests;
 
-public sealed class MathExTests
+public sealed class MathExtensionsTests
 {
     [Test]
     public void CalculatePercent_Should_Throw_When_Max_Is_Zero()
     {
-        Action act = () => MathEx.CalculatePercent<decimal>(5, 0);
+        Action act = () => Math.CalculatePercent<decimal>(5, 0);
 
         act.Should()
            .Throw<DivideByZeroException>();
@@ -24,7 +25,7 @@ public sealed class MathExTests
         const int MAX = 100;
 
         // Act
-        var result = MathEx.CalculatePercent<ulong>(CURRENT, MAX);
+        var result = Math.CalculatePercent<ulong>(CURRENT, MAX);
 
         // Assert
         result.Should()
@@ -39,7 +40,7 @@ public sealed class MathExTests
         const int MAX = 100;
 
         // Act
-        var result = MathEx.CalculatePercent<decimal>(CURRENT, MAX);
+        var result = Math.CalculatePercent<decimal>(CURRENT, MAX);
 
         // Assert
         result.Should()
@@ -54,7 +55,7 @@ public sealed class MathExTests
         const decimal PERCENT = 20;
 
         // Act
-        var result = MathEx.GetPercentOf<ulong>(NUM, PERCENT);
+        var result = Math.GetPercentOf<ulong>(NUM, PERCENT);
 
         // Assert
         result.Should()
@@ -69,7 +70,7 @@ public sealed class MathExTests
         const decimal PERCENT = 20;
 
         // Act
-        var result = MathEx.GetPercentOf<decimal>(NUM, PERCENT);
+        var result = Math.GetPercentOf<decimal>(NUM, PERCENT);
 
         // Assert
         result.Should()
@@ -79,7 +80,7 @@ public sealed class MathExTests
     [Test]
     public void ScaleRange_Generic_IntegerTarget_Rounds_Away_From_Zero()
     {
-        var result = MathEx.ScaleRange(
+        var result = Math.ScaleRange(
             2,
             0,
             3,
@@ -93,7 +94,7 @@ public sealed class MathExTests
     [Test]
     public void ScaleRange_Generic_Should_Throw_When_Min_Equals_Max()
     {
-        Action act = () => MathEx.ScaleRange(
+        Action act = () => Math.ScaleRange(
             1,
             2,
             2,
@@ -107,7 +108,7 @@ public sealed class MathExTests
     [Test]
     public void ScaleRange_Should_Throw_When_Min_Equals_Max_Double()
     {
-        Action act = () => MathEx.ScaleRange(
+        Action act = () => Math.ScaleRange(
             1.0,
             2.0,
             2.0,
@@ -129,7 +130,7 @@ public sealed class MathExTests
         const double NEW_MAX = 10;
 
         // Act
-        var result = MathEx.ScaleRange(
+        var result = Math.ScaleRange(
             NUM,
             MIN,
             MAX,
@@ -152,7 +153,7 @@ public sealed class MathExTests
         const decimal NEW_MAX = 10;
 
         // Act
-        var result = MathEx.ScaleRange(
+        var result = Math.ScaleRange(
             NUM,
             MIN,
             MAX,
@@ -175,7 +176,7 @@ public sealed class MathExTests
         const double NEW_MAX = 10.0;
 
         // Act
-        var result = MathEx.ScaleRange(
+        var result = Math.ScaleRange(
             NUM,
             MIN,
             MAX,

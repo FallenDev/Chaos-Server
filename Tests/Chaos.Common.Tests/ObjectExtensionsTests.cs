@@ -1,7 +1,6 @@
 #region
 using System.ComponentModel;
 using FluentAssertions;
-using Chaos.Extensions.Common;
 #endregion
 
 namespace Chaos.Extensions.Common.Tests;

@@ -1,4 +1,3 @@
-using System;
 using Chaos.TypeMapper;
 using Chaos.TypeMapper.Abstractions;
 using FluentAssertions;

@@ -52,7 +52,6 @@
         <File Path="README.md"/>
     </Folder>
     <Folder Name="/Extensions/">
-        <Project Path="Chaos.Extensions.Common/Chaos.Extensions.Common.csproj"/>
         <Project Path="Chaos.Extensions.Geometry/Chaos.Extensions.Geometry.csproj"/>
     </Folder>
     <Folder Name="/Patches/">
@@ -65,7 +64,6 @@
         <Project Path="Tests/Chaos.Common.Tests/Chaos.Common.Tests.csproj"/>
         <Project Path="Tests/Chaos.Cryptography.Tests/Chaos.Cryptography.Tests.csproj"/>
         <Project Path="Tests/Chaos.DarkAges.Tests/Chaos.DarkAges.Tests.csproj"/>
-        <Project Path="Tests/Chaos.Extensions.Common.Tests/Chaos.Extensions.Common.Tests.csproj"/>
         <Project Path="Tests/Chaos.Extensions.Geometry.Tests/Chaos.Extensions.Geometry.Tests.csproj"/>
         <Project Path="Tests/Chaos.Geometry.Tests/Chaos.Geometry.Tests.csproj"/>
         <Project Path="Tests/Chaos.IO.Tests/Chaos.IO.Tests.csproj"/>
