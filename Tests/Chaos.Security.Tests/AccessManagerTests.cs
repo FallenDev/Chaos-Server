@@ -511,10 +511,9 @@ public class AccessManagerTests : IDisposable
         // Act
           var result = await AccessManager.ShouldAllowAsync(clientId1, clientId2);
 
-        // Assert - this might actually return true based on implementation
-        // The IsClientIdBanned method looks for exact clientId match, not within comma-separated values
+          // The IsClientIdBanned method looks for exact clientId match
         result.Should()
-              .BeTrue(); // Adjust expectation based on actual implementation behavior
+              .BeFalse();
     }
 
     [Test]
