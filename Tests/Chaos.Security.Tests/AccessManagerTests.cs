@@ -496,8 +496,9 @@ public class AccessManagerTests : IDisposable
     public async Task ShouldAllowAsync_With_ClientId_Should_Return_False_For_Banned()
     {
         // Arrange
-        uint clientId = 12345;
-        await AccessManager.IdBanishAsync(clientId, 6789);
+          uint clientId1 = 12345;
+          uint clientId2 = 6789;
+          await AccessManager.IdBanishAsync(clientId1, clientId2);
 
         // The implementation stores "clientId1,clientId2" but checks only clientId1
         // So this test needs to match the actual behavior
@@ -508,7 +509,7 @@ public class AccessManagerTests : IDisposable
                .Contain("12345,6789");
 
         // Act
-        var result = await AccessManager.ShouldAllowAsync(clientId);
+          var result = await AccessManager.ShouldAllowAsync(clientId1, clientId2);
 
         // Assert - this might actually return true based on implementation
         // The IsClientIdBanned method looks for exact clientId match, not within comma-separated values
@@ -520,10 +521,11 @@ public class AccessManagerTests : IDisposable
     public async Task ShouldAllowAsync_With_ClientId_Should_Return_True_For_Non_Banned()
     {
         // Arrange
-        uint clientId = 12345;
+          uint clientId1 = 12345;
+          uint clientId2 = 6789;
 
         // Act
-        var result = await AccessManager.ShouldAllowAsync(clientId);
+          var result = await AccessManager.ShouldAllowAsync(clientId1, clientId2);
 
         // Assert
         result.Should()

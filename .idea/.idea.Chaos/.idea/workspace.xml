@@ -58,123 +58,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/CancellationTokenExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/CommonExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/EnumerableExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/MathExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/ObjectExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/ServiceCollectionExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/SpanExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/StringExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Chaos.Common.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Chaos.Common.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlags`1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlags`1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Definitions/RegexCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Definitions/RegexCache.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Extensions/ArrayExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/ArrayExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Extensions/RandomExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/RandomExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Extensions/TypeExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/TypeExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Utilities/DecimalRandomizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Utilities/DecimalRandomizer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Utilities/IntegerRandomizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Utilities/IntegerRandomizer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Utilities/MathEx.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Utilities/TypeEx.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.DarkAges/Extensions/ChaosDialogTypeExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.DarkAges/Extensions/ChaosDialogTypeExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.DarkAges/Extensions/StringBuilderExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.DarkAges/Extensions/StringBuilderExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/ActionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/ActionExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/ArrayExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/CancellationTokenExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/Chaos.Extensions.Common.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/CollectionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/CollectionExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/CommonExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/Definitions/RegexCache.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/DictionaryExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/DictionaryExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/EnumExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/EnumExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/EnumerableExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/FunctionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/FunctionExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/InterlockedObjectExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/InterlockedObjectExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/ObjectExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/SpanExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/StackExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/StackExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/StreamExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/StreamExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/StringExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/TimeSpanExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/TimeSpanExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Common/TypeExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/DirectionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/DirectionExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.IO/FileSystem/DirectorySynchronizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.IO/FileSystem/DirectorySynchronizer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Messaging/Chaos.Messaging.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Messaging/Chaos.Messaging.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Messaging/Extensions/MessagingExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Messaging/Extensions/MessagingExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.NLog.Logging/Chaos.NLog.Logging.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.NLog.Logging/Chaos.NLog.Logging.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.NLog.Logging/Extensions/LoggerExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.NLog.Logging/Extensions/LoggerExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Chaos.Networking.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Chaos.Networking.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Converters/Server/DisplayMenuConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Converters/Server/DisplayMenuConverter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Extensions/CryptoExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Extensions/CryptoExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Extensions/SocketExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Extensions/SocketExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Extensions/SpanWriterExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Extensions/SpanWriterExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Packets/Chaos.Packets.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Packets/Chaos.Packets.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Pathfinding/Chaos.Pathfinding.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Pathfinding/Chaos.Pathfinding.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Schemas/Extensions/TypeExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Schemas/Extensions/TypeExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Scripting.Abstractions/Chaos.Scripting.Abstractions.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Scripting.Abstractions/Chaos.Scripting.Abstractions.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Scripting/Chaos.Scripting.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Scripting/Chaos.Scripting.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Security/Chaos.Security.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Security/Chaos.Security.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Storage.Abstractions/Chaos.Storage.Abstractions.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Storage.Abstractions/Chaos.Storage.Abstractions.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Storage/Extensions/StorageExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Storage/Extensions/StorageExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.TypeMapper/Chaos.TypeMapper.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.TypeMapper/Chaos.TypeMapper.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Wpf/Chaos.Wpf.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Wpf/Chaos.Wpf.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.slnx" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.slnx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Definitions/BigFlags.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Definitions/BigFlags.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Extensions/AoeShapeExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Extensions/AoeShapeExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Extensions/CreatureTypeExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Extensions/CreatureTypeExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Extensions/EnumerableExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Extensions/EnumerableExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Extensions/ScriptExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Extensions/ScriptExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Extensions/ServiceCollectionExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Extensions/ServiceProviderExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Extensions/ServiceProviderExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Extensions/TargetFilterExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Extensions/TargetFilterExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Formulae/Regen/DefaultRegenFormula.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Formulae/Regen/DefaultRegenFormula.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/Admin/SetAislingEnumCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/SetAislingEnumCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/Admin/TestBigFlags.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/DamageAbilityComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/DamageAbilityComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/HealAbilityComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/HealAbilityComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/ManaBasedDamageAbilityComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/ManaBasedDamageAbilityComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/ManaCostAbilityComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/ManaCostAbilityComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/ManaDrainAbilityComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/ManaDrainAbilityComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/ManaReplenishAbilityComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Scripting/Components/AbilityComponents/ManaReplenishAbilityComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Scripting/DialogScripts/GuildScripts/GuildMemberDemoteScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Scripting/DialogScripts/GuildScripts/GuildMemberDemoteScript.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Scripting/DialogScripts/GuildScripts/GuildMemberPromoteScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Scripting/DialogScripts/GuildScripts/GuildMemberPromoteScript.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/Other/StockService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Other/StockService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsCollectionTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/BigFlagsCollectionTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/EnumCollectionTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/EnumCollectionTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/FifoAutoReleasingSemaphoreSlimTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/FifoAutoReleasingSemaphoreSlimTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/MapperTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/MapperTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/MathExTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/MathExTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/TypeExTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/TypeExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/TypeExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/TypeSwitchExpressionTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/TypeSwitchExpressionTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/ArrayExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/ArrayExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/CancellationTokenExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/CancellationTokenExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/Chaos.Extensions.Common.Tests.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/ChaosDialogTypeExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/ChaosDialogTypeExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/CollectionExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/CollectionExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/DictionaryExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/DictionaryExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/EnumExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/EnumExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/EnumerableExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/EnumerableExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/ObjectExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/ObjectExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/SpanExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/SpanExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/StackExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/StackExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/StreamExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/StreamExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/StringBuilderExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/StringBuilderExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/StringExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/StringExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/TimeSpanExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Common.Tests/TimeSpanExtensionsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Extensions.Common.Tests/TypeExtensionsTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.IO.Tests/FileExTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.IO.Tests/FileExTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/Definitions/Enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/Definitions/Enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/TestBigFlagsInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/TestBigFlagsInitializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Time.Tests/IntervalTimerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Time.Tests/IntervalTimerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Time.Tests/ResettingCounterTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Time.Tests/ResettingCounterTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Time.Tests/SequentialEventTimerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Time.Tests/SequentialEventTimerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Time.Tests/SequentialTimersTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Time.Tests/SequentialTimersTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/ChaosTool/Extensions/ControlExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/ChaosTool/Extensions/ControlExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/ChaosTool/Utility/AutoMapperEx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/ChaosTool/Utility/AutoMapperEx.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Security.Abstractions/IAccessManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Security.Abstractions/IAccessManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Security/AccessManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Security/AccessManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Services/Servers/LoginServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Servers/LoginServer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Security.Tests/AccessManagerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Security.Tests/AccessManagerTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -568,10 +456,14 @@
     <setting file="file://$PROJECT_DIR$/Chaos.Common/Synchronization/InterlockedObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Cryptography/Tables.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.DarkAges/Definitions/Enums.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos.DarkAges/Extensions/ChaosDialogTypeExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos.DarkAges/Extensions/ChaosDialogTypeExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos.DarkAges/Extensions/StringBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Extensions.Geometry/LocationExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Extensions.Geometry/PointExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Geometry.Abstractions/Definitions/Enums.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/repos/Sichii/Chaos-Server/Chaos.IO/FileSystem/DirectorySynchronizer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.MetaData/Abstractions/IMetaNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.MetaData/ClassMetaData/AbilityMetaNodeCollection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.MetaData/ItemMetaData/ItemMetaNode.cs" root0="FORCE_HIGHLIGHTING" />
@@ -600,7 +492,6 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Collections/MapEntityCollection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Definitions/BigFlags.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Chaos/Messaging/Admin/TestBigFlags.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/ChannelListCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/JoinChannelCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/LeaveChannelCommand.cs" root0="FORCE_HIGHLIGHTING" />
@@ -668,59 +559,59 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.Benchmarks.executor": "Run",
-    ".NET Project.Chaos.executor": "Debug",
-    ".NET Project.ChaosTool.executor": "Debug",
-    ".NET Project.ItemLevelPatch.executor": "Run",
-    ".NET Project.SchemaGenerator.executor": "Debug",
-    ".NET Project.SeqConfigurator.executor": "Run",
-    "54c0c070-a7bc-4bed-b39d-bc8f581e068c.executor": "Debug",
-    "5cacdb9d-324b-4d7e-9eea-0604ac093b11.executor": "Debug",
-    "67a2ddff-cb31-4aef-aec5-224d07a1c1d8.executor": "Debug",
-    "7b29db37-3d35-4db2-ab31-0781c9ebcf90.executor": "Debug",
-    "86858d17-9592-45c9-b16f-227e8425ab45.executor": "Debug",
-    "88ebbb62-3b48-4f36-88fd-bd8138606451.executor": "Debug",
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.CodyProjectSettingsMigration": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "a91c9345-e540-4a6b-ae63-d6cde8762931.executor": "Debug",
-    "c2afcbe5-0e59-4837-899f-c28ccc52a2d6.executor": "Debug",
-    "c4624a35-7dc3-41a5-9b53-3f8f1f8317f0.executor": "Debug",
-    "dd64a8b7-701d-4f62-bf9a-f2201898d16d.executor": "Debug",
-    "dde2c854-b787-4b8f-97bd-cd545d332b2e.executor": "Debug",
-    "ded3c7a5-9a9d-445e-8825-e30b079c3145.executor": "Debug",
-    "e1a18812-12c1-4799-bd54-eba5d50eb555.executor": "Debug",
-    "e490b3b5-8569-45e9-b78c-cf9e0537656a.executor": "Debug",
-    "edb1b382-81ae-4b94-a501-fae99ab1c6bf.executor": "Debug",
-    "fc439a04-995e-4a7b-9c5d-88fa3c6ed18d.executor": "Debug",
-    "git-widget-placeholder": "develop",
-    "ignore.virus.scanning.warn.message": "true",
-    "js.last.introduce.type": "LET",
-    "lastPackageVersionDialogProperty": "true",
-    "last_opened_file_path": "D:/repos/Sichii/Chaos-Server/Chaos.Schemas",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "rider.code.cleanup.on.save": "true",
-    "rider.code.cleanup.on.save.profile": "Custom Cleanup",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "settings.editor.splitter.proportion": "0.21536253",
-    "ts.external.directory.path": "D:\\JetBrains\\apps\\Rider\\ch-0\\233.13135.100\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.Benchmarks.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Project.Chaos.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET Project.ChaosTool.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET Project.ItemLevelPatch.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Project.SchemaGenerator.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET Project.SeqConfigurator.executor&quot;: &quot;Run&quot;,
+    &quot;54c0c070-a7bc-4bed-b39d-bc8f581e068c.executor&quot;: &quot;Debug&quot;,
+    &quot;5cacdb9d-324b-4d7e-9eea-0604ac093b11.executor&quot;: &quot;Debug&quot;,
+    &quot;67a2ddff-cb31-4aef-aec5-224d07a1c1d8.executor&quot;: &quot;Debug&quot;,
+    &quot;7b29db37-3d35-4db2-ab31-0781c9ebcf90.executor&quot;: &quot;Debug&quot;,
+    &quot;86858d17-9592-45c9-b16f-227e8425ab45.executor&quot;: &quot;Debug&quot;,
+    &quot;88ebbb62-3b48-4f36-88fd-bd8138606451.executor&quot;: &quot;Debug&quot;,
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;a91c9345-e540-4a6b-ae63-d6cde8762931.executor&quot;: &quot;Debug&quot;,
+    &quot;c2afcbe5-0e59-4837-899f-c28ccc52a2d6.executor&quot;: &quot;Debug&quot;,
+    &quot;c4624a35-7dc3-41a5-9b53-3f8f1f8317f0.executor&quot;: &quot;Debug&quot;,
+    &quot;dd64a8b7-701d-4f62-bf9a-f2201898d16d.executor&quot;: &quot;Debug&quot;,
+    &quot;dde2c854-b787-4b8f-97bd-cd545d332b2e.executor&quot;: &quot;Debug&quot;,
+    &quot;ded3c7a5-9a9d-445e-8825-e30b079c3145.executor&quot;: &quot;Debug&quot;,
+    &quot;e1a18812-12c1-4799-bd54-eba5d50eb555.executor&quot;: &quot;Debug&quot;,
+    &quot;e490b3b5-8569-45e9-b78c-cf9e0537656a.executor&quot;: &quot;Debug&quot;,
+    &quot;edb1b382-81ae-4b94-a501-fae99ab1c6bf.executor&quot;: &quot;Debug&quot;,
+    &quot;fc439a04-995e-4a7b-9c5d-88fa3c6ed18d.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;js.last.introduce.type&quot;: &quot;LET&quot;,
+    &quot;lastPackageVersionDialogProperty&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/repos/Sichii/Chaos-Server/Chaos.Schemas&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rider.code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;rider.code.cleanup.on.save.profile&quot;: &quot;Custom Cleanup&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.21536253&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\JetBrains\\apps\\Rider\\ch-0\\233.13135.100\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Project.Chaos">
     <configuration name="SeqConfiguratorPublish" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" target_folder="$PROJECT_DIR$/Tools/SeqConfigurator/bin/Release/net7.0/publish" target_framework="net7.0" uuid_high="-3565605415540145261" uuid_low="-5168491521234425180" />
@@ -2284,7 +2175,8 @@
       <workItem from="1763644984297" duration="763000" />
       <workItem from="1763648502823" duration="48000" />
       <workItem from="1763838695185" duration="1313000" />
-      <workItem from="1763840031947" duration="1654000" />
+      <workItem from="1763840031947" duration="1798000" />
+      <workItem from="1763856842618" duration="415000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2629,7 +2521,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="383" />
+    <option name="localTasksCounter" value="384" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2725,7 +2617,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="SequenceScriptBuilder, Heartbeat&#10;- added some functionality to the sequenceScriptBuilder&#10;- implemented a routing to use the heartbeat packets&#10;- added a heartbeat interval to worldoptions" />
     <MESSAGE value="package updates" />
     <MESSAGE value="SequenceScripter, Cooldowns, misc&#10;- small rework to sequence scripter&#10;- cooldowns now support negative elapsed values, which fixes a bug when trying to set custom cooldown for abilities with no cooldown, or a cooldown shorter than the custom value you were trying to provide&#10;- added a new option to monsterSpawn that allows you to control whether monsters should be counted only in the spawn area or not" />
     <MESSAGE value="tests&#10;- quadtree is now threadsafe&#10;- added a bunch of test cases" />
@@ -2750,7 +2641,8 @@
     <MESSAGE value="fix tests" />
     <MESSAGE value="memory pooling part 1" />
     <MESSAGE value="bigFlags" />
-    <option name="LAST_COMMIT_MESSAGE" value="bigFlags" />
+    <MESSAGE value="misc&#10;- bigflag fixes&#10;- extension conversion&#10;- migrated Chaos.Common.Extensions project into to Chaos.Common" />
+    <option name="LAST_COMMIT_MESSAGE" value="misc&#10;- bigflag fixes&#10;- extension conversion&#10;- migrated Chaos.Common.Extensions project into to Chaos.Common" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
