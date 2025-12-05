@@ -220,7 +220,8 @@ public abstract class SocketClientBase : ISocketClient, IDisposable
                     //required so we can use Span<byte> in an async method
                     void InnerCatch()
                     {
-                        var buffer = Buffer.TrimEnd((byte)0);
+                        var buffer = Buffer[offset..(offset + Count)]
+                            .TrimEnd((byte)0);
 
                         var hex = BitConverter.ToString(buffer.ToArray())
                                               .Replace("-", " ");
