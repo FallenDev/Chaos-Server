@@ -1,11 +1,9 @@
 #region
 using Chaos.Storage;
 using Chaos.Storage.Abstractions;
-using Chaos.Storage.Abstractions.Definitions;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Moq;
 #endregion
 
 namespace Chaos.Testing.Infrastructure.Mocks;
@@ -17,6 +15,8 @@ public sealed class MockCache<T, TSchema, TOptions> : ExpiringFileCache<T, TSche
         IMemoryCache cache,
         IEntityRepository repo,
         IOptions<TOptions> options,
+
+        // ReSharper disable once ContextualLoggerProblem
         ILogger<ExpiringFileCache<T, TSchema, TOptions>> logger)
         : base(
             cache,
