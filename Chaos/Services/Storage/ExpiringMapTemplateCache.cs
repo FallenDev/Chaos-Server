@@ -90,7 +90,7 @@ public sealed class ExpiringMapTemplateCache : ExpiringFileCache<MapTemplate, Ma
                     {
                         Sprite = leftForeground,
                         OpenRight = true,
-                        Closed = true,
+                        Closed = tile.IsWall,
                         Point = point
                     };
                 else if (CHAOS_CONSTANTS.DOOR_TILE_IDS.Contains(rightForeground))
@@ -98,7 +98,7 @@ public sealed class ExpiringMapTemplateCache : ExpiringFileCache<MapTemplate, Ma
                     {
                         Sprite = rightForeground,
                         OpenRight = false,
-                        Closed = true,
+                        Closed = tile.IsWall,
                         Point = point
                     };
             }
