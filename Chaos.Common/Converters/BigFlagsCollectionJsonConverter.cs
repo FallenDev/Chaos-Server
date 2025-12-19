@@ -33,26 +33,7 @@ public sealed class BigFlagsCollectionJsonConverter : JsonConverter<BigFlagsColl
             if (string.IsNullOrEmpty(typeName))
                 throw new JsonException("Type name cannot be null or empty");
 
-            // Resolve the marker type by name (search through loaded assemblies)
-            Type? markerType = null;
-
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                try
-                {
-                    markerType = assembly.GetTypes()
-                                         .FirstOrDefault(t => t.Name == typeName);
-
-                    if (markerType != null)
-                        break;
-                } catch
-                {
-                    // Skip assemblies that can't be loaded or inspected
-                }
-            }
-
-            if (markerType == null)
-                throw new JsonException($"Could not resolve type: {typeName}");
+            var markerType = TypeCache.GetType(typeName) ?? throw new JsonException($"Could not resolve type: {typeName}");
 
             // Read the value
             reader.Read();
@@ -62,38 +43,21 @@ public sealed class BigFlagsCollectionJsonConverter : JsonConverter<BigFlagsColl
 
             var flagsString = reader.GetString();
 
-            if (string.IsNullOrEmpty(flagsString))
+            if (string.IsNullOrEmpty(flagsString) || flagsString.Equals("None", StringComparison.OrdinalIgnoreCase))
             {
-                // Add None value
                 collection.AddFlag(markerType, BigFlags.GetNone(markerType));
 
                 continue;
             }
 
-            // Parse comma-delimited flag names
-            var flagNames = flagsString.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-            var combinedValue = BigFlags.GetNone(markerType);
-
-            foreach (var flagName in flagNames)
-            {
-                // Skip "None" as it represents an empty flags value
-                if (string.Equals(flagName, "None", StringComparison.OrdinalIgnoreCase))
-                    continue;
-
-                if (BigFlags.TryParse(
-                        markerType,
-                        flagName,
-                        false,
-                        out var flagValue))
-                {
-                    // Combine flags using OR
-                    var combined = combinedValue.Value | flagValue.Value;
-                    combinedValue = BigFlags.Create(markerType, combined);
-                } else
-                    throw new JsonException($"Unknown flag name '{flagName}' for type {markerType.Name}");
-            }
-
-            collection.AddFlag(markerType, combinedValue);
+            if (BigFlags.TryParse(
+                    markerType,
+                    flagsString,
+                    true,
+                    out var flagValue))
+                collection.AddFlag(markerType, flagValue);
+            else
+                throw new JsonException($"Unknown flag name '{flagsString}' for type {markerType.Name}");
         }
 
         throw new JsonException("Unexpected end of JSON");

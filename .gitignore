@@ -262,10 +262,6 @@ dev-debug.log
 # Editor directories and files
 .idea
 .taskmaster
-.cursor
-.cursorrules
-.claude
-.serena
 .env.example
 .vscode
 *.ntvs*
@@ -275,7 +271,6 @@ dev-debug.log
 # OS specific
 .DS_Store
 
-CLAUDE.md
 CoverageReport/*
 docs/schemas/
 

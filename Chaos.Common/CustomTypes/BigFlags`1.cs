@@ -210,6 +210,43 @@ public abstract class BigFlags<TMarker> where TMarker: class
     /// </returns>
     public static bool TryParse(string name, bool ignoreCase, out BigFlagsValue<TMarker> value)
     {
+        // Handle comma-separated flag values
+        if (name.Contains(','))
+        {
+            var flagNames = name.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var result = None;
+
+            foreach (var flagName in flagNames)
+            {
+                // Skip "None" as it represents an empty flags value
+                if (string.Equals(flagName, "None", StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                if (!TryParseSingle(flagName, ignoreCase, out var flag))
+                {
+                    value = None;
+
+                    return false;
+                }
+
+                result |= flag;
+            }
+
+            value = result;
+
+            return true;
+        }
+
+        return TryParseSingle(name, ignoreCase, out value);
+    }
+
+    /// <summary>
+    ///     Tries to parse a flag name into its corresponding value (case-sensitive).
+    /// </summary>
+    public static bool TryParse(string name, out BigFlagsValue<TMarker> value) => TryParse(name, false, out value);
+
+    private static bool TryParseSingle(string name, bool ignoreCase, out BigFlagsValue<TMarker> value)
+    {
         var lookup = ignoreCase ? CachedNameToValueIgnoreCase : CachedNameToValue;
 
         if (lookup.TryGetValue(name, out var result))
@@ -223,11 +260,6 @@ public abstract class BigFlags<TMarker> where TMarker: class
 
         return false;
     }
-
-    /// <summary>
-    ///     Tries to parse a flag name into its corresponding value (case-sensitive).
-    /// </summary>
-    public static bool TryParse(string name, out BigFlagsValue<TMarker> value) => TryParse(name, false, out value);
 }
 
 /// <summary>

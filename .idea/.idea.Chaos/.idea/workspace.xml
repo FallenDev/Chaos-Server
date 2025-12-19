@@ -14,6 +14,93 @@
       </map>
     </option>
   </component>
+  <component name="AIDiffSettings">
+    <option name="showAIDiff" value="true" />
+  </component>
+  <component name="AIDiffStorage" id="3">
+    <groups>
+      <group changeListId="9b1b1fac-4cd8-46fe-a1fa-c25cd87f74b1" id="1" name="Refactor `BigFlags&lt;TMarker&gt;.TryParse` to support comma-separated values" description="Enhance `BigFlags&lt;TMarker&gt;.TryParse` to correctly parse multiple comma-separated flag names." importance="0.9">
+        <files>
+          <file summary="Refactors `TryParse` to handle comma-separated flag names and introduces `TryParseSingle` for individual flag parsing." importance="0.9" isPending="false">
+            <change beforePath="$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlags`1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlags`1.cs" afterDir="false" />
+            <ranges>
+              <range afterLine1="212" afterLine2="217" beforeLine1="212" beforeLine2="213" groupId="1" />
+              <range afterLine1="218" afterLine2="223" beforeLine1="214" beforeLine2="217" groupId="1" />
+              <range afterLine1="224" afterLine2="227" beforeLine1="218" beforeLine2="222" groupId="1" />
+              <range afterLine1="228" afterLine2="230" beforeLine1="223" beforeLine2="225" groupId="1" />
+              <range afterLine1="231" afterLine2="242" beforeLine1="226" beforeLine2="226" groupId="1" />
+              <range afterLine1="246" afterLine2="263" beforeLine1="230" beforeLine2="230" groupId="1" />
+            </ranges>
+          </file>
+        </files>
+      </group>
+      <group changeListId="e1f6644e-8064-4a2c-9dbf-9b77f115b950" id="2" name="Add `TypeCache` for efficient enum and type lookups" description="Introduce `TypeCache` to centralize and optimize enum and type resolution for converters." importance="0.8">
+        <files>
+          <file summary="Adds `TypeCache` class with `GetEnumType` and `GetType` methods for cached type resolution, improving performance." importance="0.8" isPending="false">
+            <change afterPath="$PROJECT_DIR$/Chaos.Common/Converters/TypeCache.cs" afterDir="false" />
+            <ranges>
+              <range afterLine1="0" afterLine2="108" beforeLine1="0" beforeLine2="0" groupId="2" />
+            </ranges>
+          </file>
+        </files>
+      </group>
+      <group changeListId="33aaf774-5a98-4f62-a45d-373b9a1a74a3" id="3" name="Update JSON converters to use `TypeCache` and refactored `BigFlags.TryParse`" description="Migrate `EnumCollectionConverter`, `FlagCollectionConverter`, `BigFlagsCollectionJsonConverter`, and `BigFlagsValueJsonConverter` to use `TypeCache` and the enhanced `BigFlags.TryParse`." importance="0.7">
+        <files>
+          <file summary="Refactors `BigFlagsCollectionJsonConverter` to use `TypeCache.GetType` for marker type resolution and `BigFlags.TryParse` for flag parsing, simplifying logic." importance="0.8" isPending="false">
+            <change beforePath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsCollectionJsonConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsCollectionJsonConverter.cs" afterDir="false" />
+            <ranges>
+              <range afterLine1="35" afterLine2="37" beforeLine1="35" beforeLine2="55" groupId="3" />
+              <range afterLine1="46" afterLine2="47" beforeLine1="64" beforeLine2="65" groupId="3" />
+              <range afterLine1="48" afterLine2="48" beforeLine1="66" beforeLine2="67" groupId="3" />
+              <range afterLine1="53" afterLine2="57" beforeLine1="72" beforeLine2="96" groupId="3" />
+            </ranges>
+          </file>
+          <file summary="Simplifies `BigFlagsValueJsonConverter` by directly using the enhanced `BigFlags&lt;TMarker&gt;.TryParse` for parsing flag strings." importance="0.8" isPending="false">
+            <change beforePath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsValueJsonConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsValueJsonConverter.cs" afterDir="false" />
+            <ranges>
+              <range afterLine1="30" afterLine2="34" beforeLine1="30" beforeLine2="41" groupId="3" />
+            </ranges>
+          </file>
+          <file summary="Updates `EnumCollectionConverter` to use `TypeCache.GetEnumType` for resolving enum types, removing redundant assembly scanning." importance="0.7" isPending="false">
+            <change beforePath="$PROJECT_DIR$/Chaos.Common/Converters/EnumCollectionConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Converters/EnumCollectionConverter.cs" afterDir="false" />
+            <ranges>
+              <range afterLine1="16" afterLine2="17" beforeLine1="16" beforeLine2="34" groupId="3" />
+              <range afterLine1="20" afterLine2="25" beforeLine1="37" beforeLine2="40" groupId="3" />
+              <range afterLine1="27" afterLine2="28" beforeLine1="42" beforeLine2="43" groupId="3" />
+            </ranges>
+          </file>
+          <file summary="Updates `FlagCollectionConverter` to use `TypeCache.GetEnumType` for resolving flag types, removing redundant assembly scanning." importance="0.7" isPending="false">
+            <change beforePath="$PROJECT_DIR$/Chaos.Common/Converters/FlagCollectionConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Converters/FlagCollectionConverter.cs" afterDir="false" />
+            <ranges>
+              <range afterLine1="18" afterLine2="18" beforeLine1="18" beforeLine2="35" groupId="3" />
+              <range afterLine1="20" afterLine2="23" beforeLine1="37" beforeLine2="38" groupId="3" />
+            </ranges>
+          </file>
+        </files>
+      </group>
+      <group changeListId="e42e205f-42fa-4dab-9f8c-c4fc6628cf7e" id="4" name="Update `.idea/workspace.xml` for project settings" description="Adjust `.idea/workspace.xml` to reflect updated project settings and task counters." importance="0.1">
+        <files>
+          <file summary="Updates various project settings, task counters, and commit messages in `.idea/workspace.xml`." importance="0.1" isPending="false">
+            <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
+            <ranges>
+              <range afterLine1="61" afterLine2="63" beforeLine1="61" beforeLine2="68" groupId="4" />
+              <range afterLine1="519" afterLine2="520" beforeLine1="524" beforeLine2="524" groupId="4" />
+              <range afterLine1="539" afterLine2="543" beforeLine1="543" beforeLine2="543" groupId="4" />
+              <range afterLine1="583" afterLine2="584" beforeLine1="583" beforeLine2="583" groupId="4" />
+              <range afterLine1="620" afterLine2="627" beforeLine1="619" beforeLine2="619" groupId="4" />
+              <range afterLine1="2195" afterLine2="2198" beforeLine1="2187" beforeLine2="2188" groupId="4" />
+              <range afterLine1="2542" afterLine2="2543" beforeLine1="2532" beforeLine2="2533" groupId="4" />
+              <range afterLine1="2638" afterLine2="2638" beforeLine1="2628" beforeLine2="2629" groupId="4" />
+              <range afterLine1="2662" afterLine2="2664" beforeLine1="2653" beforeLine2="2654" groupId="4" />
+              <range afterLine1="2968" afterLine2="2969" beforeLine1="2958" beforeLine2="2959" groupId="4" />
+              <range afterLine1="2971" afterLine2="2972" beforeLine1="2961" beforeLine2="2962" groupId="4" />
+              <range afterLine1="2974" afterLine2="2975" beforeLine1="2964" beforeLine2="2965" groupId="4" />
+            </ranges>
+          </file>
+        </files>
+      </group>
+    </groups>
+  </component>
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="3" />
   </component>
@@ -57,15 +144,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
+    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="" />
+    <list id="e1f6644e-8064-4a2c-9dbf-9b77f115b950" name="Add `TypeCache` for efficient enum and type lookups" comment="Introduce `TypeCache` to centralize and optimize enum and type resolution for converters.">
+      <change afterPath="$PROJECT_DIR$/Chaos.Common/Converters/TypeCache.cs" afterDir="false" />
+    </list>
+    <list id="9b1b1fac-4cd8-46fe-a1fa-c25cd87f74b1" name="Refactor `BigFlags&lt;TMarker&gt;.TryParse` to support comma-separated values" comment="Enhance `BigFlags&lt;TMarker&gt;.TryParse` to correctly parse multiple comma-separated flag names.">
+      <change beforePath="$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlags`1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlags`1.cs" afterDir="false" />
+    </list>
+    <list id="e42e205f-42fa-4dab-9f8c-c4fc6628cf7e" name="Update `.idea/workspace.xml` for project settings" comment="Adjust `.idea/workspace.xml` to reflect updated project settings and task counters.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Storage.Abstractions/ISimpleCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Storage.Abstractions/ISimpleCache.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Storage/ExpiringFileCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Storage/ExpiringFileCache.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/Storage/SimpleCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Storage/SimpleCache.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/Chaos.Testing.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/Chaos.Testing.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/Mocks/MockCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/Mocks/MockCache.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Reports/generateCoverageReport-auto.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Reports/generateCoverageReport-auto.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Reports/generateCoverageReport.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Reports/generateCoverageReport.bat" afterDir="false" />
+    </list>
+    <list id="33aaf774-5a98-4f62-a45d-373b9a1a74a3" name="Update JSON converters to use `TypeCache` and refactored `BigFlags.TryParse`" comment="Migrate `EnumCollectionConverter`, `FlagCollectionConverter`, `BigFlagsCollectionJsonConverter`, and `BigFlagsValueJsonConverter` to use `TypeCache` and the enhanced `BigFlags.TryParse`.">
+      <change beforePath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsCollectionJsonConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsCollectionJsonConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsValueJsonConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Converters/BigFlagsValueJsonConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Common/Converters/EnumCollectionConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Converters/EnumCollectionConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Common/Converters/FlagCollectionConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Converters/FlagCollectionConverter.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -522,6 +615,7 @@
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Extensions.Geometry.Tests/PointExtensionsTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.IO.Tests/DirectorySynchronizerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Chaos.Messaging.Tests/CommandInterceptorTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/Chaos.Testing.Infrastructure/Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://D:/repos/Sichii/Chaos-Server/Tests/Chaos.Testing.Infrastructure/Mocks/MockCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/App.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tools/ChaosTool/App.xaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -541,6 +635,10 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NamedScopeManager">
@@ -581,6 +679,7 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
@@ -617,6 +716,13 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecapSpentCounter">
+    <option name="endsOfQuotaMs" value="1768327208615" />
+    <option name="spentUsd" value="0.003823" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="9" />
+  </component>
   <component name="RunManager" selected=".NET Project.Chaos">
     <configuration name="SeqConfiguratorPublish" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" target_folder="$PROJECT_DIR$/Tools/SeqConfigurator/bin/Release/net7.0/publish" target_framework="net7.0" uuid_high="-3565605415540145261" uuid_low="-5168491521234425180" />
@@ -2185,7 +2291,9 @@
       <workItem from="1764955828108" duration="361000" />
       <workItem from="1765409393684" duration="2547000" />
       <workItem from="1765808599264" duration="1635000" />
-      <workItem from="1765894275596" duration="938000" />
+      <workItem from="1765894275596" duration="1670000" />
+      <workItem from="1766183994576" duration="881000" />
+      <workItem from="1766184937639" duration="867000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2530,7 +2638,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="387" />
+    <option name="localTasksCounter" value="388" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2626,7 +2734,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="more tests" />
     <MESSAGE value="tests and misc" />
     <MESSAGE value="json schema generation" />
     <MESSAGE value="schema documentation" />
@@ -2651,7 +2758,8 @@
     <MESSAGE value="fix id bans" />
     <MESSAGE value="fix test" />
     <MESSAGE value="fix issue with buffer dumping" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix issue with buffer dumping" />
+    <MESSAGE value="Exists/TryGetValue for ISimpleCache&#10;- also fixed test report generation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exists/TryGetValue for ISimpleCache&#10;- also fixed test report generation" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2956,13 +3064,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Chaos.Common/CustomTypes/BigFlags`1.cs</url>
-          <line>266</line>
+          <line>299</line>
           <properties documentPath="D:\repos\Sichii\Chaos-Server\Chaos.Common\CustomTypes\BigFlags`1.cs" containingFunctionPresentation="Method 'InitializeAssembly'">
             <startOffsets>
-              <option value="9906" />
+              <option value="10862" />
             </startOffsets>
             <endOffsets>
-              <option value="9961" />
+              <option value="10917" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="948" />

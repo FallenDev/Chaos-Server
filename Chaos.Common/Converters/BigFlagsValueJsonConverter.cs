@@ -28,17 +28,10 @@ public sealed class BigFlagsValueJsonConverter<TMarker> : JsonConverter<BigFlags
         if (string.IsNullOrWhiteSpace(value) || value.Equals("None", StringComparison.OrdinalIgnoreCase))
             return BigFlags<TMarker>.None;
 
-        // Split by comma and parse each flag name
-        var flagNames = value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-        var result = BigFlags<TMarker>.None;
+        if (BigFlags<TMarker>.TryParse(value, true, out var result))
+            return result;
 
-        foreach (var flagName in flagNames)
-            if (BigFlags<TMarker>.TryParse(flagName, true, out var flag))
-                result |= flag;
-            else
-                throw new JsonException($"Unknown flag name '{flagName}' for type {typeof(TMarker).Name}");
-
-        return result;
+        throw new JsonException($"Unknown flag name '{value}' for type {typeof(TMarker).Name}");
     }
 
     /// <inheritdoc />
