@@ -6,6 +6,7 @@ using Chaos.Cryptography.Abstractions;
 using Chaos.DarkAges.Definitions;
 using Chaos.DarkAges.Extensions;
 using Chaos.Definitions;
+using Chaos.Extensions;
 using Chaos.Extensions.Common;
 using Chaos.Extensions.Networking;
 using Chaos.Geometry.Abstractions.Definitions;
@@ -392,6 +393,8 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
 
     public void SendDoors(IEnumerable<Door> doors)
     {
+        doors = doors.ThatAreWithinRange(Aisling, 11);
+
         var args = new DoorArgs
         {
             Doors = Mapper.MapMany<DoorInfo>(doors)
