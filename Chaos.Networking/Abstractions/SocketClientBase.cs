@@ -22,11 +22,14 @@ namespace Chaos.Networking.Abstractions;
 /// </summary>
 public abstract class SocketClientBase : ISocketClient, IDisposable
 {
+    /// <summary>
+    ///     ActivitySource for packet processing traces. Name matches the registered source in OpenTelemetry configuration.
+    /// </summary>
+    private static readonly ActivitySource PacketActivitySource = new("chaos-server.packets");
+
     private readonly Memory<byte> Memory;
     private readonly ConcurrentQueue<SocketAsyncEventArgs> SocketArgsQueue;
     private int Count;
-
-    private NetworkMonitor? NetworkMonitor;
     private int Sequence;
 
     /// <inheritdoc />
@@ -162,8 +165,6 @@ public abstract class SocketClientBase : ISocketClient, IDisposable
         Connected = true;
         await Task.Yield();
 
-        NetworkMonitor = new NetworkMonitor(this, Logger);
-
         var args = new SocketAsyncEventArgs();
         args.SetBuffer(Memory);
         args.Completed += ReceiveEventHandler;
@@ -207,14 +208,28 @@ public abstract class SocketClientBase : ISocketClient, IDisposable
 
                 try
                 {
-                    var start = Stopwatch.GetTimestamp();
                     var opcode = Buffer[offset + 3];
+
+                    // Clear parent context so packets are sampled independently
+                    var previousActivity = Activity.Current;
+                    Activity.Current = null;
+
+                    using var activity = PacketActivitySource.StartActivity("Packet.Handle");
+
+                    // Restore previous if not sampled
+                    if (activity == null)
+                        Activity.Current = previousActivity;
+
+                    activity?.SetTag("packet.opcode", opcode);
+                    activity?.SetTag("packet.length", packetLength);
+
+                    activity?.SetTag(
+                        "client.type",
+                        GetType()
+                            .Name);
 
                     await HandlePacketAsync(Buffer.Slice(offset, packetLength))
                         .ConfigureAwait(false);
-
-                    var elapsed = Stopwatch.GetElapsedTime(start);
-                    NetworkMonitor!.Digest(opcode, elapsed);
                 } catch (Exception ex)
                 {
                     //required so we can use Span<byte> in an async method

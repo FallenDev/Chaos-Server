@@ -34,6 +34,11 @@ using Microsoft.Extensions.Options;
 using NLog;
 using NLog.Config;
 using NLog.Extensions.Logging;
+using Chaos.Definitions;
+using OpenTelemetry;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using AppContext = Chaos.AppContext;
 #endregion
 
@@ -101,7 +106,7 @@ static void AddConfiguration(WebApplicationBuilder builder)
            .AddJsonFile("appsettings.logging.json", false, true)
            #if DEBUG
            .AddJsonFile("appsettings.local.json", false, true);
-           #else
+    #else
            .AddJsonFile("appsettings.prod.json", false, true);
     #endif
 
@@ -165,6 +170,8 @@ static void ConfigureServices(WebApplicationBuilder builder)
         logging.AddNLog();
     });
 
+    ConfigureOpenTelemetry(builder);
+
     builder.Services.AddJsonSerializerOptions();
     builder.Services.AddCommandInterceptor<Aisling, AislingCommandInterceptorOptions>(ConfigKeys.Options.Key);
     builder.Services.AddChannelService(ConfigKeys.Options.Key);
@@ -205,6 +212,54 @@ static void ConfigureServices(WebApplicationBuilder builder)
 
         builder.ConfigureSite();
     }
+}
+
+static void ConfigureOpenTelemetry(WebApplicationBuilder builder)
+{
+    var useSeq = builder.Configuration.GetValue<bool>(ConfigKeys.Logging.UseSeq);
+
+    if (!useSeq)
+        return;
+
+    var serviceName = builder.Configuration.GetValue<string>(ConfigKeys.OpenTelemetry.ServiceName) ?? "chaos-server";
+    var otlpEndpoint = builder.Configuration.GetValue<string>(ConfigKeys.OpenTelemetry.OtlpEndpoint);
+
+    if (string.IsNullOrWhiteSpace(otlpEndpoint))
+        return;
+
+    var samplingRatio = builder.Configuration.GetValue(ConfigKeys.OpenTelemetry.SamplingRatio, 1.0);
+    var updateSamplingRatio = builder.Configuration.GetValue(ConfigKeys.OpenTelemetry.UpdateSamplingRatio, 0.01);
+    var packetSamplingRatio = builder.Configuration.GetValue(ConfigKeys.OpenTelemetry.PacketSamplingRatio, 0.001);
+    var worldScriptSamplingRatio = builder.Configuration.GetValue(ConfigKeys.OpenTelemetry.WorldScriptSamplingRatio, 0.01);
+    var slowUpdateThresholdMs = builder.Configuration.GetValue(ConfigKeys.OpenTelemetry.SlowUpdateThresholdMs, 33.33);
+    var slowPacketThresholdMs = builder.Configuration.GetValue(ConfigKeys.OpenTelemetry.SlowPacketThresholdMs, 100.0);
+    var slowWorldScriptThresholdMs = builder.Configuration.GetValue(ConfigKeys.OpenTelemetry.SlowWorldScriptThresholdMs, 66.66);
+
+    var rootSampler = new ChaosTracingSampler(
+        samplingRatio,
+        updateSamplingRatio,
+        packetSamplingRatio,
+        worldScriptSamplingRatio);
+
+    var sampler = new ParentBasedSampler(rootSampler);
+
+    builder.Services
+           .AddOpenTelemetry()
+           .ConfigureResource(resource => resource.AddService(serviceName))
+           .WithTracing(tracing =>
+           {
+               tracing.SetSampler(sampler)
+                      .AddSource(ChaosActivitySource.SOURCE_NAME)
+                      .AddSource(ChaosActivitySource.UPDATE_SOURCE_NAME)
+                      .AddSource(ChaosActivitySource.PACKET_SOURCE_NAME)
+                      .AddSource(ChaosActivitySource.WORLD_SCRIPT_SOURCE_NAME)
+                      .AddProcessor(new SlowOperationProcessor(slowUpdateThresholdMs, slowPacketThresholdMs, slowWorldScriptThresholdMs))
+                      .AddOtlpExporter(opts =>
+                      {
+                          opts.Endpoint = new Uri(otlpEndpoint);
+                          opts.Protocol = OtlpExportProtocol.HttpProtobuf;
+                      });
+           });
 }
 
 static void RegisterStructuredLoggingTransformations()
@@ -413,22 +468,6 @@ static void RegisterStructuredLoggingTransformations()
                          Subject = obj.Subject,
                          Message = obj.Message,
                          Creation = obj.CreationDate
-                     });
-
-                     builder.RegisterObjectTransformation<List<NetworkStatistic>>(obj =>
-                     {
-                         var ret = obj.Select(x => new
-                                      {
-                                          OpCode = x.OpCode,
-                                          Average = x.Average,
-                                          Max = x.Max,
-                                          Upper95thPercentile = x.Upper95ThPercentile,
-                                          Median = x.Median,
-                                          Count = x.Count
-                                      })
-                                      .ToList();
-
-                         return ret;
                      });
 
                      builder.RegisterCollectionTransformations(

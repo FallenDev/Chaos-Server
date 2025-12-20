@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Chaos.Common.Abstractions;
 using Chaos.Common.Synchronization;
 using Chaos.DarkAges.Definitions;
+using Chaos.Definitions;
 using Chaos.Extensions;
 using Chaos.Extensions.Common;
 using Chaos.Extensions.Geometry;
@@ -33,7 +35,6 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
 {
     private readonly IAsyncStore<Aisling> AislingStore;
     private readonly IIntervalTimer DayNightCycleTimer;
-    private readonly DeltaMonitor DeltaMonitor;
     private readonly DeltaTime DeltaTime;
     private readonly PeriodicTimer DeltaTimer;
     private readonly IIntervalTimer HandleShardLimitersTimer;
@@ -221,12 +222,6 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
         var delta = 1000.0 / WorldOptions.Instance.UpdatesPerSecond;
         DeltaTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(delta));
         DeltaTime = new DeltaTime();
-
-        DeltaMonitor = new DeltaMonitor(
-            InstanceId,
-            logger,
-            TimeSpan.FromMinutes(1),
-            Math.Min(delta * 10, 500));
 
         if (extraScriptKeys != null)
             ScriptKeys.AddRange(extraScriptKeys);
@@ -1552,21 +1547,52 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     /// </param>
     public async Task UpdateMapAsync(TimeSpan delta)
     {
-        await using var sync = await Sync.WaitAsync();
+        using var activity = ChaosActivitySource.StartRootUpdateActivity("Map.UpdateAsync");
 
-        DeltaMonitor.Update(delta);
+        activity?.SetTag("map.instance_id", InstanceId);
 
-        var start = Stopwatch.GetTimestamp();
+        // Get parent context for child spans (use default if not sampled)
+        var parentContext = activity?.Context ?? default;
 
-        Update(delta);
+        IPolyDisposable sync;
 
-        var aislingsToSave = Objects.Values<Aisling>()
-                                    .Where(aisling => aisling.SaveTimer.IntervalElapsed);
+        using (var syncActivity = ChaosActivitySource.Updates.StartActivity(
+                   "Map.UpdateAsync.AcquireSync",
+                   ActivityKind.Internal,
+                   parentContext))
+        {
+            sync = await Sync.WaitAsync();
+            syncActivity?.SetTag("sync.acquired", true);
+        }
 
-        await Task.WhenAll(aislingsToSave.Select(AislingStore.SaveAsync));
+        await using (sync)
+        {
+            using (var updateActivity = ChaosActivitySource.Updates.StartActivity(
+                       "Map.UpdateAsync.Update",
+                       ActivityKind.Internal,
+                       parentContext))
+            {
+                updateActivity?.SetTag("delta_ms", delta.TotalMilliseconds);
 
-        var elapsed = Stopwatch.GetElapsedTime(start);
-        DeltaMonitor.DigestDelta(elapsed);
+                Update(delta);
+            }
+
+            var aislingsToSave = Objects.Values<Aisling>()
+                                        .Where(aisling => aisling.SaveTimer.IntervalElapsed)
+                                        .ToList();
+
+            if (aislingsToSave.Count > 0)
+            {
+                using var saveActivity = ChaosActivitySource.Updates.StartActivity(
+                    "Map.UpdateAsync.SaveAislings",
+                    ActivityKind.Internal,
+                    parentContext);
+
+                saveActivity?.SetTag("aisling.save_count", aislingsToSave.Count);
+
+                await Task.WhenAll(aislingsToSave.Select(AislingStore.SaveAsync));
+            }
+        }
     }
 
     /// <summary>

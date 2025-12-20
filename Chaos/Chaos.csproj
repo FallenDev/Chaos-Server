@@ -60,6 +60,11 @@
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"/>
         <PackageReference Include="NLog.Targets.Network"/>
         <PackageReference Include="NLog.Web.AspNetCore"/>
+        <PackageReference Include="OpenTelemetry"/>
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.Http"/>
+        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol"/>
         <PackageReference Include="System.Configuration.ConfigurationManager"/>
     </ItemGroup>
     <ItemGroup>
