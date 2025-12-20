@@ -60,9 +60,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -2197,6 +2195,7 @@
       <workItem from="1765894275596" duration="1670000" />
       <workItem from="1766183994576" duration="881000" />
       <workItem from="1766184937639" duration="1645000" />
+      <workItem from="1766186623505" duration="182000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2541,7 +2540,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="389" />
+    <option name="localTasksCounter" value="390" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2637,7 +2636,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="json schema generation" />
     <MESSAGE value="schema documentation" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="fix sln" />
@@ -2662,7 +2660,8 @@
     <MESSAGE value="fix issue with buffer dumping" />
     <MESSAGE value="Exists/TryGetValue for ISimpleCache&#10;- also fixed test report generation" />
     <MESSAGE value="Enums/Flags type caching&#10;- allowed claude/serena files to be committed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Enums/Flags type caching&#10;- allowed claude/serena files to be committed" />
+    <MESSAGE value="attempted door fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="attempted door fix" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

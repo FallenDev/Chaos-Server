@@ -1182,7 +1182,14 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
             return false;
 
         if (!ignoreWalls.Value && IsWall(point))
-            return false;
+        {
+            var openDoor = GetEntitiesAtPoints<Door>(point)
+                .FirstOrDefault(d => !d.Closed);
+
+            //we have an open door that is also a wall
+            if (openDoor is null)
+                return false;
+        }
 
         if (ignoreCollision.Value)
             return true;
