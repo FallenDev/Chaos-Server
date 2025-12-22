@@ -48,39 +48,38 @@ public sealed class WorldScriptingService : BackgroundService
 
                 var currentDelta = deltaTime.GetDelta;
 
-                using (var loopActivity = ChaosActivitySource.StartRootWorldScriptActivity("WorldScript.UpdateAll"))
-                {
-                    loopActivity?.SetTag("worldscript.count", serverScripts.Count);
-                    loopActivity?.SetTag("delta_ms", currentDelta.TotalMilliseconds);
+                using var loopActivity = ChaosActivitySource.StartRootWorldScriptActivity("WorldScript.UpdateAll");
 
-                    // Get parent context for child spans
-                    var parentContext = loopActivity?.Context ?? default;
+                loopActivity?.SetTag("worldscript.count", serverScripts.Count);
+                loopActivity?.SetTag("delta_ms", currentDelta.TotalMilliseconds);
 
-                    foreach (var script in serverScripts)
-                        if (script.Enabled)
-                            try
-                            {
-                                var scriptType = script.GetType()
-                                                       .Name;
+                // Get parent context for child spans
+                var parentContext = loopActivity?.Context ?? default;
 
-                                using var scriptActivity = ChaosActivitySource.WorldScripts.StartActivity(
-                                    "WorldScript.Update",
-                                    ActivityKind.Internal,
-                                    parentContext);
+                foreach (var script in serverScripts)
+                    if (script.Enabled)
+                        try
+                        {
+                            var scriptType = script.GetType()
+                                                   .Name;
 
-                                scriptActivity?.SetTag("worldscript.type", scriptType);
+                            using var scriptActivity = ChaosActivitySource.WorldScripts.StartActivity(
+                                "WorldScript.Update",
+                                ActivityKind.Internal,
+                                parentContext);
 
-                                script.Update(currentDelta);
-                            } catch (Exception e)
-                            {
-                                Logger.WithTopics(Topics.Actions.Update)
-                                      .LogWarning(
-                                          e,
-                                          "Failed to update server script of type {Type}",
-                                          script.GetType()
-                                                .Name);
-                            }
-                }
+                            scriptActivity?.SetTag("worldscript.type", scriptType);
+
+                            script.Update(currentDelta);
+                        } catch (Exception e)
+                        {
+                            Logger.WithTopics(Topics.Actions.Update)
+                                  .LogWarning(
+                                      e,
+                                      "Failed to update server script of type {Type}",
+                                      script.GetType()
+                                            .Name);
+                        }
             } catch (OperationCanceledException)
             {
                 return;

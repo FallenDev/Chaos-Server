@@ -61,21 +61,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Chaos/Definitions/ChaosActivitySource.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos/Definitions/ChaosTracingSampler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos/Definitions/SlowOperationProcessor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/NetworkMonitor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Time/DeltaMonitor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Chaos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Chaos.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/ConfigKeys.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/ConfigKeys.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/Other/WorldScriptingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Other/WorldScriptingService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/appsettings.seq.json" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/appsettings.seq.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Directory.Packages.props" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Packages.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +82,7 @@
     <option name="firstShow" value="false" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="17" />
+    <option name="cachedIndexableFilesCount" value="44" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -2218,7 +2206,8 @@
       <workItem from="1766186623505" duration="182000" />
       <workItem from="1766189111412" duration="89000" />
       <workItem from="1766197693180" duration="2047000" />
-      <workItem from="1766210754663" duration="10784000" />
+      <workItem from="1766210754663" duration="11247000" />
+      <workItem from="1766403098467" duration="320000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2563,7 +2552,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="392" />
+    <option name="localTasksCounter" value="393" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2659,7 +2648,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fix sln" />
     <MESSAGE value="jsonschemas update" />
     <MESSAGE value="fix schema generator" />
     <MESSAGE value="misc" />
@@ -2684,7 +2672,8 @@
     <MESSAGE value="attempted door fix" />
     <MESSAGE value="handling of doors that are walls" />
     <MESSAGE value="door fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="door fix" />
+    <MESSAGE value="OpenTelemetry tracing&#10;- by default only traces for slow operations will be sent&#10;- currently tracked:&#10;individual map updates&#10;individual packets being processed&#10;worlscript updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="OpenTelemetry tracing&#10;- by default only traces for slow operations will be sent&#10;- currently tracked:&#10;individual map updates&#10;individual packets being processed&#10;worlscript updates" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

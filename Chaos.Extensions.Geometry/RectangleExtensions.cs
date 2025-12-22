@@ -1,4 +1,5 @@
 #region
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Chaos.Geometry;
@@ -106,7 +107,7 @@ public static class RectangleExtensions
                 var target = new Point(current.X + dx * 2, current.Y + dy * 2);
 
                 //if the target is out of bounds or already carved, skip
-                if (!ContainsPoint(mazeRect, target) || !maze[target.X, target.Y])
+                if (!mazeRect.ContainsPoint(target) || !maze[target.X, target.Y])
                     continue;
 
                 //carve out the wall between the current node and the target
@@ -162,24 +163,11 @@ public static class RectangleExtensions
     /// </param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IEnumerable<Point> GetPoints<T>(this T rect) where T: IRectangle, allows ref struct
-    {
-        return InnerGetPoints(
+        => new RectanglePointIterator(
             rect.Left,
             rect.Top,
             rect.Right,
             rect.Bottom);
-
-        static IEnumerable<Point> InnerGetPoints(
-            int left,
-            int top,
-            int right,
-            int bottom)
-        {
-            for (var x = left; x <= right; x++)
-                for (var y = top; y <= bottom; y++)
-                    yield return new Point(x, y);
-        }
-    }
     #endregion
 
     #region Rectangle GetRandomPoint
@@ -266,6 +254,72 @@ public static class RectangleExtensions
         };
     }
     #endregion
+
+    /// <summary>
+    ///     An allocation-free iterator over points in a rectangle
+    /// </summary>
+    public struct RectanglePointIterator : IEnumerator<Point>, IEnumerable<Point>
+    {
+        private readonly int Left;
+        private readonly int Top;
+        private readonly int Right;
+        private readonly int Bottom;
+        private int X;
+        private int Y;
+
+        /// <summary>
+        ///     Creates a new <see cref="RectanglePointIterator" />
+        /// </summary>
+        public RectanglePointIterator(
+            int left,
+            int top,
+            int right,
+            int bottom)
+        {
+            Left = left;
+            Top = top;
+            Right = right;
+            Bottom = bottom;
+            X = left;
+            Y = top - 1;
+        }
+
+        /// <inheritdoc />
+        public readonly void Dispose() { }
+
+        /// <inheritdoc />
+        public bool MoveNext()
+        {
+            Y++;
+
+            if (Y > Bottom)
+            {
+                Y = Top;
+                X++;
+            }
+
+            return X <= Right;
+        }
+
+        /// <inheritdoc />
+        public void Reset()
+        {
+            X = Left;
+            Y = Top - 1;
+        }
+
+        /// <inheritdoc />
+        public readonly Point Current => new(X, Y);
+
+        /// <inheritdoc />
+        readonly object IEnumerator.Current => Current;
+
+        /// <inheritdoc />
+        public IEnumerator<Point> GetEnumerator() => this;
+
+        /// <inheritdoc />
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
 
     #region Rect Contains Point
     /// <summary>
@@ -435,13 +489,11 @@ public static class RectangleExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool TryGetRandomPoint(this ValueRectangle rect, Func<Point, bool> predicate, [NotNullWhen(true)] out Point? point)
     {
-        point = null;
+        var totalPoints = rect.Area;
+        var maxAttempts = Math.Max(1, totalPoints / 10);
 
-        if (!rect.GetPoints()
-                 .Any(predicate))
-            return false;
-
-        while (true)
+        // Try random points for up to 10% of possibilities
+        for (var i = 0; i < maxAttempts; i++)
         {
             var randomPoint = rect.GetRandomPoint();
 
@@ -452,6 +504,22 @@ public static class RectangleExtensions
                 return true;
             }
         }
+
+        // Fall back to brute force: get all valid points and pick randomly
+        var validPoints = rect.GetPoints()
+                              .Where(predicate)
+                              .ToList();
+
+        if (validPoints.Count == 0)
+        {
+            point = null;
+
+            return false;
+        }
+
+        point = validPoints[Random.Shared.Next(validPoints.Count)];
+
+        return true;
     }
 
     /// <summary>
@@ -479,13 +547,11 @@ public static class RectangleExtensions
     public static bool TryGetRandomPoint<T>(this T rect, Func<Point, bool> predicate, [NotNullWhen(true)] out Point? point)
         where T: IRectangle, allows ref struct
     {
-        point = null;
+        var totalPoints = rect.Area;
+        var maxAttempts = Math.Max(1, totalPoints / 10);
 
-        if (!rect.GetPoints()
-                 .Any(predicate))
-            return false;
-
-        while (true)
+        // Try random points for up to 10% of possibilities
+        for (var i = 0; i < maxAttempts; i++)
         {
             var randomPoint = rect.GetRandomPoint();
 
@@ -496,6 +562,22 @@ public static class RectangleExtensions
                 return true;
             }
         }
+
+        // Fall back to brute force: get all valid points and pick randomly
+        var validPoints = rect.GetPoints()
+                              .Where(predicate)
+                              .ToList();
+
+        if (validPoints.Count == 0)
+        {
+            point = null;
+
+            return false;
+        }
+
+        point = validPoints[Random.Shared.Next(validPoints.Count)];
+
+        return true;
     }
     #endregion
 }

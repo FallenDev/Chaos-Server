@@ -1,4 +1,6 @@
 #region
+using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Chaos.Geometry;
 using Chaos.Geometry.Abstractions;
@@ -186,146 +188,17 @@ public static class CircleExtensions
 
     #region Circle GetOutline
     /// <summary>
-    ///     Generates a sequence of point along the circumference of this circle
+    ///     Generates a sequence of points along the circumference of this circle
     /// </summary>
     /// <param name="circle">
     ///     This circle.
     /// </param>
     /// <returns>
-    ///     A sequence of point along the circumfnerence of the circle
-    /// </returns>
-    public static IEnumerable<Point> GetOutline<T>(this T circle) where T: ICircle, allows ref struct
-    {
-        return InnerGetOutline(circle.Center.X, circle.Center.Y, circle.Radius);
-
-        static IEnumerable<Point> InnerGetOutline(int x, int y, int radius)
-        {
-            var set = new HashSet<Point>();
-            var xOffset = radius;
-            var yOffset = 0;
-            var decisionOver2 = 1 - xOffset;
-
-            while (yOffset <= xOffset)
-            {
-                var pt1 = new Point(x + xOffset, y + yOffset);
-                var pt2 = new Point(x + yOffset, y + xOffset);
-                var pt3 = new Point(x - yOffset, y + xOffset);
-                var pt4 = new Point(x - xOffset, y + yOffset);
-                var pt5 = new Point(x - xOffset, y - yOffset);
-                var pt6 = new Point(x - yOffset, y - xOffset);
-                var pt7 = new Point(x + yOffset, y - xOffset);
-                var pt8 = new Point(x + xOffset, y - yOffset);
-
-                if (set.Add(pt1))
-                    yield return pt1;
-
-                if (set.Add(pt2))
-                    yield return pt2;
-
-                if (set.Add(pt3))
-                    yield return pt3;
-
-                if (set.Add(pt4))
-                    yield return pt4;
-
-                if (set.Add(pt5))
-                    yield return pt5;
-
-                if (set.Add(pt6))
-                    yield return pt6;
-
-                if (set.Add(pt7))
-                    yield return pt7;
-
-                if (set.Add(pt8))
-                    yield return pt8;
-
-                yOffset++;
-
-                if (decisionOver2 <= 0)
-                    decisionOver2 += 2 * yOffset + 1;
-                else
-                {
-                    xOffset--;
-                    decisionOver2 += 2 * (yOffset - xOffset) + 1;
-                }
-            }
-        }
-    }
-    #endregion
-
-    #region Circle GetPoints
-    /// <summary>
-    ///     Lazily generates all points within this circle.
-    /// </summary>
-    /// <param name="circle">
-    /// </param>
-    /// <returns>
-    ///     <see cref="IEnumerable{T}" /> of <see cref="Point" />
-    /// </returns>
-    public static IEnumerable<Point> GetPoints<T>(this T circle) where T: ICircle, allows ref struct
-    {
-        return InnerGetPoints(circle.Center.X, circle.Center.Y, circle.Radius);
-
-        static IEnumerable<Point> InnerGetPoints(int centerX, int centerY, int radius)
-        {
-            var set = new HashSet<Point>();
-            var radiusSqrd = radius * radius;
-
-            for (var x = centerX - radius; x <= centerX; x++)
-                for (var y = centerY - radius; y <= centerY; y++)
-                {
-                    var xdc = x - centerX;
-                    var ydc = y - centerY;
-
-                    if ((xdc * xdc + ydc * ydc) <= radiusSqrd)
-                    {
-                        var xS = centerX - xdc;
-                        var yS = centerY - ydc;
-
-                        var pt1 = new Point(x, y);
-                        var pt2 = new Point(x, yS);
-                        var pt3 = new Point(xS, y);
-                        var pt4 = new Point(xS, yS);
-
-                        if (set.Add(pt1))
-                            yield return pt1;
-
-                        if (set.Add(pt2))
-                            yield return pt2;
-
-                        if (set.Add(pt3))
-                            yield return pt3;
-
-                        if (set.Add(pt4))
-                            yield return pt4;
-                    }
-                }
-        }
-    }
-    #endregion
-
-    #region Circle GetRandomPoint
-    /// <summary>
-    ///     Gets a random point within this circle.
-    /// </summary>
-    /// <param name="circle">
-    ///     The circle
-    /// </param>
-    /// <returns>
+    ///     A sequence of point along the circumference of the circle
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Point GetRandomPoint<T>(this T circle) where T: ICircle, allows ref struct
-    {
-        var rngA = Random.Shared.NextDouble();
-        var rngR = Random.Shared.NextDouble();
-        var rngAngle = rngA * 2 * Math.PI;
-        var rngRadius = Math.Sqrt(rngR) * circle.Radius;
-        var x = (int)Math.Round(rngRadius * Math.Cos(rngAngle) + circle.Center.X, MidpointRounding.AwayFromZero);
-        var y = (int)Math.Round(rngRadius * Math.Sin(rngAngle) + circle.Center.Y, MidpointRounding.AwayFromZero);
-
-        return new Point(x, y);
-    }
+    public static IEnumerable<Point> GetOutline<T>(this T circle) where T: ICircle, allows ref struct
+        => new CircleOutlineIterator(circle.Center.X, circle.Center.Y, circle.Radius);
     #endregion
 
     #region Circle Intersects Circle
@@ -403,4 +276,276 @@ public static class CircleExtensions
                                                                                           where T2: ICircle, allows ref struct
         => Math.Max(0, circle.Center.ManhattanDistanceFrom(other.Center) - circle.Radius - other.Radius);
     #endregion
+
+    #region Circle GetPoints
+    /// <summary>
+    ///     Generates a sequence of points along the circumference of this circle in order of angle
+    /// </summary>
+    /// <param name="circle">
+    ///     This circle.
+    /// </param>
+    /// <returns>
+    ///     A sequence of point along the circumference of the circle
+    /// </returns>
+    /// <exception cref="System.ArgumentNullException">
+    ///     circle
+    /// </exception>
+    public static IEnumerable<Point> GetOrderedOutline(this ICircle circle)
+        => circle.GetOutline()
+                 .OrderBy(p => Math.Atan2(p.Y - circle.Center.Y, p.X - circle.Center.X));
+
+    /// <summary>
+    ///     Lazily generates all points within this circle.
+    /// </summary>
+    /// <param name="circle">
+    /// </param>
+    /// <returns>
+    ///     <see cref="IEnumerable{T}" /> of <see cref="Point" />
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static IEnumerable<Point> GetPoints<T>(this T circle) where T: ICircle, allows ref struct
+        => new CirclePointIterator(circle.Center.X, circle.Center.Y, circle.Radius);
+    #endregion
+
+    #region Circle GetRandomPoint
+    /// <summary>
+    ///     Gets a random point within this circle.
+    /// </summary>
+    /// <param name="circle">
+    ///     The circle
+    /// </param>
+    /// <returns>
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Point GetRandomPoint<T>(this T circle) where T: ICircle, allows ref struct
+    {
+        var rngA = Random.Shared.NextDouble();
+        var rngR = Random.Shared.NextDouble();
+        var rngAngle = rngA * 2 * Math.PI;
+        var rngRadius = Math.Sqrt(rngR) * circle.Radius;
+        var x = (int)Math.Round(rngRadius * Math.Cos(rngAngle) + circle.Center.X, MidpointRounding.AwayFromZero);
+        var y = (int)Math.Round(rngRadius * Math.Sin(rngAngle) + circle.Center.Y, MidpointRounding.AwayFromZero);
+
+        return new Point(x, y);
+    }
+
+    /// <inheritdoc cref="RectangleExtensions.TryGetRandomPoint{T}" />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryGetRandomPoint<T>(this T circle, Func<Point, bool> predicate, [NotNullWhen(true)] out Point? point)
+        where T: ICircle, allows ref struct
+    {
+        // Approximate total points in circle: π * r²
+        var totalPoints = (int)(Math.PI * circle.Radius * circle.Radius);
+        var maxAttempts = Math.Max(1, totalPoints / 10);
+
+        // Try random points for up to 10% of possibilities
+        for (var i = 0; i < maxAttempts; i++)
+        {
+            var randomPoint = circle.GetRandomPoint();
+
+            if (predicate(randomPoint))
+            {
+                point = randomPoint;
+
+                return true;
+            }
+        }
+
+        // Fall back to brute force: get all valid points and pick randomly
+        var validPoints = circle.GetPoints()
+                                .Where(predicate)
+                                .ToList();
+
+        if (validPoints.Count == 0)
+        {
+            point = null;
+
+            return false;
+        }
+
+        point = validPoints[Random.Shared.Next(validPoints.Count)];
+
+        return true;
+    }
+    #endregion
+}
+
+/// <summary>
+///     A struct-based iterator for enumerating points within a circle.
+/// </summary>
+public struct CirclePointIterator : IEnumerator<Point>, IEnumerable<Point>
+{
+    private readonly int CenterX;
+    private readonly int CenterY;
+    private readonly int RadiusSquared;
+    private readonly int Left;
+    private readonly int Top;
+    private readonly int Right;
+    private readonly int Bottom;
+    private int X;
+    private int Y;
+
+    /// <summary>
+    ///     Creates a new <see cref="CirclePointIterator" />
+    /// </summary>
+    public CirclePointIterator(int centerX, int centerY, int radius)
+    {
+        CenterX = centerX;
+        CenterY = centerY;
+        RadiusSquared = radius * radius;
+        Left = centerX - radius;
+        Top = centerY - radius;
+        Right = centerX + radius;
+        Bottom = centerY + radius;
+        X = Left;
+        Y = Top - 1;
+    }
+
+    /// <inheritdoc />
+    public readonly void Dispose() { }
+
+    /// <inheritdoc />
+    public bool MoveNext()
+    {
+        while (true)
+        {
+            Y++;
+
+            if (Y > Bottom)
+            {
+                Y = Top;
+                X++;
+            }
+
+            if (X > Right)
+                return false;
+
+            var dx = X - CenterX;
+            var dy = Y - CenterY;
+
+            if ((dx * dx + dy * dy) <= RadiusSquared)
+                return true;
+        }
+    }
+
+    /// <inheritdoc />
+    public void Reset()
+    {
+        X = Left;
+        Y = Top - 1;
+    }
+
+    /// <inheritdoc />
+    public readonly Point Current => new(X, Y);
+
+    /// <inheritdoc />
+    readonly object IEnumerator.Current => Current;
+
+    /// <inheritdoc />
+    public readonly IEnumerator<Point> GetEnumerator() => this;
+
+    /// <inheritdoc />
+    readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+}
+
+/// <summary>
+///     A struct-based iterator for enumerating points along the outline of a circle using the Midpoint Circle Algorithm.
+/// </summary>
+public struct CircleOutlineIterator : IEnumerator<Point>, IEnumerable<Point>
+{
+    private readonly int CenterX;
+    private readonly int CenterY;
+    private readonly int Radius;
+    private int XOffset;
+    private int YOffset;
+    private int DecisionOver2;
+    private int Octant;
+
+    /// <summary>
+    ///     Creates a new <see cref="CircleOutlineIterator" />
+    /// </summary>
+    public CircleOutlineIterator(int centerX, int centerY, int radius)
+    {
+        CenterX = centerX;
+        CenterY = centerY;
+        Radius = radius;
+        XOffset = radius;
+        YOffset = 0;
+        DecisionOver2 = 1 - radius;
+        Octant = -1;
+    }
+
+    /// <inheritdoc />
+    public readonly void Dispose() { }
+
+    /// <inheritdoc />
+    public bool MoveNext()
+    {
+        while (true)
+        {
+            Octant++;
+
+            if (Octant >= 8)
+            {
+                YOffset++;
+
+                if (DecisionOver2 <= 0)
+                    DecisionOver2 += 2 * YOffset + 1;
+                else
+                {
+                    XOffset--;
+                    DecisionOver2 += 2 * (YOffset - XOffset) + 1;
+                }
+
+                if (YOffset > XOffset)
+                    return false;
+
+                Octant = 0;
+            }
+
+            // Skip duplicate octants:
+            // When yOffset == 0: octants 2, 4, 6, 7 are duplicates
+            // When xOffset == yOffset: octants 1, 3, 5, 7 are duplicates
+            if ((YOffset == 0) && Octant is 2 or 4 or 6 or 7)
+                continue;
+
+            if ((XOffset == YOffset) && Octant is 1 or 3 or 5 or 7)
+                continue;
+
+            return true;
+        }
+    }
+
+    /// <inheritdoc />
+    public void Reset()
+    {
+        XOffset = Radius;
+        YOffset = 0;
+        DecisionOver2 = 1 - Radius;
+        Octant = -1;
+    }
+
+    /// <inheritdoc />
+    public readonly Point Current
+        => Octant switch
+        {
+            0 => new Point(CenterX + XOffset, CenterY + YOffset),
+            1 => new Point(CenterX + YOffset, CenterY + XOffset),
+            2 => new Point(CenterX - YOffset, CenterY + XOffset),
+            3 => new Point(CenterX - XOffset, CenterY + YOffset),
+            4 => new Point(CenterX - XOffset, CenterY - YOffset),
+            5 => new Point(CenterX - YOffset, CenterY - XOffset),
+            6 => new Point(CenterX + YOffset, CenterY - XOffset),
+            7 => new Point(CenterX + XOffset, CenterY - YOffset),
+            _ => default
+        };
+
+    /// <inheritdoc />
+    readonly object IEnumerator.Current => Current;
+
+    /// <inheritdoc />
+    public readonly IEnumerator<Point> GetEnumerator() => this;
+
+    /// <inheritdoc />
+    readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
