@@ -334,11 +334,11 @@ public static class CircleExtensions
     public static bool TryGetRandomPoint<T>(this T circle, Func<Point, bool> predicate, [NotNullWhen(true)] out Point? point)
         where T: ICircle, allows ref struct
     {
-        // Approximate total points in circle: π * r²
+        // approximate total points in circle: π * r²
         var totalPoints = (int)(Math.PI * circle.Radius * circle.Radius);
         var maxAttempts = Math.Max(1, totalPoints / 10);
 
-        // Try random points for up to 10% of possibilities
+        // try random points for up to 10% of possibilities
         for (var i = 0; i < maxAttempts; i++)
         {
             var randomPoint = circle.GetRandomPoint();
@@ -351,21 +351,25 @@ public static class CircleExtensions
             }
         }
 
-        // Fall back to brute force: get all valid points and pick randomly
-        var validPoints = circle.GetPoints()
-                                .Where(predicate)
-                                .ToList();
+        // fall back to reservoir sampling: O(n) time, O(1) memory
+        Point? selected = null;
+        var count = 0;
 
-        if (validPoints.Count == 0)
+        foreach (var pt in circle.GetPoints())
         {
-            point = null;
+            if (predicate(pt))
+            {
+                count++;
 
-            return false;
+                // with probability 1/count, select this element
+                if (Random.Shared.Next(count) == 0)
+                    selected = pt;
+            }
         }
 
-        point = validPoints[Random.Shared.Next(validPoints.Count)];
+        point = selected;
 
-        return true;
+        return selected.HasValue;
     }
     #endregion
 }

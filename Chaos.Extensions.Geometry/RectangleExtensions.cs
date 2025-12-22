@@ -492,7 +492,7 @@ public static class RectangleExtensions
         var totalPoints = rect.Area;
         var maxAttempts = Math.Max(1, totalPoints / 10);
 
-        // Try random points for up to 10% of possibilities
+        // try random points for up to 10% of possibilities
         for (var i = 0; i < maxAttempts; i++)
         {
             var randomPoint = rect.GetRandomPoint();
@@ -505,21 +505,25 @@ public static class RectangleExtensions
             }
         }
 
-        // Fall back to brute force: get all valid points and pick randomly
-        var validPoints = rect.GetPoints()
-                              .Where(predicate)
-                              .ToList();
+        // fall back to reservoir sampling: O(n) time, O(1) memory
+        Point? selected = null;
+        var count = 0;
 
-        if (validPoints.Count == 0)
+        foreach (var pt in rect.GetPoints())
         {
-            point = null;
+            if (predicate(pt))
+            {
+                count++;
 
-            return false;
+                // with probability 1/count, select this element
+                if (Random.Shared.Next(count) == 0)
+                    selected = pt;
+            }
         }
 
-        point = validPoints[Random.Shared.Next(validPoints.Count)];
+        point = selected;
 
-        return true;
+        return selected.HasValue;
     }
 
     /// <summary>
@@ -550,7 +554,7 @@ public static class RectangleExtensions
         var totalPoints = rect.Area;
         var maxAttempts = Math.Max(1, totalPoints / 10);
 
-        // Try random points for up to 10% of possibilities
+        // try random points for up to 10% of possibilities
         for (var i = 0; i < maxAttempts; i++)
         {
             var randomPoint = rect.GetRandomPoint();
@@ -563,21 +567,25 @@ public static class RectangleExtensions
             }
         }
 
-        // Fall back to brute force: get all valid points and pick randomly
-        var validPoints = rect.GetPoints()
-                              .Where(predicate)
-                              .ToList();
+        // fall back to reservoir sampling (this is better than materializing a list or set)
+        Point? selected = null;
+        var count = 0;
 
-        if (validPoints.Count == 0)
+        foreach (var pt in rect.GetPoints())
         {
-            point = null;
+            if (predicate(pt))
+            {
+                count++;
 
-            return false;
+                // with probability 1/count, select this element
+                if (Random.Shared.Next(count) == 0)
+                    selected = pt;
+            }
         }
 
-        point = validPoints[Random.Shared.Next(validPoints.Count)];
+        point = selected;
 
-        return true;
+        return selected.HasValue;
     }
     #endregion
 }

@@ -60,11 +60,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" afterDir="false" />
-    </list>
+    <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -627,10 +623,10 @@
 }</component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1768327208615" />
-    <option name="spentUsd" value="0.062130004" />
+    <option name="spentUsd" value="0.0713625" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="6" />
+    <option name="suspendCountdown" value="5" />
   </component>
   <component name="RunManager" selected=".NET Project.Chaos">
     <configuration name="SeqConfiguratorPublish" type="DotNetFolderPublish" factoryName="Publish to folder">
@@ -2207,7 +2203,7 @@
       <workItem from="1766189111412" duration="89000" />
       <workItem from="1766197693180" duration="2047000" />
       <workItem from="1766210754663" duration="11247000" />
-      <workItem from="1766403098467" duration="320000" />
+      <workItem from="1766403098467" duration="1136000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2552,7 +2548,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="393" />
+    <option name="localTasksCounter" value="394" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2648,7 +2644,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="jsonschemas update" />
     <MESSAGE value="fix schema generator" />
     <MESSAGE value="misc" />
     <MESSAGE value="minor item fixes" />
@@ -2673,7 +2668,8 @@
     <MESSAGE value="handling of doors that are walls" />
     <MESSAGE value="door fix" />
     <MESSAGE value="OpenTelemetry tracing&#10;- by default only traces for slow operations will be sent&#10;- currently tracked:&#10;individual map updates&#10;individual packets being processed&#10;worlscript updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="OpenTelemetry tracing&#10;- by default only traces for slow operations will be sent&#10;- currently tracked:&#10;individual map updates&#10;individual packets being processed&#10;worlscript updates" />
+    <MESSAGE value="optimizations" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimizations" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

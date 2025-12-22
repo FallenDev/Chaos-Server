@@ -1540,6 +1540,35 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     }
 
     /// <summary>
+    ///     Attempts to find a random walkable point on the map
+    /// </summary>
+    /// <param name="predicate">
+    ///     A predicate used to further filter valid points
+    /// </param>
+    /// <param name="point">
+    ///     A random point if found
+    /// </param>
+    /// <param name="creature">
+    ///     The creature to make the check FOR. This creature may have a special type or other circumstances
+    /// </param>
+    /// <returns>
+    ///     <c>
+    ///         true
+    ///     </c>
+    ///     if a walkable point was found, otherwise
+    ///     <c>
+    ///         false
+    ///     </c>
+    /// </returns>
+    public bool TryGetRandomWalkablePoint(Func<Point, bool> predicate, [NotNullWhen(true)] out Point? point, Creature? creature = null)
+    {
+        if (!Template.Bounds.TryGetRandomPoint(pt => IsWalkable(pt, creature) && predicate(pt), out point))
+            return false;
+
+        return true;
+    }
+
+    /// <summary>
     ///     Asynchronously updates the map
     /// </summary>
     /// <param name="delta">

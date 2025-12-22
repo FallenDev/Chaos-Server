@@ -1,14 +1,16 @@
 # Essential Development Commands
 
+**NOTE: This project uses `.slnx` format (not `.sln`)**
+
 ## Build and Run Commands
 
 ### Build Solution
 ```powershell
 # Build entire solution
-dotnet build Chaos.sln
+dotnet build Chaos.slnx
 
 # Build with code coverage support
-dotnet build Chaos.sln /p:CreateCoverageReport=true
+dotnet build Chaos.slnx /p:CreateCoverageReport=true
 ```
 
 ### Run Server
@@ -25,22 +27,22 @@ dotnet run --project Chaos/Chaos.csproj --launch-profile "Chaos - Prod"
 ### Run Tests
 ```powershell
 # Run all tests
-dotnet test Chaos.sln --nologo
+dotnet test Chaos.slnx --nologo
 
 # Run single test project
 dotnet test Tests/Chaos.Common.Tests/Chaos.Common.Tests.csproj --nologo
 
 # Run specific test by name
-dotnet test Chaos.sln --filter "FullyQualifiedName~TestName" --nologo
+dotnet test Chaos.slnx --filter "FullyQualifiedName~TestName" --nologo
 
 # Run tests from specific class
-dotnet test Chaos.sln --filter "FullyQualifiedName~ClassName" --nologo
+dotnet test Chaos.slnx --filter "FullyQualifiedName~ClassName" --nologo
 ```
 
 ### Code Coverage
 ```powershell
 # Generate Cobertura XML coverage (output: **/TestResults/coverage.cobertura.xml)
-dotnet build Chaos.sln /p:CreateCoverageReport=true
+dotnet build Chaos.slnx /p:CreateCoverageReport=true
 
 # Generate HTML coverage report (output: Tests/Reports/CoverageReport)
 Tests/Reports/generateCoverageReport-auto.bat
