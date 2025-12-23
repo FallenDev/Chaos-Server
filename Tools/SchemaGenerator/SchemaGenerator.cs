@@ -163,7 +163,7 @@ public static class JsonSchemaGenerator
             schemasProjectPath,
             "bin",
             "Debug",
-            "net9.0",
+            "net10.0",
             "Chaos.Schemas.dll");
         var assembly = Assembly.LoadFrom(schemasAssemblyPath);
 
