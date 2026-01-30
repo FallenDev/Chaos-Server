@@ -836,7 +836,7 @@ public sealed class WorldServer : ServerBase<IChaosWorldClient>, IWorldServer<IC
                       .WithProperty(aisling)
                       .WithProperty(obj)
                       .LogTrace(
-                          "Aisling {@AislingName} attempted to forcefully display an entity {@EntityId} that they cannot observe. (Unknown why this happens)",
+                          "Aisling {@AislingName} attempted to forcefully display an entity {@EntityId} that they cannot observe. We have likely sent a packet(animate, turn, etc) with an entity's id that the client can not observe",
                           aisling.Name,
                           obj.Id);
 

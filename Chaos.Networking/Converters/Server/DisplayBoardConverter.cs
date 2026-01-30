@@ -30,8 +30,11 @@ public sealed class DisplayBoardConverter : PacketConverterBase<DisplayBoardArgs
         {
             case BoardOrResponseType.BoardList:
             {
-                var count = reader.ReadUInt16();
+                var count = reader.ReadByte();
                 args.Boards = new List<BoardInfo>(count);
+
+                // ReSharper disable once UnusedVariable
+                var unknown = reader.ReadByte(); //per silo, literal empty string with no purpose (so length = 0)
 
                 for (var i = 0; i < count; i++)
                 {

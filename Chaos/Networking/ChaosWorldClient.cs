@@ -336,6 +336,25 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
         }
     }
 
+    /// <inheritdoc />
+    public void SendDisplayEditableNotepad(
+        NotepadType type,
+        Item item,
+        byte width,
+        byte height)
+    {
+        var args = new DisplayEditableNotepadArgs
+        {
+            Slot = item.Slot,
+            NotepadType = type,
+            Width = width,
+            Height = height,
+            Message = item.NotepadText ?? string.Empty
+        };
+
+        Send(args);
+    }
+
     public void SendDisplayGroupInvite(ServerGroupSwitch serverGroupSwitch, string fromName, DisplayGroupBoxInfo? groupBoxInfo = null)
     {
         var args = new DisplayGroupInviteArgs
@@ -350,25 +369,6 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
         Send(args);
     }
 
-    /// <inheritdoc />
-    public void SendDisplayNotepad(
-        NotepadType type,
-        Item item,
-        byte width,
-        byte height)
-    {
-        var args = new DisplayNotepadArgs
-        {
-            Slot = item.Slot,
-            NotepadType = type,
-            Width = width,
-            Height = height,
-            Message = item.NotepadText ?? string.Empty
-        };
-
-        Send(args);
-    }
-
     public void SendDisplayPublicMessage(uint sourceId, PublicMessageType publicMessageType, string message)
     {
         var args = new DisplayPublicMessageArgs
@@ -376,6 +376,24 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
             SourceId = sourceId,
             PublicMessageType = publicMessageType,
             Message = message
+        };
+
+        Send(args);
+    }
+
+    /// <inheritdoc />
+    public void SendDisplayReadonlyNotepad(
+        NotepadType type,
+        string text,
+        byte width,
+        byte height)
+    {
+        var args = new DisplayReadonlyNotepadArgs
+        {
+            NotepadType = type,
+            Width = width,
+            Height = height,
+            Message = text
         };
 
         Send(args);
@@ -651,7 +669,7 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
         byte width,
         string? message)
     {
-        var args = new DisplayNotepadArgs
+        var args = new DisplayEditableNotepadArgs
         {
             Slot = identifier,
             NotepadType = type,

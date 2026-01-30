@@ -9,15 +9,15 @@ using Chaos.Packets.Abstractions;
 namespace Chaos.Networking.Converters.Server;
 
 /// <summary>
-///     Provides serialization and deserialization logic for <see cref="DisplayNotepadArgs" />
+///     Provides serialization and deserialization logic for <see cref="DisplayEditableNotepadArgs" />
 /// </summary>
-public sealed class DisplayNotepadConverter : PacketConverterBase<DisplayNotepadArgs>
+public sealed class DisplayEditableNotepadConverter : PacketConverterBase<DisplayEditableNotepadArgs>
 {
     /// <inheritdoc />
-    public override byte OpCode => (byte)ServerOpCode.DisplayNotepad;
+    public override byte OpCode => (byte)ServerOpCode.DisplayEditableNotepad;
 
     /// <inheritdoc />
-    public override DisplayNotepadArgs Deserialize(ref SpanReader reader)
+    public override DisplayEditableNotepadArgs Deserialize(ref SpanReader reader)
     {
         var slot = reader.ReadByte();
         var type = reader.ReadByte();
@@ -25,7 +25,7 @@ public sealed class DisplayNotepadConverter : PacketConverterBase<DisplayNotepad
         var width = reader.ReadByte();
         var message = reader.ReadString16();
 
-        return new DisplayNotepadArgs
+        return new DisplayEditableNotepadArgs
         {
             Slot = slot,
             NotepadType = (NotepadType)type,
@@ -36,7 +36,7 @@ public sealed class DisplayNotepadConverter : PacketConverterBase<DisplayNotepad
     }
 
     /// <inheritdoc />
-    public override void Serialize(ref SpanWriter writer, DisplayNotepadArgs args)
+    public override void Serialize(ref SpanWriter writer, DisplayEditableNotepadArgs args)
     {
         writer.WriteByte(args.Slot);
         writer.WriteByte((byte)args.NotepadType);

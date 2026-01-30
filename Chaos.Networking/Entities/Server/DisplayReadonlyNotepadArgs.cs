@@ -7,9 +7,9 @@ using Chaos.Packets.Abstractions;
 namespace Chaos.Networking.Entities.Server;
 
 /// <summary>
-///     Represents the serialization of the <see cref="ServerOpCode.DisplayNotepad" /> packet
+///     Represents the serialization of the <see cref="ServerOpCode.DisplayReadonlyNotepad" /> packet
 /// </summary>
-public sealed record DisplayNotepadArgs : IPacketSerializable
+public sealed record DisplayReadonlyNotepadArgs : IPacketSerializable
 {
     /// <summary>
     ///     The height of the notepad
@@ -28,11 +28,6 @@ public sealed record DisplayNotepadArgs : IPacketSerializable
     ///     The display type of the notepad
     /// </summary>
     public NotepadType NotepadType { get; set; }
-
-    /// <summary>
-    ///     The slot of the object that the notepad is attached to
-    /// </summary>
-    public byte Slot { get; set; }
 
     /// <summary>
     ///     The width of the notepad
