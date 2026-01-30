@@ -61,9 +61,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/docs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/docs.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/pack.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/pack.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/JoinChannelCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Messaging/JoinChannelCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/LeaveChannelCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Messaging/LeaveChannelCommand.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -2209,6 +2209,9 @@
       <workItem from="1766210754663" duration="11247000" />
       <workItem from="1766403098467" duration="6104000" />
       <workItem from="1766466536161" duration="1646000" />
+      <workItem from="1769667958469" duration="767000" />
+      <workItem from="1769761044154" duration="659000" />
+      <workItem from="1769777102691" duration="789000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2553,7 +2556,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="395" />
+    <option name="localTasksCounter" value="396" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2649,7 +2652,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="misc" />
     <MESSAGE value="minor item fixes" />
     <MESSAGE value="pantsColor serializes&#10;- minor pantsColor bug fix" />
     <MESSAGE value="more verbose collision checks" />
@@ -2674,7 +2676,8 @@
     <MESSAGE value="OpenTelemetry tracing&#10;- by default only traces for slow operations will be sent&#10;- currently tracked:&#10;individual map updates&#10;individual packets being processed&#10;worlscript updates" />
     <MESSAGE value="optimizations" />
     <MESSAGE value="reservoir sampling" />
-    <option name="LAST_COMMIT_MESSAGE" value="reservoir sampling" />
+    <MESSAGE value="fix group sync ooo" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix group sync ooo" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2976,6 +2979,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="948" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Chaos.Messaging/ChannelService.cs</url>
+          <line>98</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Chaos.Messaging\ChannelService.cs" containingFunctionPresentation="Method 'LeaveChannel'">
+            <startOffsets>
+              <option value="3481" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3563" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="949" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Chaos.Messaging/ChannelService.cs</url>
+          <line>116</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Chaos.Messaging\ChannelService.cs" containingFunctionPresentation="Method 'LeaveChannel'">
+            <startOffsets>
+              <option value="4250" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4352" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="952" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
