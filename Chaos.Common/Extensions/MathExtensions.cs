@@ -10,10 +10,6 @@ namespace Chaos.Extensions.Common;
 /// </summary>
 public static class Mathtensions
 {
-    /// <summary>
-    /// </summary>
-    /// <param name="???">
-    /// </param>
     extension(Math)
     {
         /// <summary>
@@ -146,7 +142,7 @@ public static class Mathtensions
             var scaledValue = ratio * double.CreateChecked(newMax - newMin) + double.CreateChecked(newMin);
 
             // Determine if T2 is an integer type
-            if (IsIntegerType<T2>())
+            if (Math.IsIntegerType<T2>())
             {
                 // Round the scaled value to the nearest integer
                 var roundedValue = Math.Round(scaledValue, MidpointRounding.AwayFromZero);

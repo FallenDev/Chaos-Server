@@ -18,10 +18,10 @@
         <ApplicationIcon>Resources\chaos.ico</ApplicationIcon>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <NoWarn>1701;1702;CS1591</NoWarn>
+        <NoWarn>1701;1702;CS1591;CS8620</NoWarn>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <NoWarn>1701;1702;CS1591</NoWarn>
+        <NoWarn>1701;1702;CS1591;CS8620</NoWarn>
     </PropertyGroup>
     <ItemGroup>
         <None Update="appsettings.json">

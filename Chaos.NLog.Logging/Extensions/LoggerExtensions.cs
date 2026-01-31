@@ -60,7 +60,7 @@ public static class LoggerExtensions
                 logEvent = new LogEvent(logger);
 
             foreach (var topic in topics)
-                logEvent.WithTopic(topic);
+                logEvent.WithTopic(topic!);
 
             return logEvent;
         }

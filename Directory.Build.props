@@ -11,6 +11,7 @@
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <IsPackable>true</IsPackable>
+        <NoWarn>CS8620</NoWarn>
     </PropertyGroup>
     <PropertyGroup>
         <Company>Chaotic Minds</Company>
