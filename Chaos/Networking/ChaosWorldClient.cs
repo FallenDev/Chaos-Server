@@ -883,12 +883,12 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
                 continue;
 
             if (Aisling.WithinLevelRange(aisling))
-                arg.Color = WorldListColor.WithinLevelRange;
+                arg.Color = WorldListColor.Orange;
 
             if (aisling.Guild is not null && (aisling.Guild == Aisling.Guild))
             {
                 arg.IsGuilded = true;
-                arg.Color = WorldListColor.Guilded;
+                arg.Color = WorldListColor.OliveBlue;
             }
 
             worldList.Add(arg);
