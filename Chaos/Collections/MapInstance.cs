@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Chaos.Common.Abstractions;
+using Chaos.Common.Abstractions.Definitions;
 using Chaos.Common.Synchronization;
 using Chaos.DarkAges.Definitions;
 using Chaos.Definitions;
@@ -24,6 +25,7 @@ using Chaos.Services.Storage.Abstractions;
 using Chaos.Storage.Abstractions;
 using Chaos.Time;
 using Chaos.Time.Abstractions;
+using Microsoft.AspNetCore.Razor.Language.Intermediate;
 #endregion
 
 namespace Chaos.Collections;
@@ -234,43 +236,51 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     {
         try
         {
-            Objects.Update(delta);
+            using (ActivitySources.StartUpdateActivity("Update.Map.Objects"))
+                Objects.Update(delta);
 
-            foreach (ref var spawn in CollectionsMarshal.AsSpan(MonsterSpawns))
-                spawn.Update(delta);
+            using (ActivitySources.StartUpdateActivity("Update.Map.Spawns"))
+                foreach (ref var spawn in CollectionsMarshal.AsSpan(MonsterSpawns))
+                    spawn.Update(delta);
 
-            Script.Update(delta);
-            HandleShardLimitersTimer.Update(delta);
-            DayNightCycleTimer.Update(delta);
+            using (ActivitySources.StartUpdateActivity("Update.Map.Scripts"))
+                Script.Update(delta);
 
-            foreach (var timer in ShardLimiterTimers.Values)
-                timer.Update(delta);
-
-            if (HandleShardLimitersTimer.IntervalElapsed)
-                HandleShardLimiters();
-
-            if (AutoDayNightCycle && DayNightCycleTimer.IntervalElapsed)
+            using (ActivitySources.StartUpdateActivity("Update.Map.Timers"))
             {
-                var lightLevel = GameTime.Now.TimeOfDay;
+                HandleShardLimitersTimer.Update(delta);
+                DayNightCycleTimer.Update(delta);
 
-                if (CurrentLightLevel != lightLevel)
+                foreach (var timer in ShardLimiterTimers.Values)
+                    timer.Update(delta);
+
+                if (HandleShardLimitersTimer.IntervalElapsed)
+                    HandleShardLimiters();
+
+                if (AutoDayNightCycle && DayNightCycleTimer.IntervalElapsed)
                 {
-                    CurrentLightLevel = lightLevel;
+                    var lightLevel = GameTime.Now.TimeOfDay;
 
-                    foreach (var aisling in Objects.Values<Aisling>())
-                        aisling.Client.SendLightLevel(CurrentLightLevel);
+                    if (CurrentLightLevel != lightLevel)
+                    {
+                        CurrentLightLevel = lightLevel;
+
+                        foreach (var aisling in Objects.Values<Aisling>())
+                            aisling.Client.SendLightLevel(CurrentLightLevel);
+                    }
                 }
             }
 
-            while (ProcessingQueue.TryDequeue(out var action))
-                try
-                {
-                    action();
-                } catch (Exception e)
-                {
-                    Logger.WithTopics(Topics.Entities.MapInstance, Topics.Actions.Update)
-                          .LogError(e, "Failed to process action in map {@MapInstance}", this);
-                }
+            using (ActivitySources.StartUpdateActivity("Update.Map.ProcessingQueue"))
+                while (ProcessingQueue.TryDequeue(out var action))
+                    try
+                    {
+                        action();
+                    } catch (Exception e)
+                    {
+                        Logger.WithTopics(Topics.Entities.MapInstance, Topics.Actions.Update)
+                              .LogError(e, "Failed to process action in map {@MapInstance}", this);
+                    }
         } catch (Exception e)
         {
             Logger.WithTopics(Topics.Entities.MapInstance, Topics.Actions.Update)
@@ -1456,34 +1466,40 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     ///     Begins execution of the map's update loop
     /// </summary>
     public void StartAsync()
-        => Task.Run(async () =>
-        {
-            var linkedCancellationToken = MapInstanceCtx.Token;
+    {
+        using (ExecutionContext.SuppressFlow())
+            Task.Run(async () =>
+                {
+                    await Task.Yield();
 
-            while (true)
-            {
-                if (linkedCancellationToken.IsCancellationRequested)
-                    return;
+                    var linkedCancellationToken = MapInstanceCtx.Token;
 
-                try
-                {
-                    await DeltaTimer.WaitForNextTickAsync(linkedCancellationToken)
-                                    .ConfigureAwait(false);
-                } catch (OperationCanceledException)
-                {
-                    return;
-                }
+                    while (true)
+                    {
+                        if (linkedCancellationToken.IsCancellationRequested)
+                            return;
 
-                try
-                {
-                    await UpdateMapAsync(DeltaTime.GetDelta);
-                } catch (Exception e)
-                {
-                    Logger.WithTopics(Topics.Entities.MapInstance, Topics.Actions.Update)
-                          .LogError(e, "Update succeeded, but some other error occurred for map {@MapInstance}", this);
-                }
-            }
-        });
+                        try
+                        {
+                            await DeltaTimer.WaitForNextTickAsync(linkedCancellationToken)
+                                            .ConfigureAwait(false);
+                        } catch (OperationCanceledException)
+                        {
+                            return;
+                        }
+
+                        try
+                        {
+                            await UpdateMapAsync(DeltaTime.GetDelta);
+                        } catch (Exception e)
+                        {
+                            Logger.WithTopics(Topics.Entities.MapInstance, Topics.Actions.Update)
+                                  .LogError(e, "Update succeeded, but some other error occurred for map {@MapInstance}", this);
+                        }
+                    }
+                })
+                .ConfigureAwait(false);
+    }
 
     /// <summary>
     ///     Stops execution of the map's update loop
@@ -1576,51 +1592,27 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     /// </param>
     public async Task UpdateMapAsync(TimeSpan delta)
     {
-        using var activity = ChaosActivitySource.StartRootUpdateActivity("Map.UpdateAsync");
-
+        using var activity = ActivitySources.StartUpdateActivity("Update.Map");
         activity?.SetTag("map.instance_id", InstanceId);
+        activity?.SetTag("delta_ms", delta.TotalMilliseconds);
 
-        // Get parent context for child spans (use default if not sampled)
-        var parentContext = activity?.Context ?? default;
+        var syncActivity = ActivitySources.StartUpdateActivity("Update.Map.Sync");
+        await using var sync = await Sync.WaitAsync();
+        syncActivity?.Dispose();
 
-        IPolyDisposable sync;
+        using (ActivitySources.StartUpdateActivity("Update.Map.Execute"))
+            Update(delta);
 
-        using (var syncActivity = ChaosActivitySource.Updates.StartActivity(
-                   "Map.UpdateAsync.AcquireSync",
-                   ActivityKind.Internal,
-                   parentContext))
+        var aislingsToSave = Objects.Values<Aisling>()
+                                    .Where(aisling => aisling.SaveTimer.IntervalElapsed)
+                                    .ToList();
+
+        if (aislingsToSave.Count > 0)
         {
-            sync = await Sync.WaitAsync();
-            syncActivity?.SetTag("sync.acquired", true);
-        }
+            using var aislingSaveActivity = ActivitySources.StartUpdateActivity("Update.Map.AislingSave");
+            aislingSaveActivity?.SetTag("aisling_save_count", aislingsToSave.Count);
 
-        await using (sync)
-        {
-            using (var updateActivity = ChaosActivitySource.Updates.StartActivity(
-                       "Map.UpdateAsync.Update",
-                       ActivityKind.Internal,
-                       parentContext))
-            {
-                updateActivity?.SetTag("delta_ms", delta.TotalMilliseconds);
-
-                Update(delta);
-            }
-
-            var aislingsToSave = Objects.Values<Aisling>()
-                                        .Where(aisling => aisling.SaveTimer.IntervalElapsed)
-                                        .ToList();
-
-            if (aislingsToSave.Count > 0)
-            {
-                using var saveActivity = ChaosActivitySource.Updates.StartActivity(
-                    "Map.UpdateAsync.SaveAislings",
-                    ActivityKind.Internal,
-                    parentContext);
-
-                saveActivity?.SetTag("aisling.save_count", aislingsToSave.Count);
-
-                await Task.WhenAll(aislingsToSave.Select(AislingStore.SaveAsync));
-            }
+            await Task.WhenAll(aislingsToSave.Select(AislingStore.SaveAsync));
         }
     }
 

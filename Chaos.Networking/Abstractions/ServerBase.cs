@@ -1,6 +1,7 @@
 #region
 using System.Net;
 using System.Net.Sockets;
+using Chaos.Common.Abstractions.Definitions;
 using Chaos.Common.Synchronization;
 using Chaos.Extensions.Common;
 using Chaos.Networking.Abstractions.Definitions;
@@ -252,7 +253,11 @@ public abstract class ServerBase<T> : BackgroundService, IServer<T> where T: ICo
     /// </typeparam>
     public virtual async ValueTask ExecuteHandler<TArgs>(T client, TArgs args, Func<T, TArgs, ValueTask> action)
     {
+        var syncActivity = ActivitySources.StartPacketActivity("Packet.Handle.Sync");
         await using var @lock = await Sync.WaitAsync(TimeSpan.FromSeconds(1));
+        syncActivity?.Dispose();
+
+        using var executeActivity = ActivitySources.StartPacketActivity("Packet.Handle.Execute");
 
         try
         {
@@ -283,7 +288,11 @@ public abstract class ServerBase<T> : BackgroundService, IServer<T> where T: ICo
     /// </param>
     public virtual async ValueTask ExecuteHandler(T client, Func<T, ValueTask> action)
     {
+        var syncActivity = ActivitySources.StartPacketActivity("Packet.Handle.Sync");
         await using var @lock = await Sync.WaitAsync();
+        syncActivity?.Dispose();
+
+        using var executeActivity = ActivitySources.StartPacketActivity("Packet.Handle.Execute");
 
         try
         {

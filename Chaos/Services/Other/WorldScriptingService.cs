@@ -1,5 +1,6 @@
 #region
 using System.Diagnostics;
+using Chaos.Common.Abstractions.Definitions;
 using Chaos.Definitions;
 using Chaos.Extensions.Common;
 using Chaos.NLog.Logging.Definitions;
@@ -48,13 +49,9 @@ public sealed class WorldScriptingService : BackgroundService
 
                 var currentDelta = deltaTime.GetDelta;
 
-                using var loopActivity = ChaosActivitySource.StartRootWorldScriptActivity("WorldScript.UpdateAll");
-
-                loopActivity?.SetTag("worldscript.count", serverScripts.Count);
-                loopActivity?.SetTag("delta_ms", currentDelta.TotalMilliseconds);
-
-                // Get parent context for child spans
-                var parentContext = loopActivity?.Context ?? default;
+                using var worldScriptUpdateActivity = ActivitySources.StartWorldScriptActivity("WorldScript.UpdateAll");
+                worldScriptUpdateActivity?.SetTag("worldscript.count", serverScripts.Count);
+                worldScriptUpdateActivity?.SetTag("delta_ms", currentDelta.TotalMilliseconds);
 
                 foreach (var script in serverScripts)
                     if (script.Enabled)
@@ -63,13 +60,7 @@ public sealed class WorldScriptingService : BackgroundService
                             var scriptType = script.GetType()
                                                    .Name;
 
-                            using var scriptActivity = ChaosActivitySource.WorldScripts.StartActivity(
-                                "WorldScript.Update",
-                                ActivityKind.Internal,
-                                parentContext);
-
-                            scriptActivity?.SetTag("worldscript.type", scriptType);
-
+                            using var updateActivity = ActivitySources.StartWorldScriptActivity($"WorldScript.Update.{scriptType}");
                             script.Update(currentDelta);
                         } catch (Exception e)
                         {

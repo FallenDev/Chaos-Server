@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using Chaos.Collections;
 using Chaos.Collections.Abstractions;
+using Chaos.Common.Abstractions.Definitions;
 using Chaos.Cryptography.Abstractions;
 using Chaos.DarkAges.Definitions;
 using Chaos.DarkAges.Extensions;
@@ -958,6 +959,8 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
     /// <inheritdoc />
     protected override ValueTask HandlePacketAsync(Span<byte> span)
     {
+        var encryptionActivity = ActivitySources.StartPacketActivity("Packet.Handle.Encryption");
+
         var opCode = span[3];
         var packet = new Packet(ref span, Crypto.IsClientEncrypted(opCode));
 
@@ -981,6 +984,8 @@ public sealed class ChaosWorldClient : WorldClientBase, IChaosWorldClient
                       Topics.Actions.Receive)
                   .WithProperty(this)
                   .LogTrace("Received packet with code {@OpCode} from {@ClientIp}", opCode, RemoteIp);
+
+        encryptionActivity?.Dispose();
 
         return Server.HandlePacketAsync(this, in packet);
     }

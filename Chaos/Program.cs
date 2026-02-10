@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using Chaos;
 using Chaos.Collections;
 using Chaos.Collections.Abstractions;
+using Chaos.Common.Abstractions.Definitions;
 using Chaos.Extensions;
 using Chaos.Extensions.Common;
 using Chaos.Extensions.DependencyInjection;
@@ -35,6 +36,7 @@ using NLog;
 using NLog.Config;
 using NLog.Extensions.Logging;
 using Chaos.Definitions;
+using Chaos.Networking.Abstractions.Definitions;
 using OpenTelemetry;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Resources;
@@ -235,13 +237,25 @@ static void ConfigureOpenTelemetry(WebApplicationBuilder builder)
     var slowPacketThresholdMs = builder.Configuration.GetValue(ConfigKeys.OpenTelemetry.SlowPacketThresholdMs, 100.0);
     var slowWorldScriptThresholdMs = builder.Configuration.GetValue(ConfigKeys.OpenTelemetry.SlowWorldScriptThresholdMs, 66.66);
 
-    var rootSampler = new ChaosTracingSampler(
+    var sampler = new ChaosTracingSampler(
         samplingRatio,
         updateSamplingRatio,
         packetSamplingRatio,
         worldScriptSamplingRatio);
 
-    var sampler = new ParentBasedSampler(rootSampler);
+    var exporterOptions = new OtlpExporterOptions
+    {
+        Endpoint = new Uri(otlpEndpoint),
+        Protocol = OtlpExportProtocol.HttpProtobuf
+    };
+
+    var batchProcessor = new BatchActivityExportProcessor(new OtlpTraceExporter(exporterOptions));
+
+    var tailProcessor = new TailSamplingProcessor(
+        batchProcessor,
+        slowUpdateThresholdMs,
+        slowPacketThresholdMs,
+        slowWorldScriptThresholdMs);
 
     builder.Services
            .AddOpenTelemetry()
@@ -249,16 +263,12 @@ static void ConfigureOpenTelemetry(WebApplicationBuilder builder)
            .WithTracing(tracing =>
            {
                tracing.SetSampler(sampler)
-                      .AddSource(ChaosActivitySource.SOURCE_NAME)
-                      .AddSource(ChaosActivitySource.UPDATE_SOURCE_NAME)
-                      .AddSource(ChaosActivitySource.PACKET_SOURCE_NAME)
-                      .AddSource(ChaosActivitySource.WORLD_SCRIPT_SOURCE_NAME)
-                      .AddProcessor(new SlowOperationProcessor(slowUpdateThresholdMs, slowPacketThresholdMs, slowWorldScriptThresholdMs))
-                      .AddOtlpExporter(opts =>
-                      {
-                          opts.Endpoint = new Uri(otlpEndpoint);
-                          opts.Protocol = OtlpExportProtocol.HttpProtobuf;
-                      });
+                      .AddSource(ActivitySources.GENERAL_SOURCE_NAME)
+                      .AddSource(ActivitySources.INTERNAL_SOURCE_NAME)
+                      .AddSource(NetworkingActivitySources.PACKET_SOURCE_NAME)
+                      .AddSource(ChaosActivitySources.UPDATE_SOURCE_NAME)
+                      .AddSource(ChaosActivitySources.WORLD_SCRIPT_SOURCE_NAME)
+                      .AddProcessor(tailProcessor);
            });
 }
 

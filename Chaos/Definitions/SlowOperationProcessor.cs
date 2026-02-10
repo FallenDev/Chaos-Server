@@ -1,5 +1,6 @@
 #region
 using System.Diagnostics;
+using Chaos.Networking.Abstractions.Definitions;
 using OpenTelemetry;
 #endregion
 
@@ -65,10 +66,10 @@ public sealed class SlowOperationProcessor : BaseProcessor<Activity>
 
         return sourceName switch
         {
-            ChaosActivitySource.UPDATE_SOURCE_NAME       => duration > UpdateThreshold,
-            ChaosActivitySource.PACKET_SOURCE_NAME       => duration > PacketThreshold,
-            ChaosActivitySource.WORLD_SCRIPT_SOURCE_NAME => duration > WorldScriptThreshold,
-            _                                            => false // General traces use normal sampling only
+            ChaosActivitySources.UPDATE_SOURCE_NAME       => duration > UpdateThreshold,
+            NetworkingActivitySources.PACKET_SOURCE_NAME  => duration > PacketThreshold,
+            ChaosActivitySources.WORLD_SCRIPT_SOURCE_NAME => duration > WorldScriptThreshold,
+            _                                             => false // General traces use normal sampling only
         };
     }
 }

@@ -4,10 +4,12 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Chaos.Common.Abstractions.Definitions;
 using Chaos.Common.Identity;
 using Chaos.Common.Synchronization;
 using Chaos.Cryptography.Abstractions;
 using Chaos.Extensions.Networking;
+using Chaos.Networking.Abstractions.Definitions;
 using Chaos.NLog.Logging.Definitions;
 using Chaos.NLog.Logging.Extensions;
 using Chaos.Packets;
@@ -210,26 +212,16 @@ public abstract class SocketClientBase : ISocketClient, IDisposable
                 {
                     var opcode = Buffer[offset + 3];
 
-                    // Clear parent context so packets are sampled independently
-                    var previousActivity = Activity.Current;
-                    Activity.Current = null;
+                    using var packetActivity = ActivitySources.StartPacketActivity("Packet.Handle");
+                    packetActivity?.SetTag("packet.opcode", opcode);
+                    packetActivity?.SetTag("packet.length", packetLength);
 
-                    using var activity = PacketActivitySource.StartActivity("Packet.Handle");
-
-                    // Restore previous if not sampled
-                    if (activity == null)
-                        Activity.Current = previousActivity;
-
-                    activity?.SetTag("packet.opcode", opcode);
-                    activity?.SetTag("packet.length", packetLength);
-
-                    activity?.SetTag(
+                    packetActivity?.SetTag(
                         "client.type",
                         GetType()
                             .Name);
 
-                    await HandlePacketAsync(Buffer.Slice(offset, packetLength))
-                        .ConfigureAwait(false);
+                    await HandlePacketAsync(Buffer.Slice(offset, packetLength));
                 } catch (Exception ex)
                 {
                     //required so we can use Span<byte> in an async method

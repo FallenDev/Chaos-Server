@@ -61,14 +61,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Chaos.Common.Abstractions/Definitions/ActivitySources.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos.Networking.Abstractions/Definitions/NetworkingActivitySources.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos/Definitions/ChaosActivitySources.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chaos/Definitions/TailSamplingProcessor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Abstractions/IBigFlagsValue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Abstractions/IBigFlagsValue.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common/Extensions/MathExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Extensions/MathExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/CircleExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/LocationExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/LocationExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PointExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PointExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PolygonExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/PolygonExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Extensions.Geometry/RectangleExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Common.Abstractions/Chaos.Common.Abstractions.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common.Abstractions/Chaos.Common.Abstractions.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Abstractions/ServerBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Abstractions/ServerBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Definitions/ChaosActivitySource.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Definitions/ChaosTracingSampler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Definitions/ChaosTracingSampler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Definitions/SlowOperationProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Definitions/SlowOperationProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Models/World/Aisling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/World/Aisling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosLobbyClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosLobbyClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosLoginClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosLoginClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Services/Other/WorldScriptingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Other/WorldScriptingService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +98,7 @@
     <option name="firstShow" value="false" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="44" />
+    <option name="cachedIndexableFilesCount" value="43" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -221,6 +232,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/38ad98c9d60c1739a82dce92fa559af31b833496d8d3fba4a86361ff05bf017/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/3b1ca9ae4c42542ce48c7e78c36ad9b5cf71ebddb89c151a8eeeea532549/MapperConfigurationExpression.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/3b6422daa93b579eb3358e4781e4c5782dee85198f8062055ee9d07f34b7aa/JsonSerializer.Write.Stream.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/3c9a94e27a196ed76817fcb08735d1a3ba6802b39ed2f69953a86295374a46e/ActivitySource.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/3d4c243c3ef4e9f7aef1c99531813764ba8b55a38934983b8d47de4219d8485d/NotifyCollectionChangedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/3da14f955fb27c23fa952898ecb39065fb68f545b962415c63697e320bc5b4e/JsonDocument.TryGetProperty.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/3db5e3ef8d76a6361a884e2c7c221fcbcb594cfa6a594259fd8b81244cc9d5/LoggingConfigurationParser.cs" root0="FORCE_HIGHLIGHTING" />
@@ -230,6 +242,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/4533b85327df6224d2d35855bdf78de4b88cfb41b82dae38e8e78aca249b55e/SafeHandle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/46969286be38e70626b627f8cebad4740971ad/LibraryImports.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/47e3dfd9692654de14398ffdea8c695a4b42e898912f422f577c51a215779f8/InliningDiagnoserAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/485b254c16fea9b39fe917695265c618a2dc5ac52ca5d9531e2e25fb4b733/TracerProviderBuilder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/49ead4a771535a76d2fe960312dbfc284973bf3758839f97e212c2396b3fa/Array.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/4a3d2ea4bbefa4adf1718d54d4486f29bfc65414dfa2784068bf8fbb95633e1/SmallFrozenDictionary.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/4c2266d9aba4c4ba36aec62278534ed6bbd881431c65810dd69b8d57bbf/Path.Windows.cs" root0="SKIP_HIGHLIGHTING" />
@@ -325,17 +338,19 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/af9592decebfa21cfa1c195061952a228de0a945de3e12cdad8e952bf86d/ReadLinesIterator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b05fc3ef644b7632d4481b3defa11634da02637d896cb5eca3eca7cf2f3ee3/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b2e2ff5e4f118b6e4ad5f910e9fde1fd6a338b5716cff790e934a2014dc8379/File.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b2ec5c9d1f51ccb05ad4568f1bb5eadf8e2366b070f34b3147934d70e167ad4d/TraceIdRatioBasedSampler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b6b80c2c5cbc74bdda121548840fca5a53e8c61c16fbcc0f9921be589964/LogFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b7208b3f72528d22781d25fde9a55271bdf2b5aade4f03b1324579a25493cd8/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b89f587f22d2d16755c37a8dd74fd350ef6fd97fc9bcacbad5af80c41a844cc2/PointerMemoryManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/b8d753e12338b313a0baa29e5b7010f685edfd61c8eab6f759541034cc83387/RuntimeHelpers.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bb20bcb6cf86be25708bd683fe862b76c8c4497abe68566865702178cf5e1c/Memory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bb6e3f751b32d24cdec7f549f705c53ef8ee0569d1fdd901af137e52a6f119/TracerProviderBuilderBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bca1ebe78b16c322f436622bc3f2642c3eadb904227576a249e27db652f41cd/AssertionScope.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bd47ee1ab214a7674f381fb716d273cc4bb64441375b47417e9dcd5ec96f89/ToCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bd8b7843bd9757ea520c22cc618a346c5a57ecb15a313f889543dca8ab8669/MemoryCacheOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bdac74b5db145724bb644be6eff638cdc43259aed939119c661cda256cc9/ImmutableArray_1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bf4c72a994ceb532481c7e88e2b7d9f5a6a2f32365a7ec78d8dcf2a71cc2ed/Sampler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bf4c72a994ceb532481c7e88e2b7d9f5a6a2f32365a7ec78d8dcf2a71cc2ed/Sampler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/bf716f2e258f4819cd669d49cd1ec3361b17e4cb7f1ec31aaca5bbcb3a118/Except.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c173ee0aedaf314566cbf55476351dfe4f35d5a8a2fddefadbd3fab712392/StringRuneEnumerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/c24d475d83442e0a97ce97fdd4d43d6b5a3977b2a474c7996b895330c6b0/Span.cs" root0="FORCE_HIGHLIGHTING" />
@@ -459,6 +474,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/01504B0C7839F28B2D78A5B4/System.Text.RegularExpressions.Generator/System.Text.RegularExpressions.Generator.RegexGenerator/RegexGenerator.g.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/8BFE73F4073B79A7364EB99D/System.Text.Json.SourceGeneration/System.Text.Json.SourceGeneration.JsonSourceGenerator/SerializationContext.AislingTrackersSchema.g.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/.claude/settings.local.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos.Common.Abstractions/Definitions/ActivitySources.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common.Abstractions/IInterlockedObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common/Collections/BigFlagsCollection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos.Common/Collections/FlagCollection.cs" root0="FORCE_HIGHLIGHTING" />
@@ -498,6 +514,7 @@
     <setting file="file://$PROJECT_DIR$/Chaos/Collections/MapEntityCollection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Definitions/BigFlags.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Chaos/Definitions/TailSamplingProcessor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/ChannelListCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/JoinChannelCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chaos/Messaging/LeaveChannelCommand.cs" root0="FORCE_HIGHLIGHTING" />
@@ -2218,7 +2235,8 @@
       <workItem from="1769761044154" duration="659000" />
       <workItem from="1769777102691" duration="1058000" />
       <workItem from="1769800584150" duration="1588000" />
-      <workItem from="1769855476793" duration="2778000" />
+      <workItem from="1769855476793" duration="3232000" />
+      <workItem from="1770722899413" duration="8160000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2563,7 +2581,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="398" />
+    <option name="localTasksCounter" value="401" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2659,9 +2677,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="more verbose collision checks" />
-    <MESSAGE value="geometry extension stuff" />
-    <MESSAGE value="ScriptBuilder / ScriptedSequence improvements&#10;- separate implementations for creatures and non-creatures, to allow scripting for all kinds of objects" />
     <MESSAGE value="missed a file" />
     <MESSAGE value="better heartbeat" />
     <MESSAGE value=".net 10 things" />
@@ -2684,7 +2699,10 @@
     <MESSAGE value="fix group sync ooo" />
     <MESSAGE value="join/leave guild channel" />
     <MESSAGE value="network stuff&#10;- readonly notepad packet 0x35&#10;- correction on BoardList packet&#10;courtesy of silo(erik)" />
-    <option name="LAST_COMMIT_MESSAGE" value="network stuff&#10;- readonly notepad packet 0x35&#10;- correction on BoardList packet&#10;courtesy of silo(erik)" />
+    <MESSAGE value="extension blocks" />
+    <MESSAGE value="fix datatype in meta converter" />
+    <MESSAGE value="worldlist colors" />
+    <option name="LAST_COMMIT_MESSAGE" value="worldlist colors" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -3012,6 +3030,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="952" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Chaos/Definitions/SlowOperationProcessor.cs</url>
+          <line>41</line>
+          <properties documentPath="D:\repos\Sichii\Chaos-Server\Chaos\Definitions\SlowOperationProcessor.cs" containingFunctionPresentation="Method 'OnEnd'">
+            <startOffsets>
+              <option value="1641" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1678" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="977" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />

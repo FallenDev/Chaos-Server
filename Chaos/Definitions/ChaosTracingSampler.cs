@@ -1,4 +1,5 @@
 #region
+using System.Diagnostics;
 using Chaos.Extensions.Common;
 using OpenTelemetry.Trace;
 #endregion
@@ -6,7 +7,9 @@ using OpenTelemetry.Trace;
 namespace Chaos.Definitions;
 
 /// <summary>
-///     A custom sampler that applies different sampling ratios based on the activity source.
+///     A custom sampler that applies different sampling ratios based on the activity source. Handles parent context
+///     directly so that children of unsampled roots are still created (as RecordOnly) to allow the TailSamplingProcessor
+///     to evaluate their duration.
 /// </summary>
 public sealed class ChaosTracingSampler : Sampler
 {
@@ -50,35 +53,48 @@ public sealed class ChaosTracingSampler : Sampler
             _      => new TraceIdRatioBasedSampler(ratio)
         };
 
+    /// <summary>
+    ///     Ensures the activity is always created by converting Drop to RecordOnly. This allows the TailSamplingProcessor to
+    ///     evaluate duration and force-export slow traces.
+    /// </summary>
+    private static SamplingResult EnsureActivityCreated(SamplingResult result)
+        => result.Decision == SamplingDecision.Drop ? new SamplingResult(SamplingDecision.RecordOnly) : result;
+
+    private SamplingResult GetRoutedSamplingResult(in SamplingParameters samplingParameters)
+    {
+        var activityName = samplingParameters.Name;
+
+        if (activityName.StartsWithI("Update") || activityName.StartsWithI("Map."))
+            return UpdateSampler.ShouldSample(samplingParameters);
+
+        if (activityName.StartsWithI("Packet") || activityName.StartsWithI("Recv") || activityName.StartsWithI("Send"))
+            return PacketSampler.ShouldSample(samplingParameters);
+
+        if (activityName.StartsWithI("WorldScript"))
+            return WorldScriptSampler.ShouldSample(samplingParameters);
+
+        return DefaultSampler.ShouldSample(samplingParameters);
+    }
+
     /// <inheritdoc />
     public override SamplingResult ShouldSample(in SamplingParameters samplingParameters)
     {
-        var sourceName = samplingParameters.Tags?.FirstOrDefault(t => t.Key == "otel.library.name")
-                                           .Value as string;
+        var parentContext = samplingParameters.ParentContext;
 
-        // If we can't determine the source from tags, check the activity name prefix
-        if (string.IsNullOrEmpty(sourceName))
+        // Child span: inherit parent's sampling decision
+        if (parentContext.TraceId != default)
         {
-            var activityName = samplingParameters.Name;
+            var parentIsRecorded = (parentContext.TraceFlags & ActivityTraceFlags.Recorded) != 0;
 
-            if (activityName.StartsWithI("Update") || activityName.StartsWithI("Map."))
-                return UpdateSampler.ShouldSample(samplingParameters);
+            // Parent was ratio-sampled → child should also be sampled
+            if (parentIsRecorded)
+                return new SamplingResult(SamplingDecision.RecordAndSample);
 
-            if (activityName.StartsWithI("Packet") || activityName.StartsWithI("Recv") || activityName.StartsWithI("Send"))
-                return PacketSampler.ShouldSample(samplingParameters);
-
-            if (activityName.StartsWithI("WorldScript"))
-                return WorldScriptSampler.ShouldSample(samplingParameters);
-
-            return DefaultSampler.ShouldSample(samplingParameters);
+            // Parent is RecordOnly (unsampled root) → create child for slow detection
+            return new SamplingResult(SamplingDecision.RecordOnly);
         }
 
-        return sourceName switch
-        {
-            ChaosActivitySource.UPDATE_SOURCE_NAME       => UpdateSampler.ShouldSample(samplingParameters),
-            ChaosActivitySource.PACKET_SOURCE_NAME       => PacketSampler.ShouldSample(samplingParameters),
-            ChaosActivitySource.WORLD_SCRIPT_SOURCE_NAME => WorldScriptSampler.ShouldSample(samplingParameters),
-            _                                            => DefaultSampler.ShouldSample(samplingParameters)
-        };
+        // Root span: apply ratio-based routing, then ensure activity is created
+        return EnsureActivityCreated(GetRoutedSamplingResult(samplingParameters));
     }
 }

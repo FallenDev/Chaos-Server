@@ -5,6 +5,7 @@ using Chaos.Collections.Common;
 using Chaos.Collections.Synchronized;
 using Chaos.Collections.Time;
 using Chaos.Common.Abstractions;
+using Chaos.Common.Abstractions.Definitions;
 using Chaos.Common.Synchronization;
 using Chaos.DarkAges.Definitions;
 using Chaos.Definitions;
@@ -1237,22 +1238,41 @@ public sealed class Aisling : Creature, IScripted<IAislingScript>, IDialogSource
         bool? ignoreWalls = null,
         bool? ignoreCollision = null)
     {
-        if (!Script.CanMove() || ((direction != Direction) && !Script.CanTurn()) || !ShouldWalk)
-        {
-            Refresh(true);
+        using var walkActivity = ActivitySources.StartInternalActivity("Aisling.Walk");
 
-            return;
-        }
-
-        Direction = direction;
         var startPosition = Location.From(this);
         var startPoint = Point.From(this);
         var endPoint = this.DirectionalOffset(direction);
 
-        //if admin, just check if we're within the map
-        if (IsAdmin)
+        using (ActivitySources.StartInternalActivity("Aisling.Walk.Checks"))
         {
-            if (!MapInstance.IsWithinMap(endPoint))
+            if (!Script.CanMove() || ((direction != Direction) && !Script.CanTurn()) || !ShouldWalk)
+            {
+                Refresh(true);
+
+                return;
+            }
+
+            Direction = direction;
+
+            //if admin, just check if we're within the map
+            if (IsAdmin)
+            {
+                if (!MapInstance.IsWithinMap(endPoint))
+                {
+                    Refresh(true);
+
+                    return;
+                }
+            }
+
+            //otherwise, check if the point is walkable
+            else if (!MapInstance.IsWalkable(
+                         endPoint,
+                         this,
+                         ignoreBlockingReactors,
+                         ignoreWalls,
+                         ignoreCollision))
             {
                 Refresh(true);
 
@@ -1260,60 +1280,53 @@ public sealed class Aisling : Creature, IScripted<IAislingScript>, IDialogSource
             }
         }
 
-        //otherwise, check if the point is walkable
-        else if (!MapInstance.IsWalkable(
-                     endPoint,
-                     this,
-                     ignoreBlockingReactors,
-                     ignoreWalls,
-                     ignoreCollision))
+        using (ActivitySources.StartInternalActivity("Aisling.Walk.Movement"))
         {
-            Refresh(true);
+            SetLocation(endPoint);
+            Trackers.LastWalk = DateTime.UtcNow;
+            Trackers.LastPosition = startPosition;
 
-            return;
+            var creaturesToUpdate = MapInstance.GetEntitiesWithinRange<Creature>(startPoint, 16)
+                                               .ThatAreWithinRange(
+                                                   points:
+                                                   [
+                                                       startPoint,
+                                                       endPoint
+                                                   ])
+                                               .ToList();
+
+            foreach (var creature in creaturesToUpdate)
+                if (creature is Aisling)
+                    creature.UpdateViewPort();
+                else
+                    creature.UpdateViewPort([this]);
+
+            var aislingsThatWatchedUsWalk = creaturesToUpdate.ThatAreWithinRange(startPoint)
+                                                             .ThatAreWithinRange(endPoint)
+                                                             .ThatCanObserve(this)
+                                                             .OfType<Aisling>();
+
+            foreach (var aisling in aislingsThatWatchedUsWalk)
+                if (!aisling.Equals(this))
+                    aisling.Client.SendCreatureWalk(Id, startPoint, direction);
+
+            Client.SendClientWalkResponse(startPoint, direction);
         }
 
-        SetLocation(endPoint);
-        Trackers.LastWalk = DateTime.UtcNow;
-        Trackers.LastPosition = startPosition;
+        using (ActivitySources.StartInternalActivity("Aisling.Walk.PostMovement"))
+        {
+            foreach (var reactor in MapInstance.GetDistinctReactorsAtPoint(this)
+                                               .ToList())
+                reactor.OnWalkedOn(this);
 
-        var creaturesToUpdate = MapInstance.GetEntitiesWithinRange<Creature>(startPoint, 16)
-                                           .ThatAreWithinRange(
-                                               points:
-                                               [
-                                                   startPoint,
-                                                   endPoint
-                                               ])
-                                           .ToList();
+            var startOnWater = MapInstance.Template.Tiles[startPosition.X, startPosition.Y].IsWater;
+            var endOnWater = MapInstance.Template.Tiles[endPoint.X, endPoint.Y].IsWater;
 
-        foreach (var creature in creaturesToUpdate)
-            if (creature is Aisling)
-                creature.UpdateViewPort();
-            else
-                creature.UpdateViewPort([this]);
-
-        var aislingsThatWatchedUsWalk = creaturesToUpdate.ThatAreWithinRange(startPoint)
-                                                         .ThatAreWithinRange(endPoint)
-                                                         .ThatCanObserve(this)
-                                                         .OfType<Aisling>();
-
-        foreach (var aisling in aislingsThatWatchedUsWalk)
-            if (!aisling.Equals(this))
-                aisling.Client.SendCreatureWalk(Id, startPoint, direction);
-
-        Client.SendClientWalkResponse(startPoint, direction);
-
-        foreach (var reactor in MapInstance.GetDistinctReactorsAtPoint(this)
-                                           .ToList())
-            reactor.OnWalkedOn(this);
-
-        var startOnWater = MapInstance.Template.Tiles[startPosition.X, startPosition.Y].IsWater;
-        var endOnWater = MapInstance.Template.Tiles[endPoint.X, endPoint.Y].IsWater;
-
-        //if we transition between water / nonwater tiles
-        //send attributes to update the water walking status
-        if (startOnWater != endOnWater)
-            Client.SendAttributes(StatUpdateType.Full);
+            //if we transition between water / nonwater tiles
+            //send attributes to update the water walking status
+            if (startOnWater != endOnWater)
+                Client.SendAttributes(StatUpdateType.Full);
+        }
     }
 
     /// <inheritdoc />
