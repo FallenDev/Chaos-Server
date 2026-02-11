@@ -61,25 +61,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Chaos.Common.Abstractions/Definitions/ActivitySources.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos.Networking.Abstractions/Definitions/NetworkingActivitySources.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos/Definitions/ChaosActivitySources.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chaos/Definitions/TailSamplingProcessor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Common.Abstractions/Chaos.Common.Abstractions.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common.Abstractions/Chaos.Common.Abstractions.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Abstractions/ServerBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Abstractions/ServerBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Networking/Abstractions/SocketClientBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Definitions/ChaosActivitySource.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Definitions/ChaosTracingSampler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Definitions/ChaosTracingSampler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Definitions/SlowOperationProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Definitions/SlowOperationProcessor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Models/World/Aisling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/World/Aisling.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosLobbyClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosLobbyClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosLoginClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosLoginClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Networking/ChaosWorldClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/Other/WorldScriptingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Other/WorldScriptingService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Servers/WorldServer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Collections/Trackers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Collections/Trackers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/Admin/SummonCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/SummonCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/Admin/TeleportToPlayerCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/TeleportToPlayerCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/Admin/TraverseMapCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/TraverseMapCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/Creature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/Creature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/InteractableEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/InteractableEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/VisibleEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/VisibleEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Models/WorldMap/WorldMapNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/WorldMap/WorldMapNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Services/Storage/ExpiringMapInstanceCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Storage/ExpiringMapInstanceCache.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Utilities/ComplexActionHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Utilities/ComplexActionHelper.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -536,6 +529,7 @@
     <setting file="file://$PROJECT_DIR$/Chaos/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/MapData/lod2911.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/MapData/lod449.map" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Data/Configuration/MapData/lod79.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/MapData/lod8030.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/MapData/lod8329.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Configuration/Templates/Items/apple.json" root0="FORCE_HIGHLIGHTING" />
@@ -2236,7 +2230,7 @@
       <workItem from="1769777102691" duration="1058000" />
       <workItem from="1769800584150" duration="1588000" />
       <workItem from="1769855476793" duration="3232000" />
-      <workItem from="1770722899413" duration="8160000" />
+      <workItem from="1770722899413" duration="16841000" />
     </task>
     <task id="LOCAL-00065" summary="healing&#10;- added IHealFormula and DefaultHealFormula&#10;- added IApplyHealScript and 2 variants&#10;- changed DefaultApplyDamageScript to ApplyAttackDamageScript&#10;- added ApplyNonAttackDamageScript variant&#10;- added HealComponent&#10;- added skill and spell HealScript&#10;- added OnHealed to all creature scripts&#10;- consumables now use non-alerting damage or heal functional scripts to apply their effect">
       <created>1678409128727</created>
@@ -2581,7 +2575,7 @@
       <option name="project" value="LOCAL" />
       <updated>1687476978684</updated>
     </task>
-    <option name="localTasksCounter" value="401" />
+    <option name="localTasksCounter" value="402" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2677,7 +2671,6 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="missed a file" />
     <MESSAGE value="better heartbeat" />
     <MESSAGE value=".net 10 things" />
     <MESSAGE value="fix warnings" />
@@ -2702,7 +2695,8 @@
     <MESSAGE value="extension blocks" />
     <MESSAGE value="fix datatype in meta converter" />
     <MESSAGE value="worldlist colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="worldlist colors" />
+    <MESSAGE value="better tracing structures&#10;- some minor optimizations based on tracing" />
+    <option name="LAST_COMMIT_MESSAGE" value="better tracing structures&#10;- some minor optimizations based on tracing" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

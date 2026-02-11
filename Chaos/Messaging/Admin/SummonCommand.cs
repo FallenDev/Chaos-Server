@@ -1,15 +1,30 @@
+#region
+using Chaos.Collections;
 using Chaos.Collections.Common;
+using Chaos.Common.Utilities;
 using Chaos.Extensions.Common;
+using Chaos.Geometry.Abstractions;
 using Chaos.Messaging.Abstractions;
 using Chaos.Models.World;
 using Chaos.Networking.Abstractions;
+using Chaos.NLog.Logging.Definitions;
+using Chaos.NLog.Logging.Extensions;
+using Chaos.Utilities;
+#endregion
 
 namespace Chaos.Messaging.Admin;
 
 [Command("summon", helpText: "<targetName>")]
-public class SummonCommand(IClientRegistry<IChaosWorldClient> clientRegistry) : ICommand<Aisling>
+public class SummonCommand : ICommand<Aisling>
 {
-    private readonly IClientRegistry<IChaosWorldClient> ClientRegistry = clientRegistry;
+    private readonly IClientRegistry<IChaosWorldClient> ClientRegistry;
+    private readonly ILogger<SummonCommand> Logger;
+
+    public SummonCommand(IClientRegistry<IChaosWorldClient> clientRegistry, ILogger<SummonCommand> logger)
+    {
+        ClientRegistry = clientRegistry;
+        Logger = logger;
+    }
 
     /// <inheritdoc />
     public ValueTask ExecuteAsync(Aisling source, ArgumentCollection args)
@@ -24,7 +39,11 @@ public class SummonCommand(IClientRegistry<IChaosWorldClient> clientRegistry) : 
         if (aisling == null)
             source.SendOrangeBarMessage($"{aisling} is not online");
         else
-            aisling.TraverseMap(source.MapInstance, source, true);
+            ComplexActionHelper.AdminTraverseMap(
+                aisling,
+                source.MapInstance,
+                source,
+                Logger);
 
         return default;
     }

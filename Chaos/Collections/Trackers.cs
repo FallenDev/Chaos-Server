@@ -76,6 +76,22 @@ public class Trackers : IDeltaUpdatable
     public Creature? LastDamagedBy { get; set; }
 
     /// <summary>
+    ///     The instance of the last map this entity was on (excluding the current map)
+    /// </summary>
+    /// <remarks>
+    ///     NOT PERSISTENT / SERIALIZED TO FILE
+    /// </remarks>
+    public MapInstance? LastMapInstance { get; set; }
+
+    /// <summary>
+    ///     The base instance id of the last map this entity was on (excluding the current map)
+    /// </summary>
+    /// <remarks>
+    ///     NOT PERSISTENT / SERIALIZED TO FILE
+    /// </remarks>
+    public string? LastBaseMapInstanceId { get; set; }
+
+    /// <summary>
     ///     The instance id of the last map this entity was on (excluding the current map)
     /// </summary>
     /// <remarks>

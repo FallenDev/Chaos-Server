@@ -40,6 +40,7 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     private readonly DeltaTime DeltaTime;
     private readonly PeriodicTimer DeltaTimer;
     private readonly IIntervalTimer HandleShardLimitersTimer;
+    private readonly TaskCompletionSource InitializationTcs;
     private readonly ILogger<MapInstance> Logger;
     private readonly MapEntityCollection Objects;
     private readonly ConcurrentQueue<Action> ProcessingQueue;
@@ -147,6 +148,11 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     public FifoAutoReleasingSemaphoreSlim Sync { get; }
 
     /// <summary>
+    ///     A task that completes when the map instance has finished initialization
+    /// </summary>
+    public Task Initialization => InitializationTcs.Task;
+
+    /// <summary>
     ///     Whether this map is a shard of another map
     /// </summary>
     public bool IsShard => !string.IsNullOrEmpty(BaseInstanceId);
@@ -211,6 +217,7 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
 
         Objects = new MapEntityCollection(logger, template.Width, template.Height);
 
+        InitializationTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         MapInstanceCtx = CancellationTokenSource.CreateLinkedTokenSource(ServerShutdownToken);
         MonsterSpawns = [];
         Sync = new FifoAutoReleasingSemaphoreSlim(1, 1, $"MapInstance {InstanceId}");
@@ -955,13 +962,18 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
                 aisling.Client.SendMapChangeComplete();
 
                 //only send sound if the music is different
-                if (!string.IsNullOrEmpty(aisling.Trackers.LastMapInstanceId))
-                {
-                    var lastMap = SimpleCache.Get<MapInstance>(aisling.Trackers.LastMapInstanceId);
+                if (aisling.Trackers.LastMapInstance is not null)
+                    try
+                    {
+                        var lastMap = aisling.Trackers.LastMapInstance;
 
-                    if (Music != lastMap.Music)
-                        aisling.Client.SendSound(Music, true);
-                } else
+                        if (Music != lastMap.Music)
+                            aisling.Client.SendSound(Music, true);
+                    } catch
+                    {
+                        //ignored
+                    }
+                else
                     aisling.Client.SendSound(Music, true);
 
                 aisling.Client.SendMapLoadComplete();
@@ -1465,12 +1477,27 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     /// <summary>
     ///     Begins execution of the map's update loop
     /// </summary>
-    public void StartAsync()
+    public void StartAsync(Action? initializationAction = null)
     {
         using (ExecutionContext.SuppressFlow())
             Task.Run(async () =>
                 {
                     await Task.Yield();
+
+                    try
+                    {
+                        initializationAction?.Invoke();
+                        InitializationTcs.SetResult();
+                    } catch (Exception e)
+                    {
+                        Logger.WithTopics(Topics.Entities.MapInstance, Topics.Actions.Load)
+                              .WithProperty(this)
+                              .LogError(e, "Failed to initialize map instance {@MapInstanceId}", InstanceId);
+
+                        InitializationTcs.SetException(e);
+
+                        return;
+                    }
 
                     var linkedCancellationToken = MapInstanceCtx.Token;
 

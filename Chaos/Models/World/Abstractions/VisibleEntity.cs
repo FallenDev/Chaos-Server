@@ -1,7 +1,9 @@
+#region
 using Chaos.Collections;
 using Chaos.Definitions;
 using Chaos.Extensions;
 using Chaos.Geometry.Abstractions;
+#endregion
 
 namespace Chaos.Models.World.Abstractions;
 
@@ -10,7 +12,6 @@ namespace Chaos.Models.World.Abstractions;
 /// </summary>
 public abstract class VisibleEntity(ushort sprite, MapInstance mapInstance, IPoint point) : InteractableEntity(mapInstance, point)
 {
-    protected ConcurrentDictionary<uint, DateTime> LastClicked { get; init; } = new();
     public ushort Sprite { get; set; } = sprite;
     public VisibilityType Visibility { get; protected set; }
 
@@ -43,7 +44,7 @@ public abstract class VisibleEntity(ushort sprite, MapInstance mapInstance, IPoi
         }
     }
 
-    public virtual bool ShouldRegisterClick(uint fromId)
+    public override bool ShouldRegisterClick(uint fromId)
         => !LastClicked.TryGetValue(fromId, out var lastClick)
            || (DateTime.UtcNow.Subtract(lastClick)
                        .TotalMilliseconds

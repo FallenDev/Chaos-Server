@@ -1,15 +1,25 @@
+#region
 using Chaos.Collections;
 using Chaos.Collections.Common;
 using Chaos.Messaging.Abstractions;
 using Chaos.Models.World;
 using Chaos.Storage.Abstractions;
+using Chaos.Utilities;
+#endregion
 
 namespace Chaos.Messaging.Admin;
 
 [Command("traverse", helpText: "<mapInstanceId> <xPos?> <yPos?>")]
-public sealed class TraverseMapCommand(ISimpleCache cache) : ICommand<Aisling>
+public sealed class TraverseMapCommand : ICommand<Aisling>
 {
-    private readonly ISimpleCache Cache = cache;
+    private readonly ISimpleCache Cache;
+    private readonly ILogger<TraverseMapCommand> Logger;
+
+    public TraverseMapCommand(ISimpleCache cache, ILogger<TraverseMapCommand> logger)
+    {
+        Cache = cache;
+        Logger = logger;
+    }
 
     /// <inheritdoc />
     public ValueTask ExecuteAsync(Aisling aisling, ArgumentCollection args)
@@ -26,7 +36,11 @@ public sealed class TraverseMapCommand(ISimpleCache cache) : ICommand<Aisling>
         else
             point = new Point(mapInstance.Template.Width / 2, mapInstance.Template.Height / 2);
 
-        aisling.TraverseMap(mapInstance, point, true);
+        ComplexActionHelper.AdminTraverseMap(
+            aisling,
+            mapInstance,
+            point,
+            Logger);
 
         return default;
     }

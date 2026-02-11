@@ -1,15 +1,25 @@
+#region
 using Chaos.Collections.Common;
 using Chaos.Extensions.Common;
 using Chaos.Messaging.Abstractions;
 using Chaos.Models.World;
 using Chaos.Networking.Abstractions;
+using Chaos.Utilities;
+#endregion
 
 namespace Chaos.Messaging.Admin;
 
 [Command("tpto", helpText: "<targetName>")]
-public class TeleportToPlayerCommand(IClientRegistry<IChaosWorldClient> clientRegistry) : ICommand<Aisling>
+public class TeleportToPlayerCommand : ICommand<Aisling>
 {
-    private readonly IClientRegistry<IChaosWorldClient> ClientRegistry = clientRegistry;
+    private readonly IClientRegistry<IChaosWorldClient> ClientRegistry;
+    private readonly ILogger<TeleportToPlayerCommand> Logger;
+
+    public TeleportToPlayerCommand(IClientRegistry<IChaosWorldClient> clientRegistry, ILogger<TeleportToPlayerCommand> logger)
+    {
+        ClientRegistry = clientRegistry;
+        Logger = logger;
+    }
 
     /// <inheritdoc />
     public ValueTask ExecuteAsync(Aisling source, ArgumentCollection args)
@@ -28,7 +38,11 @@ public class TeleportToPlayerCommand(IClientRegistry<IChaosWorldClient> clientRe
             return default;
         }
 
-        source.TraverseMap(player.MapInstance, player, true);
+        ComplexActionHelper.AdminTraverseMap(
+            source,
+            player.MapInstance,
+            player,
+            Logger);
 
         return default;
     }
