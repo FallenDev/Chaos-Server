@@ -62,17 +62,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5428a732-04b4-4ad7-b61b-5764b5027982" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chaos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Collections/MapInstance.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Collections/Trackers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Collections/Trackers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/Admin/SummonCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/SummonCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/Admin/TeleportToPlayerCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/TeleportToPlayerCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Messaging/Admin/TraverseMapCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Messaging/Admin/TraverseMapCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/Creature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/Creature.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/InteractableEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/InteractableEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/VisibleEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/World/Abstractions/VisibleEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Models/WorldMap/WorldMapNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Models/WorldMap/WorldMapNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Services/Storage/ExpiringMapInstanceCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Services/Storage/ExpiringMapInstanceCache.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chaos/Utilities/ComplexActionHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Utilities/ComplexActionHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.Common/Utilities/JsonSerializerEx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.Common/Utilities/JsonSerializerEx.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.IO/FileSystem/FileEx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.IO/FileSystem/FileEx.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos.IO/Json/JsonValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos.IO/Json/JsonValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chaos/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chaos/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,6 +189,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/133ff33b6edfc62d77bac93b1447ef565e4689382642f57f2d4099ce633/StringHumanizeExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/1510a3e3fe7df8a2681434779ea73bc53713ed9c05689d72495b2b27c87/Path.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/159ed94ff573d8d866b5a3d81156a54ddc5c18a6813a2925699ab37547574f/JsonSerializerOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/16abc423488b235fdf529c48aa96f2a46e9d6af0d97f745e24a6b58c2/JsonSerializer.Write.String.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/1ab95f7465cd3b8eb9eeed3182216f364af090e17ac888ef7d4b76e42f43da14/ZLibStream.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/1b81cb3be224213a6a73519b6e340a628d9a1fb8629c351a186a26f6376669/List.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/1bbde5309ad69f9b197e3197e77f36e561a0a967bf83f231eec195828ff4/OfType.cs" root0="FORCE_HIGHLIGHTING" />
@@ -207,6 +201,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/24f2bc2f34acd2f18a58dc387a794496d3e71d543498db8da419e3bd3028f5b4/MemoryCacheExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/261ea83c988816e3d8fe76b15b7ac6c10af64b8f9e739854f83c137c8ba9/SafeFileHandle.Windows.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/275552b120b29f51ba6d9d2c4e46c2e38db491e9425b34cc86adf4824f59210/Skip.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/27b864ecfe757a404697b6d047f19ebe9ad4a346a645504671e145c2f5d0771e/JsonSerializer.Helpers.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/2854ce6d56c18d0d837d3a3ef9c4f2c7c77691fa3528c8394986ac7ce7719/StackFrameIterator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/2967e8dbef6326cf196796e84a12d3f462d9629df1a445ac76cbc45cb857c5a/MemoryManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/29b9095b6f479d183d31fb8dd32510123adcee3a46474dbed1ac25328dbb4c/Array.CoreCLR.cs" root0="FORCE_HIGHLIGHTING" />
@@ -218,6 +213,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/30248e11d7c377887cd699ede6dab62330d0bc8319d3fb90148687f092e8f172/JsonConverterOfT.WriteCore.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/31c16458444608b35b9c3ec4ab52872527de0f5899f243a3daf0656492d4f9/SecureString.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/3242d9d0bce1255d3be72533e02df011901fc4b3d0cf399a98fc6e3c8288e/IMappingExpressionBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/3355f1f0376e862bcc5d8061f987a1fdd5eb0c34b2a17f1a01cac293e6ba43/JsonSerializer.Write.Stream.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/36bc287f6bdaa3c12ce873262e9fc3d5c31bdea22751afa3587ebb66aa9cc6f/MemoryHandle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/36f346b6c0454bc8a6afa7aed38119fe5bbffcc983298d9bfa4dbd5f49461f/Monitor.CoreCLR.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/382d6b26278b54fc020978f6d054e484212e37ef6191a9e8638c9ebd8ef621/Char.cs" root0="SKIP_HIGHLIGHTING" />
@@ -247,6 +243,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/54c7fa9daf3ab775e3ebabc3f3948a6e2a484886fa1196f813b98e17e36aa49/RuntimeHelpers.CoreCLR.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/5553559cdb4b5664893497ec3d7831e41e3f7cff9dd2ef3258115769f70aa/DateTime.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/5564c6afea8b377eced345b87f73c66627f6d693b2ac845a99331e66a6a7df71/Union.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/5565c4f8a6572942e0f84135b217b526b0c74d46925bdac4f7d8775f893e721/Utf8JsonReader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/558c1d46e1e21d2e78ee2ab67a674f6927bf95355b2f245f35d74bb5ec0f92/CancellationTokenSource.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/55f44cf26c4f8a472241f32786a20f211d7e1ed80801eceac2a40539086141d/MemoryExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/5942d366ec5873bc1069482858322e81f74b459ddddfdcd1608f976a3dcb5ffb/FrozenHashTable.cs" root0="SKIP_HIGHLIGHTING" />

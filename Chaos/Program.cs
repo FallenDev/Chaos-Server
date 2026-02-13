@@ -80,7 +80,6 @@ ConfigureApp(app);
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
 Console.WriteLine($"Server GC: {GCSettings.IsServerGC}");
-Console.WriteLine($"Concurrent GC: {GCSettings.LatencyMode != GCLatencyMode.Batch}");
 Console.WriteLine($"GC Latency Mode: {GCSettings.LatencyMode}");
 
 await Task.Delay(2500);
