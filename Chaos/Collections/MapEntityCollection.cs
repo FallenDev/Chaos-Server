@@ -38,6 +38,8 @@ public sealed class MapEntityCollection : IDeltaUpdatable
     private readonly UpdatableCollection Updatables;
     private readonly TypeSwitchExpression<IEnumerable> ValuesCases;
 
+    public int AislingCount => Aislings.Count;
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="MapEntityCollection" /> class
     /// </summary>

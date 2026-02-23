@@ -1232,6 +1232,48 @@ public sealed class Aisling : Creature, IScripted<IAislingScript>, IDialogSource
                     ApproachTime[kvp.Key] = kvp.Value;
     }
 
+    /// <inheritdoc />
+    public override void UpdateViewPort(VisibleEntity singleEntity)
+    {
+        var wasPreviouslyObserved = ApproachTime.ContainsKey(singleEntity);
+
+        var isCurrentlyObservable = singleEntity.WithinRange(this)
+                                    && MapInstance.TryGetEntity<WorldEntity>(singleEntity.Id, out _)
+                                    && CanObserve(singleEntity, true);
+
+        if (wasPreviouslyObserved && !isCurrentlyObservable)
+        {
+            if (!singleEntity.Equals(this))
+                singleEntity.HideFrom(this);
+
+            OnDeparture(singleEntity);
+        } else if (!wasPreviouslyObserved && isCurrentlyObservable)
+        {
+            if (!singleEntity.Equals(this))
+                switch (singleEntity)
+                {
+                    case Aisling:
+                        singleEntity.ShowTo(this);
+
+                        break;
+
+                    case Door door:
+                        Client.SendDoors(door);
+
+                        break;
+                    default:
+                        Client.SendVisibleEntities(singleEntity);
+
+                        break;
+                }
+
+            OnApproached(singleEntity);
+        }
+
+        if (isCurrentlyObservable && singleEntity is Door stillADoor && (stillADoor.ManhattanDistanceFrom(this) == 11))
+            Client.SendDoors(stillADoor);
+    }
+
     public override void Walk(
         Direction direction,
         bool? ignoreBlockingReactors = null,
@@ -1295,11 +1337,15 @@ public sealed class Aisling : Creature, IScripted<IAislingScript>, IDialogSource
                                                    ])
                                                .ToList();
 
+            var isDarkMap = MapInstance.Flags.HasFlag(MapFlags.Darkness);
+
             foreach (var creature in creaturesToUpdate)
-                if (creature is Aisling)
+                if (creature.Equals(this))
+                    UpdateViewPort();
+                else if (creature is Aisling && isDarkMap)
                     creature.UpdateViewPort();
                 else
-                    creature.UpdateViewPort([this]);
+                    creature.UpdateViewPort(this);
 
             var aislingsThatWatchedUsWalk = creaturesToUpdate.ThatAreWithinRange(startPoint)
                                                              .ThatAreWithinRange(endPoint)
@@ -1340,11 +1386,15 @@ public sealed class Aisling : Creature, IScripted<IAislingScript>, IDialogSource
                                            .Union(MapInstance.GetEntitiesWithinRange<Creature>(destinationPoint))
                                            .ToList();
 
+        var isDarkMap = MapInstance.Flags.HasFlag(MapFlags.Darkness);
+
         foreach (var creature in creaturesToUpdate)
-            if (creature is Aisling)
+            if (creature.Equals(this))
+                UpdateViewPort();
+            else if (creature is Aisling && isDarkMap)
                 creature.UpdateViewPort();
             else
-                creature.UpdateViewPort([this]);
+                creature.UpdateViewPort(this);
 
         var aislingsThatWatchedUsWarp = creaturesToUpdate.ThatAreWithinRange(startPoint)
                                                          .ThatAreWithinRange(destinationPoint)

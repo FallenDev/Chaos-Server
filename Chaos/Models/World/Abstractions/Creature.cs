@@ -109,7 +109,6 @@ public abstract class Creature : NamedEntity, IAffected, IScripted<ICreatureScri
                 sound);
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public virtual bool CanObserve(VisibleEntity entity, bool fullCheck = false)
     {
         //can always see yourself
@@ -651,6 +650,20 @@ public abstract class Creature : NamedEntity, IAffected, IScripted<ICreatureScri
             OnApproached(entity, refresh);*/
     }
 
+    public virtual void UpdateViewPort(VisibleEntity singleEntity)
+    {
+        var wasPreviouslyObserved = ApproachTime.ContainsKey(singleEntity);
+
+        var isCurrentlyObservable = singleEntity.WithinRange(this)
+                                    && MapInstance.TryGetEntity<WorldEntity>(singleEntity.Id, out _)
+                                    && CanObserve(singleEntity, true);
+
+        if (wasPreviouslyObserved && !isCurrentlyObservable)
+            OnDeparture(singleEntity);
+        else if (!wasPreviouslyObserved && isCurrentlyObservable)
+            OnApproached(singleEntity);
+    }
+
     public virtual void Walk(
         Direction direction,
         bool? ignoreBlockingReactors = null,
@@ -687,13 +700,18 @@ public abstract class Creature : NamedEntity, IAffected, IScripted<ICreatureScri
                                            .ToList();
 
         //non-aislings only cause partial viewport updates because they do not have shared vision requirements (due to lanterns)
+        var nearbyVisibleEntities = creaturesToUpdate.OfType<VisibleEntity>()
+                                                     .ToHashSet();
+
         foreach (var creature in creaturesToUpdate)
-            creature.UpdateViewPort([this]);
+            if (!creature.Equals(this))
+                creature.UpdateViewPort(this);
+
+        //update the walking creature's own viewport about nearby creatures
+        UpdateViewPort(nearbyVisibleEntities);
 
         var aislingsThatWatchedUsWalk = creaturesToUpdate.OfType<Aisling>()
-                                                         .ThatCanObserve(this)
-                                                         .ThatAreWithinRange(startPoint)
-                                                         .ThatAreWithinRange(endPoint);
+                                                         .ThatCanObserve(this);
 
         foreach (var aisling in aislingsThatWatchedUsWalk)
             aisling.Client.SendCreatureWalk(Id, startPoint, Direction);
@@ -707,10 +725,13 @@ public abstract class Creature : NamedEntity, IAffected, IScripted<ICreatureScri
     {
         pathOptions ??= PathOptions.Default.ForCreatureType(Type);
 
-        var nearbyDoors = MapInstance.GetEntitiesWithinRange<Door>(this, 1)
+        var surroundingPoints = this.GenerateCardinalPoints()
+                                    .ToList();
+
+        var nearbyDoors = MapInstance.GetEntitiesAtPoints<Door>(surroundingPoints)
                                      .Where(door => door.Closed);
 
-        var nearbyCreatures = MapInstance.GetEntitiesWithinRange<Creature>(this, 1)
+        var nearbyCreatures = MapInstance.GetEntitiesAtPoints<Creature>(surroundingPoints)
                                          .ThatThisCollidesWith(this);
 
         var blockedPoints = new HashSet<IPoint>(pathOptions.BlockedPoints, PointEqualityComparer.Instance);

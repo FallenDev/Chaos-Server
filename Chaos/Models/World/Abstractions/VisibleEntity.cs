@@ -63,7 +63,7 @@ public abstract class VisibleEntity(ushort sprite, MapInstance mapInstance, IPoi
 
         //non-aislings only cause partial viewport updates because they do not have shared vision requirements (due to lanterns)
         foreach (var creature in creaturesToUpdate)
-            creature.UpdateViewPort([this]);
+            creature.UpdateViewPort(this);
 
         var aislingsThatWatchedUsWarp = creaturesToUpdate.ThatAreWithinRange(startPoint)
                                                          .ThatAreWithinRange(destinationPoint)

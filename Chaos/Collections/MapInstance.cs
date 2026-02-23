@@ -1,8 +1,6 @@
 #region
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Chaos.Common.Abstractions;
 using Chaos.Common.Abstractions.Definitions;
 using Chaos.Common.Synchronization;
 using Chaos.DarkAges.Definitions;
@@ -25,7 +23,6 @@ using Chaos.Services.Storage.Abstractions;
 using Chaos.Storage.Abstractions;
 using Chaos.Time;
 using Chaos.Time.Abstractions;
-using Microsoft.AspNetCore.Razor.Language.Intermediate;
 #endregion
 
 namespace Chaos.Collections;
@@ -146,6 +143,8 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
     ///     The synchronization mechanism used to ensure thread safety on the map
     /// </summary>
     public FifoAutoReleasingSemaphoreSlim Sync { get; }
+
+    public bool HasAislings => Objects.AislingCount > 0;
 
     /// <summary>
     ///     A task that completes when the map instance has finished initialization
@@ -990,15 +989,17 @@ public sealed class MapInstance : IScripted<IMapScript>, IDeltaUpdatable
         //and the creature is an aisling
         //do a full viewport update
         //otherwise just do a partial update
+        var isDarkMap = Flags.HasFlag(MapFlags.Darkness);
+
         foreach (var creature in GetEntitiesWithinRange<Creature>(point))
             if (creature.Equals(visibleEntity))
 
                 // ReSharper disable once RedundantJumpStatement
                 continue;
-            else if (visibleEntity is Aisling && creature is Aisling)
+            else if (visibleEntity is Aisling && creature is Aisling && isDarkMap)
                 creature.UpdateViewPort();
             else
-                creature.UpdateViewPort([visibleEntity]);
+                creature.UpdateViewPort(visibleEntity);
     }
 
     /// <summary>
